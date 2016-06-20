@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+
+.svicelistkuang{padding: 0 20px;}
+
+.datelistll{border-bottom:dashed 1px #CCC; padding-bottom:10px; margin-bottom:5px; margin-top:10px;}
+.datelistll22{border-bottom:dashed 1px #CCC; padding-bottom:10px;  margin-top:10px;}
+
+.datelistll22 li{font-family:Arial, Helvetica, sans-serif; font-weight:bold; list-style:inside; list-style-type:disc;}
+.datelistll22 h3{font-size:12px; line-height: 20px; margin: 5px 0; text-indent:1em; font-family:Arial, Helvetica, sans-serif;}
+
+.datelistll li{text-indent:1em;}
+
+.datelistll h3{font-size:12px; line-height: 20px; margin-bottom: 5px;}
+
+.datelistll  {font-family:Arial, Helvetica, sans-serif; font-size:12px;}
+
+.listeailmiaoshu{margin: 10px 0; text-indent:1em;}
+
+.neibutitle1ss{ background: none repeat scroll 0 0 #EDF1F3;
+    border-top: 1px solid #FFFFFF;
+    height: 25px;
+    padding-top: 3px; margin:0px 6px;  
+    padding-left: 10px;
+    padding-top: 8px; font-family:Arial, Helvetica, sans-serif; font-weight:bold;}
+	
+.panlink{line-height:28px;} .panlink span{margin-right:15px;}
+
+
+.preaa {
+    background-color: #E5E5CC;
+    border: 1px solid #F0F0E0;
+    font-family: Courier New;
+    font-size: x-small;
+    margin-top: -5px; white-space:pre-pre-wrap;
+	word-wrap:break-word; /* Internet Explorer 5.5+ */ 
+    padding: 5px;}
+	
+.value {
+    color: darkblue;
+}
+
+
+.infoerro{ background:#f7f7f7; padding:5px 15px; border-left: solid 1px #FFF; border-top: solid 1px #FFF; border-right:solid 1px #d0d0d0; color:#666; text-align:center; vertical-align:middle; font-size:14px;  border-bottom:solid 1px #d0d0d0;}
+.errortips{background:url(../img/error.jpg) no-repeat left ; padding-left:75px; text-align:left; height:65px; margin-left:38%; vertical-align:middle;  line-height:58px; margin-top:100px;}
+.errortips1{background:url(../img/messagebox_warning11.gif) no-repeat left ; padding-left:80px; text-align:left; height:65px; margin-left:38%; vertical-align:middle;  line-height:28px; margin-top:100px;}
+.errortips1 span a, .errortips span a{color: #005FAF; text-decoration:underline;}
+
+
+.t_red{color:#F00; }
+
+.regnav{background: none repeat scroll 0 0 #fff;
+    border: 1px solid #D0D0D0;
+    border-radius: 5px 5px 5px 5px;
+    clear: both;
+    margin: 0;
+    padding: 10px 20px;
+}
+.rgnav-pic{width:480px; padding-top:39px; height:0px !important; overflow:hidden; background:url(../img/reg_nav.jpg) no-repeat scroll  0 0;}
+.rgnav-pic1{width:480px; padding-top:39px; height:0px !important; overflow:hidden; background:url(../img/reg_nav.jpg) no-repeat scroll  0 -48px;}
+.rgnav-pic2{width:480px; padding-top:39px; height:0px !important; overflow:hidden; background:url(../img/reg_nav.jpg) no-repeat scroll  0 -96px;}
+
+.gongxiwanc h3{ font-family:"宋体", "新宋体", "微软雅黑"; line-height:36px; background:url(../img/ok01.jpg) left top no-repeat; padding-left:50px;}
+.gongxiwanc{padding:0 15px; margin:10px 0px;}
+.gongxiwanc p{padding-left:50px; margin-bottom:15px;}

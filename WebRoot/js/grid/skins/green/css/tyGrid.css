@@ -1,0 +1,279 @@
+.tyGrid {
+	*position: relative;
+	overflow: hidden;
+}
+
+.tyGrid .stheader, .listgrid .stheader {
+	background-color: #E9F9ED;
+	border-bottom: 0px solid #a7d9f9;
+	overflow: hidden;
+	position: relative;
+	zoom: 1;
+	_width: 100%;
+}
+
+.tyGrid .stheader table, .listgrid .stheader table {
+	position: relative;
+}
+
+.tyGrid .stheader th {
+	border-top: 1px solid #fff;
+	border-right: 1px solid #b7e8c0;
+	border-bottom: 1px solid #b7e8c0;
+	padding: 3px 0px 3px 5px;
+	background-color: #e9f9ed;
+	font-weight: normal;
+	color: #49a259;
+	cursor: default;
+	overflow: hidden;
+	border-collapse:collapse;
+}
+
+.tyGrid .stheader th div {
+	width: 139px;
+	white-space: nowrap;
+	line-height: 17px;
+	cursor: default;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 0 14px 0 0;
+}
+
+.tyGrid .stheader th.asc {
+	background: url(../images/asc.png) no-repeat right center;
+}
+
+.tyGrid .stheader th.desc {
+	background: url(../images/desc.png) no-repeat right center;
+}
+
+.tyGrid .stheader th p {
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	right: -5px;
+	top: -1px;
+	width: 4px;
+	height: 21px;
+	display: block;
+	cursor: w-resize;
+}
+
+.tyGrid .wrapper, .listgrid .wrapper {
+	background-color: #fff;
+	position: relative;
+	overflow: auto;
+}
+
+.tyGrid .rowline, .listgrid .rowline {
+	position: absolute;
+	line-height: 0;
+	font-size: 0;
+}
+
+.tyGrid .rowline p, .listgrid .rowline p {
+	position: absolute;
+	width: 19px;
+	height: 300px;
+	display: block;
+	cursor: w-resize;
+}
+
+.tyGrid .rowline p.hov, .listgrid .rowline p.hov {
+	background: url(../images/rowline.png) repeat-y;
+}
+
+.tyGrid .rowline .block, .listgrid .rowline .block {
+	position: absolute;
+	background-color: #fff;
+	display: none;
+}
+
+.tyGrid .grid, .listgrid .grid {
+	border: 1px solid;
+	border-width: 0 0 0 0;
+	border-color: #c0d7ea #fff #98bcd1 #fff;
+	position: absolute;
+	border-collapse:collapse;
+}
+
+.tyGrid .grid td {
+	background-color: #fff;
+	line-height: 16px;
+	padding: 3px 5px;
+	border-bottom: 1px solid #e7f4ea;
+	border-right: 1px solid #e7f4ea;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	border-collapse:collapse;
+}
+
+.tyGrid .grid td div {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.tyGrid .grid .alternative td, .listgrid .grid .alternative td {
+	background-color: #f1f6f2;
+}
+
+.tyGrid .grid .sel td, .listgrid .grid .sel td {
+	background-color: #cae8bb;
+}
+
+.tyGrid .grid .hov td, .listgrid .grid .hov td {
+	background-color: #e4fdd6;
+}
+
+.tyGrid .pager {
+	background-image: url(../images/pager_bg.png);
+	background-repeat: repeat-x;
+	height: 29px;
+	padding: 0 15px;
+	color: #2d7839;
+	border-top: 1px solid #98bcd1;
+	position: relative;
+}
+
+.tyGrid .pager table {
+
+}
+
+.tyGrid .pager .info {
+	float: right;
+}
+
+.tyGrid .pager .txt {
+	line-height: 14px;
+	margin-top: 6px;
+
+	*margin-top: 8px;
+}
+
+.tyGrid .pager .clr {
+	margin-top: 4px;
+}
+
+.tyGrid .cache {
+	display: none;
+}
+
+.formlist {
+	border: solid #d1e6f9;
+	border-width: 1px 1px 0 1px;
+}
+
+.formlist th {
+	color: #49a259;
+	text-align: right;
+	font-weight: normal;
+}
+
+.formlist td, .formlist th {
+	line-height: 16px;
+	padding: 4px 6px;
+	border-bottom: 1px solid #d9f1e0;
+}
+
+.pager .bluebtn {
+	margin: 0 1px 0 0;
+	float: none;
+	display: block;
+}
+
+.pager .bluebtn .itembody {
+	float: none;
+	display: block;
+}
+
+.pager .bluebtn.dis {
+	cursor: default;
+	opacity: .5;
+	filter: Alpha(Opacity = 50);
+}
+
+.pager .bluebtn.dis .itembody {
+	cursor: default;
+}
+
+.pager .input {
+	height: 18px;
+	text-align: center;
+}
+
+input.gridcheckbox {
+	background: url(../images/checkbox.png) no-repeat top left;
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	vertical-align: middle;
+	margin: 0 5px;
+	padding: 0;
+	border: 0px;
+}
+
+input.gridcheckbox.chk {
+	background-position: left bottom;
+}
+
+.listgrid {
+	border: 1px solid #b7e8c0;
+}
+
+.listgrid .grid {
+	table-layout: fixed;
+	width: 1%;
+	position: absolute;
+}
+
+.listgrid .stheader table {
+	table-layout: fixed;
+	width: 100px;
+	position:absolute;
+}
+
+.listgrid .stheader th,.listgrid .stheader td {
+	border-top: 1px solid #fff;
+	border-right: 1px solid #b7e8c0;
+	border-bottom: 1px solid #b7e8c0;
+	padding: 3px 5px;
+	background-color: #e9f9ed;
+	font-weight: normal;
+	color: #49a259;
+	cursor: default;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	zoom:1;
+}
+
+.listgrid .grid td {
+	background-color: #fff;
+	line-height: 16px;
+	padding: 3px 5px;
+	border-bottom: 1px solid #e7f4ea;
+	border-right: 1px solid #e7f4ea;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.listgrid .grid th {
+	height: 0;
+	line-height: 0;
+	overflow: hidden;
+	padding: 0 5px;
+	border-right: 1px solid #e3eff8;
+	border-bottom: 0;
+	border-top:0;
+}
+.listgrid .xrow th{
+	height: 0;
+	line-height: 0;
+	overflow: hidden;
+	padding: 0 5px;
+	border-bottom: 0;
+	border-top:0;
+}

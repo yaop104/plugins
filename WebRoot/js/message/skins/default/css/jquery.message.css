@@ -1,0 +1,48 @@
+/*
+ * jQuery message plug-in 1.0
+ *
+ * http://bassistance.de/jquery-plugins/jquery-plugin-message/
+ *
+ * Copyright (c) 2009 Jörn Zaefferer
+ *
+ * $Id$
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ */
+.jquery-message {
+    font-size:12px;
+	line-height:18px;
+    position: absolute;
+    word-wrap:break-word;
+    /* top: 250px; */
+	bottom: 0px;
+	left: 0%;
+    width: 100%;
+    color: #fff;
+    text-align: left;
+	background:#3c6fa4 url(../images/msg_bg.jpg) no-repeat;
+    display: none;
+    opacity: 0;
+	filter:alpha(opacity=0);
+    z-index: 100000;
+}
+
+.jquery-message .round {
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    font-size: 1px;
+    height: 2px;
+}
+
+.jquery-message p {
+    padding: 7px 10px 7px 36px;
+	*padding-top:9px;
+	margin:0px;
+    display: block;
+}
+
+.jquery-message a {
+    display: none;
+}

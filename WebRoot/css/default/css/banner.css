@@ -1,0 +1,138 @@
+body {
+	margin: 0px;
+	width: 100%;
+	font-size: 12px;
+	font-family: 宋体, Arial;
+	color: #000;
+	background-color: #FFFFFF;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	word-break: break-all;
+}
+
+.banner,.logo,.bannerright,.bannerrightimg,.sysoperation {
+	height: 70px;
+}
+
+.banner {
+	width: 100%;
+	background: url(../images/banner/banner_bg_center.gif) repeat-x;
+	/*background-position:bottom;*/
+	overflow: hidden;
+}
+
+#head{
+	width:100%;
+	height:87px;
+	background:url(../images/bg_head.png) repeat-x;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #bccdf7;
+}
+#logo{
+	left: 0px;
+	float: left;
+	height: 87px;
+	background-image: url(../images/logo.png);
+	width: 694px;
+}
+
+.Login,.oLogin,.mLogin {
+	margin-top: 40px;
+	margin-right: 25px;
+	border-style: none;
+	width: 60px;
+	height: 21px;
+}
+
+.Login {
+	background: url(../images/banner/banner_icon03_normal.gif) no-repeat;
+}
+
+.oLogin {
+	background: url(../images/banner/banner_icon03_on.gif) no-repeat;
+}
+
+.mLogin {
+	background: url(../images/banner/banner_icon03_move.gif) no-repeat;
+}
+
+.bannerright {
+	float: right;
+	width: 164px;
+}
+
+.bannerrightimg {
+	float: right;
+	width: 8px;
+	background: url(../images/banner/banner_bg_right.gif) no-repeat;
+	/*background-position:bottom;*/
+}
+
+.sysoperation {
+	float: left;
+	width: 150px;
+	text-align: right;
+	vertical-align: bottom;
+	overflow: hidden;
+	padding: 0px;
+}
+
+.Changepwd,.mChangepwd,.oChangepwd {
+	margin-top: 40px;
+	border-style: none;
+	width: 80px;
+	height: 21px;
+}
+
+.Changepwd {
+	background: url(../images/banner/banner_icon01_normal.gif) no-repeat;
+}
+
+.oChangepwd {
+	background: url(../images/banner/banner_icon01_on.gif) no-repeat;
+}
+
+.mChangepwd {
+	background: url(../images/banner/banner_icon01_move.gif) no-repeat;
+}
+
+.Exit,.oExit,.mExit {
+	border-style: none;
+	width: 60px;
+	height: 21px;
+}
+
+.Exit {
+	background: url(../images/banner/banner_icon02_normal.gif) no-repeat;
+}
+
+.oExit {
+	background: url(../images/banner/banner_icon02_on.gif) no-repeat;
+}
+
+.mExit {
+	background: url(../images/banner/banner_icon02_move.gif) no-repeat;
+}
+
+.info,.info span {
+	height: 28px;
+	line-height: 28px;
+}
+
+.info {
+	width: 100%;
+	vertical-align: middle;
+	background: url(../images/banner/info_bg.gif) repeat-x;
+	background-position: bottom;
+	font: 12px/ 160% ????   Arial;;
+	color: #000;
+}
+
+.info span {
+	vertical-align: middle;
+	margin-left: 12px;
+}

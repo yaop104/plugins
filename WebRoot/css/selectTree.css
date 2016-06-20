@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+html{height:100%}
+body{height:100%;margin:0px;padding:0px}
+#aside{position:absolute;width:245px;border-right:1px solid #bbb;background:#FFFFFF;}
+#rside{padding-left:250px !important; padding-left:247px;}

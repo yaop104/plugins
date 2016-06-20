@@ -1,0 +1,8 @@
+img{
+  position:static;
+  +position:relative;
+  top:40%;left:48%;
+  width:63px;
+  height:54px;
+  vertical-align:middle
+}

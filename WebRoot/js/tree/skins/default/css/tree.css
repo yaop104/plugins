@@ -1,0 +1,74 @@
+.treegroup{
+	position:relative;
+	zoom:1;
+}
+
+
+.tree {
+	float: left;
+	overflow: auto;
+	padding:0 1px 0 6px;
+	width: 178px;
+}
+.tree dl dl{
+	display:block;
+	overflow: hidden;
+}
+.tree a.item {
+	color: #003666;
+	padding-left: 4px;
+	display: block;
+	text-decoration: none;
+}
+.tree .item .node{
+	float:left;
+	width:7px;
+	height:7px;
+	margin:9px 8px 0 0;
+	line-height:1px;
+	overflow:hidden;
+}
+.tree .item .node.isparent{
+	background:url(../images/root.png) no-repeat;
+}
+.tree .item .isparent.exp{
+	background:url(../images/root_exp.png) no-repeat;
+}
+.tree .item .ico{
+	float:left;
+	width:16px;
+	height:16px;
+	line-height:1px;
+	overflow:hidden;
+	margin:4px 6px 0 0;
+}
+.tree .item .itembody {
+	cursor: pointer;
+	height: 24px;
+	overflow: hidden;
+}
+.tree .item .presenter {
+	line-height: 1em;
+	float:left;
+	padding-top:5px;
+	white-space:nowrap;
+	*padding-top:7px;
+}
+.tree a.item:hover {
+	background-image: url(../images/treenode_lc.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	color: #FFF;
+	text-decoration: none;
+}
+.tree a.item:hover .itembody {
+	background-image: url(../images/treenode_body.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+.tree a.item:hover .node.isparent{
+	background:url(../images/root_hov.png) no-repeat;
+}
+.tree a.item:hover .isparent.exp{
+	background:url(../images/root_exp_hov.png) no-repeat;
+}

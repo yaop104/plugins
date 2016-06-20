@@ -1,0 +1,318 @@
+.tyGrid {
+	position: relative;
+	overflow: hidden;
+	margin: 3px 3px 0px;
+}
+
+.tyGrid .stheader, .listgrid .stheader {
+	/*background: url(../../../../../img/theadbg.gif) repeat-x scroll center top #D9DEE5; */
+	/*border-bottom: 0px solid #fff;*/
+	overflow: hidden;
+	position: relative;
+	zoom: 1;
+	width: 98%;
+}
+
+.tyGrid .stheader table, .listgrid .stheader table {
+	position: relative;
+}
+.tyGrid table{
+	border-right: 1px solid #dddddd;
+}
+
+.tyGrid .stheader th {
+	border-top: 1px solid #dddddd;
+	border-left: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	padding: 3px 0px 3px 5px;
+	background-color: #dcf0ff;
+	overflow: hidden;
+    text-align:center;
+    height: 40px;
+}
+
+.tyGrid .stheader th div {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 0 14px 0 0;
+	
+	color: #706e6e;
+    font-family: 宋体;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.asc_div {
+	background: url(../images/asc.png) no-repeat right center;
+}
+
+.desc_div {
+	background: url(../images/desc.png) no-repeat right center;
+}
+
+.tyGrid .stheader th.asc {
+	background-color: #dcf0ff;
+	/*background: url(../images/asc.png) no-repeat right center;*/
+}
+
+.tyGrid .stheader th.desc {
+	background-color: #dcf0ff;
+	/*background: url(../images/desc.png) no-repeat right center;*/
+}
+
+/*
+.tyGrid .stheader th p {
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	right: -5px;
+	top: -1px;
+	width: 4px;
+	height: 21px;
+	display: block;
+	cursor: w-resize;
+}*/
+
+.tyGrid .wrapper, .listgrid .wrapper {
+	background-color: #fff;
+	position: relative;
+	overflow: auto;
+}
+
+.tyGrid .rowline, .listgrid .rowline {
+	position: absolute;
+	line-height: 0;
+	font-size: 0;
+}
+
+.tyGrid .rowline p, .listgrid .rowline p {
+	position: absolute;
+	width: 19px;
+	height: 300px;
+	display: block;
+	cursor: w-resize;
+}
+
+.tyGrid .rowline p.hov, .listgrid .rowline p.hov {
+	background: url(../images/rowline.png) repeat-y;
+}
+
+.tyGrid .rowline .block, .listgrid .rowline .block {
+	position: absolute;
+	background-color: #fff;
+	display: none;
+}
+
+.tyGrid .grid, .listgrid .grid {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-collapse: collapse;
+    border-color: #DDDDDD;
+    border-style: solid;
+    border-width: 0 1px 0 0;
+    position: absolute;
+}
+
+.tyGrid .grid td {
+	border-bottom:solid 1px #dddddd;  
+	border-left:solid 1px #dddddd; 
+	height:27px; 
+	text-align:center; 
+	padding:0px 5px; 
+}
+
+.tyGrid .grid td div {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.tyGrid .grid .alternative td, .listgrid .grid .alternative td {
+	height:40px;  text-align:center;
+}
+
+.tyGrid .grid .sel td, .listgrid .grid .sel td {
+	background-color: #cae7fd;
+}
+
+.tyGrid .grid .hov td, .listgrid .grid .hov td {
+	background-color: #e4fdd6;
+}
+
+.tyGrid .pager {
+	
+
+    color: #585858;
+    padding: 3px 10px;
+    text-align: right;
+
+}
+
+.tyGrid .pager table {
+	display:inline-block;
+	border:none;
+}
+
+.tyGrid .pager .info {
+	float: right;
+}
+
+.tyGrid .pager .txt {
+	line-height: 14px;
+	margin-top: 6px;
+
+	*margin-top: 8px;
+}
+
+.tyGrid .pager .clr {
+	margin-top: 4px;
+}
+
+.tyGrid .cache {
+	display: none;
+}
+
+.formlist {
+	border: solid #d1e6f9;
+	border-width: 1px 1px 0 1px;
+	border-collapse:collapse;
+}
+
+.formlist th {
+	color: #2c88c0;
+	text-align: right;
+	font-weight: normal;
+}
+
+.formlist td, .formlist th {
+	line-height: 16px;
+	padding: 4px 6px;
+	border-bottom: 1px solid #d1e6f9;
+	border-collapse:collapse;
+}
+
+.formlist1 {
+	border: solid #cccccc;
+	border-width: 1px 1px 0 1px;
+	border-collapse:collapse;
+}
+
+.formlist1 th {
+	color: #000000;
+	text-align: right;
+	font-weight: normal;
+}
+
+.formlist1 td, .formlist1 th {
+	line-height: 25px;
+	padding: 4px 6px;
+	border-right: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	border-collapse:collapse;
+	background-color: #eeeeff;
+}
+.th1{ background:url(../images/theadbg.gif) repeat-x scroll top;}
+
+.pager .bluebtn {
+	margin: 0 1px 0 0;
+	float: none;
+	display: block;
+}
+
+.pager .bluebtn .itembody {
+	float: none;
+	display: block;
+}
+
+.pager .bluebtn.dis {
+	cursor: default;
+	opacity: .5;
+	filter: Alpha(Opacity = 50);
+}
+
+.pager .bluebtn.dis .itembody {
+	cursor: default;
+}
+
+.pager .input {
+	height: 18px;
+	text-align: center;
+}
+
+input.gridcheckbox {
+	background: url(../images/checkbox.png) no-repeat top left;
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	vertical-align: middle;
+	margin: 0 5px;
+	padding: 0;
+	border: 0px;
+}
+
+input.gridcheckbox.chk {
+	background-position: left bottom;
+}
+
+.listgrid {
+	border: 1px solid #A7D9F9;
+}
+
+.listgrid .grid {
+	table-layout: fixed;
+	width: 1%;
+	position: absolute;
+}
+
+.listgrid .stheader table {
+	table-layout: fixed;
+	width: 100px;
+	position:absolute;
+}
+
+.listgrid .stheader th,.listgrid .stheader td {
+	border-top: 1px solid #fff;
+	border-right: 1px solid #a7d9f9;
+	border-bottom: 1px solid #a7d9f9;
+	padding: 3px 5px;
+	background-color: #e4f3ff;
+	color: #2c88c0;
+	cursor: default;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	zoom:1;
+}
+
+.listgrid .grid td {
+	background-color: #fff;
+	line-height: 16px;
+	padding: 3px 5px;
+	border-bottom: 1px solid #e3eff8;
+	border-right: 1px solid #e3eff8;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.listgrid .grid th {
+	height: 0;
+	line-height: 0;
+	overflow: hidden;
+	padding: 0 5px;
+	border-right: 1px solid #e3eff8;
+	border-bottom: 0;
+	border-top:0;
+}
+.listgrid .xrow th{
+	height: 0;
+	line-height: 0;
+	overflow: hidden;
+	padding: 0 5px;
+	border-bottom: 0;
+	border-top:0;
+}

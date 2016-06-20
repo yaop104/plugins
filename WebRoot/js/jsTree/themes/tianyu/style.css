@@ -1,0 +1,137 @@
+/* BACKGROUND */
+.tree-tianyu .ltr, .tree-tianyu .rtl {
+	min-width: 100%;
+	_width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+	display: table;
+}
+
+.tree-tianyu .ltr > li.leaf, .tree-tianyu .rtl > li.leaf {
+	background-image: none;
+}
+
+/* LOCKED */
+.tree-tianyu .locked li a {
+	color: gray;
+}
+
+/* DOTS */
+.tree-tianyu ul {
+	margin-left:2px;
+}
+
+.tree-tianyu li {
+	background-position: -64px -16px;
+	background-repeat: no-repeat;
+	padding:0 0 0 12px;
+}
+
+/* NO DOTS */
+.tree-tianyu .no_dots, .tree-tianyu .no_dots ul {
+	background: transparent;
+}
+
+.tree-tianyu .no_dots li.leaf {
+	background-image: none;
+	background-color: transparent;
+}
+
+/* OPEN or CLOSED */
+.tree-tianyu li.open {
+	background: url("icons.png") -32px -48px no-repeat;
+}
+
+.tree-tianyu li.closed, #jstree-dragged.tree-tianyu li li.open {
+	background: url("icons.png") -48px -32px no-repeat;
+}
+#jstree-dragged{
+	width:100px;
+}
+#jstree-marker {
+	background-image: url("icons.png");
+}
+
+/* DEFAULT, HOVER, CLICKED, LOADING STATES */
+.tree-tianyu li a, .tree-tianyu li span {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	padding:1px 2px;
+}
+
+.tree-tianyu li a:hover, .tree-tianyu li a.hover, .tree-tianyu li span {
+	background: #e7f4f9;
+	border: 1px solid #d8f0fa;
+	padding: 0px 1px 0px 1px;
+}
+
+.tree-tianyu li a.clicked, .tree-tianyu li a.clicked:hover, .tree-tianyu li span.clicked {
+	background: #beebff;
+	border: 1px solid #99defd;
+	padding: 0px 1px 0px 1px;
+}
+
+/* ICONS */
+.tree .ltr ins{
+	margin:0 2px 0 0;
+}
+.tree-tianyu ins {
+	background-image: url("icons.png");
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	margin:0 2px 0 0;
+}
+.tree-tianyu .open ins {
+	background-position: 0 -16px;
+}
+.tree-tianyu .closed ins {
+	background-position: 0 0;
+}
+.tree-tianyu .leaf ins{
+	background-position: 0 0;
+}
+.tree-tianyu ul li a.loading ins {
+	background-image: url("throbber.gif") !important;
+	background-position: 0 0 !important;
+}
+
+/* UL is added to make selector stronger */
+.tree-tianyu li a ins.forbidden {
+	background-position: -16px -16px;
+}
+
+.tree-tianyu .locked li a ins {
+	background-position: 0 -48px;
+}
+
+.tree-tianyu li span ins {
+	background-position: -16px 0;
+}
+
+#jstree-dragged.tree-tianyu ins {
+	background: url("icons.png") -16px -32px no-repeat;
+}
+
+#jstree-dragged.tree-tianyu ins.forbidden {
+	background: url("icons.png") -16px -16px no-repeat;
+}
+
+/* CONTEXT MENU */
+.tree-tianyu-context a ins {
+	background-image: url("icons.png");
+	background-repeat: no-repeat;
+	background-position: -64px -64px;
+}
+
+.tree-tianyu-context a ins.create {
+	background-position: 0 -16px;
+}
+
+.tree-tianyu-context a ins.rename {
+	background-position: -16px 0px;
+}
+
+.tree-tianyu-context a ins.remove {
+	background-position: 0 -32px;
+}

@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+/*reset*/
+body{color:#888;font-size:12px;line-height:1.8em; font-family:Arial,Helvetica,'Microsoft YaHei';}
+body,form,ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd,table,fieldset{margin:0; padding:0;}
+input,select,textarea{color:#888; font-size:12px;line-height:140%; font-family:'宋体','Microsoft YaHei';vertical-align: middle;resize:none;}
+img{border:0; vertical-align:middle;}
+em,i{font-style:normal;}
+ol,ul,li{ list-style:none;}
+h1,h2,h3,h4,h5{color:#2f75aa;}
+textarea{resize:none;}
+label{vertical-align:middle}
+a,a:visited{ text-decoration:none}
+a:hover,a:active{ text-decoration:underline}
+/* ==========Clear Fix 清除浮动=========*/
+.clearfix:after {
+content:".";
+display:block;
+height:0;
+clear:both;
+visibility:hidden;
+}
+.clearfix {
+display:inline-block;
+}
+.fl{ float:left}
+.fr{ float:right}
+.c888{color:#888}
+.cf60{color:#f60}
+.cl{ clear:both}
+.c2b94c8{color:#2b94c8}
+.f14{color:#14px;}
+.inp {
+padding: 5px;border: 1px solid #d5d5d5;box-shadow: 3px 2px 2px #eaeaea inset;}
+.crumb{ border-bottom:1px solid #e2e2e2; padding:5px 0; margin-bottom:10px}
+.crumb a{color:#888; padding:0 3px}
+.productInfo{ border-bottom:1px  dotted #ccc; padding-bottom:20px; margin-bottom:10px}
+.productInfo .l{ float:left;width:574px;}
+.productInfo .l h2{color:#2b94c8; font-size:16px}
+.productInfo .l h2 span{ font-size:12px;color:#f60; font-weight:normal; padding-left:10px}
+.productInfo .l .tit{ padding:10px 0}
+.productInfo .r{ float:right;width:182px; background:#fbfbfb; padding:20px; border:1px solid #e2e2e2}
+.productInfo .r p strong{ font-size:14px; font-weight:bold;color:#555}
+.sourceList table { background:#ebebeb}
+.sourceList table td{ background:#fff; padding:5px 0}
+.sourceList table td.cfb{ background:#fbfbfb}
+.sourceList table th{ padding:8px 0}
+.turnpage{ text-align:center; line-height:2em; padding:25px 0}
+.turnpage select{ padding:2px 5px; margin:0 10px}
+.turnpage a{ border:1px solid #cbcbcb; padding:4px 7px; background:#f4f4f4;color:#000; margin:0 3px}
+.turnpage a.on{ background:#52b5e6;color:#fff}
+.turnpage em{color:orange; padding:0 10px}
+.turnpage .btn{ border:none; background:#3aa1d3; padding:4px 15px;color:#fff}
+.turnpage input{ margin-left:10px}
+.searchbox p{ padding:10px 0}
+.searchbox p span{ padding:0 20px}
+.searchbox p em{ padding:0 8px}
+.searchbox p .btn-1{width:60px;height:30px; line-height:30px; font-size:12px;color:#fff; background:#4db1e3; border:none}
+.productList h2{ font:15px;color:#555; text-indent:15px; padding:10px 0}
+.productList .block{ background:#ebebeb;height:38px; line-height:38px; text-indent:15px; margin:5px 0 15px}
+.productList ul li{ border-bottom:1px dotted #ccc; padding:10px 0}
+.productList ul li .l{width:80px;}
+.productList ul li .c{ margin:0 175px 0 100px}
+.productList ul li .c .tit strong{color:#2b94c8; font-size:14px; padding-right:20px}
+.productList ul li .c .tit span{ font-size:12px}
+.productList ul li .c .txt{ padding-top:10px}
+.productList ul li .r{width:155px; border-left:1px solid #ccc; text-align:center; height:80px}

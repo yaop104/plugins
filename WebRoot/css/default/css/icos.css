@@ -1,0 +1,251 @@
+.ico {
+    background: url(../images/icos.png) no-repeat 100px 100px;
+}
+
+.lmgl {
+    background-position: 0px 0px;
+}
+
+/*用户管理*/
+.yhgl {
+    background-position: -18px 0px;
+}
+
+/*权限设置*/
+.qxsz {
+    background-position: -36px 0px;
+}
+
+.ico_app {
+    background-position: 0 0;
+}
+
+/*查询*/
+.ico_search {
+    background-position: -54px 0px;
+}
+
+/*刷新*/
+.ico_refresh {
+    background-position: -162px 0px;
+}
+
+/*查看*/
+.ico_view {
+    background-position: -216px 0px;
+}
+
+/*编辑*/
+.ico_edit {
+    background-position: -198px 0px;
+}
+
+/*删除*/
+.ico_del {
+    background-position: -180px 0px;
+}
+
+/*新建*/
+.ico_create {
+    background-position: -72px 0px;
+}
+
+/*扩展信息*/
+.ico_extend {
+    background-position: -252px 0px;
+}
+
+/*主键*/
+.ico_primary_key {
+    background-position: -36px 0px;
+}
+
+/*重置密码*/
+.ico_resetpwd {
+    background-position: -90px 0px;
+}
+
+/*数据关联*/
+.ico_relate {
+    background-position: -270px 0px;
+}
+
+/*导出到excel*/
+.ico_expexl {
+    background-position: -288px 0px;
+}
+
+/*导入到excel*/
+.ico_impexl {
+    background-position: -306px 0px;
+}
+
+/*导出*/
+.ico_export {
+    background-position: -342px 0px;
+}
+
+/*导入*/
+.ico_import {
+    background-position: -324px 0px;
+}
+
+/*数据管理*/
+.ico_datamgt {
+    background-position: -360px 0px;
+}
+
+/*数据视图*/
+.ico_dataview {
+    background-position: -378px 0px;
+}
+
+/*查询视图*/
+.ico_queryview {
+    background-position: -396px 0px;
+}
+
+/*统计视图*/
+.ico_statistview {
+    background-position: -414px 0px;
+}
+
+/*报告视图*/
+.ico_reportview {
+    background-position: -432px 0px;
+}
+
+/*生成图标*/
+.ico_chart {
+    background-position: -450px 0px;
+}
+
+/*数据源*/
+.ico_datasource {
+    background-position: -468px 0px;
+}
+
+/*数据集*/
+.ico_dataset {
+    background-position: -486px 0px;
+}
+
+/*数据列*/
+.ico_column {
+    background-position: -504px 0px;
+}
+
+/*数据同步*/
+.ico_syn {
+    background-position: -522px 0px;
+}
+
+/*连接数据库*/
+.ico_conn {
+    background-position: -540px 0px;
+}
+
+/*批量删除*/
+.ico_massdel {
+    background-position: -108px 0px;
+}
+
+/*全选*/
+.ico_selectall {
+    background-position: -126px 0px;
+}
+
+/*反选*/
+.ico_blankall {
+    background-position: -144px 0px;
+}
+
+/*批量重置密码*/
+.ico_resetpwds {
+    background-position: -234px 0px;
+}
+
+.ui-dialog-titlebar-MinMax {
+    background-position: 0px -180px;
+}
+
+.max {
+    background-position: -18px -180px;
+}
+
+.dialogclose {
+    background-position: -36px -180px;
+}
+
+.mod {
+    background-position: -36px -180px;
+}
+
+.grid .ico {
+    width: 16px;
+    height: 16px;
+    line-height: 1px;
+    overflow: hidden;
+    cursor: pointer;
+    margin-right: 2px;
+    background-image: url(../images/icos_alpha.png);
+    border: none;
+}
+
+.grid .hov .ico {
+    background-image: url(../images/icos.png);
+}
+
+.grid .icon {
+    width: 16px;
+    height: 16px;
+    line-height: 1px;
+    overflow: hidden;
+    cursor: pointer;
+    margin-right: 2px;
+    border: none;
+}
+
+.icon_table {
+    background: url(../images/icon/table.gif) no-repeat 0px 0px;
+}
+.icon_view {
+    background: url(../images/icon/view.gif) no-repeat 0px 0px;
+}
+.icon_sql {
+    background: url(../images/icon/sql.gif) no-repeat 0px 0px;
+}
+
+.icon_money {
+	background: url(../images/icon/money.png) no-repeat 0px 0px;
+}
+
+.tdButton1 {
+	background-image: url(../images/cx.gif);
+	height: 27px;
+	width: 71px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	margin: 0px;
+	padding: 0px;
+	background-repeat: no-repeat;
+	background-color: #FFFFFF;
+}
+.right {
+	border: 1px solid #a5d3e7;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	visibility: visible;
+	margin-top: 3px;
+	margin-right: 0px;
+	margin-bottom: 2px;
+	margin-left: 2px;
+}

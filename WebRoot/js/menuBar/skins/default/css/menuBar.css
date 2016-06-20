@@ -1,0 +1,71 @@
+@charset "utf-8";
+.header .maintab {
+	background-image: url(../images/maintab_bg.png);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	overflow:hidden;
+	zoom:1;
+}
+.header .maintab ul{
+	float:right;
+	margin:37px 43px 5px 0;
+	display:inline;
+}
+.header .maintab li{
+	float:left;
+	display:inline;
+	_width:1px;
+	height: 31px;
+}
+.header .maintab .tab_l{
+	background-image: url(../images/maintab_l.png);
+	background-repeat: no-repeat;
+	background-position: left 4px;
+	height:31px;
+	padding-left:6px;
+}
+.header .maintab .tab_r{
+	background-image: url(../images/maintab_r.png);
+	background-repeat: no-repeat;
+	background-position: right 4px;
+	height:31px;
+	padding-right:6px;
+}
+.header .maintab .tab_c{
+	background-image: url(../images/maintab_c.png);
+	background-repeat:repeat-x;
+	background-position: center 4px;
+	height: 31px;
+	color: #95abb9;
+}
+.header .maintab li a{
+	float:left;
+	display:block;
+	height: 31px;
+	color: #FFF;
+	text-decoration: none;
+	cursor:pointer;
+}
+.header .maintab li a:hover{
+	background-image:none;
+}
+.header .maintab li a:hover .tab_l,
+.header .maintab li.sel a .tab_l{
+	background-image: url(../images/maintab_sel_l.png);
+}
+.header .maintab li a:hover .tab_r,
+.header .maintab li.sel a .tab_r{
+	background-image: url(../images/maintab_sel_r.png);
+}
+.header .maintab li a:hover .tab_c,
+.header .maintab li.sel a .tab_c{
+	background-image: url(../images/maintab_sel_c.png);
+	background-repeat:no-repeat;
+	color: #FFF;
+}
+.header .maintab .presenter{
+	padding:14px 20px 0 20px;
+	white-space: nowrap;
+	line-height: 12px;
+}
+

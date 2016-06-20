@@ -1,0 +1,71 @@
+@charset "utf-8"; *{padding:0px; margin:0px; font-size:14px}
+html{*overflow-y:scroll}
+body{color:#333; padding:10px; font-size:12px;background:#f0f0f0;font-family:Verdana,Arial,Helvetica,sans-serif}
+img{border:none}
+ul,dl{list-style:none;}
+a{color:#004b8d; text-decoration:none}
+a:hover{color:#4192d9; text-decoration:none}
+
+
+.fc_red{color:#f26101}
+.fc_blue{color:#004b8d}
+.fc_gray{color:#656565}
+
+.fc_inp{
+	height:20px;
+	width:150px;
+	border:1px solid #b8b8b8;
+	background-color:#FFF;
+	font-size:14px;
+}
+
+.fc_inp_F{
+	background-image:url(images/ipt_bg.jpg);
+	background-repeat:repeat-x;
+	height:20px;
+	width:150px;
+	border:1px solid #666;
+	font-size:14px;
+}
+button, input, select{vertical-align:middle}
+button{margin-right:5px;cursor:pointer;}
+.btn1{height:22px;padding:0 6px;font-size:12px;line-height:22px;color:#333;border:1px solid #d9e8f5;background:url(images/button_bg1.gif) repeat-x; cursor:pointer;}
+.btn2{height:22px;padding:0 15px;font-size:12px;line-height:22px;color:#333;border:1px solid #d9e8f5;background:url(images/button_bg1.gif) repeat-x; cursor:pointer; font-weight:bold;}
+textarea{margin-left:5px!important}
+/*Download by http://www.codefans.net*/
+.mtitle{width:100%;margin:0px auto; height:29px; line-height:29px; background-color:#fff; border:1px ddd solid;overflow:hidden; clear:both}
+.mtitle h1{width:88%; height:29px; float:left; line-height:27px; font-size:14px; font-weight:bold; text-indent:14px; letter-spacing:2px; color:#333;}
+.mtitle span{float:right;}
+
+.input_title{width:100%;margin:0px auto; height:29px; line-height:29px; background-color:#6c8db8; border:1px #6d7eaa solid;overflow:hidden; clear:both}
+.input_title h1{height:29px; float:left; line-height:27px; font-size:14px; font-weight:bold; text-indent:14px; letter-spacing:2px; color:#eefcfd;}
+
+/*表格样式*/
+tbody{border:solid #ddd; border-width:1px 1px 0px 1px;}
+tbody td{border:solid #ddd; border-width:0px 1px 1px 0px; padding:10px 0px;}
+
+
+table .title{color:#eefcfd;font-weight:bold; height:38px;background-color:#6c8db8;background-image:url(images/table_th_bg.gif); background-repeat:repeat-x; border-left:1px solid #6d7eaa;border-right:1px solid #6d7eaa;}
+table .title th{ text-align:center; font-weight:bold;border-right:1px solid #6d7eaa; height:35px;}
+
+table thead tr{height:24px;line-height:24px;}
+.tform{width:100%; margin:5px auto; border-bottom:1px solid #d9e8f5; height:26px;line-height:26px;text-align:left;}
+.tlist{width:100%; margin:7px auto 0px; font-family:Tahoma,Verdana,Arial,;  border-collapse:collapse}
+table tbody{border-left:1px solid #ddd;border-right:1px solid #ddd; background-color:#fff;}
+
+tbody tr.over{ background-color:#cfdff3; cursor:pointer;}
+tbody tr.out{ background-color:#ffffff;}
+.tlist tbody td{height:24px;line-height:24px;font-weight:normal;color:#333;border-bottom:1px dotted #ddd}
+.tlist tr td{line-height:15px;padding:6px;}
+.tlist tfoot td{text-align:right; border-top:#ddd solid 2px;}
+
+/*提交数据表格样式*/
+.input_table{border:solid #6d7eaa; border-width:1px 1px 0px 1px;width:100%; margin:7px auto 0px; font-family:Tahoma,Verdana,Arial,;  border-collapse:collapse}
+.input_table td{border:solid #6d7eaa; padding-left:10px; padding-right:10px; border-width:0px 1px 1px 0px; font-size:12px;}
+
+.input_table .td_ck{border:0px;}
+
+.pagelist{padding:10px; text-align:center;}
+.pagelist a{overflow:hidden;display:inline; padding:4px;text-decoration:none; color:#333; border:1px solid #ebebeb;}
+.pagelist a:hover,.pagelist strong{border:1px solid #ffd375;color:#f26101;padding:4px;}
+

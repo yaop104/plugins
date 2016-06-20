@@ -1,0 +1,282 @@
+.subtab{
+	background-image: url(../images/subtab_bg.png);
+	background-repeat: repeat-x;
+	height: 30px;
+	position: relative;
+}
+.subtab .content{
+	background-image: url(../images/subtab_bg_l.png);
+	background-repeat: no-repeat;
+	height: 30px;
+	overflow: hidden;
+	position: relative;
+}
+.subtab .show {
+	margin: 0 40px 0 20px;
+	height: 30px;
+	overflow: hidden;
+	position:relative;
+}
+.subtab .leftbtn,.subtab .rightbtn,.subtab .extbtn {
+	position:absolute;
+	top:0px;
+	background-repeat: no-repeat;
+	background-position: left 4px;
+	width:20px;
+	height:30px;
+	filter: Alpha(Opacity=0);
+	opacity:0;
+}
+.subtab .leftbtn{
+	left:0px;
+	background-image: url(../images/tab_leftbtn.png);
+}
+.subtab .rightbtn {
+	background-image: url(../images/tab_rightbtn.png);
+	right:20px;
+}
+.subtab .extbtn{
+	background-image: url(../images/tab_extbtn.png);
+	background-position:-3px 4px;
+	right:0px;
+}
+.subtab .active{
+	filter: Alpha(Opacity=40);
+	opacity:0.4;
+	cursor:pointer;
+}
+.subtab .active.btnhov{
+	filter: Alpha(Opacity=80);
+	opacity:0.8;
+}
+.subtab ul {
+	overflow: hidden;
+	zoom: 1;
+	height: 30px;
+	margin:0px;
+	position:absolute;
+	left:0px;
+}
+
+.subtab li {
+	background-image: url(../images/subtab_lc.png);
+	background-repeat: no-repeat;
+	height: 24px;
+	float: left;
+	margin: 6px 1px 0 0;
+	padding-left: 2px;
+	position:relative;
+	cursor: default;
+	overflow:hidden;
+}
+.subtab li .itembody {
+	background-image: url(../images/subtab_body.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+	height: 24px;
+	padding-right: 2px;
+	_float:left;
+	zoom:1;
+}
+.subtab li .presenter {
+	line-height: 12px;
+	padding: 6px 16px 0 16px;
+	color: #898989;
+	white-space: nowrap;
+	*padding-top:8px;
+}
+.subtab li .delico{
+	position:absolute;
+	line-height:1px;
+	overflow:hidden;
+	right:3px;
+	top:9px;
+	background:url(../images/delico.png) no-repeat;
+	width:10px;
+	height:10px;
+	display:none;
+	cursor:pointer;
+}
+.subtab li.sel {
+	background-image: url(../images/subtab_sel_lc.png);
+
+}
+.subtab li.sel .itembody {
+	background-image: url(../images/subtab_sel_body.png);
+}
+.subtab li.sel .presenter {
+	color: #2a7c3d;
+}
+.subtab li.sel .delico{
+	opacity:0.3;
+	filter:alpha(opacity=50);
+	display:block;
+}
+.subtab li.hov .delico{
+	opacity:0.3;
+	filter:alpha(opacity=50);
+	display:block;
+}
+.subtab li.hov .delico.hov{
+	opacity:1;
+	filter:alpha(opacity=100);
+	display:block;
+}
+.repanelgroup{
+	overflow:hidden;
+	zoom:1;
+	position:relative;
+}
+.repanel{
+	width:100%;
+	height:100%;
+	position:absolute;
+	overflow:auto;
+}
+.repanel .content{
+	overflow:auto;
+}
+.tab{
+	background:#E9F9ED url(../images/tab_bg.png) repeat-x left bottom;
+}
+.tab .head {
+	overflow: hidden;
+	zoom: 1;
+	height: 24px;
+	margin:0px;
+	padding-left:20px;
+	background:#e4f3ff url(../images/tab_bg.png) repeat-x left bottom;
+}
+.tab .tabody{
+	padding:5px 0 8px 0;
+}
+.tab .tabody .panel{
+	display:none;
+	overflow:hidden;
+	zoom:1;
+}
+.tab .head li {
+	background-image: url(../images/tab_lc.png);
+	background-repeat: no-repeat;
+	height: 24px;
+	float: left;
+	margin: 0px 1px 0 0;
+	padding-left: 2px;
+	cursor: default;
+	overflow:hidden;
+}
+.tab .head li .itembody {
+	background-image: url(../images/tab_body.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+	height: 24px;
+	padding-right: 2px;
+	_float:left;
+	zoom:1;
+}
+.tab .head li .presenter {
+	line-height: 12px;
+	padding: 5px 16px 0 16px;
+	color: #999;
+	white-space: nowrap;
+	*padding-top:7px;
+}
+.tab .head li.sel {
+	background-image: url(../images/tab_sel_lc.png);
+}
+.tab .head li.sel .itembody {
+	background-image: url(../images/tab_sel_body.png);
+}
+.tab .head li.sel .presenter {
+	color: #2a7c3d;
+}
+#ghostpanel{
+	position:absolute;
+	right:0;
+	top:100px;
+	z-index:1000;
+	display:none;
+}
+#ghostpanel .cellgroup{
+	background-color:#FFF;
+	border:1px solid #75a9da;
+	border-top:none;
+	-moz-border-radius:2px;
+	padding:0 1px;
+	display:block;
+	max-height:160px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	zoom:1;
+	_float:left;
+}
+#ghostpanel .cellgroup dd{
+	position:relative;
+	line-height:20px;
+	*line-height:22px;
+	height:20px;
+	overflow:hidden;
+	padding: 1px 22px 1px 8px;
+	white-space:nowrap;
+	display:block;
+	*width:auto;
+	overflow:hidden;
+	zoom:1;
+	cursor: pointer;
+	color:#156491;
+	margin:1px 0;
+	_float:left;
+	_clear:both;
+}
+#ghostpanel dd .delico{
+	position:absolute;
+	line-height:1px;
+	overflow:hidden;
+	background:url(../images/delico.png) no-repeat;
+	width:10px;
+	height:10px;
+	visibility:hidden;
+	display:block;
+	cursor:pointer;
+	right:7px;
+	top:6px;
+}
+#ghostpanel dd.hov .delico{
+	opacity:0.3;
+	filter:alpha(opacity=50);
+	display:block;
+	visibility:visible;
+}
+#ghostpanel dd.hov .delico.hov{
+	opacity:1;
+	filter:alpha(opacity=100);
+	display:block;
+	visibility:visible;
+}
+#ghostpanel .cellgroup dt{
+	height:2px;
+	line-height:2px;
+	overflow:hidden;
+	background:#fff url(../images/spliter.png) repeat-x;
+	margin:2px 0 1px 0;
+	_float:left;
+	_clear:both;
+}
+#ghostpanel .cellgroup dd .ico{
+	float:left;
+	width:16px;
+	height:16px;
+	overflow:hidden;
+	line-height:1px;
+	margin:2px 6px 0 1px;
+}
+#ghostpanel .cellgroup dd.hov,#ghostpanel .cellgroup dd.sel{
+	background: #fff url(../images/menuitem_bg.png) repeat-x left bottom;
+	padding: 0px 21px 0px 7px;
+	border:1px solid #a4d0f9;
+	-moz-border-radius:2px;
+	margin:1px 0;
+}
+#ghostpanel .cellgroup dd.dis{
+	color:#999999;
+}

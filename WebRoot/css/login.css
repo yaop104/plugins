@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{margin:0px;  font-family:"微软雅黑", "宋体", Arial; font-size:12px;}
+
+
+
+
+/**********登录页开始**********/
+.logo{background:url(../img/logo.gif) no-repeat; left:43px;  top:32px; width:232px; height:45px; position:relative;}
+.login{background:url(../img/kbg.gif) no-repeat; width:426px; height:272px; margin:0 auto; margin-top:70px; padding-top:70px;}
+.logininput{margin:0px 30px 5px 40px; position:relative;}
+
+/*一般a标记样式*/
+a:link{color:#005faf;}
+a:hover{color:#F60;}
+a:visited{color:#005faf;}
+/* login输入框 */
+.inputleft{background:url(../img/inputleft.gif) left no-repeat; padding-left:6px; width:222px;}
+.inputright{background:url(../img/inputright.gif) right no-repeat; padding-right:6px;}
+.inputmid{background:url(../img/inputmin.gif) repeat-x scroll;  height:24px; padding-top:3px; padding-left:3px;}
+.inputmid input{border:none; line-height:20px; height:20px; width:210px; background:none; }
+
+/* 验证码输入框 */
+.inputleftyy{background:url(../img/inputleft.gif) left no-repeat; padding-left:6px; width:122px;}
+.inputmidyy{background:url(../img/inputmin.gif) repeat-x scroll;  height:24px; padding-top:3px; padding-left:3px;}
+.inputmidyy input{border:none; line-height:20px; height:20px; width:110px; background:none; }
+.checkpic{ float:left; left:150px; position:relative; top:-25px;}
+.checkpic img{vertical-align:middle; margin-right:20px;}
+.logininputss{margin:0px 30px 5px 40px; position:relative; clear:both; top:-20px;}
+.inputleftss{background:url(../img/inputleft.gif) left no-repeat; padding-left:6px; width:122px; }
+.inputmidss{background:url(../img/inputmin.gif) repeat-x scroll;  height:25px; padding-top:2px; padding-left:3px; }
+.inputmidss span{_border:none; _position:absolute; _overflow:hidden; _top:23px; _left:15px;" *border:none; *position:absolute; *overflow:hidden; *top:23px; *left:15px;"}
+.inputmidss span select{border:none; line-height:20px; height:18px; _height:20px;  *height:20px; width:110px; background:none; _margin:-2px; _background:none; *margin:-2px; *background:none; *overflow:hidden;}
+
+/* 动态密码 */
+.dongtaimm{float:right; position:relative; top:-23px; right:35px;}
+.dongtaimm a{color:#005faf;}.dongtaimm a:hover{color:#F60;}
+
+/*按钮*/
+.logininputbt{margin:10px 30px 5px 40px; position:relative; clear:both; top:-20px;}
+#btinput{background:url(../img/a_01.gif) no-repeat center; color:#FFF; width:89px;  padding-bottom:3px; height:28px; border:none; font-size:16px; font-family:"微软雅黑", "宋体", Arial; vertical-align:middle; text-align:center; cursor:pointer;}
+#btinput_hover/*鼠标悬停样式*/{background:url(../img/a_02.gif) no-repeat center; color:#FFF; width:89px;  padding-bottom:3px; height:28px; border:none; font-size:16px; font-family:"微软雅黑", "宋体", Arial; vertical-align:middle; text-align:center; }
+
+
+
+
+
+
+.logincopyright{ padding-top:15px; width:396px; text-align:left; color:#8d8d8d; padding-left:25px;  margin:0 auto; }
+/**********登录页结束**********/

@@ -1,0 +1,158 @@
+/*
+div#rMenu {position:absolute; visibility:hidden; top:0; background-color: #5A9ED6;text-align: left;padding: 2px;z-index: 999}
+div#rMenu ul li{
+	margin: 1px 0;
+	padding: 0 5px;
+	cursor: pointer;
+	list-style: none outside none;
+	background-color: #ECF1F5;
+}
+div#rMenu ul li a:hover{color: #807F7F}*/
+
+.addbtn {
+	   background-attachment: scroll;
+	    background-color: transparent;
+	    background-image: url("./img/add.png");
+	    background-repeat: no-repeat;
+	    border: 0 none;
+	    cursor: pointer;
+	    display: inline-block;
+	    height: 16px;
+	    line-height: 0;
+	    margin: 0;
+	    outline: medium none;
+	    vertical-align: middle;
+	    width: 16px;
+}
+
+.b-m-mpanel .img_edit{
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url("./img/zTreeStandard.png");
+    background-repeat: no-repeat;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    line-height: 0;
+    margin: 0;
+    outline: medium none;
+    vertical-align: middle;
+    width: 16px;
+      background-position: -110px -48px;
+    margin-right: 2px;
+    vertical-align: top;
+}
+
+.b-m-mpanel .img_del{
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url("./img/zTreeStandard.png");
+    background-repeat: no-repeat;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    line-height: 0;
+    margin: 0;
+    outline: medium none;
+    vertical-align: middle;
+    width: 16px;
+  	background-position: -110px -64px;
+    margin-right: 2px;
+    vertical-align: top;
+}
+
+.b-m-mpanel .img_copy{
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url("./img/copy.gif");
+    background-repeat: no-repeat;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    line-height: 0;
+    margin: 0;
+    outline: medium none;
+    vertical-align: middle;
+    width: 16px;
+    margin-right: 2px;
+    vertical-align: top;
+}
+
+.b-m-mpanel .img_cut{
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url("./img/cut.gif");
+    background-repeat: no-repeat;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    line-height: 0;
+    margin: 0;
+    outline: medium none;
+    vertical-align: middle;
+    width: 16px;
+    margin-right: 2px;
+    vertical-align: top;
+}
+
+.b-m-mpanel .img_paste{
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url("./img/paste.gif");
+    background-repeat: no-repeat;
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    line-height: 0;
+    margin: 0;
+    outline: medium none;
+    vertical-align: middle;
+    width: 16px;
+    margin-right: 2px;
+    vertical-align: top;
+}
+
+.b-m-mpanel {
+    background: url("./img/menu_bg.gif") repeat-y scroll left center #F0F0F0;
+    border: 1px solid #718BB7;
+    left: 0;
+    cursor:pointer;
+    padding: 2px 0;
+    position: absolute;
+    top: 0;
+    visibility:hidden;
+    z-index: 99997;
+}
+.b-m-item, .b-m-idisable {
+    line-height: 100%;
+    margin: 0 2px 0 3px;
+    padding: 4px 2px;
+}
+.b-m-idisable {
+    color: #808080;
+}
+.b-m-ibody, .b-m-arrow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.b-m-idisable .b-m-arrow {
+    background: none repeat scroll 0 0 transparent;
+}
+.b-m-item img, .b-m-ifocus img, .b-m-idisable img {
+    margin-right: 8px;
+}
+.b-m-ifocus {
+    background: url("./img/m_item.gif") repeat-x scroll center bottom transparent;
+    border: 1px solid #AACCF6;
+    line-height: 100%;
+    margin: 0 2px 0 3px;
+    padding: 3px 1px;
+}
+.b-m-idisable img {
+    visibility: hidden;
+}

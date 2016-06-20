@@ -1,0 +1,135 @@
+@charset "utf-8";
+/* CSS Document */
+
+/***all icon***/
+.icon_tijiao, .icon_jinyong, .icon_Modify,.icon_associate,.icon_chakan,.icon_start,.icon_mimaa,.icon_del,.icon_tijiaosh,.icon_shenhe,.icon_xiaxian,.icon_shangxian,.icon_shenqingxiaxian,.icon_shenqingshangxian,.icon_shenqingedit,.icon_edit,.icon_preview,.icon_groupman,.icon_grouppre,.icon_date,.icon_pause,.icon_stop,.icon_version,.icon_details,.icon_mobile,.icon_restore,.icon_usergroup,.icon_user{width:23px; height:23px;}
+.icon_tijiao a,.icon_jinyong a, .icon_Modify a,.icon_associate a,.icon_chakan a,.icon_start a,.icon_mimaa a,.icon_del a,.icon_tijiaosh a,.icon_shenhe a,.icon_xiaxian a,.icon_shangxian a,.icon_shenqingxiaxian a,.icon_shenqingshangxian a,.icon_shenqingedit a,.icon_edit a,.icon_preview a, .icon_groupman a,.icon_grouppre a,.icon_date a,.icon_pause a,.icon_stop a,.icon_version a,.icon_details a,.icon_mobile a,.icon_restore a,.icon_usergroup a,.icon_user a{display:inline-block; width:23px; height:0px !important; padding-top:23px; overflow:hidden; background:url(../img/icoall.gif) no-repeat scroll  transparent;}
+.icon_tijiao a:hover, .icon_tijiao a:focus, .icon_tijiao a:active, .icon_jinyong a:hover, .icon_jinyong a:focus, .icon_jinyong a:active, .icon_Modify a:hover, .icon_Modify a:focus, .icon_Modify a:active,.icon_chakan a:hover, .icon_chakan a:focus, .icon_chakan a:active,.icon_start a:hover, .icon_start a:focus, .icon_start a:active,.icon_mimaa a:hover, .icon_mimaa a:focus, .icon_mimaa a:active,.icon_del a:hover, .icon_del a:focus, .icon_del a:active,.icon_tijiaosh a:hover, .icon_tijiaosh a:focus, .icon_tijiaosh a:active,.icon_shenhe a:hover, .icon_shenhe a:focus, .icon_shenhe a:active,.icon_xiaxian a:hover, .icon_xiaxian a:focus, .icon_xiaxian a:active,.icon_shangxian a:hover, .icon_shangxian a:focus, .icon_shangxian a:active,.icon_shenqingxiaxian a:hover, .icon_shenqingxiaxian a:focus, .icon_shenqingxiaxian a:active,.icon_shenqingshangxian a:hover, .icon_shenqingshangxian a:focus, .icon_shenqingshangxian a:active,.icon_shenqingedit a:hover, .icon_shenqingedit a:focus, .icon_shenqingedit a:active,.icon_edit a:hover, .icon_edit a:focus, .icon_edit a:active,.icon_preview a:hover, .icon_preview a:focus, .icon_preview a:active,.icon_groupman a:hover, .icon_groupman a:focus, .icon_groupman a:active,.icon_grouppre a:hover, .icon_grouppre a:focus, .icon_grouppre a:active,.icon_date a:hover, .icon_date a:focus, .icon_date a:active,.icon_pause a:hover, .icon_pause a:focus, .icon_pause a:active,.icon_stop a:hover, .icon_stop a:focus, .icon_stop a:active,.icon_version a:hover, .icon_version a:focus, .icon_version a:active,.icon_details a:hover, .icon_details a:focus, .icon_details a:active,.icon_mobile a:hover, .icon_mobile a:focus, .icon_mobile a:active,.icon_restore a:hover, .icon_restore a:focus, .icon_restore a:active,.icon_usergroup a:hover, .icon_usergroup a:focus, .icon_usergroup a:active,.icon_user a:hover, .icon_user a:focus, .icon_user a:active{display:inline-block; width:23px; height:0px !important; padding-top:23px; background:url(../img/icoall.gif) no-repeat scroll transparent; overflow:hidden;}
+
+
+.icon_associate a{background-position:0 -135px;}
+.icon_associategr{background:url(../img/icoall.gif) no-repeat scroll 0px -135px  transparent;}
+.icon_associate a:hover, .icon_start a:focus, .icon_start a:active{background-position:0 -135px;}
+
+
+
+/*提交*/
+
+.icon_tijiao a{ background-position:0 -619px;}
+.icon_tijiaogr{background:url(../img/icoall.gif) no-repeat scroll -46px -619px  transparent;}
+.icon_tijiao a:hover, .icon_tijiao a:focus, .icon_tijiao a:active{ background-position: -23px -619px;}
+/*禁用*/
+
+.icon_jinyong a{ background-position:0 -44px;}
+.icon_jinyonggr{background:url(../img/icoall.gif) no-repeat scroll -46px -44px  transparent;}
+.icon_jinyong a:hover, .icon_jinyong a:focus, .icon_jinyong a:active{ background-position:-23px -44px;}
+/*修改*/
+
+.icon_Modify a{background-position:0 0px;}
+.icon_Modifygr{background:url(../img/icoall.gif) no-repeat scroll -46px -0px  transparent;}
+.icon_Modify a:hover, .icon_Modify a:focus, .icon_Modify a:active{ background-position:-23px 0px;}
+/*查看*/
+
+.icon_chakan a{background-position:0 -22px;}
+.icon_chakangr{background:url(../img/icoall.gif) no-repeat scroll -46px -22px  transparent;}
+.icon_chakan a:hover, .icon_chakan a:focus, .icon_chakan a:active{background-position:-23px -22px;}
+/*启用*/
+
+.icon_start a{background-position:0 -66px;}
+.icon_startgr{background:url(../img/icoall.gif) no-repeat scroll -46px -66px  transparent;}
+.icon_start a:hover, .icon_start a:focus, .icon_start a:active{background-position:-23px -66px;}
+/*密码*/
+
+.icon_mimaa a{background-position:0 -91px;}
+.icon_mimaagr{background:url(../img/icoall.gif) no-repeat scroll -46px -91px  transparent;}
+.icon_mimaa a:hover, .icon_mimaa a:focus, .icon_mimaa a:active{background-position:-23px -91px;}
+/*删除*/
+
+.icon_del a{background-position:0 -112px;}
+.icon_delgr{background:url(../img/icoall.gif) no-repeat scroll -46px -112px  transparent;}
+.icon_del a:hover, .icon_del a:focus, .icon_del a:active{background-position:-23px -112px;}
+/*提交审核*/
+
+.icon_tijiaosh a{background-position:0 -136px;}
+.icon_tijiaoshgr{background:url(../img/icoall.gif) no-repeat scroll -46px -136px  transparent;}
+.icon_tijiaosh a:hover, .icon_tijiaosh a:focus, .icon_tijiaosh a:active{background-position:-23px -136px;}
+/*审核*/
+
+.icon_shenhe a{background-position:0 -160px;}
+.icon_shenhegr{background:url(../img/icoall.gif) no-repeat scroll -46px -160px  transparent;}
+.icon_shenhe a:hover, .icon_shenhe a:focus, .icon_shenhe a:active{background-position:-23px -160px;}
+/*xiaxian*/
+.icon_xiaxian a{background-position:0 -182px;}
+.icon_xiaxiangr{background:url(../img/icoall.gif) no-repeat scroll -46px -182px  transparent;}
+.icon_xiaxian a:hover, .icon_xiaxian a:focus, .icon_xiaxian a:active{background-position:-23px -182px;}
+/*shangxian*/
+.icon_shangxian a{background-position:0 -205px;}
+.icon_shangxiangr{background:url(../img/icoall.gif) no-repeat scroll -46px -205px  transparent;}
+.icon_shangxian a:hover, .icon_shangxian a:focus, .icon_shangxian a:active{background-position:-23px -205px;}
+/*申请下线*/
+.icon_shenqingxiaxian a{background-position:0 -228px;}
+.icon_shenqingxiaxiangr{background:url(../img/icoall.gif) no-repeat scroll -46px -228px  transparent;}
+.icon_shenqingxiaxian a:hover, .icon_shenqingxiaxian a:focus, .icon_shenqingxiaxian a:active{background-position:-23px -228px;}
+/*申请上线*/
+.icon_shenqingshangxian a{background-position:0 -252px;}
+.icon_shenqingshangxiangr{background:url(../img/icoall.gif) no-repeat scroll -46px -252px  transparent;}
+.icon_shenqingshangxian a:hover, .icon_shenqingshangxian a:focus, .icon_shenqingshangxian a:active{background-position:-23px -252px;}
+/*申请上线*/
+.icon_shenqingedit a{background-position:0 -275px;}
+.icon_shenqingeditgr{background:url(../img/icoall.gif) no-repeat scroll -46px -275px  transparent;}
+.icon_shenqingedit a:hover, .icon_shenqingedit a:focus, .icon_shenqingedit a:active{background-position:-23px -275px;}
+/*编辑*/
+.icon_edit a{background-position:0 -298px;}
+.icon_editgr{background:url(../img/icoall.gif) no-repeat scroll -46px -298px  transparent;}
+.icon_edit a:hover, .icon_edit a:focus, .icon_edit a:active{background-position:-23px -298px;}
+/*预览*/
+.icon_preview a{background-position:0 -320px;}
+.icon_previewgr{background:url(../img/icoall.gif) no-repeat scroll -46px -320px  transparent;}
+.icon_preview a:hover, .icon_preview a:focus, .icon_preview a:active{background-position:-23px -320px;}
+/*集管理*/
+.icon_groupman a{background-position:0 -343px;}
+.icon_groupmangr{background:url(../img/icoall.gif) no-repeat scroll -46px -343px  transparent;}
+.icon_groupman a:hover, .icon_groupman a:focus, .icon_groupman a:active{background-position:-23px -343px;}
+/*集预览*/
+.icon_grouppre a{background-position:0 -366px;}
+.icon_grouppregr{background:url(../img/icoall.gif) no-repeat scroll -46px -366px  transparent;}
+.icon_grouppre a:hover, .icon_grouppre a:focus, .icon_grouppre a:active{background-position:-23px -366px;}
+/*审核日志*/
+.icon_date a{background-position:0 -390px;}
+.icon_dategr{background:url(../img/icoall.gif) no-repeat scroll -46px -390px  transparent;}
+.icon_date a:hover, .icon_date a:focus, .icon_date a:active{background-position:-23px -390px;}
+/*Pause*/
+.icon_pause a{background-position:0 -412px;}
+.icon_pausegr{background:url(../img/icoall.gif) no-repeat scroll -46px -412px  transparent;}
+.icon_pause a:hover, .icon_pause a:focus, .icon_pause a:active{background-position:-23px -412px;}
+/*stop*/
+.icon_stop a{background-position:0 -434px;}
+.icon_stopgr{background:url(../img/icoall.gif) no-repeat scroll -46px -434px  transparent;}
+.icon_stop a:hover, .icon_stop a:focus, .icon_stop a:active{background-position:-23px -434px;}
+/*Version*/
+.icon_version a{background-position:0 -457px;}
+.icon_versiongr{background:url(../img/icoall.gif) no-repeat scroll -46px -457px  transparent;}
+.icon_version a:hover, .icon_version a:focus, .icon_version a:active{background-position:-23px -457px;}
+/*详情*/
+.icon_details a{background-position:0 -482px;}
+.icon_detailsgr{background:url(../img/icoall.gif) no-repeat scroll -46px -482px  transparent;}
+.icon_details a:hover, .icon_details a:focus, .icon_details a:active{background-position:-23px -482px;}
+/*手机型号 */
+.icon_mobile a{background-position:0 -504px;}
+.icon_mobilegr{background:url(../img/icoall.gif) no-repeat scroll -46px -504px  transparent;}
+.icon_mobile a:hover, .icon_mobile a:focus, .icon_mobile a:active{background-position:-23px -504px;}
+/*restore */
+.icon_restore a{background-position:0 -526px;}
+.icon_restoregr{background:url(../img/icoall.gif) no-repeat scroll -46px -548px  transparent;}
+.icon_restore a:hover, .icon_restore a:focus, .icon_restore a:active{background-position:0px -548px;}
+/*usergroup */
+.icon_usergroup a{background-position:0 -572px;}
+.icon_usergroupgr{background:url(../img/icoall.gif) no-repeat scroll -46px -572px  transparent;}
+.icon_usergroup a:hover, .icon_usergroup a:focus, .icon_usergroup a:active{background-position:-23px -572px;}
+/*usergroup */
+.icon_user a{background-position:0 -595px;}
+.icon_usergr{background:url(../img/icoall.gif) no-repeat scroll -46px -595px  transparent;}
+.icon_user a:hover, .icon_user a:focus, .icon_user a:active{background-position:-23px -595px;}
+
+/*gray*/
+.icon_tijiaogr, .icon_jinyonggr, .icon_Modifygr,.icon_chakangr,.icon_startgr,.icon_mimaagr,.icon_delgr,.icon_tijiaoshgr,.icon_shenhegr,.icon_xiaxiangr,.icon_shangxiangr,.icon_shenqingxiaxiangr,.icon_shenqingshangxiangr,.icon_shenqingeditgr,.icon_editgr,.icon_previewgr,.icon_groupmangr,.icon_grouppregr,.icon_dategr,.icon_pausegr,.icon_stopgr,.icon_versiongr,.icon_detailsgr,.icon_mobilegr,.icon_restoregr,.icon_usergroupgr,.icon_usergr{ display:inline-block; width:23px; height:0px !important; padding-top:23px; overflow:hidden; }
