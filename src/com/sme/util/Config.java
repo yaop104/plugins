@@ -1,0 +1,73 @@
+package com.sme.util;
+
+import java.io.FileInputStream;
+import java.util.Properties;
+/**
+ * 配置文件
+ * @author yao
+ *
+ */
+public class Config {
+	
+	private static Properties confProperties = new Properties();
+	
+	static {
+		try {
+			String PATH = Thread.currentThread()
+					.getContextClassLoader().getResource("config.properties").getFile();
+			
+			
+			confProperties.load(new FileInputStream(PATH));
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public static String getConfigProperty(String key) 
+	{
+		return confProperties.getProperty(key);
+	}
+	
+	public static boolean isBoolean(String key)
+	{
+		return "true".equals(getConfigProperty(key));
+	}
+	
+	public static Integer getInteger(String key) 
+	{
+		return Integer.parseInt(getConfigProperty(key));
+	}
+	
+	public static final Integer TREE_ROOT_ID = 1;
+	
+	public static final boolean LOG_SWITCH =  isBoolean("log_switch");
+	
+	public static final String EMAIL_HOST = getConfigProperty("EMAIL_HOST");
+	
+	public static final String EMAIL_PORT = getConfigProperty("EMAIL_PORT");
+	
+	public static final String EMAIL_USERNAME = getConfigProperty("EMAIL_USERNAME");
+	
+	public static final String EAMIL_PASSWORD = getConfigProperty("EAMIL_PASSWORD");
+	
+	public static final String EMAIL_FROM = getConfigProperty("EMAIL_FROM");
+	
+	public static final String HOST = getConfigProperty("HOST");
+	
+	public static final String PORT = getConfigProperty("PORT");
+	
+	public static final String FILE_PATH = getConfigProperty("FILE_PATH");
+	
+	public static final String URL_PREFIX = getConfigProperty("URL_PREFIX");
+	
+	public static final String DIFF_SWITCH = getConfigProperty("DIFF_SWITCH");
+	
+	public static final Integer openCountPeriod = getInteger("openCountPeriod");
+	
+	public static final String DEFAULT_PASSWD = getConfigProperty("DEFAULT_PASSWD");
+
+	public static final String DEFAULT_APK_PATH = getConfigProperty("defult.apk.path");
+
+	public static final String DEFAULT_APK_IMGPATH = getConfigProperty("defult.apk.picpath");
+}

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.PAppPatchDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.PAppPatch">
+		<result property="pPatchId" column="pPatchId" /><!--id-->
+		<result property="pPatchCurrentversion" column="pPatchCurrentversion" /><!--当前版本-->
+		<result property="pPatchPatchversion" column="pPatchPatchversion" /><!--版本号-->
+		<result property="pPatchPatchapkversion" column="pPatchPatchapkversion" /><!--apk版本号-->
+		<result property="pPatchCurrentversionid" column="pPatchCurrentversionid" /><!--当前版本id-->
+		<result property="pPatchPatchversionid" column="pPatchPatchversionid" /><!--版本id-->
+		<result property="pPatchPatchsize" column="pPatchPatchsize" /><!--版本大小-->
+		<result property="pPatchCurrentsize" column="pPatchCurrentsize" /><!--当前版本大小-->
+		<result property="pAppPatchstate" column="pAppPatchstate" /><!--状态-->
+		<result property="pAppPatchfilepath" column="pAppPatchfilepath" /><!--版本路径-->
+		<result property="pAppOldversionsize" column="pAppOldversionsize" /><!--老版本大小-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		p_patch_id AS pPatchId,
+		p_patch_currentversion AS pPatchCurrentversion,
+		p_patch_patchversion AS pPatchPatchversion,
+		p_patch_patchapkversion AS pPatchPatchapkversion,
+		p_patch_currentversionid AS pPatchCurrentversionid,
+		p_patch_patchversionid AS pPatchPatchversionid,
+		p_patch_patchsize AS pPatchPatchsize,
+		p_patch_currentsize AS pPatchCurrentsize,
+		p_app_patchstate AS pAppPatchstate,
+		p_app_patchfilepath AS pAppPatchfilepath,
+		p_app_oldversionsize AS pAppOldversionsize
+	</sql>
+
+	<sql id="field">
+			p_patch_id,
+			p_patch_currentversion,
+			p_patch_patchversion,
+			p_patch_patchapkversion,
+			p_patch_currentversionid,
+			p_patch_patchversionid,
+			p_patch_patchsize,
+			p_patch_currentsize,
+			p_app_patchstate,
+			p_app_patchfilepath,
+			p_app_oldversionsize
+	</sql>
+
+	<sql id="property">
+			next.nextval,
+			#{pPatchCurrentversion,jdbcType=INTEGER},
+			#{pPatchPatchversion,jdbcType=INTEGER},
+			#{pPatchPatchapkversion,jdbcType=INTEGER},
+			#{pPatchCurrentversionid,jdbcType=INTEGER},
+			#{pPatchPatchversionid,jdbcType=INTEGER},
+			#{pPatchPatchsize,jdbcType=INTEGER},
+			#{pPatchCurrentsize,jdbcType=INTEGER},
+			#{pAppPatchstate,jdbcType=VARCHAR},
+			#{pAppPatchfilepath,jdbcType=VARCHAR},
+			#{pAppOldversionsize,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			p_patch_currentversion=#{pPatchCurrentversion,jdbcType=INTEGER},
+			p_patch_patchversion=#{pPatchPatchversion,jdbcType=INTEGER},
+			p_patch_patchapkversion=#{pPatchPatchapkversion,jdbcType=INTEGER},
+			p_patch_currentversionid=#{pPatchCurrentversionid,jdbcType=INTEGER},
+			p_patch_patchversionid=#{pPatchPatchversionid,jdbcType=INTEGER},
+			p_patch_patchsize=#{pPatchPatchsize,jdbcType=INTEGER},
+			p_patch_currentsize=#{pPatchCurrentsize,jdbcType=INTEGER},
+			p_app_patchstate=#{pAppPatchstate,jdbcType=VARCHAR},
+			p_app_patchfilepath=#{pAppPatchfilepath,jdbcType=VARCHAR},
+			p_app_oldversionsize=#{pAppOldversionsize,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="pPatchCurrentversion!=null" >p_patch_currentversion=#{pPatchCurrentversion,jdbcType=INTEGER},</if>
+			<if test="pPatchPatchversion!=null" >p_patch_patchversion=#{pPatchPatchversion,jdbcType=INTEGER},</if>
+			<if test="pPatchPatchapkversion!=null" >p_patch_patchapkversion=#{pPatchPatchapkversion,jdbcType=INTEGER},</if>
+			<if test="pPatchCurrentversionid!=null" >p_patch_currentversionid=#{pPatchCurrentversionid,jdbcType=INTEGER},</if>
+			<if test="pPatchPatchversionid!=null" >p_patch_patchversionid=#{pPatchPatchversionid,jdbcType=INTEGER},</if>
+			<if test="pPatchPatchsize!=null" >p_patch_patchsize=#{pPatchPatchsize,jdbcType=INTEGER},</if>
+			<if test="pPatchCurrentsize!=null" >p_patch_currentsize=#{pPatchCurrentsize,jdbcType=INTEGER},</if>
+			<if test="pAppPatchstate!=null" >p_app_patchstate=#{pAppPatchstate,jdbcType=VARCHAR},</if>
+			<if test="pAppPatchfilepath!=null" >p_app_patchfilepath=#{pAppPatchfilepath,jdbcType=VARCHAR},</if>
+			<if test="pAppOldversionsize!=null" >p_app_oldversionsize=#{pAppOldversionsize,jdbcType=INTEGER}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="pPatchCurrentversion!=null and pPatchCurrentversion!=''" >AND p_patch_currentversion=#{pPatchCurrentversion,jdbcType=INTEGER}</if>
+					<if test="pPatchPatchversion!=null and pPatchPatchversion!=''" >AND p_patch_patchversion=#{pPatchPatchversion,jdbcType=INTEGER}</if>
+					<if test="pPatchPatchapkversion!=null and pPatchPatchapkversion!=''" >AND p_patch_patchapkversion=#{pPatchPatchapkversion,jdbcType=INTEGER}</if>
+					<if test="pPatchCurrentversionid!=null and pPatchCurrentversionid!=''" >AND p_patch_currentversionid=#{pPatchCurrentversionid,jdbcType=INTEGER}</if>
+					<if test="pPatchPatchversionid!=null and pPatchPatchversionid!=''" >AND p_patch_patchversionid=#{pPatchPatchversionid,jdbcType=INTEGER}</if>
+					<if test="pPatchPatchsize!=null and pPatchPatchsize!=''" >AND p_patch_patchsize=#{pPatchPatchsize,jdbcType=INTEGER}</if>
+					<if test="pPatchCurrentsize!=null and pPatchCurrentsize!=''" >AND p_patch_currentsize=#{pPatchCurrentsize,jdbcType=INTEGER}</if>
+					<if test="pAppPatchstate!=null and pAppPatchstate!=''" >AND p_app_patchstate=#{pAppPatchstate,jdbcType=VARCHAR}</if>
+					<if test="pAppPatchfilepath!=null and pAppPatchfilepath!=''" >AND p_app_patchfilepath=#{pAppPatchfilepath,jdbcType=VARCHAR}</if>
+					<if test="pAppOldversionsize!=null and pAppOldversionsize!=''" >AND p_app_oldversionsize=#{pAppOldversionsize,jdbcType=INTEGER}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.PAppPatch">
+	    SELECT <include refid="fieldAsProperty" /> FROM P_APP_PATCH <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM P_APP_PATCH <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.PAppPatch" resultType="com.sme.entity.PAppPatch">
+		SELECT <include refid="fieldAsProperty" /> FROM P_APP_PATCH
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.PAppPatch">
+		INSERT INTO P_APP_PATCH(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.PAppPatch">
+		DELETE FROM P_APP_PATCH<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.PAppPatch" 
+		parameterType="com.sme.entity.PAppPatch">
+		SELECT<include refid="fieldAsProperty" />FROM P_APP_PATCH<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.PAppPatch">
+		UPDATE P_APP_PATCH<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="pPatchId!=null" >p_patch_id=#{pPatchId,jdbcType=INTEGER}</if>
+			<if test="pPatchId==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	<delete id="deletePatch" parameterType="int">
+		delete from p_app_detail where p_patch_currentversionid = #{id} or p_patch_patchversionid = {id}
+	</delete>
+	
+	<!-- ================== end ================== -->
+</mapper>

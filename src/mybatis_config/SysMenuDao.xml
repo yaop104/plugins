@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.SysMenuDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.SysMenu">
+		<result property="sysMenuId" column="sysMenuId" /><!--id-->
+		<result property="sysMenuName" column="sysMenuName" /><!--名称-->
+		<result property="sysMenuPid" column="sysMenuPid" /><!--父id-->
+		<result property="sysMenuState" column="sysMenuState" /><!--状态-->
+		<result property="sysMenuOrder" column="sysMenuOrder" /><!--排序-->
+		<result property="sysMenuDesc" column="sysMenuDesc" /><!--描述-->
+		<result property="sysMenuType" column="sysMenuType" /><!--类型-->
+		<result property="sysMenuUrl" column="sysMenuUrl" /><!--url地址-->
+		<result property="sysMenuCdate" column="sysMenuCdate" /><!--记录日期-->
+		<result property="sysMenuUdate" column="sysMenuUdate" /><!--更新日期-->
+		<result property="sysMenuCuser" column="sysMenuCuser" /><!--记录人-->
+		<result property="sysMenuUueser" column="sysMenuUueser" /><!--创建人-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		sys_menu_id AS sysMenuId,
+		sys_menu_name AS sysMenuName,
+		sys_menu_pid AS sysMenuPid,
+		sys_menu_state AS sysMenuState,
+		sys_menu_order AS sysMenuOrder,
+		sys_menu_desc AS sysMenuDesc,
+		sys_menu_type AS sysMenuType,
+		sys_menu_url AS sysMenuUrl,
+		sys_menu_cdate AS sysMenuCdate,
+		sys_menu_udate AS sysMenuUdate,
+		sys_menu_cuser AS sysMenuCuser,
+		sys_menu_uueser AS sysMenuUueser
+	</sql>
+
+	<sql id="field">
+			sys_menu_name,
+			sys_menu_pid,
+			sys_menu_state,
+			sys_menu_order,
+			sys_menu_desc,
+			sys_menu_type,
+			sys_menu_url,
+			sys_menu_cdate,
+			sys_menu_udate,
+			sys_menu_cuser,
+			sys_menu_uueser
+	</sql>
+
+	<sql id="property">
+			#{sysMenuName,jdbcType=VARCHAR},
+			#{sysMenuPid,jdbcType=INTEGER},
+			#{sysMenuState,jdbcType=VARCHAR},
+			#{sysMenuOrder,jdbcType=INTEGER},
+			#{sysMenuDesc,jdbcType=VARCHAR},
+			#{sysMenuType,jdbcType=VARCHAR},
+			#{sysMenuUrl,jdbcType=VARCHAR},
+			#{sysMenuCdate,jdbcType=TIMESTAMP},
+			#{sysMenuUdate,jdbcType=TIMESTAMP},
+			#{sysMenuCuser,jdbcType=VARCHAR},
+			#{sysMenuUueser,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			sys_menu_name=#{sysMenuName,jdbcType=VARCHAR},
+			sys_menu_pid=#{sysMenuPid,jdbcType=INTEGER},
+			sys_menu_state=#{sysMenuState,jdbcType=VARCHAR},
+			sys_menu_order=#{sysMenuOrder,jdbcType=INTEGER},
+			sys_menu_desc=#{sysMenuDesc,jdbcType=VARCHAR},
+			sys_menu_type=#{sysMenuType,jdbcType=VARCHAR},
+			sys_menu_url=#{sysMenuUrl,jdbcType=VARCHAR},
+			sys_menu_cdate=#{sysMenuCdate,jdbcType=TIMESTAMP},
+			sys_menu_udate=#{sysMenuUdate,jdbcType=TIMESTAMP},
+			sys_menu_cuser=#{sysMenuCuser,jdbcType=VARCHAR},
+			sys_menu_uueser=#{sysMenuUueser,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="sysMenuName!=null" >sys_menu_name=#{sysMenuName,jdbcType=VARCHAR},</if>
+			<if test="sysMenuPid!=null" >sys_menu_pid=#{sysMenuPid,jdbcType=INTEGER},</if>
+			<if test="sysMenuState!=null" >sys_menu_state=#{sysMenuState,jdbcType=VARCHAR},</if>
+			<if test="sysMenuOrder!=null" >sys_menu_order=#{sysMenuOrder,jdbcType=INTEGER},</if>
+			<if test="sysMenuDesc!=null" >sys_menu_desc=#{sysMenuDesc,jdbcType=VARCHAR},</if>
+			<if test="sysMenuType!=null" >sys_menu_type=#{sysMenuType,jdbcType=VARCHAR},</if>
+			<if test="sysMenuUrl!=null" >sys_menu_url=#{sysMenuUrl,jdbcType=VARCHAR},</if>
+			<if test="sysMenuCdate!=null" >sys_menu_cdate=#{sysMenuCdate,jdbcType=TIMESTAMP},</if>
+			<if test="sysMenuUdate!=null" >sys_menu_udate=#{sysMenuUdate,jdbcType=TIMESTAMP},</if>
+			<if test="sysMenuCuser!=null" >sys_menu_cuser=#{sysMenuCuser,jdbcType=VARCHAR},</if>
+			<if test="sysMenuUueser!=null" >sys_menu_uueser=#{sysMenuUueser,jdbcType=VARCHAR}</if>
+	</sql>
+	<select id="page" resultType="com.sme.entity.SysMenu" parameterType="map">
+	    SELECT 
+	    	m.sys_menu_id AS sysMenuId,
+			m.sys_menu_name AS sysMenuName,
+			m1.sys_menu_name as sysMenuPname,
+			m.sys_menu_pid AS sysMenuPid,
+			m.sys_menu_state AS sysMenuState,
+			m.sys_menu_order AS sysMenuOrder,
+			m.sys_menu_desc AS sysMenuDesc,
+			m.sys_menu_type AS sysMenuType,
+			m.sys_menu_url AS sysMenuUrl,
+			m.sys_menu_cdate AS sysMenuCdate,
+			m.sys_menu_udate AS sysMenuUdate,
+			m.sys_menu_cuser AS sysMenuCuser,
+			m.sys_menu_uueser AS sysMenuUueser
+	     FROM SYS_MENU m left join sys_menu m1 on m.sys_menu_pid = m1.sys_menu_id 
+	     <where>
+			<if test="sysMenuId!=null and sysMenuId!=''" >m.sys_menu_id=#{sysMenuId,jdbcType=INTEGER}</if>
+			<if test="sysMenuName!=null and sysMenuName!=''" >AND m.sys_menu_name=#{sysMenuName,jdbcType=VARCHAR}</if>
+			<if test="sysMenuPid!=null and sysMenuPid!=''" > AND m.sys_menu_pid=#{sysMenuPid,jdbcType=INTEGER}</if>
+			<if test="sysMenuState!=null and sysMenuState!=''" >AND m.sys_menu_state=#{sysMenuState,jdbcType=VARCHAR}</if>
+			<if test="sysMenuOrder!=null and sysMenuOrder!=''" >AND m.sys_menu_order=#{sysMenuOrder,jdbcType=INTEGER}</if>
+			<if test="sysMenuDesc!=null and sysMenuDesc!=''" >AND m.sys_menu_desc=#{sysMenuDesc,jdbcType=VARCHAR}</if>
+			<if test="sysMenuType!=null and sysMenuType!=''" >AND m.sys_menu_type=#{sysMenuType,jdbcType=VARCHAR}</if>
+			<if test="sysMenuUrl!=null and sysMenuUrl!=''" >AND m.sys_menu_url=#{sysMenuUrl,jdbcType=VARCHAR}</if>
+			<if test="sysMenuCdate!=null and sysMenuCdate!=''" >AND m.sys_menu_cdate=#{sysMenuCdate,jdbcType=TIMESTAMP}</if>
+			<if test="sysMenuUdate!=null and sysMenuUdate!=''" >AND m.sys_menu_udate=#{sysMenuUdate,jdbcType=TIMESTAMP}</if>
+			<if test="sysMenuCuser!=null and sysMenuCuser!=''" >AND m.sys_menu_cuser=#{sysMenuCuser,jdbcType=VARCHAR}</if>
+			<if test="sysMenuUueser!=null and sysMenuUueser!=''" >AND m.sys_menu_uueser=#{sysMenuUueser,jdbcType=VARCHAR}</if>
+		</where>
+	    order by m.sys_menu_pid asc,m.sys_menu_id asc
+		<if test="page!=null and pageCount!=null">
+			limit #{page}, #{pageCount}
+		</if>
+	</select>
+	<select id="count" resultType="Integer" parameterType="map">
+	    select count(*) from SYS_MENU <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.SysMenu" resultType="com.sme.entity.SysMenu">
+		SELECT <include refid="fieldAsProperty" /> FROM SYS_MENU <include refid="idCnd2"/> 
+		order by sysMenuPid
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.SysMenu">
+		INSERT INTO SYS_MENU(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.SysMenu">
+		DELETE FROM SYS_MENU<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.SysMenu" 
+		parameterType="com.sme.entity.SysMenu">
+		SELECT<include refid="fieldAsProperty" />FROM SYS_MENU<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.SysMenu">
+		UPDATE SYS_MENU<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<!-- 删除 软删除 -->
+	<update id="deleteById" parameterType="int">
+		update sys_menu set sys_menu_state = 2 where sys_menu_id=#{sysMenuId}
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="sysMenuId!=null" >sys_menu_id=#{sysMenuId,jdbcType=INTEGER}</if>
+			<if test="sysMenuId==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	<sql id="idCnd2">
+		<where>
+			<if test="sysMenuId!=null and sysMenuId!=''" >sys_menu_id=#{sysMenuId,jdbcType=INTEGER}</if>
+			<if test="sysMenuName!=null and sysMenuName!=''" >AND sys_menu_name=#{sysMenuName,jdbcType=VARCHAR}</if>
+			<if test="sysMenuPid!=null and sysMenuPid!=''" > AND sys_menu_pid=#{sysMenuPid,jdbcType=INTEGER}</if>
+			<if test="sysMenuState!=null and sysMenuState!=''" >AND sys_menu_state=#{sysMenuState,jdbcType=VARCHAR}</if>
+			<if test="sysMenuOrder!=null and sysMenuOrder!=''" >AND sys_menu_order=#{sysMenuOrder,jdbcType=INTEGER}</if>
+			<if test="sysMenuDesc!=null and sysMenuDesc!=''" >AND sys_menu_desc=#{sysMenuDesc,jdbcType=VARCHAR}</if>
+			<if test="sysMenuType!=null and sysMenuType!=''" >AND sys_menu_type=#{sysMenuType,jdbcType=VARCHAR}</if>
+			<if test="sysMenuUrl!=null and sysMenuUrl!=''" >AND sys_menu_url=#{sysMenuUrl,jdbcType=VARCHAR}</if>
+			<if test="sysMenuCdate!=null and sysMenuCdate!=''" >AND sys_menu_cdate=#{sysMenuCdate,jdbcType=TIMESTAMP}</if>
+			<if test="sysMenuUdate!=null and sysMenuUdate!=''" >AND sys_menu_udate=#{sysMenuUdate,jdbcType=TIMESTAMP}</if>
+			<if test="sysMenuCuser!=null and sysMenuCuser!=''" >AND sys_menu_cuser=#{sysMenuCuser,jdbcType=VARCHAR}</if>
+			<if test="sysMenuUueser!=null and sysMenuUueser!=''" >AND sys_menu_uueser=#{sysMenuUueser,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+	<select id="selectMenus" resultType="com.sme.entity.SysMenu">
+		select m.sys_menu_name as sysMenuName from sys_menu m where m.sys_menu_pid not in (-1,1) and m.sys_menu_state = 1 order by m.sys_menu_order asc
+	</select>
+	<!-- ================== end ================== -->
+</mapper>

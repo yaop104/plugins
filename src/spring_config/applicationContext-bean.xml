@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						 http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+   
+   <!-- =================================== Service层 ===================================== -->
+   <!-- ===================================修改时请注明添加时间和人员 =====================================-->
+   <!-- enable autowire -->
+	<context:annotation-config />
+    <!-- 扫描文件（自动将servicec层注入） -->
+    <context:component-scan base-package="com.sme.service.impl"/>
+
+   <!-- 扫描DAO 由spring管理dao -->
+   <context:component-scan base-package="com.sme.dao" />
+   
+	  <!-- 20150317 yaoping sys模块
+ 	<bean name="sysRoleServiceImpl" class="com.sme.service.impl.SysRoleServiceImpl" scope="prototype">
+   		<property name="sysRoleDao" ref="sysRoleDao" />
+   </bean>
+   <bean name="sysOrgServiceImpl" class="com.sme.service.impl.SysOrgServiceImpl" scope="prototype">
+   		<property name="sysOrgDao" ref="sysOrgDao" />
+   </bean>
+   <bean name="sysMenuServiceImpl" class="com.sme.service.impl.SysMenuServiceImpl" scope="prototype">
+   		<property name="sysMenuDao" ref="sysMenuDao" />
+   </bean>
+   <bean name="sysAccServiceImpl" class="com.sme.service.impl.SysAccServiceImpl" scope="prototype">
+   		<property name="sysAccDao" ref="sysAccDao" />
+   </bean>
+   <bean name="sysRoleMenuServiceImpl" class="com.sme.service.impl.SysRoleMenuServiceImpl" scope="prototype">
+   		<property name="sysRoleMenuDao" ref="sysRoleMenuDao" />
+   </bean>
+   -->
+</beans>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.PTerminalRelateDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.PTerminalRelate">
+		<result property="pTermrelateId" column="pTermrelateId" /><!--id-->
+		<result property="pTermrelateTermid" column="pTermrelateTermid" /><!--终端id-->
+		<result property="pTermrelateAppid" column="pTermrelateAppid" /><!--appid-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		p_termrelate_id AS pTermrelateId,
+		p_termrelate_termid AS pTermrelateTermid,
+		p_termrelate_appid AS pTermrelateAppid
+	</sql>
+
+	<sql id="field">
+			p_termrelate_id,
+			p_termrelate_termid,
+			p_termrelate_appid
+	</sql>
+
+	<sql id="property">
+			next.nextval,
+			#{pTermrelateTermid,jdbcType=INTEGER},
+			#{pTermrelateAppid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			p_termrelate_termid=#{pTermrelateTermid,jdbcType=INTEGER},
+			p_termrelate_appid=#{pTermrelateAppid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="pTermrelateTermid!=null" >p_termrelate_termid=#{pTermrelateTermid,jdbcType=INTEGER},</if>
+			<if test="pTermrelateAppid!=null" >p_termrelate_appid=#{pTermrelateAppid,jdbcType=INTEGER}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="pTermrelateTermid!=null and pTermrelateTermid!=''" >AND p_termrelate_termid=#{pTermrelateTermid,jdbcType=INTEGER}</if>
+					<if test="pTermrelateAppid!=null and pTermrelateAppid!=''" >AND p_termrelate_appid=#{pTermrelateAppid,jdbcType=INTEGER}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.PTerminalRelate">
+	    SELECT <include refid="fieldAsProperty" /> FROM P_TERMINAL_RELATE <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM P_TERMINAL_RELATE <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.PTerminalRelate" resultType="com.sme.entity.PTerminalRelate">
+		SELECT <include refid="fieldAsProperty" /> FROM P_TERMINAL_RELATE
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.PTerminalRelate">
+		INSERT INTO P_TERMINAL_RELATE(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.PTerminalRelate">
+		DELETE FROM P_TERMINAL_RELATE<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.PTerminalRelate" 
+		parameterType="com.sme.entity.PTerminalRelate">
+		SELECT<include refid="fieldAsProperty" />FROM P_TERMINAL_RELATE<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.PTerminalRelate">
+		UPDATE P_TERMINAL_RELATE<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="pTermrelateId!=null" >p_termrelate_id=#{pTermrelateId,jdbcType=INTEGER}</if>
+			<if test="pTermrelateId==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>

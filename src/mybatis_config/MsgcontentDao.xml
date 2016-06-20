@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.MsgcontentDao">
+	<sql id="field">systemmode,type,isAdd,userid,mainid,extra,touserids</sql>
+	<sql id="property">#{systemmode},#{type},#{isAdd},#{userid},#{mainid},#{extra},#{touserids}</sql>
+
+	<sql id="idCnd">
+		<where>
+			<if test="id!=null" >AND id=#{id}</if>
+			<if test="systemmode!=null" >AND systemmode=#{systemmode}</if>
+			<if test="type!=null" >AND type=#{type}</if>
+			<if test="isAdd!=null" >AND isAdd=#{isAdd}</if>
+			<if test="userid!=null" >AND userid=#{userid}</if>
+			<if test="mainid!=null" >AND mainid=#{mainid}</if>
+			<if test="extra!=null" >AND extra=#{extra}</if>
+			<if test="touserids!=null" >AND touserids=#{touserids}</if>
+		</where>
+	</sql>
+
+	<insert id="insert" parameterType="com.sme.entity.Msgcontent">
+		insert into msgcontent(<include refid="field"/>) values (<include refid="property"/>)
+	</insert>
+	
+	<select id="select" parameterType="com.sme.entity.Msgcontent" resultType="com.sme.entity.Msgcontent">
+		select * from msgcontent <include refid="idCnd"/>
+	</select>
+	
+	<delete id="delete" parameterType="com.sme.entity.Msgcontent">
+		delete from msgcontent <include refid="idCnd"/>
+	</delete>
+</mapper>

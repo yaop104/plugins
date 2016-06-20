@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.PlgGroupDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.PlgGroup">
+		<id property="pgpUnid" column="pgpUnid" /><!--unid-->
+		<result property="pgpUuid" column="pgpUuid" /><!--uuid-->
+		<result property="pgpState" column="pgpState" /><!--状态-->
+		<result property="pgpOrder" column="pgpOrder" /><!--序号-->
+		<result property="pgpCdate" column="pgpCdate" /><!--创建日期-->
+		<result property="pgpUdate" column="pgpUdate" /><!--最后修改日期-->
+		<result property="pgpCuser" column="pgpCuser" /><!--创建者-->
+		<result property="pgpUuser" column="pgpUuser" /><!--最后修改者-->
+		<result property="pgpName" column="pgpName" /><!--分组名称-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		pgp_unid AS pgpUnid,
+		pgp_uuid AS pgpUuid,
+		pgp_state AS pgpState,
+		pgp_order AS pgpOrder,
+		pgp_cdate AS pgpCdate,
+		pgp_udate AS pgpUdate,
+		pgp_cuser AS pgpCuser,
+		pgp_uuser AS pgpUuser,
+		pgp_name AS pgpName
+	</sql>
+
+	<sql id="field">
+			pgp_uuid,
+			pgp_state,
+			pgp_order,
+			pgp_cdate,
+			pgp_udate,
+			pgp_cuser,
+			pgp_uuser,
+			pgp_name
+	</sql>
+
+	<sql id="property">
+			#{pgpUuid,jdbcType=VARCHAR},
+			#{pgpState,jdbcType=VARCHAR},
+			#{pgpOrder,jdbcType=INTEGER},
+			#{pgpCdate,jdbcType=TIMESTAMP},
+			#{pgpUdate,jdbcType=TIMESTAMP},
+			#{pgpCuser,jdbcType=VARCHAR},
+			#{pgpUuser,jdbcType=VARCHAR},
+			#{pgpName,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			pgp_uuid=#{pgpUuid,jdbcType=VARCHAR},
+			pgp_state=#{pgpState,jdbcType=VARCHAR},
+			pgp_order=#{pgpOrder,jdbcType=INTEGER},
+			pgp_cdate=#{pgpCdate,jdbcType=TIMESTAMP},
+			pgp_udate=#{pgpUdate,jdbcType=TIMESTAMP},
+			pgp_cuser=#{pgpCuser,jdbcType=VARCHAR},
+			pgp_uuser=#{pgpUuser,jdbcType=VARCHAR},
+			pgp_name=#{pgpName,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="pgpUuid!=null" >pgp_uuid=#{pgpUuid,jdbcType=VARCHAR},</if>
+			<if test="pgpState!=null" >pgp_state=#{pgpState,jdbcType=VARCHAR},</if>
+			<if test="pgpOrder!=null" >pgp_order=#{pgpOrder,jdbcType=INTEGER},</if>
+			<if test="pgpCdate!=null" >pgp_cdate=#{pgpCdate,jdbcType=TIMESTAMP},</if>
+			<if test="pgpUdate!=null" >pgp_udate=#{pgpUdate,jdbcType=TIMESTAMP},</if>
+			<if test="pgpCuser!=null" >pgp_cuser=#{pgpCuser,jdbcType=VARCHAR},</if>
+			<if test="pgpUuser!=null" >pgp_uuser=#{pgpUuser,jdbcType=VARCHAR},</if>
+			<if test="pgpName!=null" >pgp_name=#{pgpName,jdbcType=VARCHAR}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="pgpUuid!=null and pgpUuid!=''" >AND pgp_uuid=#{pgpUuid,jdbcType=VARCHAR}</if>
+					<if test="pgpState!=null and pgpState!=''" >AND pgp_state=#{pgpState,jdbcType=VARCHAR}</if>
+					<if test="pgpOrder!=null and pgpOrder!=''" >AND pgp_order=#{pgpOrder,jdbcType=INTEGER}</if>
+					<if test="pgpCdate!=null and pgpCdate!=''" >AND pgp_cdate=#{pgpCdate,jdbcType=TIMESTAMP}</if>
+					<if test="pgpUdate!=null and pgpUdate!=''" >AND pgp_udate=#{pgpUdate,jdbcType=TIMESTAMP}</if>
+					<if test="pgpCuser!=null and pgpCuser!=''" >AND pgp_cuser=#{pgpCuser,jdbcType=VARCHAR}</if>
+					<if test="pgpUuser!=null and pgpUuser!=''" >AND pgp_uuser=#{pgpUuser,jdbcType=VARCHAR}</if>
+					<if test="pgpName!=null and pgpName!=''" >AND pgp_name=#{pgpName,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.PlgGroup">
+	    SELECT <include refid="fieldAsProperty" /> FROM PLG_GROUP <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM PLG_GROUP <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.PlgGroup" resultType="com.sme.entity.PlgGroup">
+		SELECT <include refid="fieldAsProperty" /> FROM PLG_GROUP <include refid="idCnd" />
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.PlgGroup">
+		INSERT INTO PLG_GROUP(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.PlgGroup">
+		DELETE FROM PLG_GROUP<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.PlgGroup" 
+		parameterType="com.sme.entity.PlgGroup">
+		SELECT<include refid="fieldAsProperty" />FROM PLG_GROUP<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.PlgGroup">
+		UPDATE PLG_GROUP<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="pgpUnid!=null" >pgp_unid=#{pgpUnid,jdbcType=INTEGER}</if>
+			<if test="pgpUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>

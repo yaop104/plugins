@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.LoginLogDao">
+	<select id="page" parameterType="hashmap" resultType="com.sme.entity.LoginLog">
+		select 
+			l.id as id,
+			l.login_ip as loginIp,
+			date_format(l.login_time,'%Y-%m-%d %H:%i:%s') as time,
+			b.sys_acc_name as accName,
+			b.sys_acc_realname as realName,
+			b.t_sys_role_name as accType
+		from login_log l,
+		(select a.*,r.t_sys_role_name from sys_acc a,sysrole r where a.sys_acc_roleid = r.t_sys_role_id) b
+		where l.acc_id = b.sys_acc_id 
+		<if test="accName != null and accName !=''">
+			and b.sys_acc_name = #{accName}
+		</if>
+		order by l.id desc
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	
+	<select id="count" parameterType="hashmap" resultType="Integer">
+		select 
+			count(l.id)
+		from login_log l,
+		(select a.*,r.t_sys_role_name from sys_acc a,sysrole r where a.sys_acc_roleid = r.t_sys_role_id) b
+		where l.acc_id = b.sys_acc_id 
+		<if test="accName != null and accName !=''">
+			and b.sys_acc_name = #{accName}
+		</if>
+	</select>
+	
+	<insert id="insert" parameterType="com.sme.entity.LoginLog">
+		insert into login_log(acc_id,login_ip,login_time) values (#{accId},#{loginIp},sysdate())
+	</insert>
+	
+	<delete id="batchDelete" parameterType="list">
+		delete from login_log where id in
+		<foreach collection="list" close=")" open="(" index="index" item="e" separator=",">
+			#{e}
+		</foreach>
+	</delete>
+</mapper>

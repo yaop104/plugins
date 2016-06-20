@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.PlgUserDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.PlgUser">
+		<id property="pusUnid" column="pusUnid" /><!--unid-->
+		<result property="pusUuid" column="pusUuid" /><!--uuid-->
+		<result property="pusState" column="pusState" /><!--状态-->
+		<result property="pusOrder" column="pusOrder" /><!--序号-->
+		<result property="pusCdate" column="pusCdate" /><!--创建日期-->
+		<result property="pusUdate" column="pusUdate" /><!--最后修改日期-->
+		<result property="pusCuser" column="pusCuser" /><!--创建者-->
+		<result property="pusUuser" column="pusUuser" /><!--最后修改者-->
+		<result property="pusName" column="pusName" /><!--名字-->
+		<result property="pusSex" column="pusSex" /><!--性别-->
+		<result property="pusAge" column="pusAge" /><!--年纪-->
+		<result property="pusMobile" column="pusMobile" /><!--电话-->
+		<result property="pusAddress" column="pusAddress" /><!--地址-->
+		<result property="pusGroupid" column="pusGroupid" /><!--分组-->
+		<result property="pusFromtype" column="pusFromtype" /><!--数据来源-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		pus_unid AS pusUnid,
+		pus_uuid AS pusUuid,
+		pus_state AS pusState,
+		pus_order AS pusOrder,
+		pus_cdate AS pusCdate,
+		pus_udate AS pusUdate,
+		pus_cuser AS pusCuser,
+		pus_uuser AS pusUuser,
+		pus_name AS pusName,
+		pus_sex AS pusSex,
+		pus_age AS pusAge,
+		pus_mobile AS pusMobile,
+		pus_address AS pusAddress,
+		pus_groupid AS pusGroupid,
+		pus_fromtype AS pusFromtype
+	</sql>
+
+	<sql id="field">
+			pus_unid,
+			pus_uuid,
+			pus_state,
+			pus_order,
+			pus_cdate,
+			pus_udate,
+			pus_cuser,
+			pus_uuser,
+			pus_name,
+			pus_sex,
+			pus_age,
+			pus_mobile,
+			pus_address,
+			pus_groupid,
+			pus_fromtype
+	</sql>
+
+	<sql id="property">
+			next.nextval,
+			#{pusUuid,jdbcType=VARCHAR},
+			#{pusState,jdbcType=VARCHAR},
+			#{pusOrder,jdbcType=INTEGER},
+			#{pusCdate,jdbcType=TIMESTAMP},
+			#{pusUdate,jdbcType=TIMESTAMP},
+			#{pusCuser,jdbcType=VARCHAR},
+			#{pusUuser,jdbcType=VARCHAR},
+			#{pusName,jdbcType=VARCHAR},
+			#{pusSex,jdbcType=VARCHAR},
+			#{pusAge,jdbcType=INTEGER},
+			#{pusMobile,jdbcType=VARCHAR},
+			#{pusAddress,jdbcType=VARCHAR},
+			#{pusGroupid,jdbcType=INTEGER},
+			#{pusFromtype,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			pus_uuid=#{pusUuid,jdbcType=VARCHAR},
+			pus_state=#{pusState,jdbcType=VARCHAR},
+			pus_order=#{pusOrder,jdbcType=INTEGER},
+			pus_cdate=#{pusCdate,jdbcType=TIMESTAMP},
+			pus_udate=#{pusUdate,jdbcType=TIMESTAMP},
+			pus_cuser=#{pusCuser,jdbcType=VARCHAR},
+			pus_uuser=#{pusUuser,jdbcType=VARCHAR},
+			pus_name=#{pusName,jdbcType=VARCHAR},
+			pus_sex=#{pusSex,jdbcType=VARCHAR},
+			pus_age=#{pusAge,jdbcType=INTEGER},
+			pus_mobile=#{pusMobile,jdbcType=VARCHAR},
+			pus_address=#{pusAddress,jdbcType=VARCHAR},
+			pus_groupid=#{pusGroupid,jdbcType=INTEGER},
+			pus_fromtype=#{pusFromtype,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="pusUuid!=null" >pus_uuid=#{pusUuid,jdbcType=VARCHAR},</if>
+			<if test="pusState!=null" >pus_state=#{pusState,jdbcType=VARCHAR},</if>
+			<if test="pusOrder!=null" >pus_order=#{pusOrder,jdbcType=INTEGER},</if>
+			<if test="pusCdate!=null" >pus_cdate=#{pusCdate,jdbcType=TIMESTAMP},</if>
+			<if test="pusUdate!=null" >pus_udate=#{pusUdate,jdbcType=TIMESTAMP},</if>
+			<if test="pusCuser!=null" >pus_cuser=#{pusCuser,jdbcType=VARCHAR},</if>
+			<if test="pusUuser!=null" >pus_uuser=#{pusUuser,jdbcType=VARCHAR},</if>
+			<if test="pusName!=null" >pus_name=#{pusName,jdbcType=VARCHAR},</if>
+			<if test="pusSex!=null" >pus_sex=#{pusSex,jdbcType=VARCHAR},</if>
+			<if test="pusAge!=null" >pus_age=#{pusAge,jdbcType=INTEGER},</if>
+			<if test="pusMobile!=null" >pus_mobile=#{pusMobile,jdbcType=VARCHAR},</if>
+			<if test="pusAddress!=null" >pus_address=#{pusAddress,jdbcType=VARCHAR},</if>
+			<if test="pusGroupid!=null" >pus_groupid=#{pusGroupid,jdbcType=INTEGER},</if>
+			<if test="pusFromtype!=null" >pus_fromtype=#{pusFromtype,jdbcType=VARCHAR}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="pusUuid!=null and pusUuid!=''" >AND pus_uuid=#{pusUuid,jdbcType=VARCHAR}</if>
+					<if test="pusState!=null and pusState!=''" >AND pus_state=#{pusState,jdbcType=VARCHAR}</if>
+					<if test="pusOrder!=null and pusOrder!=''" >AND pus_order=#{pusOrder,jdbcType=INTEGER}</if>
+					<if test="pusCdate!=null and pusCdate!=''" >AND pus_cdate=#{pusCdate,jdbcType=TIMESTAMP}</if>
+					<if test="pusUdate!=null and pusUdate!=''" >AND pus_udate=#{pusUdate,jdbcType=TIMESTAMP}</if>
+					<if test="pusCuser!=null and pusCuser!=''" >AND pus_cuser=#{pusCuser,jdbcType=VARCHAR}</if>
+					<if test="pusUuser!=null and pusUuser!=''" >AND pus_uuser=#{pusUuser,jdbcType=VARCHAR}</if>
+					<if test="pusName!=null and pusName!=''" >AND pus_name=#{pusName,jdbcType=VARCHAR}</if>
+					<if test="pusSex!=null and pusSex!=''" >AND pus_sex=#{pusSex,jdbcType=VARCHAR}</if>
+					<if test="pusAge!=null and pusAge!=''" >AND pus_age=#{pusAge,jdbcType=INTEGER}</if>
+					<if test="pusMobile!=null and pusMobile!=''" >AND pus_mobile=#{pusMobile,jdbcType=VARCHAR}</if>
+					<if test="pusAddress!=null and pusAddress!=''" >AND pus_address=#{pusAddress,jdbcType=VARCHAR}</if>
+					<if test="pusGroupid!=null and pusGroupid!=''" >AND pus_groupid=#{pusGroupid,jdbcType=INTEGER}</if>
+					<if test="pusFromtype!=null and pusFromtype!=''" >AND pus_fromtype=#{pusFromtype,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.PlgUser">
+	    SELECT <include refid="fieldAsProperty" /> FROM PLG_USER <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM PLG_USER <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.PlgUser" resultType="com.sme.entity.PlgUser">
+		SELECT <include refid="fieldAsProperty" /> FROM PLG_USER
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.PlgUser">
+		INSERT INTO PLG_USER(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.PlgUser">
+		DELETE FROM PLG_USER<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.PlgUser" 
+		parameterType="com.sme.entity.PlgUser">
+		SELECT<include refid="fieldAsProperty" />FROM PLG_USER<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.PlgUser">
+		UPDATE PLG_USER<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="pusUnid!=null" >pus_unid=#{pusUnid,jdbcType=INTEGER}</if>
+			<if test="pusUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>

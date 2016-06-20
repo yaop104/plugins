@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.SysRoleMenuDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.SysRoleMenu">
+		<result property="sysRmId" column="sysRmId" /><!--id-->
+		<result property="sysRoleId" column="sysRoleId" /><!--角色ID-->
+		<result property="sysMenuId" column="sysMenuId" /><!--菜单ID-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		sys_rm_id AS sysRmId,
+		sys_role_id AS sysRoleId,
+		sys_menu_id AS sysMenuId
+	</sql>
+
+	<sql id="field">
+			sys_role_id,
+			sys_menu_id
+	</sql>
+
+	<sql id="property">
+			#{sysRoleId,jdbcType=INTEGER},
+			#{sysMenuId,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			sys_role_id=#{sysRoleId,jdbcType=INTEGER},
+			sys_menu_id=#{sysMenuId,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="sysRoleId!=null" >sys_role_id=#{sysRoleId,jdbcType=INTEGER},</if>
+			<if test="sysMenuId!=null" >sys_menu_id=#{sysMenuId,jdbcType=INTEGER}</if>
+	</sql>
+
+	<select id="select" parameterType="com.sme.entity.SysRoleMenu" resultType="com.sme.entity.SysRoleMenu">
+		SELECT <include refid="fieldAsProperty" /> FROM SYS_ROLE_MENU <include refid="idCnd1"/>
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.SysRoleMenu">
+		INSERT INTO SYS_ROLE_MENU(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.SysRoleMenu">
+		DELETE FROM SYS_ROLE_MENU<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.SysRoleMenu" 
+		parameterType="com.sme.entity.SysRoleMenu">
+		SELECT<include refid="fieldAsProperty" />FROM SYS_ROLE_MENU<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.SysRoleMenu">
+		UPDATE SYS_ROLE_MENU<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="sysRmId!=null" >sys_rm_id=#{sysRmId,jdbcType=INTEGER}</if>
+			<if test="sysRmId==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	<select id="isEixts" parameterType="com.sme.entity.SysRoleMenu" resultType="long">
+		select count(*) from SYS_ROLE_MENU <include refid="idCnd1"/>
+	</select>
+	
+	<select id="selectMenuIds" parameterType="com.sme.entity.SysRoleMenu" resultType="string">
+		select sys_menu_id from SYS_ROLE_MENU <include refid="idCnd1"/>
+	</select>
+	
+	<sql id="idCnd1">
+		<where>
+			<if test="sysRoleId!=null and sysRoleId!=''" >sys_role_id=#{sysRoleId,jdbcType=INTEGER}</if>
+			<if test="sysMenuId!=null and sysMenuId!=''" > AND sys_menu_id=#{sysMenuId,jdbcType=INTEGER}</if>
+		</where>
+	</sql>
+	
+	<delete id="deleteByMenuAndRole" parameterType="com.sme.entity.SysRoleMenu">
+		delete from SYS_ROLE_MENU where sys_role_id=#{sysRoleId,jdbcType=INTEGER} and sys_menu_id=#{sysMenuId,jdbcType=INTEGER}
+	</delete>
+	
+	<!-- ================== end ================== -->
+</mapper>

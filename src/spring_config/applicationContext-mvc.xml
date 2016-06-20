@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="   
+    http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<!-- enable autowire -->
+	<context:annotation-config />
+
+	<!-- 扫描controller（controller层注入） -->
+	<context:component-scan base-package="com.sme.view"/>
+
+	<!-- 扫描文件（自动将servicec层注入） -->
+	<context:component-scan base-package="com.sme.service.impl"/>
+
+	<!-- 扫描DAO 由spring管理dao -->
+	<context:component-scan base-package="com.sme.dao" />
+
+	<!-- 默认的注解映射的支持  
+    <mvc:annotation-driven/> --> 
+    
+    <!-- 引入applicationContext.xml -->
+	<import resource="applicationContext.xml"/>
+	
+	<!-- 注册Annotation -->	
+	<mvc:annotation-driven />
+
+    <mvc:interceptors>
+        <bean id="authorInterceptor" class="com.sme.core.spring.AuthorInterceptor" />
+    </mvc:interceptors>
+	
+	<aop:config>
+		<aop:aspect id="operateLog" ref="operateLogAspect">
+			<aop:pointcut id="logPoint" expression="execution(* com.sme.view.*.*(..)) and @annotation(com.sme.core.spring.Log)"/>
+			<aop:after pointcut-ref="logPoint" method="doAfter" />
+		</aop:aspect>
+	</aop:config>
+	
+	<bean id="operateLogAspect" class="com.sme.core.spring.OperateLogAspect" />
+
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="contentNegotiationManager">
+            <bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+                <property name="ignoreAcceptHeader" value="true" />
+                <property name="defaultContentType" value="text/html" />
+                <property name="mediaTypes">
+                    <map>
+                        <entry key="page" value="text/html;charset=UTF-8"/>
+                        <entry key="json" value="application/json;charset=UTF-8" />
+                    </map>
+                </property>
+            </bean>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+                     <property name="prefix" value="/WEB-INF/jsp/"/>
+                    <property name="suffix" value=".jsp"/>
+                </bean>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+            </list>
+        </property>
+    </bean>
+     
+    <!-- 上传文件配置 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
+          <property name="maxUploadSize"><value>100000000</value></property>
+          <property name="defaultEncoding"><value>UTF-8</value></property> 
+    </bean> 
+    
+    <!-- 跳转视图配置 -->
+	<bean name="viewResolver" 
+	      class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"><!-- 跳转到JSP的视图 -->
+			<value>org.springframework.web.servlet.view.JstlView</value>
+		</property>
+		<!-- 相关JSP页面路径配置 -->
+		<property name="prefix"><!-- JSP页面前缀 -->
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix"><!-- JSP页面后缀 -->
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<!-- 
+		设置全局异常处理方式。！注意，如果使用XML配置了异常处理方式，
+		那么使用Annotation处理异常的方式将不再被使用。 
+	-->
+	<bean name="exceptionResolver" 
+	      class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<!-- 这里的errorPage同样应用viewResolver的前缀、后缀匹配 -->
+				<prop key="java.lang.Exception">errorPage</prop>
+			</props>
+		</property>
+	</bean>
+	
+</beans>

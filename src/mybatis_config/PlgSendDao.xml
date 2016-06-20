@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.PlgSendDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.PlgSend">
+		<id property="psdUnid" column="psdUnid" /><!--unid-->
+		<result property="psdUuid" column="psdUuid" /><!--uuid-->
+		<result property="psdState" column="psdState" /><!--状态-->
+		<result property="psdOrder" column="psdOrder" /><!--序号-->
+		<result property="psdCdate" column="psdCdate" /><!--创建日期-->
+		<result property="psdUdate" column="psdUdate" /><!--最后修改日期-->
+		<result property="psdCuser" column="psdCuser" /><!--创建者-->
+		<result property="psdUuser" column="psdUuser" /><!--最后修改者-->
+		<result property="psdPlgname" column="psdPlgname" /><!--插件名称-->
+		<result property="psdPlgversion" column="psdPlgversion" /><!--插件版本-->
+		<result property="psdPlgurl" column="psdPlgurl" /><!--插件地址-->
+		<result property="psdAccount" column="psdAccount" /><!--推送账号-->
+		<result property="psdIssend" column="psdIssend" /><!--是否发送-->
+		<result property="psdAppid" column="psdAppid" /><!--插件详情id-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		psd_unid AS psdUnid,
+		psd_uuid AS psdUuid,
+		psd_state AS psdState,
+		psd_order AS psdOrder,
+		psd_cdate AS psdCdate,
+		psd_udate AS psdUdate,
+		psd_cuser AS psdCuser,
+		psd_uuser AS psdUuser,
+		psd_plgname AS psdPlgname,
+		psd_plgversion AS psdPlgversion,
+		psd_plgurl AS psdPlgurl,
+		psd_account AS psdAccount,
+		psd_issend AS psdIssend,
+		psd_appid AS psdAppid
+	</sql>
+
+	<sql id="field">
+			psd_uuid,
+			psd_state,
+			psd_order,
+			psd_cdate,
+			psd_udate,
+			psd_cuser,
+			psd_uuser,
+			psd_plgname,
+			psd_plgversion,
+			psd_plgurl,
+			psd_account,
+			psd_issend,
+			psd_appid
+	</sql>
+
+	<sql id="property">
+			#{psdUuid,jdbcType=VARCHAR},
+			#{psdState,jdbcType=VARCHAR},
+			#{psdOrder,jdbcType=INTEGER},
+			#{psdCdate,jdbcType=TIMESTAMP},
+			#{psdUdate,jdbcType=TIMESTAMP},
+			#{psdCuser,jdbcType=VARCHAR},
+			#{psdUuser,jdbcType=VARCHAR},
+			#{psdPlgname,jdbcType=VARCHAR},
+			#{psdPlgversion,jdbcType=VARCHAR},
+			#{psdPlgurl,jdbcType=VARCHAR},
+			#{psdAccount,jdbcType=VARCHAR},
+			#{psdIssend,jdbcType=VARCHAR},
+			#{psdAppid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			psd_uuid=#{psdUuid,jdbcType=VARCHAR},
+			psd_state=#{psdState,jdbcType=VARCHAR},
+			psd_order=#{psdOrder,jdbcType=INTEGER},
+			psd_cdate=#{psdCdate,jdbcType=TIMESTAMP},
+			psd_udate=#{psdUdate,jdbcType=TIMESTAMP},
+			psd_cuser=#{psdCuser,jdbcType=VARCHAR},
+			psd_uuser=#{psdUuser,jdbcType=VARCHAR},
+			psd_plgname=#{psdPlgname,jdbcType=VARCHAR},
+			psd_plgversion=#{psdPlgversion,jdbcType=VARCHAR},
+			psd_plgurl=#{psdPlgurl,jdbcType=VARCHAR},
+			psd_account=#{psdAccount,jdbcType=VARCHAR},
+			psd_issend=#{psdIssend,jdbcType=VARCHAR},
+			psd_appid=#{psdAppid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="psdUuid!=null" >psd_uuid=#{psdUuid,jdbcType=VARCHAR},</if>
+			<if test="psdState!=null" >psd_state=#{psdState,jdbcType=VARCHAR},</if>
+			<if test="psdOrder!=null" >psd_order=#{psdOrder,jdbcType=INTEGER},</if>
+			<if test="psdCdate!=null" >psd_cdate=#{psdCdate,jdbcType=TIMESTAMP},</if>
+			<if test="psdUdate!=null" >psd_udate=#{psdUdate,jdbcType=TIMESTAMP},</if>
+			<if test="psdCuser!=null" >psd_cuser=#{psdCuser,jdbcType=VARCHAR},</if>
+			<if test="psdUuser!=null" >psd_uuser=#{psdUuser,jdbcType=VARCHAR},</if>
+			<if test="psdPlgname!=null" >psd_plgname=#{psdPlgname,jdbcType=VARCHAR},</if>
+			<if test="psdPlgversion!=null" >psd_plgversion=#{psdPlgversion,jdbcType=VARCHAR},</if>
+			<if test="psdPlgurl!=null" >psd_plgurl=#{psdPlgurl,jdbcType=VARCHAR},</if>
+			<if test="psdAccount!=null" >psd_account=#{psdAccount,jdbcType=VARCHAR},</if>
+			<if test="psdIssend!=null" >psd_issend=#{psdIssend,jdbcType=VARCHAR},</if>
+			<if test="psdAppid!=null" >psd_appid=#{psdAppid,jdbcType=INTEGER}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="psdUuid!=null and psdUuid!=''" >AND psd_uuid=#{psdUuid,jdbcType=VARCHAR}</if>
+					<if test="psdState!=null and psdState!=''" >AND psd_state=#{psdState,jdbcType=VARCHAR}</if>
+					<if test="psdOrder!=null and psdOrder!=''" >AND psd_order=#{psdOrder,jdbcType=INTEGER}</if>
+					<if test="psdCdate!=null and psdCdate!=''" >AND psd_cdate=#{psdCdate,jdbcType=TIMESTAMP}</if>
+					<if test="psdUdate!=null and psdUdate!=''" >AND psd_udate=#{psdUdate,jdbcType=TIMESTAMP}</if>
+					<if test="psdCuser!=null and psdCuser!=''" >AND psd_cuser=#{psdCuser,jdbcType=VARCHAR}</if>
+					<if test="psdUuser!=null and psdUuser!=''" >AND psd_uuser=#{psdUuser,jdbcType=VARCHAR}</if>
+					<if test="psdPlgname!=null and psdPlgname!=''" >AND psd_plgname=#{psdPlgname,jdbcType=VARCHAR}</if>
+					<if test="psdPlgversion!=null and psdPlgversion!=''" >AND psd_plgversion=#{psdPlgversion,jdbcType=VARCHAR}</if>
+					<if test="psdPlgurl!=null and psdPlgurl!=''" >AND psd_plgurl=#{psdPlgurl,jdbcType=VARCHAR}</if>
+					<if test="psdAccount!=null and psdAccount!=''" >AND psd_account=#{psdAccount,jdbcType=VARCHAR}</if>
+					<if test="psdIssend!=null and psdIssend!=''" >AND psd_issend=#{psdIssend,jdbcType=VARCHAR}</if>
+					<if test="psdAppid!=null and psdAppid!=''" >AND psd_appid=#{psdAppid,jdbcType=INTEGER}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.PlgSend">
+	    SELECT <include refid="fieldAsProperty" /> FROM PLG_SEND <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM PLG_SEND <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.PlgSend" resultType="com.sme.entity.PlgSend">
+		SELECT <include refid="fieldAsProperty" /> FROM PLG_SEND
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.PlgSend">
+		INSERT INTO PLG_SEND(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.PlgSend">
+		DELETE FROM PLG_SEND<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.PlgSend" 
+		parameterType="com.sme.entity.PlgSend">
+		SELECT<include refid="fieldAsProperty" />FROM PLG_SEND<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.PlgSend">
+		UPDATE PLG_SEND<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="psdUnid!=null" >psd_unid=#{psdUnid,jdbcType=INTEGER}</if>
+			<if test="psdUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	<update id="updateForSend" parameterType="com.sme.entity.PlgSend">
+		UPDATE PLG_SEND set psd_issend=#{psdIssend,jdbcType=VARCHAR} <include refid="idCnd" />
+	</update>
+	
+	<select id="selectForSend" parameterType="com.sme.entity.PlgSend" resultType="com.sme.entity.PlgSend">
+		SELECT
+			s.psd_unid AS psdUnid,
+			s.psd_uuid AS psdUuid,
+			s.psd_state AS psdState,
+			s.psd_order AS psdOrder,
+			s.psd_cdate AS psdCdate,
+			s.psd_udate AS psdUdate,
+			s.psd_cuser AS psdCuser,
+			s.psd_uuser AS psdUuser,
+			s.psd_plgname AS psdPlgname,
+			s.psd_plgversion AS psdPlgversion,
+			s.psd_plgurl AS psdPlgurl,
+			s.psd_account AS psdAccount,
+			s.psd_issend AS psdIssend,
+			s.psd_appid AS psdAppid ,
+			d.p_appdetail_size AS psdsize,
+			d.p_appdetail_desc AS psddesc
+	  FROM plg_send s LEFT JOIN p_app_detail d ON s.psd_appid = d.p_appdetail_id 
+	  <include refid="idCnd2" />
+	</select>
+	<!-- ================== end ================== -->
+</mapper>

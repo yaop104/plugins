@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.PTerminalInfoDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.PTerminalInfo">
+		<result property="pTerminfoId" column="pTerminfoId" /><!--id-->
+		<result property="pTerminfoName" column="pTerminfoName" /><!--终端名称-->
+		<result property="pTerminfoFeature" column="pTerminfoFeature" /><!--终端特征-->
+		<result property="pTerminfoDemo" column="pTerminfoDemo" /><!--demo-->
+		<result property="pTerminfoFactor" column="pTerminfoFactor" /><!--factor-->
+		<result property="pTerminfoIsfactory" column="pTerminfoIsfactory" /><!--是否是厂商字段-->
+		<result property="pTerminfoVersion" column="pTerminfoVersion" /><!--版本-->
+		<result property="pTerminfoCuser" column="pTerminfoCuser" /><!--创建者-->
+		<result property="pTerminfoUuser" column="pTerminfoUuser" /><!--更新者-->
+		<result property="pTerminfoCdate" column="pTerminfoCdate" /><!--创建时间-->
+		<result property="pTerminfoUdate" column="pTerminfoUdate" /><!--更新时间-->
+		<result property="pTerminfoDelflag" column="pTerminfoDelflag" /><!--删除标记-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		p_terminfo_id AS pTerminfoId,
+		p_terminfo_name AS pTerminfoName,
+		p_terminfo_feature AS pTerminfoFeature,
+		p_terminfo_demo AS pTerminfoDemo,
+		p_terminfo_factor AS pTerminfoFactor,
+		p_terminfo_isfactory AS pTerminfoIsfactory,
+		p_terminfo_version AS pTerminfoVersion,
+		p_terminfo_cuser AS pTerminfoCuser,
+		p_terminfo_uuser AS pTerminfoUuser,
+		p_terminfo_cdate AS pTerminfoCdate,
+		p_terminfo_udate AS pTerminfoUdate,
+		p_terminfo_delflag AS pTerminfoDelflag
+	</sql>
+
+	<sql id="field">
+			p_terminfo_name,
+			p_terminfo_feature,
+			p_terminfo_demo,
+			p_terminfo_factor,
+			p_terminfo_isfactory,
+			p_terminfo_version,
+			p_terminfo_cuser,
+			p_terminfo_uuser,
+			p_terminfo_cdate,
+			p_terminfo_udate,
+			p_terminfo_delflag
+	</sql>
+
+	<sql id="property">
+			#{pTerminfoName,jdbcType=VARCHAR},
+			#{pTerminfoFeature,jdbcType=VARCHAR},
+			#{pTerminfoDemo,jdbcType=VARCHAR},
+			#{pTerminfoFactor,jdbcType=VARCHAR},
+			#{pTerminfoIsfactory,jdbcType=VARCHAR},
+			#{pTerminfoVersion,jdbcType=INTEGER},
+			#{pTerminfoCuser,jdbcType=INTEGER},
+			#{pTerminfoUuser,jdbcType=INTEGER},
+			#{pTerminfoCdate,jdbcType=TIMESTAMP},
+			#{pTerminfoUdate,jdbcType=TIMESTAMP},
+			#{pTerminfoDelflag,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			p_terminfo_name=#{pTerminfoName,jdbcType=VARCHAR},
+			p_terminfo_feature=#{pTerminfoFeature,jdbcType=VARCHAR},
+			p_terminfo_demo=#{pTerminfoDemo,jdbcType=VARCHAR},
+			p_terminfo_factor=#{pTerminfoFactor,jdbcType=VARCHAR},
+			p_terminfo_isfactory=#{pTerminfoIsfactory,jdbcType=VARCHAR},
+			p_terminfo_version=#{pTerminfoVersion,jdbcType=INTEGER},
+			p_terminfo_cuser=#{pTerminfoCuser,jdbcType=INTEGER},
+			p_terminfo_uuser=#{pTerminfoUuser,jdbcType=INTEGER},
+			p_terminfo_cdate=#{pTerminfoCdate,jdbcType=TIMESTAMP},
+			p_terminfo_udate=#{pTerminfoUdate,jdbcType=TIMESTAMP},
+			p_terminfo_delflag=#{pTerminfoDelflag,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="pTerminfoName!=null" >p_terminfo_name=#{pTerminfoName,jdbcType=VARCHAR},</if>
+			<if test="pTerminfoFeature!=null" >p_terminfo_feature=#{pTerminfoFeature,jdbcType=VARCHAR},</if>
+			<if test="pTerminfoDemo!=null" >p_terminfo_demo=#{pTerminfoDemo,jdbcType=VARCHAR},</if>
+			<if test="pTerminfoFactor!=null" >p_terminfo_factor=#{pTerminfoFactor,jdbcType=VARCHAR},</if>
+			<if test="pTerminfoIsfactory!=null" >p_terminfo_isfactory=#{pTerminfoIsfactory,jdbcType=VARCHAR},</if>
+			<if test="pTerminfoVersion!=null" >p_terminfo_version=#{pTerminfoVersion,jdbcType=INTEGER},</if>
+			<if test="pTerminfoCuser!=null" >p_terminfo_cuser=#{pTerminfoCuser,jdbcType=INTEGER},</if>
+			<if test="pTerminfoUuser!=null" >p_terminfo_uuser=#{pTerminfoUuser,jdbcType=INTEGER},</if>
+			<if test="pTerminfoCdate!=null" >p_terminfo_cdate=#{pTerminfoCdate,jdbcType=TIMESTAMP},</if>
+			<if test="pTerminfoUdate!=null" >p_terminfo_udate=#{pTerminfoUdate,jdbcType=TIMESTAMP},</if>
+			<if test="pTerminfoDelflag!=null" >p_terminfo_delflag=#{pTerminfoDelflag,jdbcType=VARCHAR}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="pTerminfoName!=null and pTerminfoName!=''" >AND p_terminfo_name=#{pTerminfoName,jdbcType=VARCHAR}</if>
+					<if test="pTerminfoFeature!=null and pTerminfoFeature!=''" >AND p_terminfo_feature=#{pTerminfoFeature,jdbcType=VARCHAR}</if>
+					<if test="pTerminfoDemo!=null and pTerminfoDemo!=''" >AND p_terminfo_demo=#{pTerminfoDemo,jdbcType=VARCHAR}</if>
+					<if test="pTerminfoFactor!=null and pTerminfoFactor!=''" >AND p_terminfo_factor=#{pTerminfoFactor,jdbcType=VARCHAR}</if>
+					<if test="pTerminfoIsfactory!=null and pTerminfoIsfactory!=''" >AND p_terminfo_isfactory=#{pTerminfoIsfactory,jdbcType=VARCHAR}</if>
+					<if test="pTerminfoVersion!=null and pTerminfoVersion!=''" >AND p_terminfo_version=#{pTerminfoVersion,jdbcType=INTEGER}</if>
+					<if test="pTerminfoCuser!=null and pTerminfoCuser!=''" >AND p_terminfo_cuser=#{pTerminfoCuser,jdbcType=INTEGER}</if>
+					<if test="pTerminfoUuser!=null and pTerminfoUuser!=''" >AND p_terminfo_uuser=#{pTerminfoUuser,jdbcType=INTEGER}</if>
+					<if test="pTerminfoCdate!=null and pTerminfoCdate!=''" >AND p_terminfo_cdate=#{pTerminfoCdate,jdbcType=TIMESTAMP}</if>
+					<if test="pTerminfoUdate!=null and pTerminfoUdate!=''" >AND p_terminfo_udate=#{pTerminfoUdate,jdbcType=TIMESTAMP}</if>
+					<if test="pTerminfoDelflag!=null and pTerminfoDelflag!=''" >AND p_terminfo_delflag=#{pTerminfoDelflag,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.PTerminalInfo">
+	    SELECT <include refid="fieldAsProperty" /> FROM P_TERMINAL_INFO <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM P_TERMINAL_INFO <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.PTerminalInfo" resultType="com.sme.entity.PTerminalInfo">
+		SELECT <include refid="fieldAsProperty" /> FROM P_TERMINAL_INFO
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.PTerminalInfo">
+		<selectKey keyProperty="" order="BEFORE" resultType="long">
+			select LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO P_TERMINAL_INFO(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.PTerminalInfo">
+		DELETE FROM P_TERMINAL_INFO<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.PTerminalInfo" 
+		parameterType="com.sme.entity.PTerminalInfo">
+		SELECT<include refid="fieldAsProperty" />FROM P_TERMINAL_INFO<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.PTerminalInfo">
+		UPDATE P_TERMINAL_INFO<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="pTerminfoId!=null" >p_terminfo_id=#{pTerminfoId,jdbcType=INTEGER}</if>
+			<if test="pTerminfoId==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>

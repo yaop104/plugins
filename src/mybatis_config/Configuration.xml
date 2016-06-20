@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true"/>  
+		<setting name="lazyLoadingEnabled" value="true"/>  
+		<setting name="multipleResultSetsEnabled" value="true"/>  
+		<setting name="useColumnLabel" value="true"/>  
+		<setting name="useGeneratedKeys" value="true"/>  
+		<setting name="defaultExecutorType" value="SIMPLE"/>  
+		<setting name="defaultStatementTimeout" value="25000"/>  
+	</settings>
+	
+	<!--！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！这里配置bean文件！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！ -->
+	<typeAliases>
+		<typeAlias type="com.sme.entity.SysRole" alias="SysRole" />
+		<typeAlias type="com.sme.entity.SysOrg" alias="SysOrg" />
+		<typeAlias type="com.sme.entity.SysMenu" alias="SysMenu" />
+		<typeAlias type="com.sme.entity.SysAcc" alias="SysAcc" /> 
+		<typeAlias type="com.sme.entity.SysRoleMenu" alias="SysRoleMenu" />
+		<typeAlias type="com.sme.entity.PApplication" alias="PApplication" />
+		<typeAlias type="com.sme.entity.PAppPatch" alias="PAppPatch" />
+		<typeAlias type="com.sme.entity.PTerminalInfo" alias="PTerminalInfo" />
+		<typeAlias type="com.sme.entity.PTerminalRelate" alias="PTerminalRelate" />
+		<typeAlias type="com.sme.entity.PAppDetail" alias="PAppDetail" />
+		<typeAlias type="com.sme.entity.Feedback" alias="Feedback" />
+		<typeAlias type="com.sme.entity.PlgGroup" alias="PlgGroup" />
+		<typeAlias type="com.sme.entity.PlgUser" alias="PlgUser" />
+		<typeAlias type="com.sme.entity.PlgSend" alias="PlgSend" />
+		<typeAlias type="com.sme.entity.Msgcontent" alias="Msgcontent" />
+	</typeAliases>
+	
+	<!--<environments default="MySQL">
+		<environment id="MySQL">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	-->
+	
+	<!--！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！这里添加mybatis配置文件！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！ -->
+	<mappers>
+		<mapper resource="./mybatis_config/SysRoleDao.xml"/>
+		<mapper resource="./mybatis_config/SysOrgDao.xml"/>
+		<mapper resource="./mybatis_config/SysMenuDao.xml"/>
+		<mapper resource="./mybatis_config/SysAccDao.xml"/>
+		<mapper resource="./mybatis_config/SysRoleMenuDao.xml"/>
+		<mapper resource="./mybatis_config/PApplicationDao.xml"/>
+		<mapper resource="./mybatis_config/PAppPatchDao.xml"/>
+		<mapper resource="./mybatis_config/PTerminalInfoDao.xml"/>
+		<mapper resource="./mybatis_config/PTerminalRelateDao.xml"/>
+		<mapper resource="./mybatis_config/PAppDetailDao.xml"/>
+		<mapper resource="./mybatis_config/LoginLog.xml"/>
+		<mapper resource="./mybatis_config/OperateLog.xml"/>
+		<mapper resource="./mybatis_config/FeedbackDao.xml"/>
+		<mapper resource="./mybatis_config/PlgGroupDao.xml"/>
+		<mapper resource="./mybatis_config/PlgUserDao.xml"/>
+		<mapper resource="./mybatis_config/PlgSendDao.xml"/>
+		<mapper resource="./mybatis_config/MsgcontentDao.xml"/>
+	</mappers>
+</configuration>

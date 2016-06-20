@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.SysOrgDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.SysOrg">
+		<result property="sysOrgId" column="sysOrgId" /><!--id-->
+		<result property="sysOrgCode" column="sysOrgCode" /><!--编号-->
+		<result property="sysOrgName" column="sysOrgName" /><!--名称-->
+		<result property="sysOrgPcode" column="sysOrgPcode" /><!--父编号-->
+		<result property="sysOrgState" column="sysOrgState" /><!--状态-->
+		<result property="sysOrgOrder" column="sysOrgOrder" /><!--排序-->
+		<result property="sysOrgDesc" column="sysOrgDesc" /><!--描述-->
+		<result property="sysOrgType" column="sysOrgType" /><!--类型-->
+		<result property="sysOrgOutercode" column="sysOrgOutercode" /><!--外部编号-->
+		<result property="sysOrgCdate" column="sysOrgCdate" /><!--记录日期-->
+		<result property="sysOrgUdate" column="sysOrgUdate" /><!--更新日期-->
+		<result property="sysOrgCuser" column="sysOrgCuser" /><!--记录人-->
+		<result property="sysOrgUueser" column="sysOrgUueser" /><!--创建人-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		sys_org_id AS sysOrgId,
+		sys_org_code AS sysOrgCode,
+		sys_org_name AS sysOrgName,
+		sys_org_pcode AS sysOrgPcode,
+		sys_org_state AS sysOrgState,
+		sys_org_order AS sysOrgOrder,
+		sys_org_desc AS sysOrgDesc,
+		sys_org_type AS sysOrgType,
+		sys_org_outercode AS sysOrgOutercode,
+		sys_org_cdate AS sysOrgCdate,
+		sys_org_udate AS sysOrgUdate,
+		sys_org_cuser AS sysOrgCuser,
+		sys_org_uueser AS sysOrgUueser
+	</sql>
+
+	<sql id="field">
+			sys_org_code,
+			sys_org_name,
+			sys_org_pcode,
+			sys_org_state,
+			sys_org_order,
+			sys_org_desc,
+			sys_org_type,
+			sys_org_outercode,
+			sys_org_cdate,
+			sys_org_udate,
+			sys_org_cuser,
+			sys_org_uueser
+	</sql>
+
+	<sql id="property">
+			#{sysOrgCode,jdbcType=VARCHAR},
+			#{sysOrgName,jdbcType=VARCHAR},
+			#{sysOrgPcode,jdbcType=VARCHAR},
+			#{sysOrgState,jdbcType=VARCHAR},
+			#{sysOrgOrder,jdbcType=INTEGER},
+			#{sysOrgDesc,jdbcType=VARCHAR},
+			#{sysOrgType,jdbcType=VARCHAR},
+			#{sysOrgOutercode,jdbcType=VARCHAR},
+			#{sysOrgCdate,jdbcType=TIMESTAMP},
+			#{sysOrgUdate,jdbcType=TIMESTAMP},
+			#{sysOrgCuser,jdbcType=VARCHAR},
+			#{sysOrgUueser,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			sys_org_code=#{sysOrgCode,jdbcType=VARCHAR},
+			sys_org_name=#{sysOrgName,jdbcType=VARCHAR},
+			sys_org_pcode=#{sysOrgPcode,jdbcType=VARCHAR},
+			sys_org_state=#{sysOrgState,jdbcType=VARCHAR},
+			sys_org_order=#{sysOrgOrder,jdbcType=INTEGER},
+			sys_org_desc=#{sysOrgDesc,jdbcType=VARCHAR},
+			sys_org_type=#{sysOrgType,jdbcType=VARCHAR},
+			sys_org_outercode=#{sysOrgOutercode,jdbcType=VARCHAR},
+			sys_org_cdate=#{sysOrgCdate,jdbcType=TIMESTAMP},
+			sys_org_udate=#{sysOrgUdate,jdbcType=TIMESTAMP},
+			sys_org_cuser=#{sysOrgCuser,jdbcType=VARCHAR},
+			sys_org_uueser=#{sysOrgUueser,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="sysOrgCode!=null" >sys_org_code=#{sysOrgCode,jdbcType=VARCHAR},</if>
+			<if test="sysOrgName!=null" >sys_org_name=#{sysOrgName,jdbcType=VARCHAR},</if>
+			<if test="sysOrgPcode!=null" >sys_org_pcode=#{sysOrgPcode,jdbcType=VARCHAR},</if>
+			<if test="sysOrgState!=null" >sys_org_state=#{sysOrgState,jdbcType=VARCHAR},</if>
+			<if test="sysOrgOrder!=null" >sys_org_order=#{sysOrgOrder,jdbcType=INTEGER},</if>
+			<if test="sysOrgDesc!=null" >sys_org_desc=#{sysOrgDesc,jdbcType=VARCHAR},</if>
+			<if test="sysOrgType!=null" >sys_org_type=#{sysOrgType,jdbcType=VARCHAR},</if>
+			<if test="sysOrgOutercode!=null" >sys_org_outercode=#{sysOrgOutercode,jdbcType=VARCHAR},</if>
+			<if test="sysOrgCdate!=null" >sys_org_cdate=#{sysOrgCdate,jdbcType=TIMESTAMP},</if>
+			<if test="sysOrgUdate!=null" >sys_org_udate=#{sysOrgUdate,jdbcType=TIMESTAMP},</if>
+			<if test="sysOrgCuser!=null" >sys_org_cuser=#{sysOrgCuser,jdbcType=VARCHAR},</if>
+			<if test="sysOrgUueser!=null" >sys_org_uueser=#{sysOrgUueser,jdbcType=VARCHAR}</if>
+	</sql>
+	
+	<select id="select" parameterType="com.sme.entity.SysOrg" resultType="com.sme.entity.SysOrg">
+		select <include refid="fieldAsProperty"/> from SYS_ORG
+	</select>
+
+	<insert id="insert" parameterType="com.sme.entity.SysOrg">
+		INSERT INTO SYS_ORG(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.SysOrg">
+		DELETE FROM SYS_ORG<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.SysOrg" 
+		parameterType="com.sme.entity.SysOrg">
+		SELECT<include refid="fieldAsProperty" />FROM SYS_ORG<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.SysOrg">
+		UPDATE SYS_ORG<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="sysOrgId!=null" >sys_org_id=#{sysOrgId,jdbcType=INTEGER}</if>
+			<if test="sysOrgId==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>
