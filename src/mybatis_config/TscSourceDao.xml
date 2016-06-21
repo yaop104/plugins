@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.TscSourceDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.TscSource">
+		<id property="tscUnid" column="tscUnid" /><!--unid-->
+		<result property="tscState" column="tscState" /><!--状态-->
+		<result property="tscOrder" column="tscOrder" /><!--序号-->
+		<result property="tscCdate" column="tscCdate" /><!--创建日期-->
+		<result property="tscUdate" column="tscUdate" /><!--最后修改日期-->
+		<result property="tscCuser" column="tscCuser" /><!--创建者-->
+		<result property="tscUuser" column="tscUuser" /><!--最后修改者-->
+		<result property="tscSourcename" column="tscSourcename" /><!--素材名-->
+		<result property="tscTitle" column="tscTitle" /><!--素材标题要求-->
+		<result property="tscDocunments" column="tscDocunments" /><!--素材文案要求-->
+		<result property="tscPircture" column="tscPircture" /><!--素材图片要求-->
+		<result property="tscPositionid" column="tscPositionid" /><!--投放位id-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		tsc_unid AS tscUnid,
+		tsc_state AS tscState,
+		tsc_order AS tscOrder,
+		tsc_cdate AS tscCdate,
+		tsc_udate AS tscUdate,
+		tsc_cuser AS tscCuser,
+		tsc_uuser AS tscUuser,
+		tsc_sourcename AS tscSourcename,
+		tsc_title AS tscTitle,
+		tsc_docunments AS tscDocunments,
+		tsc_pircture AS tscPircture,
+		tsc_positionid AS tscPositionid
+	</sql>
+
+	<sql id="field">
+			tsc_unid,
+			tsc_state,
+			tsc_order,
+			tsc_cdate,
+			tsc_udate,
+			tsc_cuser,
+			tsc_uuser,
+			tsc_sourcename,
+			tsc_title,
+			tsc_docunments,
+			tsc_pircture,
+			tsc_positionid
+	</sql>
+
+	<sql id="property">
+			next.nextval,
+			#{tscState,jdbcType=VARCHAR},
+			#{tscOrder,jdbcType=INTEGER},
+			#{tscCdate,jdbcType=TIMESTAMP},
+			#{tscUdate,jdbcType=TIMESTAMP},
+			#{tscCuser,jdbcType=VARCHAR},
+			#{tscUuser,jdbcType=VARCHAR},
+			#{tscSourcename,jdbcType=VARCHAR},
+			#{tscTitle,jdbcType=VARCHAR},
+			#{tscDocunments,jdbcType=VARCHAR},
+			#{tscPircture,jdbcType=VARCHAR},
+			#{tscPositionid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			tsc_state=#{tscState,jdbcType=VARCHAR},
+			tsc_order=#{tscOrder,jdbcType=INTEGER},
+			tsc_cdate=#{tscCdate,jdbcType=TIMESTAMP},
+			tsc_udate=#{tscUdate,jdbcType=TIMESTAMP},
+			tsc_cuser=#{tscCuser,jdbcType=VARCHAR},
+			tsc_uuser=#{tscUuser,jdbcType=VARCHAR},
+			tsc_sourcename=#{tscSourcename,jdbcType=VARCHAR},
+			tsc_title=#{tscTitle,jdbcType=VARCHAR},
+			tsc_docunments=#{tscDocunments,jdbcType=VARCHAR},
+			tsc_pircture=#{tscPircture,jdbcType=VARCHAR},
+			tsc_positionid=#{tscPositionid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="tscState!=null" >tsc_state=#{tscState,jdbcType=VARCHAR},</if>
+			<if test="tscOrder!=null" >tsc_order=#{tscOrder,jdbcType=INTEGER},</if>
+			<if test="tscCdate!=null" >tsc_cdate=#{tscCdate,jdbcType=TIMESTAMP},</if>
+			<if test="tscUdate!=null" >tsc_udate=#{tscUdate,jdbcType=TIMESTAMP},</if>
+			<if test="tscCuser!=null" >tsc_cuser=#{tscCuser,jdbcType=VARCHAR},</if>
+			<if test="tscUuser!=null" >tsc_uuser=#{tscUuser,jdbcType=VARCHAR},</if>
+			<if test="tscSourcename!=null" >tsc_sourcename=#{tscSourcename,jdbcType=VARCHAR},</if>
+			<if test="tscTitle!=null" >tsc_title=#{tscTitle,jdbcType=VARCHAR},</if>
+			<if test="tscDocunments!=null" >tsc_docunments=#{tscDocunments,jdbcType=VARCHAR},</if>
+			<if test="tscPircture!=null" >tsc_pircture=#{tscPircture,jdbcType=VARCHAR},</if>
+			<if test="tscPositionid!=null" >tsc_positionid=#{tscPositionid,jdbcType=INTEGER}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="tscState!=null and tscState!=''" >AND tsc_state=#{tscState,jdbcType=VARCHAR}</if>
+					<if test="tscOrder!=null and tscOrder!=''" >AND tsc_order=#{tscOrder,jdbcType=INTEGER}</if>
+					<if test="tscCdate!=null and tscCdate!=''" >AND tsc_cdate=#{tscCdate,jdbcType=TIMESTAMP}</if>
+					<if test="tscUdate!=null and tscUdate!=''" >AND tsc_udate=#{tscUdate,jdbcType=TIMESTAMP}</if>
+					<if test="tscCuser!=null and tscCuser!=''" >AND tsc_cuser=#{tscCuser,jdbcType=VARCHAR}</if>
+					<if test="tscUuser!=null and tscUuser!=''" >AND tsc_uuser=#{tscUuser,jdbcType=VARCHAR}</if>
+					<if test="tscSourcename!=null and tscSourcename!=''" >AND tsc_sourcename=#{tscSourcename,jdbcType=VARCHAR}</if>
+					<if test="tscTitle!=null and tscTitle!=''" >AND tsc_title=#{tscTitle,jdbcType=VARCHAR}</if>
+					<if test="tscDocunments!=null and tscDocunments!=''" >AND tsc_docunments=#{tscDocunments,jdbcType=VARCHAR}</if>
+					<if test="tscPircture!=null and tscPircture!=''" >AND tsc_pircture=#{tscPircture,jdbcType=VARCHAR}</if>
+					<if test="tscPositionid!=null and tscPositionid!=''" >AND tsc_positionid=#{tscPositionid,jdbcType=INTEGER}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.TscSource">
+	    SELECT <include refid="fieldAsProperty" /> FROM TSC_SOURCE <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM TSC_SOURCE <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.TscSource" resultType="com.sme.entity.TscSource">
+		SELECT <include refid="fieldAsProperty" /> FROM TSC_SOURCE
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.TscSource">
+		INSERT INTO TSC_SOURCE(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.TscSource">
+		DELETE FROM TSC_SOURCE<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.TscSource" 
+		parameterType="com.sme.entity.TscSource">
+		SELECT<include refid="fieldAsProperty" />FROM TSC_SOURCE<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.TscSource">
+		UPDATE TSC_SOURCE<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="tscUnid!=null" >tsc_unid=#{tscUnid,jdbcType=INTEGER}</if>
+			<if test="tscUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>

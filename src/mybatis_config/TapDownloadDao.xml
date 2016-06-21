@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.TapDownloadDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.TapDownload">
+		<id property="tapUnid" column="tapUnid" /><!--unid-->
+		<result property="tapState" column="tapState" /><!--状态-->
+		<result property="tapUdate" column="tapUdate" /><!--最近安装时间-->
+		<result property="tapUuser" column="tapUuser" /><!--安装者-->
+		<result property="tapAppid" column="tapAppid" /><!--appid-->
+		<result property="tapTitle" column="tapTitle" /><!--历史app名字-->
+		<result property="tapImg" column="tapImg" /><!--历史app图片-->
+		<result property="tapNumber" column="tapNumber" /><!--历史app版本-->
+		<result property="tapOptname" column="tapOptname" /><!--开发商信息-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		tap_unid AS tapUnid,
+		tap_state AS tapState,
+		tap_udate AS tapUdate,
+		tap_uuser AS tapUuser,
+		tap_appid AS tapAppid,
+		tap_title AS tapTitle,
+		tap_img AS tapImg,
+		tap_number AS tapNumber,
+		tap_optname AS tapOptname
+	</sql>
+
+	<sql id="field">
+			tap_unid,
+			tap_state,
+			tap_udate,
+			tap_uuser,
+			tap_appid,
+			tap_title,
+			tap_img,
+			tap_number,
+			tap_optname
+	</sql>
+
+	<sql id="property">
+			next.nextval,
+			#{tapState,jdbcType=VARCHAR},
+			#{tapUdate,jdbcType=TIMESTAMP},
+			#{tapUuser,jdbcType=INTEGER},
+			#{tapAppid,jdbcType=INTEGER},
+			#{tapTitle,jdbcType=VARCHAR},
+			#{tapImg,jdbcType=VARCHAR},
+			#{tapNumber,jdbcType=VARCHAR},
+			#{tapOptname,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			tap_state=#{tapState,jdbcType=VARCHAR},
+			tap_udate=#{tapUdate,jdbcType=TIMESTAMP},
+			tap_uuser=#{tapUuser,jdbcType=INTEGER},
+			tap_appid=#{tapAppid,jdbcType=INTEGER},
+			tap_title=#{tapTitle,jdbcType=VARCHAR},
+			tap_img=#{tapImg,jdbcType=VARCHAR},
+			tap_number=#{tapNumber,jdbcType=VARCHAR},
+			tap_optname=#{tapOptname,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="tapState!=null" >tap_state=#{tapState,jdbcType=VARCHAR},</if>
+			<if test="tapUdate!=null" >tap_udate=#{tapUdate,jdbcType=TIMESTAMP},</if>
+			<if test="tapUuser!=null" >tap_uuser=#{tapUuser,jdbcType=INTEGER},</if>
+			<if test="tapAppid!=null" >tap_appid=#{tapAppid,jdbcType=INTEGER},</if>
+			<if test="tapTitle!=null" >tap_title=#{tapTitle,jdbcType=VARCHAR},</if>
+			<if test="tapImg!=null" >tap_img=#{tapImg,jdbcType=VARCHAR},</if>
+			<if test="tapNumber!=null" >tap_number=#{tapNumber,jdbcType=VARCHAR},</if>
+			<if test="tapOptname!=null" >tap_optname=#{tapOptname,jdbcType=VARCHAR}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="tapState!=null and tapState!=''" >AND tap_state=#{tapState,jdbcType=VARCHAR}</if>
+					<if test="tapUdate!=null and tapUdate!=''" >AND tap_udate=#{tapUdate,jdbcType=TIMESTAMP}</if>
+					<if test="tapUuser!=null and tapUuser!=''" >AND tap_uuser=#{tapUuser,jdbcType=INTEGER}</if>
+					<if test="tapAppid!=null and tapAppid!=''" >AND tap_appid=#{tapAppid,jdbcType=INTEGER}</if>
+					<if test="tapTitle!=null and tapTitle!=''" >AND tap_title=#{tapTitle,jdbcType=VARCHAR}</if>
+					<if test="tapImg!=null and tapImg!=''" >AND tap_img=#{tapImg,jdbcType=VARCHAR}</if>
+					<if test="tapNumber!=null and tapNumber!=''" >AND tap_number=#{tapNumber,jdbcType=VARCHAR}</if>
+					<if test="tapOptname!=null and tapOptname!=''" >AND tap_optname=#{tapOptname,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.TapDownload">
+	    SELECT <include refid="fieldAsProperty" /> FROM TAP_DOWNLOAD <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM TAP_DOWNLOAD <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.TapDownload" resultType="com.sme.entity.TapDownload">
+		SELECT <include refid="fieldAsProperty" /> FROM TAP_DOWNLOAD
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.TapDownload">
+		INSERT INTO TAP_DOWNLOAD(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.TapDownload">
+		DELETE FROM TAP_DOWNLOAD<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.TapDownload" 
+		parameterType="com.sme.entity.TapDownload">
+		SELECT<include refid="fieldAsProperty" />FROM TAP_DOWNLOAD<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.TapDownload">
+		UPDATE TAP_DOWNLOAD<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="tapUnid!=null" >tap_unid=#{tapUnid,jdbcType=INTEGER}</if>
+			<if test="tapUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>

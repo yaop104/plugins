@@ -30,6 +30,9 @@
 		<typeAlias type="com.sme.entity.PlgUser" alias="PlgUser" />
 		<typeAlias type="com.sme.entity.PlgSend" alias="PlgSend" />
 		<typeAlias type="com.sme.entity.Msgcontent" alias="Msgcontent" />
+		<typeAlias type="com.sme.entity.TbcInfo" alias="TbcInfo" />
+		<typeAlias type="com.sme.entity.TapDownload" alias="TapDownload" />
+		<typeAlias type="com.sme.entity.TscSource" alias="TscSource" />
 	</typeAliases>
 	
 	<!--<environments default="MySQL">
@@ -64,5 +67,8 @@
 		<mapper resource="./mybatis_config/PlgUserDao.xml"/>
 		<mapper resource="./mybatis_config/PlgSendDao.xml"/>
 		<mapper resource="./mybatis_config/MsgcontentDao.xml"/>
+		<mapper resource="./mybatis_config/TapDownloadDao.xml"/>
+		<mapper resource="./mybatis_config/TbcInfoDao.xml"/>
+		<mapper resource="./mybatis_config/TscSourceDao.xml"/>
 	</mappers>
 </configuration>
