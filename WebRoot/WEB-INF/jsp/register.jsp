@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <link href="<s:url value="/css/default/css/register.css" />"	rel="stylesheet" type="text/css"/>
 <script src="<s:url value="/js/jquery.js" />"	type="text/javascript"></script>
+<script src="<s:url value="/js/check.js" />"	type="text/javascript"></script>
 <script type="text/javascript" >
 
 	document.onkeypress = keyListener;
@@ -19,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var keyCode = e ? e.which : event.keyCode;
 		if(keyCode == 13) {
 			// 回车事件
-			do_login();
+			do_register();
 		}
 	}
 	
@@ -40,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		history.go(-1);
 	}
 
-	function do_login() {
+	function do_register() {
 		var account = $('#user_code').val();
 		var password = $('#user_pwd').val();
 		if(account == ""){
@@ -125,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
       <td>&nbsp;</td>
       <td><label>
-      	<input type="button" class="loginbtn1" id="button1" name="button" onclick="do_login();return false;"  tabIndex="2" value=""/>
+      	<input type="button" class="loginbtn1" id="button1" name="button" onclick="do_register();return false;"  tabIndex="2" value=""/>
       </label></td>
 		<td height="35">&nbsp;&nbsp;&nbsp;&nbsp;<label>
 			<input type="button" class="loginbtn2" id="button2" name="button" onclick="ctxCancel();return false;"  tabIndex="2" value=""/>
