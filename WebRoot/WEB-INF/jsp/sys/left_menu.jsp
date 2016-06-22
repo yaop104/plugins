@@ -9,7 +9,7 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
-	<meta http-equiv="keywords" content="无线城市管理平台" />
+	<meta http-equiv="keywords" content="管理平台" />
 	<meta http-equiv="description" content="菜单" />
 	<link href="js/dtree/dtree.css"	rel="stylesheet" type="text/css"/>
 	<script src="js/dtree/dtree.js" type="text/javascript"></script>

@@ -9,7 +9,7 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
-	<meta http-equiv="keywords" content="无线城市管理平台" />
+	<meta http-equiv="keywords" content="管理平台" />
 	<meta http-equiv="description" content="菜单" />
     <link href="<s:url value="/js/dtree/dtree.css" encode="false"/>" type="text/css" rel="StyleSheet" />
     <script src="<s:url value="/js/dtree/dtree.js" encode="false"/>"	type="text/javascript"></script>
@@ -43,7 +43,7 @@
 	<script type="text/javascript">
 	var imgPath = "<s:url value="/js/dtree/" encode="false"/>";
 	d = new dTree('d');
-	d.add('0','-1','黄页管理系统','','黄页管理系统');
+	d.add('0','-1','管理系统','','管理系统');
 	<s:iterator value="menus" status="stuts">
 	d.add('${pkid}','${parentId}','${menuName}','${url}','${menuName}','main');
 	</s:iterator>

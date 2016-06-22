@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>黄页管理平台</title>
+	<title>管理平台</title>
 	<link href="<s:url value="css/default/css/css.css" />"	rel="stylesheet" type="text/css"/>
 	<script src="<s:url value="/js/jquery/jquery-1.4.3.js" />"	type="text/javascript"></script>
 	<%-- <script type="text/javascript" src="<s:url value="/js/jquery.epiclock.js" />"> --%>

@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>黄页管理平台</title>
+		<title>管理平台</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <link href="<s:url value="/css/default/css/login.css" />"	rel="stylesheet" type="text/css"/>
 <script src="<s:url value="/js/jquery.js" />"	type="text/javascript"></script>
