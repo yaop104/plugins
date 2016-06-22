@@ -102,7 +102,7 @@
 	function addOption(){
 		$('#d1').dialog('open');
 		$('#f1').form('reset');
-		$('#f1').form.url='${ctx }/sysAcc/save.do';
+		$('#f1').form.url='${ctx }/TbcInfo/save.do';
 	}
 
 	function editOption(){
@@ -110,22 +110,16 @@
 		var rows = grid.datagrid('getSelections');
 		if(row){
 			if(1 == rows.length){
-				//	$('#f1').form.url='${ctx }/sysAccount/sysAccountUpdate.do';
-				$('#f1').form.url='${ctx }/sysAcc/save.do';
+				$('#f1').form.url='${ctx }/TbcInfo/save.do';
 				$('#f1').form('load',{
-					'sysAccId':row.sysAccId,
-					'sysAccName':row.sysAccName,
-					'sysAccRealname':row.sysAccRealname,
-					'sysAccState':row.sysAccState,
-					'sysAccType':row.sysAccType,
-					'sysAccDesc':row.sysAccDesc,
-					'sysAccRoleid':row.sysAccRoleid,
-					'sysAccOrgid':row.sysAccOrgid
+					'tioUnid':row.tioUnid,
+					'tioType':row.tioType,
+					'tioName':row.tioName,
+					'tioContactname':row.tioContactname,
+					'tioContactphone':row.tioContactphone,
+					'tioState':row.tioState,
+					'tioDesc':row.tioDesc
 				});
-				$('#sysAccId').val(row.sysAccId);
-				$('#sysAccName').val(row.sysAccName);
-				$('#sysAccRealname').val(row.sysAccRealname);
-				$('#sysAccDesc').val(row.sysAccDesc);
 				$('#d1').dialog('open');
 			}else{
 				msgShow('错误','请选择一条要修改的记录！','error');
@@ -142,12 +136,12 @@
 		if(row){
 			var s='';
 			$.each(rows,function(i,n){
-				s+=n.sysAccId+',';
+				s+=n.tioUnid+',';
 			});
 			s=s.substr(0,s.length-1);
 			$.messager.confirm('确认？', '确认删除所有选中记录吗', function(r){
 				if (r){
-					$.post('${ctx }/sysAcc/deleteSysAcc.do',{'ids': s},function(data){
+					$.post('${ctx }/TbcInfo/deleteTbcInfos.do',{'ids': s},function(data){
 						if(data.success){
 							msgShow('成功',data.message,'info');
 							grid.datagrid('reload');
@@ -183,6 +177,8 @@
 					$('#d1').dialog('close');
 					grid.datagrid('load');
 					grid.datagrid('clearSelections');
+				}else{
+					msgShow('错误',data.message,'error');
 				}
 			}
 		});

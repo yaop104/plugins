@@ -10,12 +10,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<head>
 		<title>管理平台</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<link href="<s:url value="/css/default/css/login.css" />"	rel="stylesheet" type="text/css"/>
+<link href="<s:url value="/css/default/css/register.css" />"	rel="stylesheet" type="text/css"/>
 <script src="<s:url value="/js/jquery.js" />"	type="text/javascript"></script>
 <script type="text/javascript" >
-	if(parent && parent.frames.length>0){
-		top.location.href = "login.jsp";
-	}
+
 	document.onkeypress = keyListener;
 	function keyListener(e) {
 		var keyCode = e ? e.which : event.keyCode;
@@ -26,14 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	$(document).ready(function() {
-		if ($.trim($("#user_code").val()).length == 0) {
-			$("#user_code").focus();
-		} else {
-			$("#user_code").focus();
-			$("#user_code").select();
-		}
-
-
 		// 自动除掉两边空格
 		$("input").each(function (i,j) {
 			var $obj = $(j).attr("rules");
@@ -45,6 +35,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 		
 	});
+
+	function ctxCancel(){
+		history.go(-1);
+	}
 
 	function do_login() {
 		var account = $('#user_code').val();
@@ -60,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return false;
 		}
 		
-		$.post('<%=basePath%>login.do', {'account':account, 'password':password}, function(data){
+		$.post('<%=basePath%>registerUser.do', {'account':account, 'password':password}, function(data){
 			if("0"==data.code){
 				location.href = data.message;
 			}else{
@@ -74,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 <form name="frm" method="post">
-<div class="loginpanel">
+<div class="loginpanel1">
 	<table width="100%" height="239" border="0" cellpadding="0" cellspacing="0">
     <tr>
       <td width="19%" height="77">&nbsp;</td>
@@ -85,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     <tr>
       <td height="35">&nbsp;</td>
-      <td height="35"><div align="right" class="STYLE1">用户名：</div></td>
+      <td height="35"><div align="right" class="STYLE1">公司名：</div></td>
       <td height="35">
       	<input type="text" id="user_code" name="user_code" class="tbox" style="width: 180px;" tabIndex="1"  rules="trimBlank"/>
       </td>
@@ -94,20 +88,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     <tr>
       <td height="35">&nbsp;</td>
-      <td height="35"><div align="right" class="STYLE1">密 码：</div></td>
+      <td height="35"><div align="right" class="STYLE1">用户名：</div></td>
       <td height="35">
-      	<input type="password" id="user_pwd"  name="user_pwd" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
+      	<input type="password" id="user_name"  name="user_name" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
       </td>
       <td height="35">&nbsp;</td>
       <td height="35">&nbsp;</td>
     </tr>
+		<tr>
+			<td height="35">&nbsp;</td>
+			<td height="35"><div align="right" class="STYLE1">联系人：</div></td>
+			<td height="35">
+				<input type="password" id="user_connectname"  name="user_connectname" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
+			</td>
+			<td height="35">&nbsp;</td>
+			<td height="35">&nbsp;</td>
+		</tr>
+		<tr>
+			<td height="35">&nbsp;</td>
+			<td height="35"><div align="right" class="STYLE1">手机号：</div></td>
+			<td height="35">
+				<input type="password" id="user_mobile"  name="user_mobile" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
+			</td>
+			<td height="35">&nbsp;</td>
+			<td height="35">&nbsp;</td>
+		</tr>
+		<tr>
+			<td height="35">&nbsp;</td>
+			<td height="35"><div align="right" class="STYLE1">密码：</div></td>
+			<td height="35">
+				<input type="password" id="user_pwd"  name="user_pwd" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
+			</td>
+			<td height="35">&nbsp;</td>
+			<td height="35">&nbsp;</td>
+		</tr>
     <tr>
       <td>&nbsp;</td>
-      <td>&nbsp;</td>
       <td><label>
-      	<input type="button" class="loginbtn" id="button" name="button" onclick="do_login();return false;" class="loginbtn" tabIndex="3"/>
+      	<input type="button" class="loginbtn1" id="button1" name="button" onclick="do_login();return false;"  tabIndex="2" value=""/>
       </label></td>
-		<td height="35"><a href="<%=basePath%>register.do">申请账号</a></td>
+		<td height="35">&nbsp;&nbsp;&nbsp;&nbsp;<label>
+			<input type="button" class="loginbtn2" id="button2" name="button" onclick="ctxCancel();return false;"  tabIndex="2" value=""/>
+		</label></td>
       <td colspan="2">
       <span id="msgDiv" style="color:red;text-align:center;font-size:12px">
 

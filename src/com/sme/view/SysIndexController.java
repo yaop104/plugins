@@ -79,6 +79,11 @@ public class SysIndexController extends BaseController<SysAcc>{
 		return respMessage;
 	}
 	
+	@RequestMapping("/register")
+	public String register() {
+		return "register";
+	}
+
 	@RequestMapping("/login")
 	public String login() {
 		return "login";

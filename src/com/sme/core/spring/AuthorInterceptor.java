@@ -9,6 +9,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 拦截类
@@ -19,7 +21,14 @@ import java.lang.reflect.Method;
 public class AuthorInterceptor extends HandlerInterceptorAdapter {
 
 	private Logger log = LoggerFactory.getLogger(AuthorInterceptor.class);
-	
+
+	private static List<String> ignoreRequest = new ArrayList<>();
+
+	static {
+		ignoreRequest.add("login.do");
+		ignoreRequest.add("register.do");
+	}
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -39,8 +48,10 @@ public class AuthorInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		//登陆请求不需要拦截
-		if (uri.endsWith("login.do")) {
-			return true;
+		for(String url : ignoreRequest) {
+			if (uri.contains(url)) {
+				return true;
+			}
 		}
 		
 		Object session = request.getSession().getAttribute("loginUser");

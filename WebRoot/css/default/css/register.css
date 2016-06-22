@@ -1,0 +1,64 @@
+body {
+	background-image: url(../images/lbg.png);
+	background-color:#cccccc;
+	background-position: top;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	text-align:center;
+}
+.loginpanel1 {
+	margin: 0px auto;
+	background-image: url(../images/loginbgg1.png);
+	background-repeat: no-repeat;
+	height: 350px;
+	width: 480px;
+	text-align:left;
+	margin-top:150px;
+}
+.STYLE1 {font-size: 12px}
+.tbox {
+	height: 20px;
+	border: 1px soild #EEEEEE
+}
+.loginpanel1 #logintb1 {
+	top: 202px;
+	left: 370px;
+	width: 221px;
+	position: absolute;
+}
+.loginpanel1 #logintb1 td{
+	color:#fff;
+	line-height: 26px;
+}
+
+.loginbtn1 {
+	background-image: url(../images/denglllla1.png);
+	margin: 0px;
+	padding: 0px;
+	height: 45px;
+	width: 106px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
+.loginbtn2 {
+	background-image: url(../images/denglllla2.png);
+	margin: 0px;
+	padding: 0px;
+	height: 45px;
+	width: 106px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
