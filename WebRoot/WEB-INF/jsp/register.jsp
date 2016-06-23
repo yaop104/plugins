@@ -42,22 +42,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 
 	function do_register() {
-		var account = $('#user_code').val();
+		if(!isInput('user_code', '公司名称', 128, 1)){
+			return false;
+		}
+		if(!isInput('user_name', '用户名', 128, 1)){
+			return false;
+		}
+		if(!isInput('user_connectname', '联系人', 128, 1)){
+			return false;
+		}
+
+		if(!isMobilePhone($("#user_mobile").val(), false)){
+			alert("输入手机号码为空或者号码不正确");
+			$("#user_mobile").focus();
+			return false;
+		}
+
+		if(!isInput('user_pwd', '密码', 64, 1)){
+			return false;
+		}
+		var commpany = $('#user_code').val();
+		var username = $('#user_name').val();
+		var cname = $('#user_connectname').val();
+		var moblie = $('#user_mobile').val();
 		var password = $('#user_pwd').val();
-		if(account == ""){
-			alert("请输入用户名！");
-			$('#user_pwd').focus();
-			return false;
-		}
-		if(password == ""){
-			alert("请输入密码！");
-			$('#user_pwd').focus();
-			return false;
-		}
-		
-		$.post('<%=basePath%>registerUser.do', {'account':account, 'password':password}, function(data){
-			if("0"==data.code){
-				location.href = data.message;
+		$.post('<%=basePath%>sysAcc/register.do',
+				{   'sysAccName':username,
+					'sysAccPassword':password,
+			        'sysAccDesc':commpany,
+					'sysAccRealname':cname,
+					'sysAccMobile':moblie
+				}, function(data){
+			if(data.success){
+				alert(data.message);
+				location.href = '<%=basePath%>login.do';
 			}else{
 				alert(data.message);
 				}
@@ -91,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td height="35">&nbsp;</td>
       <td height="35"><div align="right" class="STYLE1">用户名：</div></td>
       <td height="35">
-      	<input type="password" id="user_name"  name="user_name" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
+      	<input type="text" id="user_name"  name="user_name" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
       </td>
       <td height="35">&nbsp;</td>
       <td height="35">&nbsp;</td>
@@ -100,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td height="35">&nbsp;</td>
 			<td height="35"><div align="right" class="STYLE1">联系人：</div></td>
 			<td height="35">
-				<input type="password" id="user_connectname"  name="user_connectname" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
+				<input type="text" id="user_connectname"  name="user_connectname" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
 			</td>
 			<td height="35">&nbsp;</td>
 			<td height="35">&nbsp;</td>
@@ -109,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td height="35">&nbsp;</td>
 			<td height="35"><div align="right" class="STYLE1">手机号：</div></td>
 			<td height="35">
-				<input type="password" id="user_mobile"  name="user_mobile" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
+				<input type="text" id="user_mobile"  name="user_mobile" class="tbox" style="width: 180px;" tabIndex="2" rules="trimBlank"/>
 			</td>
 			<td height="35">&nbsp;</td>
 			<td height="35">&nbsp;</td>

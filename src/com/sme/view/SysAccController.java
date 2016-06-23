@@ -132,6 +132,18 @@ public class SysAccController extends BaseController<SysAcc> {
 
 				return getSuccess(true, "修改成功", null);
 			} else {
+
+				SysAcc sysAccnames=new SysAcc();
+				sysAccnames.setSysAccName(sysAcc.getSysAccName());
+				if(chkAccountIsExists(sysAccnames)){
+					return getSuccess(false, "该用户名已存在,请重新输入用户名！！");
+				}
+				SysAcc sysAccphone = new SysAcc();
+				sysAccphone.setSysAccMobile(sysAcc.getSysAccMobile());
+				if(chkAccountIsExists(sysAccphone)){
+					return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
+				}
+
 				String password = MD5.encryByMD5("1");
 				sysAcc.setSysAccPassword(password);
 				sysAcc.setSysAccCdate(new Date());
@@ -147,6 +159,48 @@ public class SysAccController extends BaseController<SysAcc> {
 			System.out.println(e.getCause().getMessage());
 			return getSuccess(false, "发生系统异常");
 		}
+	}
+
+
+	@RequestMapping(value = "/register", method = { RequestMethod.POST })
+	@ResponseBody
+	@com.sme.core.spring.Log(type = "首页", desc = "运营商注册")
+	public StringJSON sysAccRegistere(SysAcc sysAcc, Model model, HttpServletRequest request,
+								 HttpServletResponse response) {
+		try {
+
+				SysAcc sysAccnames=new SysAcc();
+				sysAccnames.setSysAccName(sysAcc.getSysAccName());
+				if(chkAccountIsExists(sysAccnames)){
+					return getSuccess(false, "该用户名已存在,请重新输入用户名！！");
+				}
+				SysAcc sysAccphone = new SysAcc();
+				sysAccphone.setSysAccMobile(sysAcc.getSysAccMobile());
+				if(chkAccountIsExists(sysAccphone)){
+					return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
+				}
+
+				String password = MD5.encryByMD5(sysAcc.getSysAccPassword());
+				sysAcc.setSysAccPassword(password);
+			    sysAcc.setSysAccState("2");
+				sysAcc.setSysAccType("2");
+				sysAcc.setSysAccCdate(new Date());
+				sysAcc.setSysAccCuser("运营商"+sysAcc.getSysAccName());
+
+				sysAccServiceImpl.insert(sysAcc);
+
+				return getSuccess(true, "注册成功，帐号审核通过后客服将会联系你！");
+
+		} catch (Exception e) {
+			log.error(e.getCause().getMessage());
+			System.out.println(e.getCause().getMessage());
+			return getSuccess(false, "系统异常，注册失败！");
+		}
+	}
+
+	private boolean chkAccountIsExists(SysAcc sysAcc) {
+		Boolean flag = sysAccServiceImpl.getSysAcc(sysAcc);
+		return flag;
 	}
 
 	public String sysAccAdd(Model model, SysAcc sysAcc) {

@@ -16,6 +16,7 @@
 			{ field:'sysAccId', align:'center', width:'150' , title:'ID' },
 			{ field:'sysAccName', align:'center', width:'150' , title:'昵称' },
 			{ field:'sysAccRealname', align:'center', width:'120', sortable:'true' , title:'姓名' },
+			{ field:'sysAccMobile', align:'center', width:'120', sortable:'true' , title:'号码' },
 			{ field:'sysAccState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState },
 			{ field:'sysAccType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
 			{ field:'sysAccRoleid', align:'center',  width:'80', sortable:'true' , title:'角色' },
@@ -54,6 +55,16 @@
 			url:'${ctx }/sysRole/selectRoles.do',
 			valueField:'roleid',
 			textField:'rolename'
+		});
+		$('#sysAccOrgid').combobox({
+// 			onShowPanel:function(){
+// 				$('#sysAccRoleid').combobox({
+// 					url:'${ctx }/sysRole/selectRoles.do'
+// 				});
+// 			},
+			url:'${ctx }/TbcInfo/select.do',
+			valueField:'tioUnid',
+			textField:'tioName'
 		});
 
 		//初始化显示列表
@@ -131,12 +142,13 @@
 					'sysAccType':row.sysAccType,
 					'sysAccDesc':row.sysAccDesc,
 					'sysAccRoleid':row.sysAccRoleid,
+					'sysAccMobile':row.sysAccMobile,
 					'sysAccOrgid':row.sysAccOrgid
 				});
-				$('#sysAccId').val(row.sysAccId);
-				$('#sysAccName').val(row.sysAccName);
-				$('#sysAccRealname').val(row.sysAccRealname);
-				$('#sysAccDesc').val(row.sysAccDesc);
+//				$('#sysAccId').val(row.sysAccId);
+//				$('#sysAccName').val(row.sysAccName);
+//				$('#sysAccRealname').val(row.sysAccRealname);
+//				$('#sysAccDesc').val(row.sysAccDesc);
 				$('#d1').dialog('open');
 			}else{
 				msgShow('错误','请选择一条要修改的记录！','error');
@@ -163,6 +175,8 @@
 							msgShow('成功',data.message,'info');
 							grid.datagrid('reload');
 							grid.datagrid('clearSelections');
+						}else{
+							msgShow('失败',data.message,'error');
 						}
 					}, 'json');
 				}
@@ -192,7 +206,31 @@
 		}
 	}
 
+	function checkForm(){
+
+		if(!isInput('sysAccName', '用户名', 128, 1)){
+			return false;
+		}
+		if(!isInput('sysAccRealname', '联系人', 128, 1)){
+			return false;
+		}
+
+		if(!isMobilePhone($("#sysAccMobile").val(), false)){
+			alert("输入手机号码为空或者号码不正确");
+			$("#user_mobile").focus();
+			return false;
+		}
+
+		if(!isInput('sysAccRoleid', '角色', 128, 0)){
+			return false;
+		}
+		if(!isInput('sysAccOrgid', '公司名称', 128, 0)){
+			return false;
+		}
+	}
+
 	function  saveForm(){
+		checkForm();
 		$('#f1').form('submit',{
 			url:$('#f1').form.url,
 			success:function(data){
@@ -202,6 +240,8 @@
 					$('#d1').dialog('close');
 					grid.datagrid('load');
 					grid.datagrid('clearSelections');
+				}else{
+					msgShow('失败',data.message,'error');
 				}
 			}
 		});
@@ -238,7 +278,7 @@
 		<table id="t1"></table>
 
 		<!-- 窗口-->
-		<div id="d1" class="easyui-dialog" buttons="#btn1" title="账号编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:400px;height:300px;overflow: hidden;">
+		<div id="d1" class="easyui-dialog" buttons="#btn1" title="账号编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:600px;height:400px;overflow: hidden;">
 			<div style="padding:10px 60px 20px 60px">
 				<form id="f1"  class="easyui-form" method="post">
 					<input type="hidden" id="sysAccId" name="sysAccId"/>
@@ -255,12 +295,16 @@
 							</td>
 						</tr>
 						<tr>
-							<td align="right">昵称：</td>
-							<td><input class="easyui-validatebox" name="sysAccName" required="true" style="width: 152px" id="sysAccName"></input></td>
+							<td align="right">用户名：</td>
+							<td><input class="easyui-validatebox" name="sysAccName" required="true" style="width: 152px" id="sysAccName"/></td>
 						</tr>
 						<tr>
-							<td align="right">名称：</td>
-							<td><input class="easyui-validatebox" name="sysAccRealname" required="true" style="width: 152px" id="sysAccRealname"></input></td>
+							<td align="right">真实姓名：</td>
+							<td><input class="easyui-validatebox" name="sysAccRealname" required="true" style="width: 152px" id="sysAccRealname"/></td>
+						</tr>
+						<tr>
+							<td align="right">手机号码：</td>
+							<td><input class="easyui-validatebox" name="sysAccMobile" required="true" style="width: 152px" id="sysAccMobile"/></td>
 						</tr>
 						<tr>
 							<td align="right">角色：</td>
@@ -271,8 +315,12 @@
 							</td>
 						</tr>
 						<tr>
-							<td align="right">组织：</td>
-							<td><input name="sysAccOrgid" required="true" style="width: 152px" id="sysAccOrgid"></input></td>
+							<td align="right">公司：</td>
+							<td>
+								<select  class="easyui-combobox" name="sysAccOrgid" id="sysAccOrgid" style="width:152px;" required="true" editable="false">
+
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<td align="right">状态：</td>
@@ -285,7 +333,7 @@
 						</tr>
 						<tr>
 							<td>备注：</td>
-							<td><input class="easyui-textbox" id="sysAccDesc" name="sysAccDesc" data-options="multiline:true" style="height:60px"></input></td>
+							<td><input class="easyui-textbox" id="sysAccDesc" name="sysAccDesc" data-options="multiline:true" style="height:60px"/></td>
 						</tr>
 					</table>
 				</form>

@@ -56,5 +56,20 @@ public class SysAccServiceImpl extends BaseService<SysAcc> implements SysAccServ
 		}
 		return sysAcc;
 	}
+
+	/**
+	 * 判断重复
+	 */
+	@Override
+	public Boolean getSysAcc(SysAcc sysAcc) {
+		List<SysAcc> list = new ArrayList<SysAcc>();
+		list = sysAccDao.select(sysAcc);
+		if (list.size() > 0) {
+			sysAcc = list.get(0);
+		} else {
+			sysAcc = null;
+		}
+		return sysAcc == null ? false : true;
+	}
 	//================== end ======================
 }

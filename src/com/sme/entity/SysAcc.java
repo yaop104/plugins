@@ -53,6 +53,19 @@ public class SysAcc extends BaseObject{
 	/** 类型 1用户2开发商3财务4系统 **/
 	private String sysAccType;
 
+	/** 手机号 **/
+	private String sysAccMobile;
+
+	public String getSysAccMobile() {
+		return sysAccMobile;
+	}
+
+	public void setSysAccMobile(String sysAccMobile) {
+		this.sysAccMobile = sysAccMobile;
+	}
+
+
+
 	public String getSysAccType() {
 		return sysAccType;
 	}

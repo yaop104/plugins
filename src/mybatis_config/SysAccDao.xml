@@ -14,7 +14,8 @@
 		<result property="sysAccUdate" column="sysAccUdate" /><!--更新日期-->
 		<result property="sysAccCuser" column="sysAccCuser" /><!--记录人-->
 		<result property="sysAccUueser" column="sysAccUueser" /><!--创建人-->
-		<result property="sysAccType" column="sysAccType" /><!--创建人-->
+		<result property="sysAccType" column="sysAccType" /><!--类型 1用户2开发商3财务4系统-->
+		<result property="sysAccMobile" column="sysAccMobile" /><!--号码-->
 	</resultMap>
 
 	<sql id="fieldAsProperty">
@@ -30,7 +31,8 @@
 		sys_acc_udate AS sysAccUdate,
 		sys_acc_cuser AS sysAccCuser,
 		sys_acc_uueser AS sysAccUueser,
-		sys_acc_type AS sysAccType
+		sys_acc_type AS sysAccType,
+		sys_acc_mobile AS sysAccMobile
 	</sql>
 
 	<sql id="field">
@@ -45,7 +47,8 @@
 		sys_acc_udate,
 		sys_acc_cuser,
 		sys_acc_uueser,
-		sys_acc_type
+		sys_acc_type,
+		sys_acc_mobile
 	</sql>
 
 	<sql id="property">
@@ -60,7 +63,8 @@
 		#{sysAccUdate,jdbcType=TIMESTAMP},
 		#{sysAccCuser,jdbcType=VARCHAR},
 		#{sysAccUueser,jdbcType=VARCHAR},
-		#{sysAccType,jdbcType=VARCHAR}
+		#{sysAccType,jdbcType=VARCHAR},
+		#{sysAccMobile,jdbcType=VARCHAR}
 	</sql>
 
 	<sql id="fieldEqProperty">
@@ -75,7 +79,8 @@
 		sys_acc_udate=#{sysAccUdate,jdbcType=TIMESTAMP},
 		sys_acc_cuser=#{sysAccCuser,jdbcType=VARCHAR},
 		sys_acc_uueser=#{sysAccUueser,jdbcType=VARCHAR},
-		sys_acc_type=#{sysAccType,jdbcType=VARCHAR}
+		sys_acc_type=#{sysAccType,jdbcType=VARCHAR},
+		sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}
 	</sql>
 
 	<sql id="fieldEqPropertyIf">
@@ -90,7 +95,8 @@
 		<if test="sysAccUdate!=null" >sys_acc_udate=#{sysAccUdate,jdbcType=TIMESTAMP},</if>
 		<if test="sysAccCuser!=null" >sys_acc_cuser=#{sysAccCuser,jdbcType=VARCHAR},</if>
 		<if test="sysAccUueser!=null" >sys_acc_uueser=#{sysAccUueser,jdbcType=VARCHAR},</if>
-		<if test="sysAccType!=null" >sys_acc_type=#{sysAccType,jdbcType=VARCHAR}</if>
+		<if test="sysAccType!=null" >sys_acc_type=#{sysAccType,jdbcType=VARCHAR},</if>
+		<if test="sysAccMobile!=null" >sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
 	</sql>
 	<select id="page" resultType="com.sme.entity.SysAcc" parameterType="map">
 		SELECT <include refid="fieldAsProperty" /> FROM SYS_ACC <include refid="idCnd3"/>
@@ -142,6 +148,7 @@
 			<if test="sysAccDesc!=null and sysAccDesc!=''" >AND sys_acc_desc=#{sysAccDesc,jdbcType=VARCHAR}</if>
 			<if test="sysAccRoleid!=null and sysAccRoleid!=''" >AND sys_acc_orgid=#{sysAccRoleid,jdbcType=VARCHAR}</if>
 			<if test="sysAccType!=null and sysAccType!=''" >AND sys_acc_type=#{sysAccType,jdbcType=VARCHAR}</if>
+			<if test="sysAccMobile!=null and sysAccMobile!=''" >AND sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
 	<sql id="idCnd3">
@@ -154,6 +161,7 @@
 			<if test="sysAccDesc!=null and sysAccDesc!=''" >AND sys_acc_desc=#{sysAccDesc,jdbcType=VARCHAR}</if>
 			<if test="sysAccRoleid!=null and sysAccRoleid!=''" >AND sys_acc_orgid=#{sysAccRoleid,jdbcType=VARCHAR}</if>
 			<if test="sysAccType!=null and sysAccType!=''" >AND sys_acc_type=#{sysAccType,jdbcType=VARCHAR}</if>
+			<if test="sysAccMobile!=null and sysAccMobile!=''" >AND sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
 			<if test="startTime!=null and startTime!=''" >AND sys_acc_cdate <![CDATA[> ]]> #{startTime,jdbcType=TIMESTAMP}</if>
 			<if test="endTime!=null and endTime!=''" >AND sys_acc_cdate <![CDATA[< ]]> #{endTime,jdbcType=TIMESTAMP}</if>
 		</where>
