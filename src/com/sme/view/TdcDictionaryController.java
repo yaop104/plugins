@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sme.core.model.StringJSON;
 import com.sme.core.service.InterfaceBaseService;
 import com.sme.core.view.BaseController;
 import org.apache.commons.logging.Log;
@@ -66,25 +67,40 @@ public class TdcDictionaryController extends BaseController<TdcDictionary> {
 			return "redirect:/tdcDictionary/tdcDictionarylist.do";
 		}
 	 }
-	
-	@RequestMapping(value="/save", method={RequestMethod.POST})
-	public String tdcDictionarySave(TdcDictionary tdcDictionary,Model model, HttpServletRequest request, HttpServletResponse response){
-		
-		try
-		{
-//			if(tdcDictionary.getTdcDictionaryId()!=null){
-//
-//				return "redirect:/tdcDictionary/tdcDictionarylist.do";
-//			}else{
-				
-				return "redirect:/tdcDictionary/tdcDictionarylist.do";
-//			}
-			
-		}
-		catch (Exception e)
-		{
-			log.error(e.getMessage());
-			return tdcDictionaryAdd(model,tdcDictionary);
+
+	@RequestMapping(value = "/save", method = { RequestMethod.POST })
+	@ResponseBody
+	@com.sme.core.spring.Log(type = "字典管理", desc = "修改字典")
+	public StringJSON tdcDictionarySave(TdcDictionary tdcDictionary, Model model, HttpServletRequest request, HttpServletResponse response){
+		try {
+			if (tdcDictionary.getTdcDictionaryUnid() != null) {
+
+
+	//			TbcInfo tbcInfo1 = new TbcInfo();
+	//			tbcInfo1 = tbcInfoServiceImpl.getById(tbcInfo);
+	//			tbcInfo1.setTioName(tbcInfo.getTioName());
+	//			tbcInfo1.setTioContactname(tbcInfo.getTioContactname());
+	//			tbcInfo1.setTioContactphone(tbcInfo.getTioContactphone());
+	//			tbcInfo1.setTioDesc(tbcInfo.getTioDesc());
+	//			tbcInfo1.setTioState(tbcInfo.getTioState());
+	//			tbcInfo1.setTioType(tbcInfo.getTioType());
+	//			tbcInfo1.setTioUdate(new Date());
+	//			tbcInfo1.setTioUuser("admin2");
+	//
+	//			tbcInfoServiceImpl.update(tbcInfo1);
+
+				return getSuccess(true, "修改成功");
+			} else {
+				tdcDictionary.setTdcDictionaryState("1");
+				tdcDictionary.setTdcDictionaryCdate(new Date());
+				tdcDictionary.setTdcDictionaryCuser(1);
+
+				return getSuccess(true, "添加成功");
+			}
+
+		} catch (Exception e) {
+			log.error(e.getCause().getMessage());
+			return getSuccess(false, "发生系统异常");
 		}
 	}
 	

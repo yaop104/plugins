@@ -24,21 +24,21 @@
 
 		var _toolbars = [{
 			id : 'btnadd',
-			text : '添加运营商',
+			text : '添加字典',
 			iconCls : 'icon-add',
 			handler : function() {
 				addOption();
 			}
 		}, '-', {
 			id : 'btncut',
-			text : '删除运营商',
+			text : '删除字典',
 			iconCls : 'icon-remove',
 			handler : function() {
 				deleteOption();
 			}
 		}, '-', {
 			id : 'btnupdate',
-			text : '更新运营商',
+			text : '更新字典',
 			iconCls : 'icon-edit',
 			handler : function() {
 				editOption();
@@ -83,8 +83,8 @@
 
 		/* queryParams.StartTime = StartTime;
 		 queryParams.EndTime = EndTime;   */
-		queryParams.tioName = Name;
-		queryParams.tioState = State;
+		queryParams.tdcDictionaryName = Name;
+		queryParams.tdcDictionaryState = State;
 
 		return queryParams;
 
@@ -103,7 +103,7 @@
 	function addOption(){
 		$('#d1').dialog('open');
 		$('#f1').form('reset');
-		$('#f1').form.url='${ctx }/TbcInfo/save.do';
+		$('#f1').form.url='${ctx }/TdcDictionary/save.do';
 	}
 
 	function editOption(){
@@ -111,7 +111,7 @@
 		var rows = grid.datagrid('getSelections');
 		if(row){
 			if(1 == rows.length){
-				$('#f1').form.url='${ctx }/TbcInfo/save.do';
+				$('#f1').form.url='${ctx }/TdcDictionary/save.do';
 				$('#f1').form('load',{
 					'tioUnid':row.tioUnid,
 					'tioType':row.tioType,
@@ -142,7 +142,7 @@
 			s=s.substr(0,s.length-1);
 			$.messager.confirm('确认？', '确认删除所有选中记录吗', function(r){
 				if (r){
-					$.post('${ctx }/TbcInfo/deleteTbcInfos.do',{'ids': s},function(data){
+					$.post('${ctx }/TdcDictionary/deleteTbcInfos.do',{'ids': s},function(data){
 						if(data.success){
 							msgShow('成功',data.message,'info');
 							grid.datagrid('reload');
@@ -202,7 +202,7 @@
 		<div id="tb" style="padding: 10px; height: auto">
 			<%-- 查找管理员信息，根据时间、管理员名 --%>
 			<div>
-				公司名:
+				名称:
 				<input id="s_name"/>
 				按状态：
 				<select id="s_state" class="easyui-combobox" name="s_state" style="width: 150px;" panelheight="auto">
@@ -223,34 +223,37 @@
 		<div id="d1" class="easyui-dialog" buttons="#btn1" title="编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:400px;height:300px;overflow: hidden;">
 			<div style="padding:10px 60px 20px 60px">
 				<form id="f1"  class="easyui-form" method="post">
-					<input type="hidden" id="tioUnid" name="tioUnid"/>
+					<input type="hidden" id="tdcDictionaryUnid" name="tdcDictionaryUnid"/>
 					<table>
 						<tr>
 							<td align="right">类型：</td>
 							<td>
-								<select  class="easyui-combobox" name="tioType" id="tioType" style="width:152px;" required="true" editable="false">
-									<option value="1">开发商</option>
+								<select  class="easyui-combobox" name="tdcDictionaryType" id="tdcDictionaryType" style="width:152px;" required="true" editable="false">
+									<option value="1">大类</option>
+									<option value="2">小类</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<td align="right">公司名称：</td>
+							<td align="right">名称：</td>
 							<td><input class="easyui-validatebox" name="tioName" required="true" style="width: 152px" id="tioName"/></td>
 						</tr>
 						<tr>
 							<td align="right">联系人：</td>
-							<td><input class="easyui-validatebox" name="tioContactname" required="true" style="width: 152px" id="tioContactname"/></td>
+							<td><input class="easyui-validatebox" name="tdcDictionaryName" required="true" style="width: 152px" id="tdcDictionaryName"/></td>
 						</tr>
 						<tr>
-							<td align="right">联系电话：</td>
+							<td align="right">父节点：</td>
 							<td>
-								<input class="easyui-validatebox" name="tioContactphone" required="true" style="width: 152px" id="tioContactphone"/>
+								<select  class="easyui-combobox" name="tdcDictionaryParentid" id="tdcDictionaryParentid" style="width:152px;" required="true" editable="false">
+
+								</select>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">状态：</td>
 							<td>
-								<select  class="easyui-combobox" name="tioState" id="tioState" style="width:152px;" required="true" editable="false">
+								<select  class="easyui-combobox" name="tdcDictionaryState" id="tdcDictionaryState" style="width:152px;" required="true" editable="false">
 									<option value="1">有效</option>
 									<option value="2">无效</option>
 								</select>
@@ -258,7 +261,7 @@
 						</tr>
 						<tr>
 							<td>备注：</td>
-							<td><input class="easyui-textbox" id="tioDesc" name="tioDesc" data-options="multiline:true" style="height:60px"/></td>
+							<td><input class="easyui-textbox" id="tdcDictionaryDesc" name="tdcDictionaryDesc" data-options="multiline:true" style="height:60px"/></td>
 						</tr>
 					</table>
 				</form>
