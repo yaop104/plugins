@@ -33,6 +33,7 @@
 		<typeAlias type="com.sme.entity.TbcInfo" alias="TbcInfo" />
 		<typeAlias type="com.sme.entity.TapDownload" alias="TapDownload" />
 		<typeAlias type="com.sme.entity.TscSource" alias="TscSource" />
+		<typeAlias type="com.sme.entity.TdcDictionary" alias="TdcDictionary" />
 	</typeAliases>
 	
 	<!--<environments default="MySQL">
@@ -70,5 +71,6 @@
 		<mapper resource="./mybatis_config/TapDownloadDao.xml"/>
 		<mapper resource="./mybatis_config/TbcInfoDao.xml"/>
 		<mapper resource="./mybatis_config/TscSourceDao.xml"/>
+		<mapper resource="./mybatis_config/TdcDictionaryDao.xml"/>
 	</mappers>
 </configuration>

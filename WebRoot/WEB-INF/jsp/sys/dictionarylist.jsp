@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<%@ include file="/WEB-INF/jsp/sys/taglib2.jsp"%>
-	<title>公司信息</title>
+	<title>字典信息</title>
 </head>
 <script language="javascript">
 	var grid;
@@ -13,12 +13,13 @@
 		var colArr = [];
 
 		colArr = [
-			{ field:'tioUnid', align:'center', width:'150' , title:'ID' },
-			{ field:'tioName', align:'center', width:'150' , title:'公司名称' },
-			{ field:'tioContactname', align:'center', width:'120', sortable:'true' , title:'联系人' },
-			{ field:'tioContactphone', align:'center',  width:'80', sortable:'true' , title:'联系方式' },
-			{ field:'tioType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
-			{ field:'tioState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState }
+			{ field:'tdcDictionaryUnid', align:'center', width:'150' , title:'ID' },
+			{ field:'tdcDictionaryName', align:'center', width:'150' , title:'名称' },
+			{ field:'tdcDictionaryCuser', align:'center', width:'120', sortable:'true' , title:'记录人' },
+			{ field:'tdcDictionaryCdate', align:'center', width:'120', sortable:'true' , title:'记录时间' },
+			{ field:'tdcDictionaryParentid', align:'center',  width:'80', sortable:'true' , title:'上级' },
+			{ field:'tdcDictionaryType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
+			{ field:'tdcDictionaryState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState }
 		];
 
 		var _toolbars = [{
@@ -51,19 +52,19 @@
 			nowrap : true,//设置为true，当数据长度超出列宽时将会自动截取。
 			striped : true,//显示条纹
 			collapsible : true,
-			url : '${ctx }/TbcInfo/gettbcInfolists.do',
+			url : '${ctx }/TdcDictionary/page.do',
 			pageList : [10, 15, 20],
 			pageSize : 10,
 			fitColumns : false,
 			fit : true,
 			loadMsg : '正在加载数据.......',//当从远程站点载入数据时，显示的一条快捷信息
 			pagination : true,//设置true将在数据表格底部显示分页工具栏
-			sortName : 'tioUnid',//当数据表格初始化时以哪一列来排序
+			sortName : 'tdcDictionaryUnid',//当数据表格初始化时以哪一列来排序
 			sortOrder : 'asc',//定义排序顺序，可以是'asc'或者'desc'（正序或者倒序）
 			remoteSort : false,//定义是否通过远程服务器对数据排序
 			itColumns : false,
 			singleSelect : false,//设置为true将只允许选择一行
-			idField : 'tioUnid',//表明该列是一个唯一列。
+			idField : 'tdcDictionaryUnid',//表明该列是一个唯一列。
 			rownumbers : true,//设置为true将显示行数
 			frozenColumns:[[
 				{field:'ck',checkbox:true}
@@ -164,7 +165,11 @@
 	}
 
 	function convertType(val, rec, index) {
-			return '<span style="color: green">开发商</span>';
+		if(val == '1'){
+			return '<span style="color: green">大类</span>';
+		}else{
+			return '<span style="color: green">小类</span>';
+		}
 	}
 
 	function  saveForm(){
