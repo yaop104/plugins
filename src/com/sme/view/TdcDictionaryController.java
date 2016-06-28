@@ -50,23 +50,31 @@ public class TdcDictionaryController extends BaseController<TdcDictionary> {
 		}
 		
 	}
-	
-	 @RequestMapping(value="/{id}/delete", method={RequestMethod.GET})
-	 public String tdcDictionaryDelete(@PathVariable Integer id){
-		 try
-		{
-			 log.info("<=====执行delete口====>" + id);
-			 TdcDictionary tdcDictionary = new TdcDictionary();
-//			 tdcDictionary.setTdcDictionaryId(id);
-			tdcDictionaryServiceImpl.delete(tdcDictionary);
-			return "redirect:/tdcDictionary/tdcDictionarylist.do";
-		}
-		catch (Exception e)
-		{
+
+	@RequestMapping(value = "/deleteDictionary")
+	@ResponseBody
+	@com.sme.core.spring.Log(type = "字典管理", desc = "删除字典")
+	public StringJSON tdcDictionaryDelete(String ids) {
+		try {
+			if (ids != null && ids.length() > 0) {
+				String[] idStrings = ids.split(",");
+
+				for (String id : idStrings) {
+					TdcDictionary tdcDictionary = new TdcDictionary();
+					tdcDictionary.setTdcDictionaryUnid(Integer.valueOf(id));
+					tdcDictionaryServiceImpl.delete(tdcDictionary);
+				}
+
+				return getSuccess(true, "删除成功！");
+			} else {
+				return getSuccess(false, "删除内容为空！");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 			log.error(e.getMessage());
-			return "redirect:/tdcDictionary/tdcDictionarylist.do";
+			return getSuccess(false, "系统异常！");
 		}
-	 }
+	}
 
 	@RequestMapping(value = "/save", method = { RequestMethod.POST })
 	@ResponseBody
@@ -88,13 +96,38 @@ public class TdcDictionaryController extends BaseController<TdcDictionary> {
 	//			tbcInfo1.setTioUuser("admin2");
 	//
 	//			tbcInfoServiceImpl.update(tbcInfo1);
+				TdcDictionary models = new TdcDictionary();
+				models.setTdcDictionaryName(tdcDictionary.getTdcDictionaryName());
+				models.setTdcDictionaryUnid(tdcDictionary.getTdcDictionaryUnid());
+				if(checkIsExists(models)){
+					return getSuccess(false, "该分类名称已存在,请输入未使用名称！！");
+				}
 
+				TdcDictionary amodels = new TdcDictionary();
+				amodels = tdcDictionaryServiceImpl.getById(tdcDictionary);
+				amodels.setTdcDictionaryName(tdcDictionary.getTdcDictionaryName());
+				amodels.setTdcDictionaryDesc(tdcDictionary.getTdcDictionaryDesc());
+				amodels.setTdcDictionaryState(tdcDictionary.getTdcDictionaryState());
+				amodels.setTdcDictionaryType(tdcDictionary.getTdcDictionaryType());
+				amodels.setTdcDictionaryParentid(tdcDictionary.getTdcDictionaryParentid());
+				amodels.setTdcDictionaryUdate(new Date());
+				amodels.setTdcDictionaryUuser(1);
+
+				tdcDictionaryServiceImpl.update(amodels);
 				return getSuccess(true, "修改成功");
 			} else {
+
+				TdcDictionary models = new TdcDictionary();
+				models.setTdcDictionaryName(tdcDictionary.getTdcDictionaryName());
+				if(checkIsExists(models)){
+					return getSuccess(false, "该分类名称已存在,请输入未使用名称！！");
+				}
+
 				tdcDictionary.setTdcDictionaryState("1");
 				tdcDictionary.setTdcDictionaryCdate(new Date());
 				tdcDictionary.setTdcDictionaryCuser(1);
 
+				tdcDictionaryServiceImpl.insert(tdcDictionary);
 				return getSuccess(true, "添加成功");
 			}
 
@@ -103,7 +136,12 @@ public class TdcDictionaryController extends BaseController<TdcDictionary> {
 			return getSuccess(false, "发生系统异常");
 		}
 	}
-	
+
+	private boolean checkIsExists(TdcDictionary tdcDictionary) {
+		Boolean flag = tdcDictionaryServiceImpl.getDictionary(tdcDictionary);
+		return flag;
+	}
+
 	public String tdcDictionaryAdd(Model model,TdcDictionary tdcDictionary){
 			model.addAttribute("tdcDictionary", tdcDictionary);
 			return "/tdcDictionary/tdcDictionaryform";

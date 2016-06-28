@@ -30,7 +30,6 @@
 	</sql>
 
 	<sql id="field">
-			tdc_dictionary_unid,
 			tdc_dictionary_order,
 			tdc_dictionary_state,
 			tdc_dictionary_cdate,
@@ -44,7 +43,6 @@
 	</sql>
 
 	<sql id="property">
-			next.nextval,
 			#{tdcDictionaryOrder,jdbcType=INTEGER},
 			#{tdcDictionaryState,jdbcType=VARCHAR},
 			#{tdcDictionaryCdate,jdbcType=TIMESTAMP},
@@ -98,7 +96,22 @@
 					<if test="tdcDictionaryDesc!=null and tdcDictionaryDesc!=''" >AND tdc_dictionary_desc=#{tdcDictionaryDesc,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
-	
+	<sql id="idCnd3">
+		<where>
+					<if test="tdcDictionaryOrder!=null and tdcDictionaryOrder!=''" >AND tdc_dictionary_order=#{tdcDictionaryOrder,jdbcType=INTEGER}</if>
+					<if test="tdcDictionaryState!=null and tdcDictionaryState!=''" >AND tdc_dictionary_state=#{tdcDictionaryState,jdbcType=VARCHAR}</if>
+					<if test="tdcDictionaryCdate!=null and tdcDictionaryCdate!=''" >AND tdc_dictionary_cdate=#{tdcDictionaryCdate,jdbcType=TIMESTAMP}</if>
+					<if test="tdcDictionaryUdate!=null and tdcDictionaryUdate!=''" >AND tdc_dictionary_udate=#{tdcDictionaryUdate,jdbcType=TIMESTAMP}</if>
+					<if test="tdcDictionaryCuser!=null and tdcDictionaryCuser!=''" >AND tdc_dictionary_cuser=#{tdcDictionaryCuser,jdbcType=INTEGER}</if>
+					<if test="tdcDictionaryUuser!=null and tdcDictionaryUuser!=''" >AND tdc_dictionary_uuser=#{tdcDictionaryUuser,jdbcType=INTEGER}</if>
+					<if test="tdcDictionaryType!=null and tdcDictionaryType!=''" >AND tdc_dictionary_type=#{tdcDictionaryType,jdbcType=VARCHAR}</if>
+					<if test="tdcDictionaryName!=null and tdcDictionaryName!=''" >AND tdc_dictionary_name=#{tdcDictionaryName,jdbcType=VARCHAR}</if>
+					<if test="tdcDictionaryParentid!=null and tdcDictionaryParentid!=''" >AND tdc_dictionary_parentid=#{tdcDictionaryParentid,jdbcType=INTEGER}</if>
+					<if test="tdcDictionaryDesc!=null and tdcDictionaryDesc!=''" >AND tdc_dictionary_desc=#{tdcDictionaryDesc,jdbcType=VARCHAR}</if>
+					<if test="tdcDictionaryUnid!=null and tdcDictionaryUnid!=''" >AND tdc_dictionary_unid!=#{tdcDictionaryUnid,jdbcType=INTEGER}</if>
+		</where>
+	</sql>
+
 	<select id="page" parameterType="map" resultType="com.sme.entity.TdcDictionary">
 	    SELECT <include refid="fieldAsProperty" /> FROM TDC_DICTIONARY <include refid="idCnd2"/> 
 
@@ -110,7 +123,10 @@
 	    SELECT COUNT(*) FROM TDC_DICTIONARY <include refid="idCnd2"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.TdcDictionary" resultType="com.sme.entity.TdcDictionary">
-		SELECT <include refid="fieldAsProperty" /> FROM TDC_DICTIONARY
+		SELECT <include refid="fieldAsProperty" /> FROM TDC_DICTIONARY <include refid="idCnd2"/>
+	</select>
+	<select id="selectForDictionary" parameterType="com.sme.entity.TdcDictionary" resultType="com.sme.entity.TdcDictionary">
+		SELECT <include refid="fieldAsProperty" /> FROM TDC_DICTIONARY <include refid="idCnd3"/>
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.TdcDictionary">
 		INSERT INTO TDC_DICTIONARY(<include refid="field" />) VALUES (<include refid="property" />)

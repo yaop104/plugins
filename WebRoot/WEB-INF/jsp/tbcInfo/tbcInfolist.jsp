@@ -146,6 +146,8 @@
 							msgShow('成功',data.message,'info');
 							grid.datagrid('reload');
 							grid.datagrid('clearSelections');
+						}else{
+							msgShow('错误',data.message,'error');
 						}
 					}, 'json');
 				}

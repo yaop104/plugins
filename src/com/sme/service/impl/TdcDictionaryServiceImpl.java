@@ -8,6 +8,9 @@ import com.sme.service.TdcDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TdcDictionaryServiceImpl extends BaseService<TdcDictionary> implements TdcDictionaryService{
 	@Autowired
@@ -25,8 +28,20 @@ public class TdcDictionaryServiceImpl extends BaseService<TdcDictionary> impleme
 	{
 		this.tdcDictionaryDao = tdcDictionaryDao;
 	}
-	
+
 	//================== begin ======================
+
+	@Override
+	public Boolean getDictionary(TdcDictionary tdcDictionary) {
+		List<TdcDictionary> list = new ArrayList<TdcDictionary>();
+		list = tdcDictionaryDao.selectForDictionary(tdcDictionary);
+		if (list.size() > 0) {
+			tdcDictionary = list.get(0);
+		} else {
+			tdcDictionary = null;
+		}
+		return tdcDictionary == null ? false : true;
+	}
 
 	//================== end ======================
 }

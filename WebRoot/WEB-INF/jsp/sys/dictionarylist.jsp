@@ -46,6 +46,13 @@
 		}];
 
 
+		$('#tdcDictionaryParentid').combobox({
+			url:'${ctx }/TdcDictionary/select.do?tdcDictionaryType=1',
+			valueField:'tdcDictionaryUnid',
+			textField:'tdcDictionaryName'
+		});
+
+
 		//初始化显示列表
 		grid = $('#t1').datagrid({
 			iconCls : 'icon-save',
@@ -113,14 +120,14 @@
 			if(1 == rows.length){
 				$('#f1').form.url='${ctx }/TdcDictionary/save.do';
 				$('#f1').form('load',{
-					'tioUnid':row.tioUnid,
-					'tioType':row.tioType,
-					'tioName':row.tioName,
-					'tioContactname':row.tioContactname,
-					'tioContactphone':row.tioContactphone,
-					'tioState':row.tioState,
-					'tioDesc':row.tioDesc
+					'tdcDictionaryUnid':row.tdcDictionaryUnid,
+					'tdcDictionaryType':row.tdcDictionaryType,
+					'tdcDictionaryName':row.tdcDictionaryName,
+					'tdcDictionaryParentid':row.tdcDictionaryParentid,
+					'tdcDictionaryState':row.tdcDictionaryState,
+					'tdcDictionaryDesc':row.tdcDictionaryDesc
 				});
+				isShowTr(row.tdcDictionaryType);
 				$('#d1').dialog('open');
 			}else{
 				msgShow('错误','请选择一条要修改的记录！','error');
@@ -137,16 +144,18 @@
 		if(row){
 			var s='';
 			$.each(rows,function(i,n){
-				s+=n.tioUnid+',';
+				s+=n.tdcDictionaryUnid+',';
 			});
 			s=s.substr(0,s.length-1);
 			$.messager.confirm('确认？', '确认删除所有选中记录吗', function(r){
 				if (r){
-					$.post('${ctx }/TdcDictionary/deleteTbcInfos.do',{'ids': s},function(data){
+					$.post('${ctx }/TdcDictionary/deleteDictionary.do',{'ids': s},function(data){
 						if(data.success){
 							msgShow('成功',data.message,'info');
 							grid.datagrid('reload');
 							grid.datagrid('clearSelections');
+						}else{
+							msgShow('错误',data.message,'error');
 						}
 					}, 'json');
 				}
@@ -194,6 +203,18 @@
 		$('#d1').dialog('close');
 		grid.datagrid('clearSelections');
 	}
+	function hideUuidItem(rec){
+		var typeUuid = $('#tdcDictionaryType').combobox("getValue") ;
+		isShowTr(typeUuid);
+	}
+
+	function isShowTr(typeUuid){
+		if('1'==typeUuid){
+			$("#divParent" ).css("display", "none");
+		}else{
+			$("#divParent" ).css("display", "");
+		}
+	}
 </script>
 <body>
 <div class="easyui-layout" fit="true"  border="false">
@@ -228,7 +249,10 @@
 						<tr>
 							<td align="right">类型：</td>
 							<td>
-								<select  class="easyui-combobox" name="tdcDictionaryType" id="tdcDictionaryType" style="width:152px;" required="true" editable="false">
+								<select class="easyui-combobox" name="tdcDictionaryType" id="tdcDictionaryType" style="width:152px;" required="true" editable="false" data-options="
+				onSelect: function(rec){
+					hideUuidItem(rec);
+				}">
 									<option value="1">大类</option>
 									<option value="2">小类</option>
 								</select>
@@ -236,16 +260,12 @@
 						</tr>
 						<tr>
 							<td align="right">名称：</td>
-							<td><input class="easyui-validatebox" name="tioName" required="true" style="width: 152px" id="tioName"/></td>
-						</tr>
-						<tr>
-							<td align="right">联系人：</td>
 							<td><input class="easyui-validatebox" name="tdcDictionaryName" required="true" style="width: 152px" id="tdcDictionaryName"/></td>
 						</tr>
-						<tr>
+						<tr id="divParent" style="display: none;">
 							<td align="right">父节点：</td>
 							<td>
-								<select  class="easyui-combobox" name="tdcDictionaryParentid" id="tdcDictionaryParentid" style="width:152px;" required="true" editable="false">
+								<select  class="easyui-combobox" name="tdcDictionaryParentid" id="tdcDictionaryParentid" style="width:152px;" editable="false">
 
 								</select>
 							</td>
