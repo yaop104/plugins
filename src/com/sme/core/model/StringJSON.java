@@ -5,6 +5,16 @@ public class StringJSON
 	private boolean success;
 	private String message;
 	private Long id;
+
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
+	}
+
+	private Object data;
 	public boolean isSuccess()
 	{
 		return success;

@@ -27,6 +27,7 @@ public class AuthorInterceptor extends HandlerInterceptorAdapter {
 	static {
 		ignoreRequest.add("login.do");
 		ignoreRequest.add("register.do");
+		ignoreRequest.add("/outInterface");
 	}
 
 	@Override
