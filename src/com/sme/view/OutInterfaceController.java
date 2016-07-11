@@ -1,7 +1,9 @@
 package com.sme.view;
 
 import com.sme.core.model.StringJSON;
+import com.sme.entity.PApplication;
 import com.sme.entity.TdcDictionary;
+import com.sme.service.PApplicationService;
 import com.sme.service.impl.TdcDictionaryServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,6 +26,8 @@ public class OutInterfaceController {
 
     @Autowired
     private TdcDictionaryServiceImpl tdcDictionaryServiceImpl;
+    @Autowired
+    private PApplicationService pApplicationService;
 
     private Log log = LogFactory.getLog(TdcDictionaryController.class);
 
@@ -53,12 +57,26 @@ public class OutInterfaceController {
     @ResponseBody
     public StringJSON tdcDictionaryLists(TdcDictionary tdcDictionary, HttpServletRequest req) {
         try {
-            log.info("<=====执行sysmenulist====>");
+            log.info("<=====执行gettdcDictionarylists====>");
             List<TdcDictionary> tdcDictionarys = tdcDictionaryServiceImpl.select(tdcDictionary);
             return getSuccess(true,"",tdcDictionarys);
         } catch (Exception e) {
             log.error(e.getMessage());
             return getSuccess(false,"分类获取失败,系统异常！！");
+        }
+
+    }
+
+    @RequestMapping(value="/getpApplicationlists", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public StringJSON getpApplicationlists(PApplication pApplication, HttpServletRequest req) {
+        try {
+            log.info("<=====执行getpApplicationlists====>");
+            List<PApplication> pAppDetails = pApplicationService.select(pApplication);
+            return getSuccess(true,"",pAppDetails);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return getSuccess(false,"app列表获取失败,系统异常！！");
         }
 
     }

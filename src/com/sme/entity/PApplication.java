@@ -52,7 +52,10 @@ public class PApplication extends BaseObject{
 	
 	/** 状态 */
 	private String pAppAuditstate;
-	
+
+	/** 类型 */
+	private String pAppBigType;
+
 	/** 备注 */
 	private String pAppRemark;
 	
@@ -335,8 +338,14 @@ public class PApplication extends BaseObject{
 		this.pAppRemark = pAppRemark;
 	}
 
-	
 
+	public String getpAppBigType() {
+		return pAppBigType;
+	}
+
+	public void setpAppBigType(String pAppBigType) {
+		this.pAppBigType = pAppBigType;
+	}
 
 	//================== end ======================
 }

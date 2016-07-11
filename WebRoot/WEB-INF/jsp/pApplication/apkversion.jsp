@@ -199,7 +199,7 @@ height:27px;
   	<div region="center"   border="false">
   		<table id="t1"></table>
   			<!-- 窗口-->
-			<div id="d1" class="easyui-dialog" buttons="#btn123" title="账号编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:400px;height:300px;overflow: hidden;">  
+			<div id="d1" class="easyui-dialog" buttons="#btn123" title="编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:400px;height:300px;overflow: hidden;">
 		         <div style="padding:10px 60px 20px 60px">
 		            <form id="f1"  class="easyui-form" method="post">  
 		            <input type="hidden" id="pAppId" name="pAppId"/>
@@ -213,13 +213,21 @@ height:27px;
 		                        <td><input name="pAppDisplaysort" required="true" style="width: 152px" id="pAppDisplaysort"></input></td>  
 		                    </tr> 
 		                     <tr>  
-		                        <td align="right">插件类型：</td>  
+		                        <td align="right">类型：</td>
 		                        <td>
 		                        <select name="pAppPlugintype" id="pAppPlugintype" style="width:152px;">
 		                       		 <option value="2" selected="selected">APK</option>
 		                        </select>
 		                        </td>  
-		                    </tr> 
+		                    </tr>
+							<tr>
+								<td align="right">插件类型：</td>
+								<td>
+									<select  class="easyui-combobox" name="pAppBigType" id="pAppBigType" style="width:152px;" editable="false">
+
+									</select>
+								</td>
+							</tr>
 		                    <tr>
 								<td>备注：</td>
 								<td><input class="easyui-textbox" id="pAppRemark" name="pAppRemark" data-options="multiline:true" style="height:60px"></input></td>
@@ -315,7 +323,13 @@ $(function() {
 			valueField:'roleid', 
 			textField:'rolename' 
 		});
-	
+
+	$('#pAppBigType').combobox({
+		url:'${ctx }/TdcDictionary/select.do?tdcDictionaryType=1',
+		valueField:'tdcDictionaryUnid',
+		textField:'tdcDictionaryName'
+	});
+
 	//初始化显示列表		
 	grid = $('#t1').datagrid({
 			iconCls : 'icon-save',

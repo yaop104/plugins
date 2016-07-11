@@ -15,6 +15,7 @@
 		<result property="pAppCdate" column="pAppCdate" /><!--创建时间-->
 		<result property="pAppUdate" column="pAppUdate" /><!--更新时间-->
 		<result property="pAppAuditstate" column="pAppAuditstate" /><!--状态-->
+		<result property="pAppBigType" column="pAppBigType" /><!--类型-->
 		<result property="pAppRemark" column="pAppRemark" /><!--说明-->
 	</resultMap>
 
@@ -32,6 +33,7 @@
 		p_app_cdate AS pAppCdate,
 		p_app_udate AS pAppUdate,
 		p_app_auditstate AS pAppAuditstate,
+		p_app_bigType AS pAppBigType,
 		p_app_remark AS pAppRemark
 	</sql>
 
@@ -48,6 +50,7 @@
 			p_app_cdate,
 			p_app_udate,
 			p_app_auditstate,
+			p_app_bigType,
 			p_app_remark
 	</sql>
 
@@ -64,6 +67,7 @@
 			#{pAppCdate,jdbcType=TIMESTAMP},
 			#{pAppUdate,jdbcType=TIMESTAMP},
 			#{pAppAuditstate,jdbcType=VARCHAR},
+			#{pAppBigType,jdbcType=VARCHAR},
 			#{pAppRemark,jdbcType=VARCHAR}
 	</sql>
 
@@ -80,6 +84,7 @@
 			p_app_cdate=#{pAppCdate,jdbcType=TIMESTAMP},
 			p_app_udate=#{pAppUdate,jdbcType=TIMESTAMP},
 			p_app_auditstate=#{pAppAuditstate,jdbcType=VARCHAR},
+			p_app_bigType=#{pAppBigType,jdbcType=VARCHAR},
 			p_app_remark=#{pAppRemark,jdbcType=VARCHAR}
 	</sql>
 
@@ -96,6 +101,7 @@
 			<if test="pAppCdate!=null" >p_app_cdate=#{pAppCdate,jdbcType=TIMESTAMP},</if>
 			<if test="pAppUdate!=null" >p_app_udate=#{pAppUdate,jdbcType=TIMESTAMP},</if>
 			<if test="pAppAuditstate!=null" >p_app_auditstate=#{pAppAuditstate,jdbcType=VARCHAR},</if>
+			<if test="pAppBigType!=null" >p_app_bigType=#{pAppBigType,jdbcType=VARCHAR},</if>
 			<if test="pAppRemark!=null" >p_app_remark=#{pAppRemark,jdbcType=VARCHAR}</if>
 	</sql>
 
@@ -114,6 +120,7 @@
 					<if test="pAppCdate!=null and pAppCdate!=''" >AND p_app_cdate=#{pAppCdate,jdbcType=TIMESTAMP}</if>
 					<if test="pAppUdate!=null and pAppUdate!=''" >AND p_app_udate=#{pAppUdate,jdbcType=TIMESTAMP}</if>
 					<if test="pAppAuditstate!=null and pAppAuditstate!=''" >AND p_app_auditstate=#{pAppAuditstate,jdbcType=VARCHAR}</if>
+					<if test="pAppBigType!=null and pAppBigType!=''" >AND p_app_bigType=#{pAppBigType,jdbcType=VARCHAR}</if>
 					<if test="pAppRemark!=null and pAppRemark!=''" >AND p_app_remark=#{pAppRemark,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
@@ -129,7 +136,7 @@
 	    SELECT COUNT(*) FROM P_APPLICATION <include refid="idCnd2"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.PApplication" resultType="com.sme.entity.PApplication">
-		SELECT <include refid="fieldAsProperty" /> FROM P_APPLICATION
+		SELECT <include refid="fieldAsProperty" /> FROM P_APPLICATION <include refid="idCnd2"/>
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.PApplication">
 		INSERT INTO P_APPLICATION(<include refid="field" />) VALUES (<include refid="property" />)
