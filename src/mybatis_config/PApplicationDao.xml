@@ -110,7 +110,7 @@
 		<where>
 					<if test="pAppActionname!=null and pAppActionname!=''" >AND p_app_actionname=#{pAppActionname,jdbcType=VARCHAR}</if>
 					<if test="pAppPackagename!=null and pAppPackagename!=''" >AND p_app_packagename=#{pAppPackagename,jdbcType=VARCHAR}</if>
-					<if test="pAppPluginname!=null and pAppPluginname!=''" >AND p_app_pluginname=#{pAppPluginname,jdbcType=VARCHAR}</if>
+					<if test="pAppPluginname!=null and pAppPluginname!=''" >AND p_app_pluginname LIKE CONCAT(CONCAT('%', #{pAppPluginname}), '%')</if>
 					<if test="pAppDisplaysort!=null and pAppDisplaysort!=''" >AND p_app_displaysort=#{pAppDisplaysort,jdbcType=INTEGER}</if>
 					<if test="pAppPlugintype!=null and pAppPlugintype!=''" >AND p_app_plugintype=#{pAppPlugintype,jdbcType=VARCHAR}</if>
 					<if test="pAppOpen!=null and pAppOpen!=''" >AND p_app_open=#{pAppOpen,jdbcType=INTEGER}</if>

@@ -37,5 +37,7 @@ public interface PAppDetailDao extends BaseDao<PAppDetail> {
 
     String selectLatestApkName(String packageName);
 
+	List<PAppDetail> selectDetail(PAppDetail pAppDetail);
+
 	//================== end ======================
 }

@@ -121,6 +121,16 @@ public class PAppDetail extends BaseObject {
 	private String pAppdetailAdminame;
 	private String pAppdetailAdmindesc;
 
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
+	private String pid;
+
 	public String toString() {
 		StringBuffer buffer = new StringBuffer(super.toString());
 		buffer.append("\n");

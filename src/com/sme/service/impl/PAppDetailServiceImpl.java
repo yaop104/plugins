@@ -82,7 +82,12 @@ public class PAppDetailServiceImpl extends BaseService<PAppDetail> implements PA
 			return null;
 		}
 	}
-	
+
+	@Override
+	public List<PAppDetail> selectDetail(PAppDetail pAppDetail) {
+		return pAppDetailDao.selectDetail(pAppDetail);
+	}
+
 	//================== begin ======================
 
 	class Context {

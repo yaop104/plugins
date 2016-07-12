@@ -69,5 +69,7 @@ public class Config {
 
 	public static final String DEFAULT_APK_PATH = getConfigProperty("defult.apk.path");
 
+	public static final String DEFAULT_APK_ONLINEPATH = getConfigProperty("defult.apk.onlinepath");
+
 	public static final String DEFAULT_APK_IMGPATH = getConfigProperty("defult.apk.picpath");
 }

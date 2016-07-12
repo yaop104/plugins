@@ -18,5 +18,7 @@ public interface PAppDetailService extends InterfaceBaseService<PAppDetail>  {
 	Integer countForGetCheckAppList(Map<String, Object> parm);
 	
 	public Object auditApp(PAppDetail t);
+
+	List<PAppDetail> selectDetail(PAppDetail pAppDetail);
 	//================== end ======================
 }

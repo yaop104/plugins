@@ -74,6 +74,42 @@
 		p_appdetail_cdnpic2 AS pAppdetailCdnpic2,
 		p_appdetail_cdnpic3 AS pAppdetailCdnpic3
 	</sql>
+	<sql id="fieldAsPropertyAsP">
+		p.p_appdetail_id AS pAppdetailId,
+		p.p_appdetail_apkactionid AS pAppdetailApkactionid,
+		p.p_appdetail_name AS pAppdetailName,
+		p.p_appdetail_version AS pAppdetailVersion,
+		p.p_appdetail_versioncode AS pAppdetailVersioncode,
+		p.p_appdetail_actionname AS pAppdetailActionname,
+		p.p_appdetail_packagename AS pAppdetailPackagename,
+		p.p_appdetail_delflag AS pAppdetailDelflag,
+		p.p_appdetail_certdigest AS pAppdetailCertdigest,
+		p.p_appdetail_desc AS pAppdetailDesc,
+		p.p_appdetail_changelog AS pAppdetailChangelog,
+		p.p_appdetail_apk AS pAppdetailApk,
+		p.p_appdetail_logo AS pAppdetailLogo,
+		p.p_appdetail_date AS pAppdetailDate,
+		p.p_appdetail_platform AS pAppdetailPlatform,
+		p.p_appdetail_platformversion AS pAppdetailPlatformversion,
+		p.p_appdetail_url AS pAppdetailUrl,
+		p.p_appdetail_size AS pAppdetailSize,
+		p.p_appdetail_versionname AS pAppdetailVersionname,
+		p.p_appdetail_patchstate AS pAppdetailPatchstate,
+		p.p_appdetail_md5 AS pAppdetailMd5,
+		p.p_appdetail_plugintype AS pAppdetailPlugintype,
+		p.p_appdetail_descpic1 AS pAppdetailDescpic1,
+		p.p_appdetail_descpic2 AS pAppdetailDescpic2,
+		p.p_appdetail_descpic3 AS pAppdetailDescpic3,
+		p.p_appdetail_auditoption AS pAppdetailAuditoption,
+		p.p_appdetail_auditstate AS pAppdetailAuditstate,
+		p.p_appdetail_auditdate AS pAppdetailAuditdate,
+		p.p_appdetail_adminid AS pAppdetailAdminid,
+		p.p_appdetail_cdnurl AS pAppdetailCdnurl,
+		p.p_appdetail_cdnlogo AS pAppdetailCdnlogo,
+		p.p_appdetail_cdnpic1 AS pAppdetailCdnpic1,
+		p.p_appdetail_cdnpic2 AS pAppdetailCdnpic2,
+		p.p_appdetail_cdnpic3 AS pAppdetailCdnpic3
+	</sql>
 
 	<sql id="field">
 			p_appdetail_apkactionid,
@@ -273,6 +309,18 @@
 	</select>
 	<select id="select" parameterType="com.sme.entity.PAppDetail" resultType="com.sme.entity.PAppDetail">
 		SELECT <include refid="fieldAsProperty" /> FROM P_APP_DETAIL <include refid="idCnd2"/>
+	</select>
+	<select id="selectDetail" parameterType="com.sme.entity.PAppDetail" resultType="com.sme.entity.PAppDetail">
+		SELECT <include refid="fieldAsPropertyAsP" /> FROM p_app_detail p, (SELECT detail.p_appdetail_apkactionid, MAX(detail.p_appdetail_id) AS appdetail_id
+		FROM p_application app,p_app_detail detail
+
+		WHERE app.p_app_id = detail.p_appdetail_apkactionid AND app.p_app_bigType='1'
+
+		<if test="pAppdetailApkactionid!=null">
+			AND detail.p_appdetail_apkactionid = #{pAppdetailApkactionid}
+		</if>
+
+		GROUP BY detail.p_appdetail_apkactionid) c WHERE p.p_appdetail_id = c.appdetail_id
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.PAppDetail">
 		INSERT INTO P_APP_DETAIL(<include refid="field" />) VALUES (<include refid="property" />)
