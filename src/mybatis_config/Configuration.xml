@@ -34,6 +34,8 @@
 		<typeAlias type="com.sme.entity.TapDownload" alias="TapDownload" />
 		<typeAlias type="com.sme.entity.TscSource" alias="TscSource" />
 		<typeAlias type="com.sme.entity.TdcDictionary" alias="TdcDictionary" />
+		<typeAlias type="com.sme.entity.TagTag" alias="TagTag" />
+		<typeAlias type="com.sme.entity.TatTagApp" alias="TatTagApp" />
 	</typeAliases>
 	
 	<!--<environments default="MySQL">
@@ -72,5 +74,7 @@
 		<mapper resource="./mybatis_config/TbcInfoDao.xml"/>
 		<mapper resource="./mybatis_config/TscSourceDao.xml"/>
 		<mapper resource="./mybatis_config/TdcDictionaryDao.xml"/>
+		<mapper resource="./mybatis_config/TagTagDao.xml"/>
+		<mapper resource="./mybatis_config/TatTagAppDao.xml"/>
 	</mappers>
 </configuration>

@@ -6,8 +6,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sme.core.service.InterfaceBaseService;
+import com.sme.core.view.BaseController;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +25,8 @@ import com.sme.util.RespUtil;
 
 @Controller
 @RequestMapping("/TscSource")
-public class TscSourceController {
+public class TscSourceController extends BaseController<TscSource>{
+	@Autowired
 	private TscSourceServiceImpl tscSourceServiceImpl;
 	
 	private Log log = LogFactory.getLog(TscSourceController.class);
@@ -136,7 +140,12 @@ public class TscSourceController {
 	public void setTscSourceServiceImpl(TscSourceServiceImpl tscSourceServiceImpl) {
 		this.tscSourceServiceImpl = tscSourceServiceImpl;
 	}
-	
+
+	@Override
+	public InterfaceBaseService<TscSource> getService() {
+		return tscSourceServiceImpl;
+	}
+
 	//================== begin ======================
  
 	//================== end ======================

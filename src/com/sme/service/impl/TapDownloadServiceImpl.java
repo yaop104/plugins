@@ -5,8 +5,12 @@ import com.sme.core.service.BaseService;
 import com.sme.dao.TapDownloadDao;
 import com.sme.entity.TapDownload;
 import com.sme.service.TapDownloadService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TapDownloadServiceImpl extends BaseService<TapDownload> implements TapDownloadService{
+	@Autowired
 	private TapDownloadDao tapDownloadDao;
 
 	@Override

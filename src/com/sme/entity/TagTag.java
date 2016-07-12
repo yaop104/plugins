@@ -1,5 +1,7 @@
 package com.sme.entity;
 
+import com.sme.core.model.BaseObject;
+
 import java.io.Serializable;
 
 import java.util.Date;
@@ -7,7 +9,7 @@ import java.util.Date;
 /**
  * 标签管理(TagTag)模型对象
  */
-public class TagTag implements Serializable {
+public class TagTag extends BaseObject implements Serializable {
 	/**
 	 *
 	 */

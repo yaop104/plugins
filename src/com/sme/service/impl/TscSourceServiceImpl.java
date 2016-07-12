@@ -5,8 +5,12 @@ import com.sme.core.service.BaseService;
 import com.sme.dao.TscSourceDao;
 import com.sme.entity.TscSource;
 import com.sme.service.TscSourceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TscSourceServiceImpl extends BaseService<TscSource> implements TscSourceService{
+	@Autowired
 	private TscSourceDao tscSourceDao;
 
 	@Override

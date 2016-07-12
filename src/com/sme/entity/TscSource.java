@@ -1,5 +1,7 @@
 package com.sme.entity;
 
+import com.sme.core.model.BaseObject;
+
 import java.io.Serializable;
 
 import java.util.Date;
@@ -7,7 +9,7 @@ import java.util.Date;
 /**
  * 素材表(TscSource)模型对象
  */
-public class TscSource implements Serializable {
+public class TscSource extends BaseObject implements Serializable {
 	//======================字段列表========================
 	/** unid */
 	private Integer	tscUnid;

@@ -82,20 +82,6 @@ public class TdcDictionaryController extends BaseController<TdcDictionary> {
 	public StringJSON tdcDictionarySave(TdcDictionary tdcDictionary, Model model, HttpServletRequest request, HttpServletResponse response){
 		try {
 			if (tdcDictionary.getTdcDictionaryUnid() != null) {
-
-
-	//			TbcInfo tbcInfo1 = new TbcInfo();
-	//			tbcInfo1 = tbcInfoServiceImpl.getById(tbcInfo);
-	//			tbcInfo1.setTioName(tbcInfo.getTioName());
-	//			tbcInfo1.setTioContactname(tbcInfo.getTioContactname());
-	//			tbcInfo1.setTioContactphone(tbcInfo.getTioContactphone());
-	//			tbcInfo1.setTioDesc(tbcInfo.getTioDesc());
-	//			tbcInfo1.setTioState(tbcInfo.getTioState());
-	//			tbcInfo1.setTioType(tbcInfo.getTioType());
-	//			tbcInfo1.setTioUdate(new Date());
-	//			tbcInfo1.setTioUuser("admin2");
-	//
-	//			tbcInfoServiceImpl.update(tbcInfo1);
 				TdcDictionary models = new TdcDictionary();
 				models.setTdcDictionaryName(tdcDictionary.getTdcDictionaryName());
 				models.setTdcDictionaryUnid(tdcDictionary.getTdcDictionaryUnid());

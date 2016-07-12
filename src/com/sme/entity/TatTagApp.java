@@ -1,11 +1,13 @@
 package com.sme.entity;
 
+import com.sme.core.model.BaseObject;
+
 import java.io.Serializable;
 
 /**
  * 应用标签关联表(TatTagApp)模型对象
  */
-public class TatTagApp implements Serializable {
+public class TatTagApp extends BaseObject implements Serializable {
 	/**
 	 *
 	 */

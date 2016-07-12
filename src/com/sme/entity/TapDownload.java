@@ -1,5 +1,7 @@
 package com.sme.entity;
 
+import com.sme.core.model.BaseObject;
+
 import java.io.Serializable;
 
 import java.util.Date;
@@ -7,7 +9,7 @@ import java.util.Date;
 /**
  * 用户app下载历史(TapDownload)模型对象
  */
-public class TapDownload implements Serializable {
+public class TapDownload extends BaseObject implements Serializable {
 	//======================字段列表========================
 	/** unid */
 	private Integer	tapUnid;
