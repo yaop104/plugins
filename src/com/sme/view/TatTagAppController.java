@@ -6,8 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sme.core.model.StringJSON;
 import com.sme.core.service.InterfaceBaseService;
 import com.sme.core.view.BaseController;
+import com.sme.entity.TagTag;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,28 +75,30 @@ public class TatTagAppController extends BaseController<TatTagApp>{
 			return "redirect:/tatTagApp/tatTagApplist.do";
 		}
 	 }
-	
-	@RequestMapping(value="/save", method={RequestMethod.POST})
-	public String tatTagAppSave(TatTagApp tatTagApp,Model model, HttpServletRequest request, HttpServletResponse response){
-		
-		try
-		{
-//			if(tatTagApp.getTatTagAppId()!=null){
-//
-//				return "redirect:/tatTagApp/tatTagApplist.do";
-//			}else{
-				
-				return "redirect:/tatTagApp/tatTagApplist.do";
-//			}
-			
-		}
-		catch (Exception e)
-		{
+
+	@RequestMapping(value = "/insertTagApp")
+	@ResponseBody
+	@com.sme.core.spring.Log(type = "标签应用管理", desc = "添加标签应用")
+	public StringJSON insertTagApp(String ids,String hotAppId) {
+		try {
+			if(hotAppId == null || hotAppId.trim() == ""){
+				return getSuccess(false, "请选择应用！");
+			}
+			if (ids != null && ids.length() > 0) {
+
+				tatTagAppServiceImpl.insertTagApp(ids,hotAppId);
+
+				return getSuccess(true, "成功！");
+			} else {
+				return getSuccess(false, "请选择标签！");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 			log.error(e.getMessage());
-			return tatTagAppAdd(model,tatTagApp);
+			return getSuccess(false, "系统异常！");
 		}
 	}
-	
+
 	public String tatTagAppAdd(Model model,TatTagApp tatTagApp){
 			model.addAttribute("tatTagApp", tatTagApp);
 			return "/tatTagApp/tatTagAppform";

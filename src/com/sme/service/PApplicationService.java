@@ -25,4 +25,6 @@ public interface PApplicationService extends InterfaceBaseService<PApplication> 
     PAppDetail hasNewVersion();
 
     String getLatestApkName(String packageName);
+
+	List<PApplication> selectHot(PApplication pApplication);
 }

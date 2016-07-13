@@ -83,7 +83,7 @@ public class OutInterfaceController {
     public StringJSON getpApplicationlists(PApplication pApplication, HttpServletRequest req) {
         try {
             log.info("<=====执行getpApplicationlists====>");
-            List<PApplication> pAppDetails = pApplicationService.select(pApplication);
+            List<PApplication> pAppDetails = pApplicationService.selectHot(pApplication);
             return getSuccess(true,"",pAppDetails);
         } catch (Exception e) {
             log.error(e.getMessage());

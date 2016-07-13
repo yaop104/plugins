@@ -243,6 +243,28 @@ height:27px;
   	</div>
  </div>
 <div id="viewDig"></div>
+<!-- 窗口-->
+<div id="d222" class="easyui-dialog" buttons="#btn1" title="编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:400px;height:300px;overflow: hidden;">
+	<div style="padding:10px 60px 20px 60px">
+		<form id="f222"  class="easyui-form" method="post">
+			<table>
+				<tr>
+					<td align="right">标签名称(可多选)：</td>
+					<td>
+						<select  class="easyui-combobox" name="tagTagUnid" id="tagTagUnid" style="width:152px;" editable="false">
+
+						</select>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<div id="btn1">
+	<a href="javascript:void(0)" class="easyui-linkbutton c6" data-options="iconCls:'icon-ok'" onclick="saveFormHot()" style="width:90px"> 保  存 </a>
+	<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="clearFormHot()" style="width:90px"> 取  消 </a>
+</div>
+
  <div style="display: none;">
 	<form id="form" name="form" action="${ctx}/appDetail/addHtmlDetail.do" method="post">
 				<input type="hidden" id="hdone" name="pAppdetailDescpic1"><br/>
@@ -278,6 +300,7 @@ var imgform = '<form id="html_second_pic" name="upload_Two_form" style="padding:
 '</form>';
 var grid;
 var ctx = 'http://127.0.0.1:8089/download/pic/';
+var hotAppId;
 $(function() {
 	var colArr = [];
 	
@@ -289,7 +312,7 @@ $(function() {
 		{ field:'pAppPraise', align:'center',  width:'80', sortable:'true' , title:'点赞数' },
 		{ field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 	];
-	
+
 	var _toolbars = [{
 	        id : 'btnadd',
 	        text : '添加插件大类',
@@ -330,6 +353,12 @@ $(function() {
 		textField:'tdcDictionaryName'
 	});
 
+	$('#tagTagUnid').combobox({
+		url:'${ctx }/TagTag/select.do',
+		valueField:'tagTagUnid',
+		textField:'tagTagName',
+		multiple:true
+	});
 	//初始化显示列表		
 	grid = $('#t1').datagrid({
 			iconCls : 'icon-save',
@@ -648,8 +677,42 @@ $(function() {
 		$("#html").dialog("setTitle","上传插件新版本");
 	}
 
+	function hotapk(id, name){
+		hotAppId = id;
+		$('#d222').dialog('open');
+		$('#f222').form('reset');
+	}
+
+	function  saveFormHot(){
+		var arr =$('#tagTagUnid').combo('getValues');
+		var s='';
+
+		for(var i=0;i<arr.length;i++){
+			if(arr[i].length>0){
+				console.info(arr[i]);
+				s+=arr[i]+',';
+			}
+		}
+
+		$.post('${ctx }/TatTagApp/insertTagApp.do',{'ids': s,'hotAppId':hotAppId},function(data){
+			if(data.success){
+				msgShow('成功',data.message,'info');
+				clearFormHot()
+			}else{
+				msgShow('错误',data.message,'error');
+			}
+		}, 'json');
+
+	}
+
+	function clearFormHot(){
+		$('#d222').dialog('close');
+		$('#f222').form('reset');
+	}
+
 	function ys1(val, rec, index) {
 		var returnvalue="<img  src='${ctx}/image/table_td_button/check.png' onclick='openapk(" + rec.pAppId + ",\"" + rec.pAppPluginname + "\")' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='openapk(" + rec.pAppId + ",\"" + rec.pAppPluginname + "\")'>添加</a>&nbsp;&nbsp;";
+		returnvalue=returnvalue+"<img  src='${ctx}/image/table_td_button/update.png' onclick='hotapk(" + rec.pAppId + ",\"" + rec.pAppPluginname + "\")' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='hotapk(" + rec.pAppId + ",\"" + rec.pAppPluginname + "\")'>设置标签</a>&nbsp;&nbsp;";
 // 		if((rec.pAppdetailAuditstate-0)<=2){
 // 			returnvalue=returnvalue+"<img src='${ctx}/image/table_td_button/update.png' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;' onclick='updatechild(\""+rec.pAppId+"\",\""+rec.pAppdetailActionname+"\",\""+rec.pAppdetailPlugintype+"\")'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='updatechild(\""+rec.pAppId+"\",\""+rec.pAppdetailActionname+"\",\""+rec.pAppdetailPlugintype+"\")'>修改</a>&nbsp;&nbsp;";								
 // 		}else if((rec.pAppdetailAuditstate-0)==3){

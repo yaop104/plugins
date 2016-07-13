@@ -85,4 +85,9 @@ public class PApplicationServiceImpl extends BaseService<PApplication> implement
     public String getLatestApkName(String packageName) {
         return pAppDetailDao.selectLatestApkName(packageName);
     }
+
+	@Override
+	public List<PApplication> selectHot(PApplication pApplication) {
+		return pAppDetailDao.selectHot(pApplication);
+	}
 }

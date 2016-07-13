@@ -4,7 +4,8 @@ import com.sme.core.service.InterfaceBaseService;
 import com.sme.entity.TatTagApp;
 
 public interface TatTagAppService  extends InterfaceBaseService<TatTagApp>{
-	//================== begin ======================
+    //================== begin ======================
+    void insertTagApp(String ids, String hotAppId);
 
 	//================== end ======================
 }

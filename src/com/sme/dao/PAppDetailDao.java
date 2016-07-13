@@ -3,6 +3,7 @@ package com.sme.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.sme.entity.PApplication;
 import org.mybatis.spring.annotation.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -38,6 +39,8 @@ public interface PAppDetailDao extends BaseDao<PAppDetail> {
     String selectLatestApkName(String packageName);
 
 	List<PAppDetail> selectDetail(PAppDetail pAppDetail);
+
+	List<PApplication> selectHot(PApplication pApplication);
 
 	//================== end ======================
 }

@@ -122,6 +122,7 @@
 					<if test="pAppAuditstate!=null and pAppAuditstate!=''" >AND p_app_auditstate=#{pAppAuditstate,jdbcType=VARCHAR}</if>
 					<if test="pAppBigType!=null and pAppBigType!=''" >AND p_app_bigType=#{pAppBigType,jdbcType=VARCHAR}</if>
 					<if test="pAppRemark!=null and pAppRemark!=''" >AND p_app_remark=#{pAppRemark,jdbcType=VARCHAR}</if>
+					<if test="tagUnid!=null and tagUnid!=''" >AND tag_unid=#{tagUnid,jdbcType=INTEGER}</if>
 		</where>
 	</sql>
 	
@@ -138,6 +139,12 @@
 	<select id="select" parameterType="com.sme.entity.PApplication" resultType="com.sme.entity.PApplication">
 		SELECT <include refid="fieldAsProperty" /> FROM P_APPLICATION <include refid="idCnd2"/>
 	</select>
+	<select id="selectHot" parameterType="com.sme.entity.PApplication" resultType="com.sme.entity.PApplication">
+		SELECT <include refid="fieldAsProperty" /> FROM p_application  left join	 tat_tag_app  on p_app_id = app_unid
+	</select>
+
+
+
 	<insert id="insert" parameterType="com.sme.entity.PApplication">
 		INSERT INTO P_APPLICATION(<include refid="field" />) VALUES (<include refid="property" />)
 	</insert>

@@ -58,7 +58,17 @@ public class PApplication extends BaseObject{
 
 	/** 备注 */
 	private String pAppRemark;
-	
+
+	public Integer getTagUnid() {
+		return tagUnid;
+	}
+
+	public void setTagUnid(Integer tagUnid) {
+		this.tagUnid = tagUnid;
+	}
+
+	private Integer tagUnid;
+
 	private String pAppdetailVersionname;
 	private String pAppdetailDesc;
 	private String pAppdetailAdmindesc;
