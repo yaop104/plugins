@@ -56,6 +56,26 @@ public class SysAcc extends BaseObject{
 	/** 手机号 **/
 	private String sysAccMobile;
 
+	public String getSysAccEmail() {
+		return sysAccEmail;
+	}
+
+	public void setSysAccEmail(String sysAccEmail) {
+		this.sysAccEmail = sysAccEmail;
+	}
+
+	public String getSysAccHead() {
+		return sysAccHead;
+	}
+
+	public void setSysAccHead(String sysAccHead) {
+		this.sysAccHead = sysAccHead;
+	}
+
+	private  String sysAccEmail;
+
+	private  String sysAccHead;
+
 	public String getSysAccMobile() {
 		return sysAccMobile;
 	}

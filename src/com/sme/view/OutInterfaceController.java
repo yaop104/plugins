@@ -1,30 +1,33 @@
 package com.sme.view;
 
 import com.sme.core.model.StringJSON;
-import com.sme.entity.PAppDetail;
-import com.sme.entity.PApplication;
-import com.sme.entity.TdcDictionary;
-import com.sme.service.PAppDetailService;
-import com.sme.service.PApplicationService;
+import com.sme.entity.*;
+import com.sme.service.*;
+import com.sme.service.impl.TagTagServiceImpl;
 import com.sme.service.impl.TdcDictionaryServiceImpl;
-import com.sme.util.Config;
-import com.sme.util.Pass;
+import com.sme.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yao on 2016/7/11.
@@ -39,6 +42,12 @@ public class OutInterfaceController {
     private PApplicationService pApplicationService;
     @Autowired
     private PAppDetailService pAppDetailService;
+    @Autowired
+    private TagTagService tagTagServiceImpl;
+    @Autowired
+    private SysAccService sysAccService;
+    @Autowired
+    private LoginLogService loginLogService;
 
     private Log log = LogFactory.getLog(TdcDictionaryController.class);
 
@@ -63,6 +72,126 @@ public class OutInterfaceController {
         json.setMessage(message);
         return json;
     }
+
+
+    @RequestMapping(value="/getHomePage", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public StringJSON getHomePage(HttpServletRequest req) {
+        try {
+            log.info("<=====执行getHomePage====>");
+            List<TdcDictionary> tdcDictionarys = tdcDictionaryServiceImpl.select(new TdcDictionary());
+            PApplication pApplication = new PApplication();
+            List<PApplication> pAppDetails = pApplicationService.selectHot(pApplication);
+            List<TagTag> tagTags =tagTagServiceImpl.select(new TagTag());
+            Map<String, Object> map = new HashMap<>();
+            map.put("type",tdcDictionarys);
+            map.put("tag",tagTags.size()>0?tagTags.get(0):new TagTag());
+            map.put("apps",pAppDetails);
+
+            return getSuccess(true,"",map);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return getSuccess(false,"分类获取失败,系统异常！！");
+        }
+
+    }
+
+    @RequestMapping(value="/getUserInfo", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public StringJSON getUserInfo(Integer id, HttpServletRequest req) {
+        try {
+            log.info("<=====执行getUserInfo====>");
+            SysAcc sysAcc = new SysAcc();
+            sysAcc.setSysAccId(id);
+            sysAcc = sysAccService.getById(sysAcc);
+            sysAcc.setSysAccPassword("");
+            return getSuccess(true,"成功",sysAcc);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return getSuccess(false,"分类获取失败,系统异常！！");
+        }
+
+    }
+
+    /**
+     * 上传logo
+     * @param file
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value="/updateLogo", method={RequestMethod.POST})
+    @ResponseBody
+    public JSONObject updateLogo(Integer id,@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response){
+        System.out.println("file="+file.getOriginalFilename());// 得到上传文件的文件名
+        String savePath = Config.HEAD_IMG_PATH;
+        IFileSaver fileUtil = new ImageCheckProxy(new FileSaver(savePath));
+        fileUtil.save(file, file.getOriginalFilename());
+        JSONObject json = fileUtil.getResult();
+        if(500==json.getCode()){
+            SysAcc sysAcc = new SysAcc();
+            sysAcc.setSysAccId(id);
+            sysAcc.setSysAccHead(json.getInfo());
+            sysAccService.update(sysAcc);
+            String img = json.getInfo();
+            img = Config.HEAD_IMG_REALPATH + img;
+            json.setInfo(img);
+        }
+        return json;
+    }
+
+    @RequestMapping(value="/login", method={RequestMethod.POST})
+    @ResponseBody
+    public RespMessage login(String account, String password, HttpSession session, Model model, HttpServletRequest req){
+
+        RespMessage respMessage = new RespMessage();
+        try
+        {
+
+            SysAcc sysAcc = new SysAcc();
+            //是否增加ip限制
+            if(!"".equals(password) && !"".equals(account.trim()) ){
+                sysAcc = sysAccService.getSysAccForLogin(account, password);//验证用户名、密码登录（用于普通登录）
+                if(sysAcc != null){
+                    sysAcc.setSysAccPassword("");
+                    model.addAttribute("loginUser", sysAcc);
+                    respMessage.setCode("0");
+                    String path = req.getContextPath();
+                    respMessage.setMessage("成功");
+                    respMessage.setBody(sysAcc);
+
+                    //登陆成功 记录登陆日志
+                    LoginLog log = new LoginLog();
+                    log.setAccId(sysAcc.getSysAccId());
+                    log.setLoginIp(sysAcc.getSysAccMobile());
+
+                    loginLogService.insert(log);
+
+                    return respMessage;
+
+                }else{
+                    respMessage.setCode("1");
+                    respMessage.setMessage("用户名或密码错误！");
+                    return respMessage;
+                }
+
+            }else{
+                respMessage.setCode("1");
+                respMessage.setMessage("用户名或密码错误！");
+                return respMessage;
+            }
+        }
+        catch (Exception e)
+        {
+
+            e.getStackTrace();
+            respMessage.setCode("1");
+            respMessage.setMessage("失败，系统异常，请刷新页面，尝试重新登入！");
+            return respMessage;
+        }
+
+    }
+
 
     @RequestMapping(value="/gettdcDictionarylists", method={RequestMethod.GET , RequestMethod.POST})
     @ResponseBody

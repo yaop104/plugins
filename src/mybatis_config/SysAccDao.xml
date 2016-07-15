@@ -16,6 +16,8 @@
 		<result property="sysAccUueser" column="sysAccUueser" /><!--创建人-->
 		<result property="sysAccType" column="sysAccType" /><!--类型 1用户2开发商3财务4系统-->
 		<result property="sysAccMobile" column="sysAccMobile" /><!--号码-->
+		<result property="sysAccEmail" column="sysAccEmail" /><!--号码-->
+		<result property="sysAccHead" column="sysAccHead" /><!--号码-->
 	</resultMap>
 
 	<sql id="fieldAsProperty">
@@ -32,7 +34,9 @@
 		sys_acc_cuser AS sysAccCuser,
 		sys_acc_uueser AS sysAccUueser,
 		sys_acc_type AS sysAccType,
-		sys_acc_mobile AS sysAccMobile
+		sys_acc_mobile AS sysAccMobile,
+		sys_acc_email AS sysAccEmail,
+		sys_acc_head AS sysAccHead
 	</sql>
 
 	<sql id="field">
@@ -48,7 +52,9 @@
 		sys_acc_cuser,
 		sys_acc_uueser,
 		sys_acc_type,
-		sys_acc_mobile
+		sys_acc_mobile,
+		sys_acc_email,
+		sys_acc_head
 	</sql>
 
 	<sql id="property">
@@ -64,7 +70,9 @@
 		#{sysAccCuser,jdbcType=VARCHAR},
 		#{sysAccUueser,jdbcType=VARCHAR},
 		#{sysAccType,jdbcType=VARCHAR},
-		#{sysAccMobile,jdbcType=VARCHAR}
+		#{sysAccMobile,jdbcType=VARCHAR},
+		#{sysAccEmail,jdbcType=VARCHAR},
+		#{sysAccHead,jdbcType=VARCHAR}
 	</sql>
 
 	<sql id="fieldEqProperty">
@@ -80,7 +88,9 @@
 		sys_acc_cuser=#{sysAccCuser,jdbcType=VARCHAR},
 		sys_acc_uueser=#{sysAccUueser,jdbcType=VARCHAR},
 		sys_acc_type=#{sysAccType,jdbcType=VARCHAR},
-		sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}
+		sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR},
+		sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR},
+		sys_acc_head=#{sysAccHead,jdbcType=VARCHAR}
 	</sql>
 
 	<sql id="fieldEqPropertyIf">
@@ -96,7 +106,9 @@
 		<if test="sysAccCuser!=null" >sys_acc_cuser=#{sysAccCuser,jdbcType=VARCHAR},</if>
 		<if test="sysAccUueser!=null" >sys_acc_uueser=#{sysAccUueser,jdbcType=VARCHAR},</if>
 		<if test="sysAccType!=null" >sys_acc_type=#{sysAccType,jdbcType=VARCHAR},</if>
-		<if test="sysAccMobile!=null" >sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
+		<if test="sysAccMobile!=null" >sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR},</if>
+		<if test="sysAccEmail!=null" >sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR},</if>
+		<if test="sysAccHead!=null" >sys_acc_head=#{sysAccHead,jdbcType=VARCHAR},</if>
 	</sql>
 	<select id="page" resultType="com.sme.entity.SysAcc" parameterType="map">
 		SELECT <include refid="fieldAsProperty" /> FROM SYS_ACC <include refid="idCnd3"/>
