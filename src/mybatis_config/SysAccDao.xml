@@ -161,6 +161,7 @@
 			<if test="sysAccRoleid!=null and sysAccRoleid!=''" >AND sys_acc_orgid=#{sysAccRoleid,jdbcType=VARCHAR}</if>
 			<if test="sysAccType!=null and sysAccType!=''" >AND sys_acc_type=#{sysAccType,jdbcType=VARCHAR}</if>
 			<if test="sysAccMobile!=null and sysAccMobile!=''" >AND sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
+			<if test="sysAccEmail!=null and sysAccEmail!=''" >AND sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
 	<sql id="idCnd3">
@@ -174,6 +175,7 @@
 			<if test="sysAccRoleid!=null and sysAccRoleid!=''" >AND sys_acc_orgid=#{sysAccRoleid,jdbcType=VARCHAR}</if>
 			<if test="sysAccType!=null and sysAccType!=''" >AND sys_acc_type=#{sysAccType,jdbcType=VARCHAR}</if>
 			<if test="sysAccMobile!=null and sysAccMobile!=''" >AND sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
+			<if test="sysAccEmail!=null and sysAccEmail!=''" >AND sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR}</if>
 			<if test="startTime!=null and startTime!=''" >AND sys_acc_cdate <![CDATA[> ]]> #{startTime,jdbcType=TIMESTAMP}</if>
 			<if test="endTime!=null and endTime!=''" >AND sys_acc_cdate <![CDATA[< ]]> #{endTime,jdbcType=TIMESTAMP}</if>
 		</where>

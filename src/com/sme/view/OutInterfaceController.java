@@ -287,7 +287,25 @@ public class OutInterfaceController {
     public StringJSON insertDownload(TapDownload tapDownload, HttpServletRequest req) {
         try {
             log.info("<=====执行insertDownload====>");
+            tapDownload.setTapState("1");
+            tapDownload.setTapUdate(new Date());
             tapDownloadService.insert(tapDownload);
+
+
+            int apkName = tapDownload.getTapAppid();
+            PAppDetail pAppDetail = new PAppDetail();
+            pAppDetail.setpAppdetailId(apkName);
+           PAppDetail pAppDetails = pAppDetailService.getById(pAppDetail);
+
+            if(pAppDetails ==null ){
+                return null;
+            }
+            PApplication pApplication = new PApplication();
+            pApplication.setpAppId(pAppDetails.getpAppdetailApkactionid());
+            pApplication = pApplicationService.getById(pApplication);
+            pApplication.setpAppOpen(pApplication.getpAppOpen()==null?1:pApplication.getpAppOpen()+1);
+            pApplicationService.update(pApplication);
+
             return getSuccess(true,"");
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -327,7 +345,7 @@ public class OutInterfaceController {
             if(chkAccountIsExists(sysAccphone)){
                 return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
             }
-            if(RegexValidateUtil.checkEmail(sysAcc.getSysAccEmail())){
+            if(!RegexValidateUtil.checkEmail(sysAcc.getSysAccEmail())){
                 return getSuccess(false, "该邮箱格式不正确,请输入新的邮箱！！");
             }
             SysAcc sysAccmail = new SysAcc();
@@ -338,7 +356,7 @@ public class OutInterfaceController {
             String pwd = StringUtil.getRandomChar(6);
             String password = MD5.encryByMD5(pwd);
             sysAcc.setSysAccPassword(password);
-            sysAcc.setSysAccState("2");
+            sysAcc.setSysAccState("1");
             sysAcc.setSysAccType("1");
             sysAcc.setSysAccCdate(new Date());
             sysAcc.setSysAccCuser("用户"+sysAcc.getSysAccName());
@@ -374,7 +392,7 @@ public class OutInterfaceController {
         mailInfo.setMailServerHost(Config.MailServerHost);
         //或者是通过qq邮箱发送
 //        mailInfo.setMailServerHost("smtp.qq.com");
-        mailInfo.setMailServerPort(Config.PORT);
+        mailInfo.setMailServerPort(Config.MailServerPort);
         mailInfo.setValidate(true);
         //您的邮箱用户名
         mailInfo.setUserName(Config.UserName);
