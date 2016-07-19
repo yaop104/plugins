@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.TptPositionDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.TptPosition">
+		<id property="tptUnid" column="tptUnid" /><!--unid-->
+		<result property="tptState" column="tptState" /><!--状态-->
+		<result property="tptOrder" column="tptOrder" /><!--序号-->
+		<result property="tptCdate" column="tptCdate" /><!--创建日期-->
+		<result property="tptUdate" column="tptUdate" /><!--最后修改日期-->
+		<result property="tptCuser" column="tptCuser" /><!--创建者-->
+		<result property="tptUuser" column="tptUuser" /><!--最后修改者-->
+		<result property="tptModeid" column="tptModeid" /><!--渠道id-->
+		<result property="tptName" column="tptName" /><!--投放位名-->
+		<result property="tptNumstime" column="tptNumstime" /><!--限制生效时间-->
+		<result property="tptPrice" column="tptPrice" /><!--原价-->
+		<result property="tptDemourl" column="tptDemourl" /><!--示例图地址-->
+		<result property="tptDesc" column="tptDesc" /><!--描述-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		tpt_unid AS tptUnid,
+		tpt_state AS tptState,
+		tpt_order AS tptOrder,
+		tpt_cdate AS tptCdate,
+		tpt_udate AS tptUdate,
+		tpt_cuser AS tptCuser,
+		tpt_uuser AS tptUuser,
+		tpt_modeid AS tptModeid,
+		tpt_name AS tptName,
+		tpt_numstime AS tptNumstime,
+		tpt_price AS tptPrice,
+		tpt_demourl AS tptDemourl,
+		tpt_desc AS tptDesc
+	</sql>
+
+	<sql id="field">
+			tpt_unid,
+			tpt_state,
+			tpt_order,
+			tpt_cdate,
+			tpt_udate,
+			tpt_cuser,
+			tpt_uuser,
+			tpt_modeid,
+			tpt_name,
+			tpt_numstime,
+			tpt_price,
+			tpt_demourl,
+			tpt_desc
+	</sql>
+
+	<sql id="property">
+			next.nextval,
+			#{tptState,jdbcType=VARCHAR},
+			#{tptOrder,jdbcType=INTEGER},
+			#{tptCdate,jdbcType=TIMESTAMP},
+			#{tptUdate,jdbcType=TIMESTAMP},
+			#{tptCuser,jdbcType=VARCHAR},
+			#{tptUuser,jdbcType=VARCHAR},
+			#{tptModeid,jdbcType=VARCHAR},
+			#{tptName,jdbcType=VARCHAR},
+			#{tptNumstime,jdbcType=VARCHAR},
+			#{tptPrice,jdbcType=INTEGER},
+			#{tptDemourl,jdbcType=VARCHAR},
+			#{tptDesc,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			tpt_state=#{tptState,jdbcType=VARCHAR},
+			tpt_order=#{tptOrder,jdbcType=INTEGER},
+			tpt_cdate=#{tptCdate,jdbcType=TIMESTAMP},
+			tpt_udate=#{tptUdate,jdbcType=TIMESTAMP},
+			tpt_cuser=#{tptCuser,jdbcType=VARCHAR},
+			tpt_uuser=#{tptUuser,jdbcType=VARCHAR},
+			tpt_modeid=#{tptModeid,jdbcType=VARCHAR},
+			tpt_name=#{tptName,jdbcType=VARCHAR},
+			tpt_numstime=#{tptNumstime,jdbcType=VARCHAR},
+			tpt_price=#{tptPrice,jdbcType=INTEGER},
+			tpt_demourl=#{tptDemourl,jdbcType=VARCHAR},
+			tpt_desc=#{tptDesc,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="tptState!=null" >tpt_state=#{tptState,jdbcType=VARCHAR},</if>
+			<if test="tptOrder!=null" >tpt_order=#{tptOrder,jdbcType=INTEGER},</if>
+			<if test="tptCdate!=null" >tpt_cdate=#{tptCdate,jdbcType=TIMESTAMP},</if>
+			<if test="tptUdate!=null" >tpt_udate=#{tptUdate,jdbcType=TIMESTAMP},</if>
+			<if test="tptCuser!=null" >tpt_cuser=#{tptCuser,jdbcType=VARCHAR},</if>
+			<if test="tptUuser!=null" >tpt_uuser=#{tptUuser,jdbcType=VARCHAR},</if>
+			<if test="tptModeid!=null" >tpt_modeid=#{tptModeid,jdbcType=VARCHAR},</if>
+			<if test="tptName!=null" >tpt_name=#{tptName,jdbcType=VARCHAR},</if>
+			<if test="tptNumstime!=null" >tpt_numstime=#{tptNumstime,jdbcType=VARCHAR},</if>
+			<if test="tptPrice!=null" >tpt_price=#{tptPrice,jdbcType=INTEGER},</if>
+			<if test="tptDemourl!=null" >tpt_demourl=#{tptDemourl,jdbcType=VARCHAR},</if>
+			<if test="tptDesc!=null" >tpt_desc=#{tptDesc,jdbcType=VARCHAR}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="tptState!=null and tptState!=''" >AND tpt_state=#{tptState,jdbcType=VARCHAR}</if>
+					<if test="tptOrder!=null and tptOrder!=''" >AND tpt_order=#{tptOrder,jdbcType=INTEGER}</if>
+					<if test="tptCdate!=null and tptCdate!=''" >AND tpt_cdate=#{tptCdate,jdbcType=TIMESTAMP}</if>
+					<if test="tptUdate!=null and tptUdate!=''" >AND tpt_udate=#{tptUdate,jdbcType=TIMESTAMP}</if>
+					<if test="tptCuser!=null and tptCuser!=''" >AND tpt_cuser=#{tptCuser,jdbcType=VARCHAR}</if>
+					<if test="tptUuser!=null and tptUuser!=''" >AND tpt_uuser=#{tptUuser,jdbcType=VARCHAR}</if>
+					<if test="tptModeid!=null and tptModeid!=''" >AND tpt_modeid=#{tptModeid,jdbcType=VARCHAR}</if>
+					<if test="tptName!=null and tptName!=''" >AND tpt_name=#{tptName,jdbcType=VARCHAR}</if>
+					<if test="tptNumstime!=null and tptNumstime!=''" >AND tpt_numstime=#{tptNumstime,jdbcType=VARCHAR}</if>
+					<if test="tptPrice!=null and tptPrice!=''" >AND tpt_price=#{tptPrice,jdbcType=INTEGER}</if>
+					<if test="tptDemourl!=null and tptDemourl!=''" >AND tpt_demourl=#{tptDemourl,jdbcType=VARCHAR}</if>
+					<if test="tptDesc!=null and tptDesc!=''" >AND tpt_desc=#{tptDesc,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.TptPosition">
+	    SELECT <include refid="fieldAsProperty" /> FROM TPT_POSITION <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM TPT_POSITION <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.TptPosition" resultType="com.sme.entity.TptPosition">
+		SELECT <include refid="fieldAsProperty" /> FROM TPT_POSITION
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.TptPosition">
+		INSERT INTO TPT_POSITION(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.TptPosition">
+		DELETE FROM TPT_POSITION<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.TptPosition" 
+		parameterType="com.sme.entity.TptPosition">
+		SELECT<include refid="fieldAsProperty" />FROM TPT_POSITION<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.TptPosition">
+		UPDATE TPT_POSITION<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="tptUnid!=null" >tpt_unid=#{tptUnid,jdbcType=INTEGER}</if>
+			<if test="tptUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>

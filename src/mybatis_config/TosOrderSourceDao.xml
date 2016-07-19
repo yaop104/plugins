@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.TosOrderSourceDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.TosOrderSource">
+		<id property="tosOdsourceUnid" column="tosOdsourceUnid" /><!--id-->
+		<result property="tosOdsourceOrder" column="tosOdsourceOrder" /><!--排序-->
+		<result property="tosOdsourceState" column="tosOdsourceState" /><!--状态-->
+		<result property="tosOdsourceCdate" column="tosOdsourceCdate" /><!--记录日期-->
+		<result property="tosOdsourceUdate" column="tosOdsourceUdate" /><!--更新日期-->
+		<result property="tosOdsourceCuser" column="tosOdsourceCuser" /><!--记录人-->
+		<result property="tosOdsourceUuser" column="tosOdsourceUuser" /><!--创建人-->
+		<result property="tosOdsourceUrl" column="tosOdsourceUrl" /><!--订单素材图片url-->
+		<result property="tosOdsourceTitle" column="tosOdsourceTitle" /><!--订单素材标题-->
+		<result property="tosOdsourceDocument" column="tosOdsourceDocument" /><!--订单素材文案-->
+		<result property="tosOdsourceOrderid" column="tosOdsourceOrderid" /><!--订单id-->
+		<result property="tosOdsourcePositionid" column="tosOdsourcePositionid" /><!--投放位id-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		tos_odsource_unid AS tosOdsourceUnid,
+		tos_odsource_order AS tosOdsourceOrder,
+		tos_odsource_state AS tosOdsourceState,
+		tos_odsource_cdate AS tosOdsourceCdate,
+		tos_odsource_udate AS tosOdsourceUdate,
+		tos_odsource_cuser AS tosOdsourceCuser,
+		tos_odsource_uuser AS tosOdsourceUuser,
+		tos_odsource_url AS tosOdsourceUrl,
+		tos_odsource_title AS tosOdsourceTitle,
+		tos_odsource_document AS tosOdsourceDocument,
+		tos_odsource_orderid AS tosOdsourceOrderid,
+		tos_odsource_positionid AS tosOdsourcePositionid
+	</sql>
+
+	<sql id="field">
+			tos_odsource_unid,
+			tos_odsource_order,
+			tos_odsource_state,
+			tos_odsource_cdate,
+			tos_odsource_udate,
+			tos_odsource_cuser,
+			tos_odsource_uuser,
+			tos_odsource_url,
+			tos_odsource_title,
+			tos_odsource_document,
+			tos_odsource_orderid,
+			tos_odsource_positionid
+	</sql>
+
+	<sql id="property">
+			next.nextval,
+			#{tosOdsourceOrder,jdbcType=INTEGER},
+			#{tosOdsourceState,jdbcType=VARCHAR},
+			#{tosOdsourceCdate,jdbcType=TIMESTAMP},
+			#{tosOdsourceUdate,jdbcType=TIMESTAMP},
+			#{tosOdsourceCuser,jdbcType=INTEGER},
+			#{tosOdsourceUuser,jdbcType=INTEGER},
+			#{tosOdsourceUrl,jdbcType=VARCHAR},
+			#{tosOdsourceTitle,jdbcType=VARCHAR},
+			#{tosOdsourceDocument,jdbcType=VARCHAR},
+			#{tosOdsourceOrderid,jdbcType=INTEGER},
+			#{tosOdsourcePositionid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			tos_odsource_order=#{tosOdsourceOrder,jdbcType=INTEGER},
+			tos_odsource_state=#{tosOdsourceState,jdbcType=VARCHAR},
+			tos_odsource_cdate=#{tosOdsourceCdate,jdbcType=TIMESTAMP},
+			tos_odsource_udate=#{tosOdsourceUdate,jdbcType=TIMESTAMP},
+			tos_odsource_cuser=#{tosOdsourceCuser,jdbcType=INTEGER},
+			tos_odsource_uuser=#{tosOdsourceUuser,jdbcType=INTEGER},
+			tos_odsource_url=#{tosOdsourceUrl,jdbcType=VARCHAR},
+			tos_odsource_title=#{tosOdsourceTitle,jdbcType=VARCHAR},
+			tos_odsource_document=#{tosOdsourceDocument,jdbcType=VARCHAR},
+			tos_odsource_orderid=#{tosOdsourceOrderid,jdbcType=INTEGER},
+			tos_odsource_positionid=#{tosOdsourcePositionid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="tosOdsourceOrder!=null" >tos_odsource_order=#{tosOdsourceOrder,jdbcType=INTEGER},</if>
+			<if test="tosOdsourceState!=null" >tos_odsource_state=#{tosOdsourceState,jdbcType=VARCHAR},</if>
+			<if test="tosOdsourceCdate!=null" >tos_odsource_cdate=#{tosOdsourceCdate,jdbcType=TIMESTAMP},</if>
+			<if test="tosOdsourceUdate!=null" >tos_odsource_udate=#{tosOdsourceUdate,jdbcType=TIMESTAMP},</if>
+			<if test="tosOdsourceCuser!=null" >tos_odsource_cuser=#{tosOdsourceCuser,jdbcType=INTEGER},</if>
+			<if test="tosOdsourceUuser!=null" >tos_odsource_uuser=#{tosOdsourceUuser,jdbcType=INTEGER},</if>
+			<if test="tosOdsourceUrl!=null" >tos_odsource_url=#{tosOdsourceUrl,jdbcType=VARCHAR},</if>
+			<if test="tosOdsourceTitle!=null" >tos_odsource_title=#{tosOdsourceTitle,jdbcType=VARCHAR},</if>
+			<if test="tosOdsourceDocument!=null" >tos_odsource_document=#{tosOdsourceDocument,jdbcType=VARCHAR},</if>
+			<if test="tosOdsourceOrderid!=null" >tos_odsource_orderid=#{tosOdsourceOrderid,jdbcType=INTEGER},</if>
+			<if test="tosOdsourcePositionid!=null" >tos_odsource_positionid=#{tosOdsourcePositionid,jdbcType=INTEGER}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="tosOdsourceOrder!=null and tosOdsourceOrder!=''" >AND tos_odsource_order=#{tosOdsourceOrder,jdbcType=INTEGER}</if>
+					<if test="tosOdsourceState!=null and tosOdsourceState!=''" >AND tos_odsource_state=#{tosOdsourceState,jdbcType=VARCHAR}</if>
+					<if test="tosOdsourceCdate!=null and tosOdsourceCdate!=''" >AND tos_odsource_cdate=#{tosOdsourceCdate,jdbcType=TIMESTAMP}</if>
+					<if test="tosOdsourceUdate!=null and tosOdsourceUdate!=''" >AND tos_odsource_udate=#{tosOdsourceUdate,jdbcType=TIMESTAMP}</if>
+					<if test="tosOdsourceCuser!=null and tosOdsourceCuser!=''" >AND tos_odsource_cuser=#{tosOdsourceCuser,jdbcType=INTEGER}</if>
+					<if test="tosOdsourceUuser!=null and tosOdsourceUuser!=''" >AND tos_odsource_uuser=#{tosOdsourceUuser,jdbcType=INTEGER}</if>
+					<if test="tosOdsourceUrl!=null and tosOdsourceUrl!=''" >AND tos_odsource_url=#{tosOdsourceUrl,jdbcType=VARCHAR}</if>
+					<if test="tosOdsourceTitle!=null and tosOdsourceTitle!=''" >AND tos_odsource_title=#{tosOdsourceTitle,jdbcType=VARCHAR}</if>
+					<if test="tosOdsourceDocument!=null and tosOdsourceDocument!=''" >AND tos_odsource_document=#{tosOdsourceDocument,jdbcType=VARCHAR}</if>
+					<if test="tosOdsourceOrderid!=null and tosOdsourceOrderid!=''" >AND tos_odsource_orderid=#{tosOdsourceOrderid,jdbcType=INTEGER}</if>
+					<if test="tosOdsourcePositionid!=null and tosOdsourcePositionid!=''" >AND tos_odsource_positionid=#{tosOdsourcePositionid,jdbcType=INTEGER}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.TosOrderSource">
+	    SELECT <include refid="fieldAsProperty" /> FROM TOS_ORDER_SOURCE <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM TOS_ORDER_SOURCE <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.TosOrderSource" resultType="com.sme.entity.TosOrderSource">
+		SELECT <include refid="fieldAsProperty" /> FROM TOS_ORDER_SOURCE
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.TosOrderSource">
+		INSERT INTO TOS_ORDER_SOURCE(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.TosOrderSource">
+		DELETE FROM TOS_ORDER_SOURCE<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.TosOrderSource" 
+		parameterType="com.sme.entity.TosOrderSource">
+		SELECT<include refid="fieldAsProperty" />FROM TOS_ORDER_SOURCE<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.TosOrderSource">
+		UPDATE TOS_ORDER_SOURCE<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="tosOdsourceUnid!=null" >tos_odsource_unid=#{tosOdsourceUnid,jdbcType=INTEGER}</if>
+			<if test="tosOdsourceUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>

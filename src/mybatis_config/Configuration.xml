@@ -35,7 +35,10 @@
 		<typeAlias type="com.sme.entity.TscSource" alias="TscSource" />
 		<typeAlias type="com.sme.entity.TdcDictionary" alias="TdcDictionary" />
 		<typeAlias type="com.sme.entity.TagTag" alias="TagTag" />
-		<typeAlias type="com.sme.entity.TatTagApp" alias="TatTagApp" />
+		<typeAlias type="com.sme.entity.TptPosition" alias="TptPosition" />
+		<typeAlias type="com.sme.entity.TodOrder" alias="TodOrder" />
+		<typeAlias type="com.sme.entity.TosOrderSource" alias="TosOrderSource" />
+		<typeAlias type="com.sme.entity.TtmTime" alias="TtmTime" />
 	</typeAliases>
 	
 	<!--<environments default="MySQL">
@@ -76,5 +79,9 @@
 		<mapper resource="./mybatis_config/TdcDictionaryDao.xml"/>
 		<mapper resource="./mybatis_config/TagTagDao.xml"/>
 		<mapper resource="./mybatis_config/TatTagAppDao.xml"/>
+		<mapper resource="./mybatis_config/TptPositionDao.xml"/>
+		<mapper resource="./mybatis_config/TodOrderDao.xml"/>
+		<mapper resource="./mybatis_config/TosOrderSourceDao.xml"/>
+		<mapper resource="./mybatis_config/TtmTimeDao.xml"/>
 	</mappers>
 </configuration>

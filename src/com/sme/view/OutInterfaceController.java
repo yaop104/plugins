@@ -259,7 +259,10 @@ public class OutInterfaceController {
     public StringJSON getpApplicationlists(PApplication pApplication, HttpServletRequest req) {
         try {
             log.info("<=====执行getpApplicationlists====>");
-            List<PApplication> pAppDetails = pApplicationService.selectHot(pApplication);
+            Map<String, Object> parm = new HashMap<String, Object>();
+            parm.put("pAppdetailName", req.getParameter("pAppdetailName"));
+            parm.put("pluginType", req.getParameter("pluginType"));
+            List<PApplication> pAppDetails = pApplicationService.pageForList(parm);
             return getSuccess(true,"",pAppDetails);
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -277,7 +280,7 @@ public class OutInterfaceController {
             return getSuccess(true,"",pAppDetails);
         } catch (Exception e) {
             log.error(e.getMessage());
-            return getSuccess(false,"app列表获取失败,系统异常！！");
+            return getSuccess(false,"app获取失败,系统异常！！");
         }
 
     }

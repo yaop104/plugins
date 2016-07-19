@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.TtmTimeDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.TtmTime">
+		<id property="ttmTimeUnid" column="ttmTimeUnid" /><!--id-->
+		<result property="ttmTimeState" column="ttmTimeState" /><!--状态1全部2删除3增加-->
+		<result property="ttmTimeCdate" column="ttmTimeCdate" /><!--记录日期-->
+		<result property="ttmTimeUdate" column="ttmTimeUdate" /><!--更新日期-->
+		<result property="ttmTimeCuser" column="ttmTimeCuser" /><!--记录人-->
+		<result property="ttmTimeUuser" column="ttmTimeUuser" /><!--创建人-->
+		<result property="ttmTimePositionid" column="ttmTimePositionid" /><!--投放位id-->
+		<result property="ttmTimeTime" column="ttmTimeTime" /><!--投放时间-->
+		<result property="ttmTimeOrderid" column="ttmTimeOrderid" /><!--订单id-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		ttm_time_unid AS ttmTimeUnid,
+		ttm_time_state AS ttmTimeState,
+		ttm_time_cdate AS ttmTimeCdate,
+		ttm_time_udate AS ttmTimeUdate,
+		ttm_time_cuser AS ttmTimeCuser,
+		ttm_time_uuser AS ttmTimeUuser,
+		ttm_time_positionid AS ttmTimePositionid,
+		ttm_time_time AS ttmTimeTime,
+		ttm_time_orderid AS ttmTimeOrderid
+	</sql>
+
+	<sql id="field">
+			ttm_time_unid,
+			ttm_time_state,
+			ttm_time_cdate,
+			ttm_time_udate,
+			ttm_time_cuser,
+			ttm_time_uuser,
+			ttm_time_positionid,
+			ttm_time_time,
+			ttm_time_orderid
+	</sql>
+
+	<sql id="property">
+			next.nextval,
+			#{ttmTimeState,jdbcType=VARCHAR},
+			#{ttmTimeCdate,jdbcType=TIMESTAMP},
+			#{ttmTimeUdate,jdbcType=TIMESTAMP},
+			#{ttmTimeCuser,jdbcType=INTEGER},
+			#{ttmTimeUuser,jdbcType=INTEGER},
+			#{ttmTimePositionid,jdbcType=INTEGER},
+			#{ttmTimeTime,jdbcType=TIMESTAMP},
+			#{ttmTimeOrderid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			ttm_time_state=#{ttmTimeState,jdbcType=VARCHAR},
+			ttm_time_cdate=#{ttmTimeCdate,jdbcType=TIMESTAMP},
+			ttm_time_udate=#{ttmTimeUdate,jdbcType=TIMESTAMP},
+			ttm_time_cuser=#{ttmTimeCuser,jdbcType=INTEGER},
+			ttm_time_uuser=#{ttmTimeUuser,jdbcType=INTEGER},
+			ttm_time_positionid=#{ttmTimePositionid,jdbcType=INTEGER},
+			ttm_time_time=#{ttmTimeTime,jdbcType=TIMESTAMP},
+			ttm_time_orderid=#{ttmTimeOrderid,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="ttmTimeState!=null" >ttm_time_state=#{ttmTimeState,jdbcType=VARCHAR},</if>
+			<if test="ttmTimeCdate!=null" >ttm_time_cdate=#{ttmTimeCdate,jdbcType=TIMESTAMP},</if>
+			<if test="ttmTimeUdate!=null" >ttm_time_udate=#{ttmTimeUdate,jdbcType=TIMESTAMP},</if>
+			<if test="ttmTimeCuser!=null" >ttm_time_cuser=#{ttmTimeCuser,jdbcType=INTEGER},</if>
+			<if test="ttmTimeUuser!=null" >ttm_time_uuser=#{ttmTimeUuser,jdbcType=INTEGER},</if>
+			<if test="ttmTimePositionid!=null" >ttm_time_positionid=#{ttmTimePositionid,jdbcType=INTEGER},</if>
+			<if test="ttmTimeTime!=null" >ttm_time_time=#{ttmTimeTime,jdbcType=TIMESTAMP},</if>
+			<if test="ttmTimeOrderid!=null" >ttm_time_orderid=#{ttmTimeOrderid,jdbcType=INTEGER}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="ttmTimeState!=null and ttmTimeState!=''" >AND ttm_time_state=#{ttmTimeState,jdbcType=VARCHAR}</if>
+					<if test="ttmTimeCdate!=null and ttmTimeCdate!=''" >AND ttm_time_cdate=#{ttmTimeCdate,jdbcType=TIMESTAMP}</if>
+					<if test="ttmTimeUdate!=null and ttmTimeUdate!=''" >AND ttm_time_udate=#{ttmTimeUdate,jdbcType=TIMESTAMP}</if>
+					<if test="ttmTimeCuser!=null and ttmTimeCuser!=''" >AND ttm_time_cuser=#{ttmTimeCuser,jdbcType=INTEGER}</if>
+					<if test="ttmTimeUuser!=null and ttmTimeUuser!=''" >AND ttm_time_uuser=#{ttmTimeUuser,jdbcType=INTEGER}</if>
+					<if test="ttmTimePositionid!=null and ttmTimePositionid!=''" >AND ttm_time_positionid=#{ttmTimePositionid,jdbcType=INTEGER}</if>
+					<if test="ttmTimeTime!=null and ttmTimeTime!=''" >AND ttm_time_time=#{ttmTimeTime,jdbcType=TIMESTAMP}</if>
+					<if test="ttmTimeOrderid!=null and ttmTimeOrderid!=''" >AND ttm_time_orderid=#{ttmTimeOrderid,jdbcType=INTEGER}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.TtmTime">
+	    SELECT <include refid="fieldAsProperty" /> FROM TTM_TIME <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM TTM_TIME <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.TtmTime" resultType="com.sme.entity.TtmTime">
+		SELECT <include refid="fieldAsProperty" /> FROM TTM_TIME
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.TtmTime">
+		INSERT INTO TTM_TIME(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.TtmTime">
+		DELETE FROM TTM_TIME<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.TtmTime" 
+		parameterType="com.sme.entity.TtmTime">
+		SELECT<include refid="fieldAsProperty" />FROM TTM_TIME<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.TtmTime">
+		UPDATE TTM_TIME<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="ttmTimeUnid!=null" >ttm_time_unid=#{ttmTimeUnid,jdbcType=INTEGER}</if>
+			<if test="ttmTimeUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>
