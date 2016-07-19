@@ -75,4 +75,13 @@ public class Config {
 
 	public static final String HEAD_IMG_PATH = getConfigProperty("head.img.path");
 	public static final String HEAD_IMG_REALPATH = getConfigProperty("head.img.realPath");
+	//email
+	public static final String MailServerHost = getConfigProperty("defult.MailServerHost");
+	public static final String MailServerPort = getConfigProperty("defult.MailServerPort");
+	public static final String UserName = getConfigProperty("defult.UserName");
+	public static final String Password = getConfigProperty("defult.Password");
+	public static final String FromAddress = getConfigProperty("defult.FromAddress");
+	public static final String Subject = getConfigProperty("defult.Subject");
+	public static final String Content1 = getConfigProperty("defult.Content1");
+	public static final String Content2 = getConfigProperty("defult.Content2");
 }

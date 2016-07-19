@@ -4,8 +4,11 @@ import com.sme.core.model.StringJSON;
 import com.sme.entity.*;
 import com.sme.service.*;
 import com.sme.service.impl.TagTagServiceImpl;
+import com.sme.service.impl.TapDownloadServiceImpl;
 import com.sme.service.impl.TdcDictionaryServiceImpl;
 import com.sme.util.*;
+import com.sme.util.mail.MailSenderInfo;
+import com.sme.util.mail.SimpleMailSender;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,10 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by yao on 2016/7/11.
@@ -48,6 +48,10 @@ public class OutInterfaceController {
     private SysAccService sysAccService;
     @Autowired
     private LoginLogService loginLogService;
+    @Autowired
+    private TapDownloadService tapDownloadService;
+    @Autowired
+    public FeedbackService feedbackService;
 
     private Log log = LogFactory.getLog(TdcDictionaryController.class);
 
@@ -73,6 +77,39 @@ public class OutInterfaceController {
         return json;
     }
 
+
+    @RequestMapping(value = "/insertData", method = {RequestMethod.POST})
+    @ResponseBody
+    public StringJSON insertData(@RequestParam(value = "pic", required = false) MultipartFile[] files,
+                                 long userId,String text,HttpServletRequest request,HttpServletResponse response){
+        Feedback feedback = new Feedback();
+        feedback.setUserId(userId);
+        feedback.setText(text);
+        feedback.setCreatTime(new Date());
+        String savePath = request.getServletContext().getRealPath("upload");
+        try {
+            StringBuilder sb = new StringBuilder();
+            //判断file数组不能为空并且长度大于0
+            if(files!=null&&files.length>0){
+                for(int i = 0;i<files.length;i++){
+                    MultipartFile file = files[i];
+                    IFileSaver fileUtil = new ImageCheckProxy(new FileSaver(savePath));
+                    if(!file.isEmpty()){
+                        //保存文件
+                        fileUtil.save(file, file.getOriginalFilename());
+                        sb.append(file.getOriginalFilename()).append(",");
+                    }
+                }
+                sb.deleteCharAt(sb.lastIndexOf(","));
+                feedback.setPic(sb.toString());
+            }
+            feedbackService.insert(feedback);
+            return getSuccess(true, "反馈成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return getSuccess(false, "反馈异常");
+        }
+    }
 
     @RequestMapping(value="/getHomePage", method={RequestMethod.GET , RequestMethod.POST})
     @ResponseBody
@@ -105,7 +142,9 @@ public class OutInterfaceController {
             sysAcc.setSysAccId(id);
             sysAcc = sysAccService.getById(sysAcc);
             sysAcc.setSysAccPassword("");
-            return getSuccess(true,"成功",sysAcc);
+            Map<String, Object> map = new HashMap<>();
+            map.put("sysAcc",sysAcc);
+            return getSuccess(true,"成功",map);
         } catch (Exception e) {
             log.error(e.getMessage());
             return getSuccess(false,"分类获取失败,系统异常！！");
@@ -122,7 +161,7 @@ public class OutInterfaceController {
      */
     @RequestMapping(value="/updateLogo", method={RequestMethod.POST})
     @ResponseBody
-    public JSONObject updateLogo(Integer id,@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response){
+    public StringJSON updateLogo(Integer id,@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response){
         System.out.println("file="+file.getOriginalFilename());// 得到上传文件的文件名
         String savePath = Config.HEAD_IMG_PATH;
         IFileSaver fileUtil = new ImageCheckProxy(new FileSaver(savePath));
@@ -137,12 +176,19 @@ public class OutInterfaceController {
             img = Config.HEAD_IMG_REALPATH + img;
             json.setInfo(img);
         }
-        return json;
+        Map<String, Object> map = new HashMap<>();
+        map.put("logo",json);
+        if(500==json.getCode()){
+            return getSuccess(true,"",map);
+        }else{
+            return getSuccess(false,"",map);
+        }
+
     }
 
     @RequestMapping(value="/login", method={RequestMethod.POST})
     @ResponseBody
-    public RespMessage login(String account, String password, HttpSession session, Model model, HttpServletRequest req){
+    public StringJSON login(String account, String password, HttpSession session, Model model, HttpServletRequest req){
 
         RespMessage respMessage = new RespMessage();
         try
@@ -166,19 +212,20 @@ public class OutInterfaceController {
                     log.setLoginIp(sysAcc.getSysAccMobile());
 
                     loginLogService.insert(log);
-
-                    return respMessage;
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("login",sysAcc);
+                    return getSuccess(true,"",map);
 
                 }else{
                     respMessage.setCode("1");
                     respMessage.setMessage("用户名或密码错误！");
-                    return respMessage;
+                    return getSuccess(false,"用户名或密码错误！");
                 }
 
             }else{
                 respMessage.setCode("1");
                 respMessage.setMessage("用户名或密码错误！");
-                return respMessage;
+                return getSuccess(false,"用户名或密码错误！");
             }
         }
         catch (Exception e)
@@ -187,7 +234,7 @@ public class OutInterfaceController {
             e.getStackTrace();
             respMessage.setCode("1");
             respMessage.setMessage("失败，系统异常，请刷新页面，尝试重新登入！");
-            return respMessage;
+            return getSuccess(false,"失败，系统异常，请刷新页面，尝试重新登入！");
         }
 
     }
@@ -234,6 +281,119 @@ public class OutInterfaceController {
         }
 
     }
+
+    @RequestMapping(value="/insertDownload", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public StringJSON insertDownload(TapDownload tapDownload, HttpServletRequest req) {
+        try {
+            log.info("<=====执行insertDownload====>");
+            tapDownloadService.insert(tapDownload);
+            return getSuccess(true,"");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return getSuccess(false,"系统异常！！");
+        }
+
+    }
+
+    @RequestMapping(value="/getTapDownload", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public StringJSON getTapDownload(TapDownload tapDownload, HttpServletRequest req) {
+        try {
+            log.info("<=====执行getTapDownload====>");
+            List<TapDownload> tapDownloads = tapDownloadService.select(tapDownload);
+            return getSuccess(true,"",tapDownloads);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return getSuccess(false,"列表获取失败,系统异常！！");
+        }
+
+    }
+
+    @RequestMapping(value = "/register", method = { RequestMethod.POST })
+    @ResponseBody
+    @com.sme.core.spring.Log(type = "首页", desc = "用户注册")
+    public StringJSON sysAccRegistere(SysAcc sysAcc, Model model, HttpServletRequest request,
+                                      HttpServletResponse response) {
+        try {
+
+            SysAcc sysAccnames=new SysAcc();
+            sysAccnames.setSysAccName(sysAcc.getSysAccName());
+            if(chkAccountIsExists(sysAccnames)){
+                return getSuccess(false, "该用户名已存在,请重新输入用户名！！");
+            }
+            SysAcc sysAccphone = new SysAcc();
+            sysAccphone.setSysAccMobile(sysAcc.getSysAccMobile());
+            if(chkAccountIsExists(sysAccphone)){
+                return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
+            }
+            if(RegexValidateUtil.checkEmail(sysAcc.getSysAccEmail())){
+                return getSuccess(false, "该邮箱格式不正确,请输入新的邮箱！！");
+            }
+            SysAcc sysAccmail = new SysAcc();
+            sysAccmail.setSysAccEmail(sysAcc.getSysAccEmail());
+            if(chkAccountIsExists(sysAccmail)){
+                return getSuccess(false, "该邮箱已存在,请输入未注册邮箱！！");
+            }
+            String pwd = StringUtil.getRandomChar(6);
+            String password = MD5.encryByMD5(pwd);
+            sysAcc.setSysAccPassword(password);
+            sysAcc.setSysAccState("2");
+            sysAcc.setSysAccType("1");
+            sysAcc.setSysAccCdate(new Date());
+            sysAcc.setSysAccCuser("用户"+sysAcc.getSysAccName());
+
+
+
+            boolean flag =  sendMail(sysAcc.getSysAccEmail(), pwd);
+
+            if(flag){
+                sysAccService.insert(sysAcc);
+                return getSuccess(true, "注册成功，稍后帐号密码将发送至邮件！");
+            }else{
+                return getSuccess(false, "激活邮件发送失败，注册失败，稍后再试！");
+            }
+
+        } catch (Exception e) {
+            log.error(e.getCause().getMessage());
+            System.out.println(e.getCause().getMessage());
+            return getSuccess(false, "系统异常，注册失败！");
+        }
+    }
+
+    private boolean chkAccountIsExists(SysAcc sysAcc) {
+        Boolean flag = sysAccService.getSysAcc(sysAcc);
+        return flag;
+    }
+
+    public boolean sendMail(String mail, String pwd){
+
+        //这个类主要是设置邮件
+        MailSenderInfo mailInfo = new MailSenderInfo();
+        //服务器端口
+        mailInfo.setMailServerHost(Config.MailServerHost);
+        //或者是通过qq邮箱发送
+//        mailInfo.setMailServerHost("smtp.qq.com");
+        mailInfo.setMailServerPort(Config.PORT);
+        mailInfo.setValidate(true);
+        //您的邮箱用户名
+        mailInfo.setUserName(Config.UserName);
+        //您的邮箱密码
+        mailInfo.setPassword(Config.Password);
+        //发送邮件源地址
+        mailInfo.setFromAddress(Config.FromAddress);
+        //发送邮件目的地址
+        mailInfo.setToAddress(mail);
+        //主题
+        mailInfo.setSubject(Config.Subject);
+        //内容
+        mailInfo.setContent(Config.Content1 + pwd + Config.Content2);
+        //这个类主要来发送邮件
+        SimpleMailSender sms = new SimpleMailSender();
+        Boolean flag = sms.sendTextMail(mailInfo);//发送文体格式
+        return  flag;
+    }
+
 
 
     @RequestMapping(value = "/download")

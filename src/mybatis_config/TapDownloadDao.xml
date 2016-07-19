@@ -26,7 +26,6 @@
 	</sql>
 
 	<sql id="field">
-			tap_unid,
 			tap_state,
 			tap_udate,
 			tap_uuser,
@@ -38,7 +37,6 @@
 	</sql>
 
 	<sql id="property">
-			next.nextval,
 			#{tapState,jdbcType=VARCHAR},
 			#{tapUdate,jdbcType=TIMESTAMP},
 			#{tapUuser,jdbcType=INTEGER},
@@ -96,7 +94,7 @@
 	    SELECT COUNT(*) FROM TAP_DOWNLOAD <include refid="idCnd2"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.TapDownload" resultType="com.sme.entity.TapDownload">
-		SELECT <include refid="fieldAsProperty" /> FROM TAP_DOWNLOAD
+		SELECT <include refid="fieldAsProperty" /> FROM TAP_DOWNLOAD <include refid="idCnd2"/>
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.TapDownload">
 		INSERT INTO TAP_DOWNLOAD(<include refid="field" />) VALUES (<include refid="property" />)
