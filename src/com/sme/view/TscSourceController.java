@@ -33,14 +33,7 @@ public class TscSourceController extends BaseController<TscSource>{
 	
 	@RequestMapping(value="/tscSourcelist", method={RequestMethod.GET})
 	public String tscSourceList(TscSource tscSource, HttpServletRequest req) {
-		try {
-			log.info("<=====执行sysmenulist====>");
-			List<TscSource> tscSources = tscSourceServiceImpl.select(tscSource);
-//			RespUtil.setResp(tscSources, 10, 1, req);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
-		return "/tscSource/tscSourcelist";
+		return "/tbcInfo/tscSourcelist";
 	}
 	
 	@RequestMapping(value="/gettscSourcelists", method={RequestMethod.GET})

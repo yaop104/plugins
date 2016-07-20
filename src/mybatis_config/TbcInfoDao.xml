@@ -133,10 +133,10 @@
 		</if>
 	</select>
 	<select id="count" parameterType="map" resultType="Integer">
-	    SELECT COUNT(*) FROM tbc_info
+	    SELECT COUNT(*) FROM tbc_info <include refid="idCnd2"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.TbcInfo" resultType="com.sme.entity.TbcInfo">
-		SELECT <include refid="fieldAsProperty" /> FROM TBC_INFO
+		SELECT <include refid="fieldAsProperty" /> FROM TBC_INFO <include refid="idCnd2"/>
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.TbcInfo">
 		INSERT INTO TBC_INFO(<include refid="field" />) VALUES (<include refid="property" />)
