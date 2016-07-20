@@ -140,7 +140,7 @@
 		SELECT <include refid="fieldAsProperty" /> FROM P_APPLICATION <include refid="idCnd2"/>
 	</select>
 	<select id="selectHot" parameterType="com.sme.entity.PApplication" resultType="com.sme.entity.PApplication">
-		SELECT <include refid="fieldAsProperty" /> FROM p_application  left join	 tat_tag_app  on p_app_id = app_unid
+		SELECT <include refid="fieldAsProperty" /> FROM p_application  left join	 tat_tag_app  on p_app_id = app_unid <include refid="idCnd2"/>
 	</select>
 
 

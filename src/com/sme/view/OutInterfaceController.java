@@ -52,6 +52,8 @@ public class OutInterfaceController {
     private TapDownloadService tapDownloadService;
     @Autowired
     public FeedbackService feedbackService;
+    @Autowired
+    private TsmSendMessageService tsmSendMessageService;
 
     private Log log = LogFactory.getLog(TdcDictionaryController.class);
 
@@ -382,12 +384,163 @@ public class OutInterfaceController {
         }
     }
 
+
+    	@RequestMapping(value="/gettsmSendMessageCode")
+	@ResponseBody
+	public StringJSON gettsmSendMessageCode(TsmSendMessage tsmSendMessage, HttpServletRequest req) {
+		try {
+			log.info("<=====执行gettsmSendMessageCode====>");
+			//检查数据完整性
+            if(!RegexValidateUtil.checkEmail(tsmSendMessage.getTsmSendMobile())){
+                    return getSuccess(false, "该邮箱格式不正确,请输入新的邮箱！！");
+			}
+
+			SysAcc sysAccphone = new SysAcc();
+			sysAccphone.setSysAccEmail(tsmSendMessage.getTsmSendMobile());
+			List<SysAcc> list = sysAccService.select(sysAccphone);
+			if(list.size() > 0 ){
+				if(!list.get(0).getSysAccType().equals("1")){
+                    return getSuccess(false, "您的账号并非为移动端用户！");
+				}
+			}else{
+                return getSuccess(false, "您的邮箱未注册！");
+			}
+
+			String code = StringUtil.getRandomNumber(4);
+			tsmSendMessage.setTsmSendCode(code);
+			tsmSendMessage.setTsmSendType("1");
+			String flag = tsmSendMessageService.sendMessage(tsmSendMessage);
+
+			if("1".endsWith(flag)){
+                return  getSuccess(true, "发送成功，稍后验证码将发送至邮件！");
+			}else{
+                return getSuccess(false, "发送失败，稍后再试！");
+			}
+
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return getSuccess(false, "失败，系统异常，稍后再试！");
+		}
+
+	}
+
+    //获取账户流水明细信息
+    @RequestMapping(value = "/getCode")
+    @ResponseBody
+    public StringJSON getCode(TsmSendMessage tsmSendMessage, HttpServletRequest request) {
+        try {
+            //检查数据完整性
+            if(!RegexValidateUtil.checkEmail(tsmSendMessage.getTsmSendMobile())){
+                return getSuccess(false, "该邮箱格式不正确,请输入新的邮箱！！");
+            }
+            //检查数据完整性
+            if(tsmSendMessage.getTsmSendCode()==""||tsmSendMessage.getTsmSendCode()==null||!StringUtil.isNumber(tsmSendMessage.getTsmSendCode())){
+                return getSuccess(false, "请正确输入验证码！！");
+            }
+            tsmSendMessage.setTsmSendType("1");
+            String flag = tsmSendMessageService.selectLastCode(tsmSendMessage);
+
+            if("1".equals(flag)){
+                return  getSuccess(true, "成功");
+            }else{
+                return getSuccess(false, "无效验证码，请重新获取！");
+            }
+
+
+
+        } catch (Exception e) {
+            log.error(e.getStackTrace());
+            return getSuccess(false, "失败，系统异常，稍后再试！");
+        }
+
+    }
+
+    // 根据code修改密码
+    @RequestMapping(value = "/repwd")
+    @ResponseBody
+    public StringJSON repwd(String mobile, String oldpwd, String newpwd) {
+        try {
+
+            //检查数据完整性
+            if(!RegexValidateUtil.checkEmail(mobile)){
+                return getSuccess(false, "该邮箱格式不正确,请输入新的邮箱！！");
+            }
+
+            if (StringUtils.isBlank(newpwd)) {
+                return getSuccess(false, "密码为空");
+            }
+
+            SysAcc sysAcc1 = new SysAcc();
+            sysAcc1 = sysAccService.getSysAccForLoginByRepwd(mobile, oldpwd);// 验证用户名、密码登录（用于普通登录）
+            if (sysAcc1 != null) {
+                if("1".equals(sysAcc1.getSysAccType())){
+                    String password = MD5.encryByMD5(newpwd);
+                    sysAcc1.setSysAccPassword(password);
+                    sysAccService.update(sysAcc1);
+                    sysAcc1.setSysAccPassword("");
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("repwd", sysAcc1);
+                    return getSuccess(true, "修改密码成功",map);
+                }else{
+                    return getSuccess(false, "非移动端用户,请稍后再试");
+                }
+
+            } else {
+                return getSuccess(false, "原密码错误");
+            }
+        } catch (Exception e) {
+            log.error(e.getStackTrace());
+            return getSuccess(false, "系统异常！");
+        }
+
+    }
+
     private boolean chkAccountIsExists(SysAcc sysAcc) {
         Boolean flag = sysAccService.getSysAcc(sysAcc);
         return flag;
     }
 
-    public boolean sendMail(String mail, String pwd){
+    @RequestMapping(value = "/repassword", method = { RequestMethod.POST })
+    @ResponseBody
+    @com.sme.core.spring.Log(type = "首页", desc = "修改密码")
+    public StringJSON sysAccRepassword(String mobile, String oldpwd, String newpwd) {
+        try {
+
+            //检查数据完整性
+            if(!RegexValidateUtil.checkEmail(mobile)){
+                return getSuccess(false, "该邮箱格式不正确,请输入新的邮箱！！");
+            }
+
+            if (StringUtils.isBlank(newpwd)) {
+                return getSuccess(false, "密码为空");
+            }
+
+            SysAcc sysAcc1 = new SysAcc();
+            sysAcc1 = sysAccService.getSysAccForLoginRepwd(mobile, oldpwd);// 验证用户名、密码登录（用于普通登录）
+            if (sysAcc1 != null) {
+                if("1".equals(sysAcc1.getSysAccType())){
+                    String password = MD5.encryByMD5(newpwd);
+                    sysAcc1.setSysAccPassword(password);
+                    sysAccService.update(sysAcc1);
+                    sysAcc1.setSysAccPassword("");
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("repwd", sysAcc1);
+                    return getSuccess(true, "修改密码成功",map);
+                }else{
+                    return getSuccess(false, "非移动端用户,请稍后再试");
+                }
+
+            } else {
+                return getSuccess(false, "原密码错误");
+            }
+
+        } catch (Exception e) {
+            log.error(e.getCause().getMessage());
+            return getSuccess(false, "系统异常！");
+        }
+    }
+
+    public static boolean sendMail(String mail, String pwd){
 
         //这个类主要是设置邮件
         MailSenderInfo mailInfo = new MailSenderInfo();

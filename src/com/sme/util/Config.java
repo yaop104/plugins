@@ -84,4 +84,6 @@ public class Config {
 	public static final String Subject = getConfigProperty("defult.Subject");
 	public static final String Content1 = getConfigProperty("defult.Content1");
 	public static final String Content2 = getConfigProperty("defult.Content2");
+	public static final String CodeContent1 = getConfigProperty("defult.codeContent1");
+	public static final String CodeContent2 = getConfigProperty("defult.codeContent2");
 }

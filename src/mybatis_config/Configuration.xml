@@ -41,6 +41,7 @@
 		<typeAlias type="com.sme.entity.TtmTime" alias="TtmTime" />
 		<typeAlias type="com.sme.entity.TstStatement" alias="TstStatement" />
 		<typeAlias type="com.sme.entity.TapApplication" alias="TapApplication" />
+		<typeAlias type="com.sme.entity.TsmSendMessage" alias="TsmSendMessage" />
 	</typeAliases>
 	
 	<!--<environments default="MySQL">
@@ -87,5 +88,6 @@
 		<mapper resource="./mybatis_config/TtmTimeDao.xml"/>
 		<mapper resource="./mybatis_config/TstStatementDao.xml"/>
 		<mapper resource="./mybatis_config/TapApplicationDao.xml"/>
+		<mapper resource="./mybatis_config/TsmSendMessageDao.xml"/>
 	</mappers>
 </configuration>

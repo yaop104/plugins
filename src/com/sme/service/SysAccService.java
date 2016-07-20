@@ -9,5 +9,11 @@ public interface SysAccService extends InterfaceBaseService<SysAcc> {
 	SysAcc getSysAccForLogin(String sysAccName, String oldpwd);
 
 	Boolean getSysAcc(SysAcc sysAcc);
+
+
+	SysAcc getSysAccForLoginRepwd(String mobile, String oldpwd);
+
+	SysAcc getSysAccForLoginByRepwd(String mobile, String oldpwd);
+
 	//================== end ======================
 }

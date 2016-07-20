@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.TsmSendMessageDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.TsmSendMessage">
+		<id property="tsmSendUnid" column="tsmSendUnid" /><!--unid-->
+		<result property="tsmSendUuid" column="tsmSendUuid" /><!--uuid-->
+		<result property="tsmSendTime" column="tsmSendTime" /><!--插入时间-->
+		<result property="tsmSendState" column="tsmSendState" /><!--发送状态1已验证2未验证-->
+		<result property="tsmSendCode" column="tsmSendCode" /><!--验证码-->
+		<result property="tsmSendMobile" column="tsmSendMobile" /><!--手机号-->
+		<result property="tsmSendType" column="tsmSendType" /><!--类型 1注册码2更换手机码-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		tsm_send_unid AS tsmSendUnid,
+		tsm_send_uuid AS tsmSendUuid,
+		tsm_send_time AS tsmSendTime,
+		tsm_send_state AS tsmSendState,
+		tsm_send_code AS tsmSendCode,
+		tsm_send_mobile AS tsmSendMobile,
+		tsm_send_type AS tsmSendType
+	</sql>
+
+	<sql id="field">
+			tsm_send_uuid,
+			tsm_send_time,
+			tsm_send_state,
+			tsm_send_code,
+			tsm_send_mobile,
+			tsm_send_type
+	</sql>
+
+	<sql id="property">
+			#{tsmSendUuid,jdbcType=VARCHAR},
+			#{tsmSendTime,jdbcType=TIMESTAMP},
+			#{tsmSendState,jdbcType=VARCHAR},
+			#{tsmSendCode,jdbcType=VARCHAR},
+			#{tsmSendMobile,jdbcType=VARCHAR},
+			#{tsmSendType,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			tsm_send_uuid=#{tsmSendUuid,jdbcType=VARCHAR},
+			tsm_send_time=#{tsmSendTime,jdbcType=TIMESTAMP},
+			tsm_send_state=#{tsmSendState,jdbcType=VARCHAR},
+			tsm_send_code=#{tsmSendCode,jdbcType=VARCHAR},
+			tsm_send_mobile=#{tsmSendMobile,jdbcType=VARCHAR},
+			tsm_send_type=#{tsmSendType,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="tsmSendUuid!=null" >tsm_send_uuid=#{tsmSendUuid,jdbcType=VARCHAR},</if>
+			<if test="tsmSendTime!=null" >tsm_send_time=#{tsmSendTime,jdbcType=TIMESTAMP},</if>
+			<if test="tsmSendState!=null" >tsm_send_state=#{tsmSendState,jdbcType=VARCHAR},</if>
+			<if test="tsmSendCode!=null" >tsm_send_code=#{tsmSendCode,jdbcType=VARCHAR},</if>
+			<if test="tsmSendMobile!=null" >tsm_send_mobile=#{tsmSendMobile,jdbcType=VARCHAR},</if>
+			<if test="tsmSendType!=null" >tsm_send_type=#{tsmSendType,jdbcType=VARCHAR}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="tsmSendUuid!=null and tsmSendUuid!=''" >AND tsm_send_uuid=#{tsmSendUuid,jdbcType=VARCHAR}</if>
+					<if test="tsmSendTime!=null and tsmSendTime!=''" >AND tsm_send_time=#{tsmSendTime,jdbcType=TIMESTAMP}</if>
+					<if test="tsmSendState!=null and tsmSendState!=''" >AND tsm_send_state=#{tsmSendState,jdbcType=VARCHAR}</if>
+					<if test="tsmSendCode!=null and tsmSendCode!=''" >AND tsm_send_code=#{tsmSendCode,jdbcType=VARCHAR}</if>
+					<if test="tsmSendMobile!=null and tsmSendMobile!=''" >AND tsm_send_mobile=#{tsmSendMobile,jdbcType=VARCHAR}</if>
+					<if test="tsmSendType!=null and tsmSendType!=''" >AND tsm_send_type=#{tsmSendType,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.TsmSendMessage">
+	    SELECT <include refid="fieldAsProperty" /> FROM tsm_send_message <include refid="idCnd2"/> 
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM tsm_send_message <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.TsmSendMessage" resultType="com.sme.entity.TsmSendMessage">
+		SELECT <include refid="fieldAsProperty" /> FROM tsm_send_message <include refid="idCnd2"/>
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.TsmSendMessage">
+		INSERT INTO tsm_send_message(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.TsmSendMessage">
+		DELETE FROM tsm_send_message<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.TsmSendMessage"
+		parameterType="com.sme.entity.TsmSendMessage">
+		SELECT<include refid="fieldAsProperty" />FROM tsm_send_message<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.TsmSendMessage">
+		UPDATE tsm_send_message<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="tsmSendUnid!=null" >tsm_send_unid=#{tsmSendUnid,jdbcType=INTEGER}</if>
+			<if test="tsmSendUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	<select id="selectLastCode" parameterType="com.sme.entity.TsmSendMessage" resultType="com.sme.entity.TsmSendMessage">
+		SELECT <include refid="fieldAsProperty" /> FROM tsm_send_message 
+		WHERE tsm_send_mobile = #{tsmSendMobile}
+		 AND tsm_send_code = #{tsmSendCode}
+		 AND tsm_send_type = #{tsmSendType}
+		 AND tsm_send_state = '2'
+		 AND tsm_send_time BETWEEN SYSDATE()-INTERVAL 1800 SECOND AND SYSDATE()
+		  LIMIT 1
+	</select>
+	<!-- ================== end ================== -->
+</mapper>

@@ -71,5 +71,49 @@ public class SysAccServiceImpl extends BaseService<SysAcc> implements SysAccServ
 		}
 		return sysAcc == null ? false : true;
 	}
+
+	/**
+	 * 根据邮箱修改密码
+	 * @param mobile
+	 * @param oldpwd
+	 * @return
+	 */
+	@Override
+	public SysAcc getSysAccForLoginRepwd(String mobile, String oldpwd) {
+		oldpwd = MD5.encryByMD5(oldpwd);
+		SysAcc sysAcc = new SysAcc();
+		sysAcc.setSysAccEmail(mobile);
+		sysAcc.setSysAccPassword(oldpwd);
+		List<SysAcc> list = new ArrayList<SysAcc>();
+		list = sysAccDao.select(sysAcc);
+		if (list.size() > 0) {
+			sysAcc = list.get(0);
+		} else {
+			sysAcc = null;
+		}
+		return sysAcc;
+	}
+
+	/**
+	 * 根据手机修改密码
+	 * @param mobile
+	 * @param oldpwd
+	 * @return
+	 */
+	@Override
+	public SysAcc getSysAccForLoginByRepwd(String mobile, String oldpwd) {
+//		oldpwd = MD5.encryByMD5(oldpwd);
+		SysAcc sysAcc = new SysAcc();
+		sysAcc.setSysAccEmail(mobile);
+//		sysAcc.setSysAccPassword(oldpwd);
+		List<SysAcc> list = new ArrayList<SysAcc>();
+		list = sysAccDao.select(sysAcc);
+		if (list.size() > 0) {
+			sysAcc = list.get(0);
+		} else {
+			sysAcc = null;
+		}
+		return sysAcc;
+	}
 	//================== end ======================
 }
