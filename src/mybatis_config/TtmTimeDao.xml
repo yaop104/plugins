@@ -26,7 +26,6 @@
 	</sql>
 
 	<sql id="field">
-			ttm_time_unid,
 			ttm_time_state,
 			ttm_time_cdate,
 			ttm_time_udate,
@@ -38,7 +37,6 @@
 	</sql>
 
 	<sql id="property">
-			next.nextval,
 			#{ttmTimeState,jdbcType=VARCHAR},
 			#{ttmTimeCdate,jdbcType=TIMESTAMP},
 			#{ttmTimeUdate,jdbcType=TIMESTAMP},

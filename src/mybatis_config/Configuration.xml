@@ -39,6 +39,8 @@
 		<typeAlias type="com.sme.entity.TodOrder" alias="TodOrder" />
 		<typeAlias type="com.sme.entity.TosOrderSource" alias="TosOrderSource" />
 		<typeAlias type="com.sme.entity.TtmTime" alias="TtmTime" />
+		<typeAlias type="com.sme.entity.TstStatement" alias="TstStatement" />
+		<typeAlias type="com.sme.entity.TapApplication" alias="TapApplication" />
 	</typeAliases>
 	
 	<!--<environments default="MySQL">
@@ -83,5 +85,7 @@
 		<mapper resource="./mybatis_config/TodOrderDao.xml"/>
 		<mapper resource="./mybatis_config/TosOrderSourceDao.xml"/>
 		<mapper resource="./mybatis_config/TtmTimeDao.xml"/>
+		<mapper resource="./mybatis_config/TstStatementDao.xml"/>
+		<mapper resource="./mybatis_config/TapApplicationDao.xml"/>
 	</mappers>
 </configuration>

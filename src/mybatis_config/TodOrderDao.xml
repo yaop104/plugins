@@ -26,7 +26,6 @@
 	</sql>
 
 	<sql id="field">
-			tod_order_unid,
 			tod_order_ordernum,
 			tod_order_state,
 			tod_order_cdate,
@@ -38,7 +37,6 @@
 	</sql>
 
 	<sql id="property">
-			next.nextval,
 			#{todOrderOrdernum,jdbcType=VARCHAR},
 			#{todOrderState,jdbcType=VARCHAR},
 			#{todOrderCdate,jdbcType=TIMESTAMP},

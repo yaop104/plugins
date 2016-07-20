@@ -34,7 +34,6 @@
 	</sql>
 
 	<sql id="field">
-			tpt_unid,
 			tpt_state,
 			tpt_order,
 			tpt_cdate,
@@ -50,7 +49,6 @@
 	</sql>
 
 	<sql id="property">
-			next.nextval,
 			#{tptState,jdbcType=VARCHAR},
 			#{tptOrder,jdbcType=INTEGER},
 			#{tptCdate,jdbcType=TIMESTAMP},

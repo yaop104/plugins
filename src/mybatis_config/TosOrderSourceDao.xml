@@ -32,7 +32,6 @@
 	</sql>
 
 	<sql id="field">
-			tos_odsource_unid,
 			tos_odsource_order,
 			tos_odsource_state,
 			tos_odsource_cdate,
@@ -47,7 +46,6 @@
 	</sql>
 
 	<sql id="property">
-			next.nextval,
 			#{tosOdsourceOrder,jdbcType=INTEGER},
 			#{tosOdsourceState,jdbcType=VARCHAR},
 			#{tosOdsourceCdate,jdbcType=TIMESTAMP},
