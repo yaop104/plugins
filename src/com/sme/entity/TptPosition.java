@@ -1,5 +1,7 @@
 package com.sme.entity;
 
+import com.sme.core.model.BaseObject;
+
 import java.io.Serializable;
 
 import java.util.Date;
@@ -7,7 +9,7 @@ import java.util.Date;
 /**
  * 投放位(TptPosition)模型对象
  */
-public class TptPosition implements Serializable {
+public class TptPosition extends BaseObject implements Serializable {
 	//======================字段列表========================
 	/** unid */
 	private Integer	tptUnid;

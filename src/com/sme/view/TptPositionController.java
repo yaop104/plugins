@@ -6,6 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sme.core.service.InterfaceBaseService;
+import com.sme.core.view.BaseController;
+import com.sme.entity.TbcInfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,7 @@ import com.sme.util.RespUtil;
 
 @Controller
 @RequestMapping("/TptPosition")
-public class TptPositionController {
+public class TptPositionController extends BaseController<TptPosition> {
 	@Autowired
 	private TptPositionServiceImpl tptPositionServiceImpl;
 	
@@ -31,13 +34,6 @@ public class TptPositionController {
 	
 	@RequestMapping(value="/tptPositionlist", method={RequestMethod.GET})
 	public String tptPositionList(TptPosition tptPosition, HttpServletRequest req) {
-		try {
-			log.info("<=====执行sysmenulist====>");
-			List<TptPosition> tptPositions = tptPositionServiceImpl.select(tptPosition);
-//			RespUtil.setResp(tptPositions, 10, 1, req);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
 		return "/tptPosition/tptPositionlist";
 	}
 	
@@ -138,7 +134,12 @@ public class TptPositionController {
 	public void setTptPositionServiceImpl(TptPositionServiceImpl tptPositionServiceImpl) {
 		this.tptPositionServiceImpl = tptPositionServiceImpl;
 	}
-	
+
+	@Override
+	public InterfaceBaseService<TptPosition> getService() {
+		return tptPositionServiceImpl;
+	}
+
 	//================== begin ======================
  
 	//================== end ======================

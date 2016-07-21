@@ -314,10 +314,14 @@
 		SELECT <include refid="fieldAsPropertyAsP" /> FROM p_app_detail p, (SELECT detail.p_appdetail_apkactionid, MAX(detail.p_appdetail_id) AS appdetail_id
 		FROM p_application app,p_app_detail detail
 
-		WHERE app.p_app_id = detail.p_appdetail_apkactionid AND app.p_app_bigType='1'
+		WHERE app.p_app_id = detail.p_appdetail_apkactionid AND app.p_app_bigType='1' and detail.p_appdetail_auditstate in (3,4)
 
 		<if test="pAppdetailApkactionid!=null">
 			AND detail.p_appdetail_apkactionid = #{pAppdetailApkactionid}
+		</if>
+
+		<if test="pAppdetailName!=null">
+			AND detail.p_appdetail_name like '%${pAppdetailName}%'
 		</if>
 
 		GROUP BY detail.p_appdetail_apkactionid) c WHERE p.p_appdetail_id = c.appdetail_id

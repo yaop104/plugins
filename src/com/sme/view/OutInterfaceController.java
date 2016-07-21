@@ -119,8 +119,8 @@ public class OutInterfaceController {
         try {
             log.info("<=====执行getHomePage====>");
             List<TdcDictionary> tdcDictionarys = tdcDictionaryServiceImpl.select(new TdcDictionary());
-            PApplication pApplication = new PApplication();
-            List<PApplication> pAppDetails = pApplicationService.selectHot(pApplication);
+            PAppDetail pAppDetail = new PAppDetail();
+            List<PAppDetail> pAppDetails = pAppDetailService.selectDetail(pAppDetail);
             List<TagTag> tagTags =tagTagServiceImpl.select(new TagTag());
             Map<String, Object> map = new HashMap<>();
             map.put("type",tdcDictionarys);

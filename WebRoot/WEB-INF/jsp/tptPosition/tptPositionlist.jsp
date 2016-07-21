@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<%@ include file="/WEB-INF/jsp/sys/taglib2.jsp"%>
-	<title>公司信息</title>
+	<title>信息</title>
 </head>
 <script language="javascript">
 	var grid;
@@ -13,31 +13,30 @@
 		var colArr = [];
 
 		colArr = [
-			{ field:'tioUnid', align:'center', width:'150' , title:'ID' },
-			{ field:'tioName', align:'center', width:'150' , title:'公司名称' },
-			{ field:'tioContactname', align:'center', width:'120', sortable:'true' , title:'联系人' },
-			{ field:'tioContactphone', align:'center',  width:'80', sortable:'true' , title:'联系方式' },
-			{ field:'tioType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
-			{ field:'tioState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState }
+			{ field:'tptUnid', align:'center', width:'150' , title:'ID' },
+			{ field:'tptName', align:'center', width:'150' , title:'名称' },
+			{ field:'tptPrice', align:'center', width:'120', sortable:'true' , title:'价格（元/天）' },
+			{ field:'tptDemourl', align:'center',  width:'80', sortable:'true' , title:'示例图片' },
+			{ field:'tptState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState }
 		];
 
 		var _toolbars = [{
 			id : 'btnadd',
-			text : '添加运营商',
+			text : '添加广告',
 			iconCls : 'icon-add',
 			handler : function() {
 				addOption();
 			}
 		}, '-', {
 			id : 'btncut',
-			text : '删除运营商',
+			text : '删除广告',
 			iconCls : 'icon-remove',
 			handler : function() {
 				deleteOption();
 			}
 		}, '-', {
 			id : 'btnupdate',
-			text : '更新运营商',
+			text : '更新广告',
 			iconCls : 'icon-edit',
 			handler : function() {
 				editOption();
@@ -51,19 +50,19 @@
 			nowrap : true,//设置为true，当数据长度超出列宽时将会自动截取。
 			striped : true,//显示条纹
 			collapsible : true,
-			url : '${ctx }/TbcInfo/gettbcInfolists.do',
+			url : '${ctx }/TptPosition/page.do',
 			pageList : [10, 15, 20],
 			pageSize : 10,
 			fitColumns : false,
 			fit : true,
 			loadMsg : '正在加载数据.......',//当从远程站点载入数据时，显示的一条快捷信息
 			pagination : true,//设置true将在数据表格底部显示分页工具栏
-			sortName : 'tioUnid',//当数据表格初始化时以哪一列来排序
+			sortName : 'tptUnid',//当数据表格初始化时以哪一列来排序
 			sortOrder : 'asc',//定义排序顺序，可以是'asc'或者'desc'（正序或者倒序）
 			remoteSort : false,//定义是否通过远程服务器对数据排序
 			itColumns : false,
 			singleSelect : false,//设置为true将只允许选择一行
-			idField : 'tioUnid',//表明该列是一个唯一列。
+			idField : 'tptUnid',//表明该列是一个唯一列。
 			rownumbers : true,//设置为true将显示行数
 			frozenColumns:[[
 				{field:'ck',checkbox:true}
@@ -82,8 +81,8 @@
 
 		/* queryParams.StartTime = StartTime;
 		 queryParams.EndTime = EndTime;   */
-		queryParams.tioName = Name;
-		queryParams.tioState = State;
+		queryParams.tptName = Name;
+		queryParams.tptState = State;
 
 		return queryParams;
 
@@ -102,7 +101,7 @@
 	function addOption(){
 		$('#d1').dialog('open');
 		$('#f1').form('reset');
-		$('#f1').form.url='${ctx }/TbcInfo/save.do';
+		$('#f1').form.url='${ctx }/TptPosition/save.do';
 	}
 
 	function editOption(){
@@ -110,7 +109,7 @@
 		var rows = grid.datagrid('getSelections');
 		if(row){
 			if(1 == rows.length){
-				$('#f1').form.url='${ctx }/TbcInfo/save.do';
+				$('#f1').form.url='${ctx }/TptPosition/save.do';
 				$('#f1').form('load',{
 					'tioUnid':row.tioUnid,
 					'tioType':row.tioType,
@@ -141,7 +140,7 @@
 			s=s.substr(0,s.length-1);
 			$.messager.confirm('确认？', '确认删除所有选中记录吗', function(r){
 				if (r){
-					$.post('${ctx }/TbcInfo/deleteTbcInfos.do',{'ids': s},function(data){
+					$.post('${ctx }/TptPosition/deleteTptPositions.do',{'ids': s},function(data){
 						if(data.success){
 							msgShow('成功',data.message,'info');
 							grid.datagrid('reload');
@@ -217,7 +216,7 @@
 		<table id="t1"></table>
 
 		<!-- 窗口-->
-		<div id="d1" class="easyui-dialog" buttons="#btn1" title="编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:400px;height:300px;overflow: hidden;">
+		<div id="d1" class="easyui-dialog" buttons="#btn1" title="编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:500px;height:600px;overflow: hidden;">
 			<div style="padding:10px 60px 20px 60px">
 				<form id="f1"  class="easyui-form" method="post">
 					<input type="hidden" id="tioUnid" name="tioUnid"/>

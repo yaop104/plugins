@@ -126,7 +126,7 @@
 	</select>
 	<select id="select" parameterType="com.sme.entity.SysMenu" resultType="com.sme.entity.SysMenu">
 		SELECT <include refid="fieldAsProperty" /> FROM SYS_MENU <include refid="idCnd2"/> 
-		order by sysMenuPid
+		order by sysMenuPid,sysMenuOrder
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.SysMenu">
 		INSERT INTO SYS_MENU(<include refid="field" />) VALUES (<include refid="property" />)
