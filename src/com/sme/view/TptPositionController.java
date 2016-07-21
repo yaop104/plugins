@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sme.core.model.StringJSON;
 import com.sme.core.service.InterfaceBaseService;
 import com.sme.core.view.BaseController;
 import com.sme.entity.TbcInfo;
@@ -69,23 +70,29 @@ public class TptPositionController extends BaseController<TptPosition> {
 	 }
 	
 	@RequestMapping(value="/save", method={RequestMethod.POST})
-	public String tptPositionSave(TptPosition tptPosition,Model model, HttpServletRequest request, HttpServletResponse response){
+	@ResponseBody
+	@com.sme.core.spring.Log(type = "运营商管理", desc = "修改运营商")
+	public StringJSON tptPositionSave(TptPosition tptPosition, Model model, HttpServletRequest request, HttpServletResponse response){
 		
 		try
 		{
-//			if(tptPosition.getTptPositionId()!=null){
-//
-//				return "redirect:/tptPosition/tptPositionlist.do";
-//			}else{
-				
-				return "redirect:/tptPosition/tptPositionlist.do";
-//			}
+			if(tptPosition.getTptUnid()!=null){
+
+				return getSuccess(true, "修改成功");
+			} else {
+
+				tptPosition.setTptCdate(new Date());
+				tptPosition.setTptCuser("admin");
+				tptPositionServiceImpl.insert(tptPosition);
+
+				return getSuccess(true, "添加成功");
+			}
 			
 		}
 		catch (Exception e)
 		{
 			log.error(e.getMessage());
-			return tptPositionAdd(model,tptPosition);
+			return getSuccess(false, "发生系统异常");
 		}
 	}
 	

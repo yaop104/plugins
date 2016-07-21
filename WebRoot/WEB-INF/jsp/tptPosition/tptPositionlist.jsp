@@ -111,13 +111,13 @@
 			if(1 == rows.length){
 				$('#f1').form.url='${ctx }/TptPosition/save.do';
 				$('#f1').form('load',{
-					'tioUnid':row.tioUnid,
-					'tioType':row.tioType,
-					'tioName':row.tioName,
-					'tioContactname':row.tioContactname,
-					'tioContactphone':row.tioContactphone,
-					'tioState':row.tioState,
-					'tioDesc':row.tioDesc
+					'tptUnid':row.tptUnid,
+					'tptType':row.tptType,
+					'tptName':row.tptName,
+					'tptContactname':row.tptContactname,
+					'tptContactphone':row.tptContactphone,
+					'tptState':row.tptState,
+					'tptDesc':row.tptDesc
 				});
 				$('#d1').dialog('open');
 			}else{
@@ -135,7 +135,7 @@
 		if(row){
 			var s='';
 			$.each(rows,function(i,n){
-				s+=n.tioUnid+',';
+				s+=n.tptUnid+',';
 			});
 			s=s.substr(0,s.length-1);
 			$.messager.confirm('确认？', '确认删除所有选中记录吗', function(r){
@@ -219,34 +219,26 @@
 		<div id="d1" class="easyui-dialog" buttons="#btn1" title="编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:500px;height:600px;overflow: hidden;">
 			<div style="padding:10px 60px 20px 60px">
 				<form id="f1"  class="easyui-form" method="post">
-					<input type="hidden" id="tioUnid" name="tioUnid"/>
+					<input type="hidden" id="tptUnid" name="tptUnid"/>
 					<table>
 						<tr>
-							<td align="right">类型：</td>
+							<td align="right">广告位命名：</td>
+							<td><input class="easyui-validatebox" name="tptName" required="true" style="width: 152px" id="tptName"/></td>
+						</tr>
+						<tr>
+							<td align="right">价格：</td>
+							<td><input class="easyui-validatebox" name="tptPrice" required="true" style="width: 152px" id="tptPrice"/></td>
+						</tr>
+						<tr>
+							<td align="right">示例：</td>
 							<td>
-								<select  class="easyui-combobox" name="tioType" id="tioType" style="width:152px;" required="true" editable="false">
-									<option value="1">开发商</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">公司名称：</td>
-							<td><input class="easyui-validatebox" name="tioName" required="true" style="width: 152px" id="tioName"/></td>
-						</tr>
-						<tr>
-							<td align="right">联系人：</td>
-							<td><input class="easyui-validatebox" name="tioContactname" required="true" style="width: 152px" id="tioContactname"/></td>
-						</tr>
-						<tr>
-							<td align="right">联系电话：</td>
-							<td>
-								<input class="easyui-validatebox" name="tioContactphone" required="true" style="width: 152px" id="tioContactphone"/>
+								<input class="easyui-validatebox" name="tptDemourl" required="true" style="width: 152px" id="tptDemourl"/>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">状态：</td>
 							<td>
-								<select  class="easyui-combobox" name="tioState" id="tioState" style="width:152px;" required="true" editable="false">
+								<select  class="easyui-combobox" name="tptState" id="tptState" style="width:152px;" required="true" editable="false">
 									<option value="1">有效</option>
 									<option value="2">无效</option>
 								</select>
@@ -254,7 +246,7 @@
 						</tr>
 						<tr>
 							<td>备注：</td>
-							<td><input class="easyui-textbox" id="tioDesc" name="tioDesc" data-options="multiline:true" style="height:60px"/></td>
+							<td><input class="easyui-textbox" id="tptDesc" name="tptDesc" data-options="multiline:true" style="height:60px"/></td>
 						</tr>
 					</table>
 				</form>
