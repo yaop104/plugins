@@ -6,6 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sme.core.model.StringJSON;
+import com.sme.core.service.InterfaceBaseService;
+import com.sme.core.view.BaseController;
+import com.sme.util.StringUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +27,7 @@ import com.sme.util.RespUtil;
 
 @Controller
 @RequestMapping("/TodOrder")
-public class TodOrderController {
+public class TodOrderController extends BaseController<TodOrder>{
 	@Autowired
 	private TodOrderServiceImpl todOrderServiceImpl;
 	
@@ -138,8 +142,27 @@ public class TodOrderController {
 	public void setTodOrderServiceImpl(TodOrderServiceImpl todOrderServiceImpl) {
 		this.todOrderServiceImpl = todOrderServiceImpl;
 	}
-	
+
+	@Override
+	public InterfaceBaseService<TodOrder> getService() {
+		return todOrderServiceImpl;
+	}
+
 	//================== begin ======================
- 
+	@RequestMapping(value = "/insert", method = { RequestMethod.POST })
+	@ResponseBody
+	public StringJSON insert(TodOrder t) {
+		try {
+			t.setTodOrderOrdernum(String.valueOf(System.currentTimeMillis()));
+			t.setTodOrderCuser(1);
+			t.setTodOrderCdate(new Date());
+			t.setTodOrderState("2");
+			todOrderServiceImpl.insert(t);
+			return getSuccess(true, "新增成功！");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return getSuccess(false, "系统异常！");
+		}
+	}
 	//================== end ======================
 }

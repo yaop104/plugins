@@ -11,6 +11,9 @@
 		<result property="todOrderUuser" column="todOrderUuser" /><!--创建人-->
 		<result property="todOrderCustomid" column="todOrderCustomid" /><!--客户id-->
 		<result property="odOrderPackageid" column="odOrderPackageid" /><!--套餐id-->
+		<result property="todOrderPositionprice" column="todOrderPositionprice" /><!--套餐id-->
+		<result property="todOrderPositionname" column="todOrderPositionname" /><!--套餐id-->
+		<result property="todOrderTotaldays" column="todOrderTotaldays" /><!--套餐id-->
 	</resultMap>
 
 	<sql id="fieldAsProperty">
@@ -22,7 +25,10 @@
 		tod_order_cuser AS todOrderCuser,
 		tod_order_uuser AS todOrderUuser,
 		tod_order_customid AS todOrderCustomid,
-		od_order_packageid AS odOrderPackageid
+		od_order_packageid AS odOrderPackageid,
+		tod_order_positionprice AS todOrderPositionprice,
+		tod_order_positionname AS todOrderPositionname,
+		tod_order_totaldays AS todOrderTotaldays
 	</sql>
 
 	<sql id="field">
@@ -33,7 +39,10 @@
 			tod_order_cuser,
 			tod_order_uuser,
 			tod_order_customid,
-			od_order_packageid
+			od_order_packageid,
+			tod_order_positionprice,
+			tod_order_positionname,
+			tod_order_totaldays
 	</sql>
 
 	<sql id="property">
@@ -44,7 +53,10 @@
 			#{todOrderCuser,jdbcType=INTEGER},
 			#{todOrderUuser,jdbcType=INTEGER},
 			#{todOrderCustomid,jdbcType=INTEGER},
-			#{odOrderPackageid,jdbcType=INTEGER}
+			#{odOrderPackageid,jdbcType=INTEGER},
+			#{todOrderPositionprice,jdbcType=INTEGER},
+			#{todOrderPositionname,jdbcType=INTEGER},
+			#{todOrderTotaldays,jdbcType=INTEGER}
 	</sql>
 
 	<sql id="fieldEqProperty">
@@ -55,7 +67,10 @@
 			tod_order_cuser=#{todOrderCuser,jdbcType=INTEGER},
 			tod_order_uuser=#{todOrderUuser,jdbcType=INTEGER},
 			tod_order_customid=#{todOrderCustomid,jdbcType=INTEGER},
-			od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER}
+			od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER},
+			tod_order_positionprice=#{todOrderPositionprice,jdbcType=INTEGER},
+			tod_order_positionname=#{todOrderPositionname,jdbcType=INTEGER},
+			tod_order_totaldays=#{todOrderTotaldays,jdbcType=INTEGER}
 	</sql>
 
 	<sql id="fieldEqPropertyIf">
@@ -66,7 +81,10 @@
 			<if test="todOrderCuser!=null" >tod_order_cuser=#{todOrderCuser,jdbcType=INTEGER},</if>
 			<if test="todOrderUuser!=null" >tod_order_uuser=#{todOrderUuser,jdbcType=INTEGER},</if>
 			<if test="todOrderCustomid!=null" >tod_order_customid=#{todOrderCustomid,jdbcType=INTEGER},</if>
-			<if test="odOrderPackageid!=null" >od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER}</if>
+			<if test="odOrderPackageid!=null" >od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER},</if>
+			<if test="todOrderPositionprice!=null" >tod_order_positionprice=#{todOrderPositionprice,jdbcType=INTEGER},</if>
+			<if test="todOrderPositionname!=null" >tod_order_positionname=#{todOrderPositionname,jdbcType=INTEGER},</if>
+			<if test="todOrderTotaldays!=null" >tod_order_totaldays=#{todOrderTotaldays,jdbcType=INTEGER}</if>
 	</sql>
 
 	
@@ -80,6 +98,9 @@
 					<if test="todOrderUuser!=null and todOrderUuser!=''" >AND tod_order_uuser=#{todOrderUuser,jdbcType=INTEGER}</if>
 					<if test="todOrderCustomid!=null and todOrderCustomid!=''" >AND tod_order_customid=#{todOrderCustomid,jdbcType=INTEGER}</if>
 					<if test="odOrderPackageid!=null and odOrderPackageid!=''" >AND od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER}</if>
+					<if test="todOrderPositionprice!=null and todOrderPositionprice!=''" >AND tod_order_positionprice=#{todOrderPositionprice,jdbcType=INTEGER}</if>
+					<if test="todOrderPositionname!=null and todOrderPositionname!=''" >AND tod_order_positionname=#{todOrderPositionname,jdbcType=INTEGER}</if>
+					<if test="todOrderTotaldays!=null and todOrderTotaldays!=''" >AND tod_order_totaldays=#{todOrderTotaldays,jdbcType=INTEGER}</if>
 		</where>
 	</sql>
 	

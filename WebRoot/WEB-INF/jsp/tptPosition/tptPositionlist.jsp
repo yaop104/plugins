@@ -174,23 +174,30 @@
 		return returnvalue;
 	}
 	var hotAppId;
+	var hotAppName;
 	function buyPosition(id, name){
 		hotAppId = id;
+		hotAppName = name;
 		$('#d222').dialog('open');
 		$('#f222').form('reset');
 	}
 
 	function  saveFormHot(){
-		var arr =$('#tagTagUnid').combo('getValues');
-alert(arr);
-		<%--$.post('${ctx }/TatTagApp/insertTagApp.do',{'ids': arr,'hotAppId':hotAppId},function(data){--%>
-			<%--if(data.success){--%>
-				<%--msgShow('成功',data.message,'info');--%>
-				<%--clearFormHot()--%>
-			<%--}else{--%>
-				<%--msgShow('错误',data.message,'error');--%>
-			<%--}--%>
-		<%--}, 'json');--%>
+		var arr =$('#tagTagUnid').combo('getValue');
+
+		alert(arr);
+		$.post('${ctx }/TodOrder/insert.do',{
+			'odOrderPackageid': hotAppId,
+			'todOrderTotaldays': arr,
+			'todOrderPositionname': hotAppName
+		},function(data){
+			if(data.success){
+				msgShow('成功',data.message,'info');
+				clearFormHot()
+			}else{
+				msgShow('错误',data.message,'error');
+			}
+		}, 'json');
 
 	}
 

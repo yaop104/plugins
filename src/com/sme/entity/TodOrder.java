@@ -1,5 +1,7 @@
 package com.sme.entity;
 
+import com.sme.core.model.BaseObject;
+
 import java.io.Serializable;
 
 import java.util.Date;
@@ -7,7 +9,7 @@ import java.util.Date;
 /**
  * 订单管理(TodOrder)模型对象
  */
-public class TodOrder implements Serializable {
+public class TodOrder extends BaseObject implements Serializable {
 	//======================字段列表========================
 	/** id */
 	private Integer	todOrderUnid;
@@ -35,6 +37,35 @@ public class TodOrder implements Serializable {
 
 	/** 套餐id */
 	private Integer	odOrderPackageid;
+
+	private Integer todOrderPositionprice;
+
+	private String todOrderPositionname;
+	private Integer todOrderTotaldays;
+
+	public Integer getTodOrderPositionprice() {
+		return todOrderPositionprice;
+	}
+
+	public void setTodOrderPositionprice(Integer todOrderPositionprice) {
+		this.todOrderPositionprice = todOrderPositionprice;
+	}
+
+	public String getTodOrderPositionname() {
+		return todOrderPositionname;
+	}
+
+	public void setTodOrderPositionname(String todOrderPositionname) {
+		this.todOrderPositionname = todOrderPositionname;
+	}
+
+	public Integer getTodOrderTotaldays() {
+		return todOrderTotaldays;
+	}
+
+	public void setTodOrderTotaldays(Integer todOrderTotaldays) {
+		this.todOrderTotaldays = todOrderTotaldays;
+	}
 
 	public Integer getTodOrderUnid() {
 		return this.todOrderUnid;
