@@ -17,7 +17,8 @@
 			{ field:'tptName', align:'center', width:'150' , title:'名称' },
 			{ field:'tptPrice', align:'center', width:'120', sortable:'true' , title:'价格（元/天）' },
 			{ field:'tptDemourl', align:'center',  width:'80', sortable:'true' , title:'示例图片' },
-			{ field:'tptState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState }
+			{ field:'tptState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState },
+			{ field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];
 
 		var _toolbars = [{
@@ -168,6 +169,36 @@
 			return '<span style="color: green">开发商</span>';
 	}
 
+	function ys1(val, rec, index) {
+		var returnvalue="<img  src='${ctx}/image/table_td_button/check.png' onclick='buyPosition(" + rec.tptUnid + ",\"" + rec.tptName + "\")' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='buyPosition(" + rec.tptUnid + ",\"" + rec.tptUnid + "\")'>购买</a>&nbsp;&nbsp;";
+		return returnvalue;
+	}
+	var hotAppId;
+	function buyPosition(id, name){
+		hotAppId = id;
+		$('#d222').dialog('open');
+		$('#f222').form('reset');
+	}
+
+	function  saveFormHot(){
+		var arr =$('#tagTagUnid').combo('getValues');
+alert(arr);
+		<%--$.post('${ctx }/TatTagApp/insertTagApp.do',{'ids': arr,'hotAppId':hotAppId},function(data){--%>
+			<%--if(data.success){--%>
+				<%--msgShow('成功',data.message,'info');--%>
+				<%--clearFormHot()--%>
+			<%--}else{--%>
+				<%--msgShow('错误',data.message,'error');--%>
+			<%--}--%>
+		<%--}, 'json');--%>
+
+	}
+
+	function clearFormHot(){
+		$('#d222').dialog('close');
+		$('#f222').form('reset');
+	}
+
 	function  saveForm(){
 		$('#f1').form('submit',{
 			url:$('#f1').form.url,
@@ -256,6 +287,31 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton c6" data-options="iconCls:'icon-ok'" onclick="saveForm()" style="width:90px"> 保  存 </a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="clearForm()" style="width:90px"> 取  消 </a>
 		</div>
+	</div>
+
+	<!-- 窗口-->
+	<div id="d222" class="easyui-dialog" buttons="#btn2" title="编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:400px;height:300px;overflow: hidden;">
+		<div style="padding:10px 60px 20px 60px">
+			<form id="f222"  class="easyui-form" method="post">
+				<table>
+					<tr>
+						<td align="right">选择投放期限（具体投放时间从购买日期开始计算）：</td>
+						<td>
+							<select  class="easyui-combobox" name="tagTagUnid" id="tagTagUnid" style="width:152px;" editable="false">
+								<option value="1">1天</option>
+								<option value="7">7天</option>
+								<option value="15">15天</option>
+								<option value="30">30天</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	<div id="btn2">
+		<a href="javascript:void(0)" class="easyui-linkbutton c6" data-options="iconCls:'icon-ok'" onclick="saveFormHot()" style="width:90px"> 保  存 </a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="clearFormHot()" style="width:90px"> 取  消 </a>
 	</div>
 </div>
 </body>
