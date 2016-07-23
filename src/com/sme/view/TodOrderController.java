@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.sme.core.model.StringJSON;
 import com.sme.core.service.InterfaceBaseService;
 import com.sme.core.view.BaseController;
+import com.sme.entity.TptPosition;
+import com.sme.service.impl.TptPositionServiceImpl;
 import com.sme.util.StringUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,6 +32,8 @@ import com.sme.util.RespUtil;
 public class TodOrderController extends BaseController<TodOrder>{
 	@Autowired
 	private TodOrderServiceImpl todOrderServiceImpl;
+	@Autowired
+	private TptPositionServiceImpl tptPositionServiceImpl;
 	
 	private Log log = LogFactory.getLog(TodOrderController.class);
 	
@@ -153,12 +157,22 @@ public class TodOrderController extends BaseController<TodOrder>{
 	@ResponseBody
 	public StringJSON insert(TodOrder t) {
 		try {
-			t.setTodOrderOrdernum(String.valueOf(System.currentTimeMillis()));
-			t.setTodOrderCuser(1);
-			t.setTodOrderCdate(new Date());
-			t.setTodOrderState("2");
-			todOrderServiceImpl.insert(t);
-			return getSuccess(true, "新增成功！");
+			TptPosition tptPosition = new TptPosition();
+			tptPosition.setTptUnid(t.getOdOrderPackageid());
+			tptPosition = tptPositionServiceImpl.getById(tptPosition);
+			if(tptPosition!=null){
+				t.setTodOrderOrdernum(String.valueOf(System.currentTimeMillis()));
+				t.setTodOrderCuser(1);
+				t.setTodOrderCdate(new Date());
+				t.setTodOrderState("2");
+				t.setTodOrderCustomid(1);
+				t.setTodOrderPositionprice(tptPosition.getTptPrice());
+				todOrderServiceImpl.insert(t);
+				return getSuccess(true, "新增成功！");
+			}else{
+				return getSuccess(false, "广告位不存在！");
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return getSuccess(false, "系统异常！");

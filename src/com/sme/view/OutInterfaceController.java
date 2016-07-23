@@ -287,6 +287,26 @@ public class OutInterfaceController {
 
     }
 
+    @RequestMapping(value="/getpApplicationPackages", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public StringJSON getpApplicationPackages(PAppDetail pAppDetail, HttpServletRequest req) {
+        try {
+            log.info("<=====执行getpApplicationPackages====>");
+            List<PAppDetail> pAppDetails = pAppDetailService.selectDetail(pAppDetail);
+            String applicationPackages = "";
+            for(PAppDetail p : pAppDetails){
+                applicationPackages = applicationPackages + p.getpAppdetailPackagename() + ",";
+            }
+            applicationPackages = applicationPackages.substring(0,applicationPackages.length()-1);
+            return getSuccess(true,"",applicationPackages);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return getSuccess(false,"app获取失败,系统异常！！");
+        }
+
+    }
+
+
     @RequestMapping(value="/insertDownload", method={RequestMethod.GET , RequestMethod.POST})
     @ResponseBody
     public StringJSON insertDownload(TapDownload tapDownload, HttpServletRequest req) {

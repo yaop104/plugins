@@ -63,7 +63,7 @@ public class ApkinformatonUtil {
             shellCommand[0] = "cmd";
             shellCommand[1] = "/C";
             softName = "aapt.exe";
-            mAaptPath = "D:\\";
+            mAaptPath = "C:\\";
         } else {
             // Unix, Linux ...
             shellCommand[0] = "/bin/sh";
@@ -506,7 +506,7 @@ public class ApkinformatonUtil {
 //	    System.out.println(mp.find());
 //	    System.out.println(mp.group());
         try {
-            String apkPath = "D:\\Download\\apk\\_1466082340279.apk";
+            String apkPath = "C:\\Users\\yao\\ngfile\\download\\apk\\_1469203865915.apk";
             ApkinformatonUtil util = new ApkinformatonUtil();
             util.processApk(apkPath);
             System.out.println(util.actionname);

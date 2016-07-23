@@ -51,24 +51,32 @@ public class TptPositionController extends BaseController<TptPosition> {
 		}
 		
 	}
-	
-	 @RequestMapping(value="/{id}/delete", method={RequestMethod.GET})
-	 public String tptPositionDelete(@PathVariable Integer id){
-		 try
-		{
-			 log.info("<=====执行delete口====>" + id);
-			 TptPosition tptPosition = new TptPosition();
-//			 tptPosition.setTptPositionId(id);
-			tptPositionServiceImpl.delete(tptPosition);
-			return "redirect:/tptPosition/tptPositionlist.do";
+
+	@RequestMapping(value = "/deleteTptPositions")
+	@ResponseBody
+	@com.sme.core.spring.Log(type = "运营商管理", desc = "删除运营商")
+	public StringJSON tptPositionDelete(String ids) {
+		try {
+			if (ids != null && ids.length() > 0) {
+				String[] idStrings = ids.split(",");
+
+				for (String id : idStrings) {
+					TptPosition tptPosition = new TptPosition();
+					 tptPosition.setTptUnid(Integer.valueOf(id));
+					tptPositionServiceImpl.delete(tptPosition);
+				}
+
+				return getSuccess(true, "删除成功！", null);
+			} else {
+				return getSuccess(false, "删除内容为空！", null);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return getSuccess(false, "系统异常！", null);
 		}
-		catch (Exception e)
-		{
-			log.error(e.getMessage());
-			return "redirect:/tptPosition/tptPositionlist.do";
-		}
-	 }
-	
+	}
+
+
 	@RequestMapping(value="/save", method={RequestMethod.POST})
 	@ResponseBody
 	@com.sme.core.spring.Log(type = "运营商管理", desc = "修改运营商")
@@ -77,7 +85,14 @@ public class TptPositionController extends BaseController<TptPosition> {
 		try
 		{
 			if(tptPosition.getTptUnid()!=null){
-
+				TptPosition tptPosition1 = new TptPosition();
+				tptPosition1.setTptUnid(tptPosition.getTptUnid());
+				tptPosition1 = tptPositionServiceImpl.getById(tptPosition1);
+				tptPosition1.setTptDemourl(tptPosition.getTptDemourl());
+				tptPosition1.setTptDesc(tptPosition.getTptDesc());
+				tptPosition1.setTptName(tptPosition.getTptName());
+				tptPosition1.setTptPrice(tptPosition.getTptPrice());
+				tptPosition1.setTptState(tptPosition.getTptState());
 				return getSuccess(true, "修改成功");
 			} else {
 
