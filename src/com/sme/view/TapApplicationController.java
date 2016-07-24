@@ -6,6 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sme.core.model.StringJSON;
+import com.sme.entity.SysAcc;
+import com.sme.entity.TptPosition;
+import com.sme.entity.TstStatement;
+import com.sme.service.SysAccService;
+import com.sme.service.TstStatementService;
+import com.sme.service.impl.SysAccServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +35,19 @@ import com.sme.util.RespUtil;
 public class TapApplicationController extends BaseController<TapApplication>{
 	@Autowired
 	private TapApplicationService tapApplicationServiceImpl;
-	
+
 	private Log log = LogFactory.getLog(TapApplicationController.class);
 	
 	@RequestMapping(value="/tapApplicationlist", method={RequestMethod.GET})
 	public String tapApplicationList(TapApplication tapApplication, HttpServletRequest req) {
-		try {
-			log.info("<=====执行sysmenulist====>");
-			List<TapApplication> tapApplications = tapApplicationServiceImpl.select(tapApplication);
-//			RespUtil.setResp(tapApplications, 10, 1, req);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
 		return "/tapApplication/tapApplicationlist";
 	}
-	
+
+	@RequestMapping(value="/tapApplicationChecklist", method={RequestMethod.GET})
+	public String tapApplicationChecklist(TapApplication tapApplication, HttpServletRequest req) {
+		return "/tapApplication/tapApplicationChecklist";
+	}
+
 	@RequestMapping(value="/gettapApplicationlists", method={RequestMethod.GET})
 	@ResponseBody
 	public List<TapApplication> tapApplicationLists(TapApplication tapApplication, HttpServletRequest req) {
@@ -74,24 +79,40 @@ public class TapApplicationController extends BaseController<TapApplication>{
 		}
 	 }
 	
+
 	@RequestMapping(value="/save", method={RequestMethod.POST})
-	public String tapApplicationSave(TapApplication tapApplication,Model model, HttpServletRequest request, HttpServletResponse response){
-		
+	@ResponseBody
+	@com.sme.core.spring.Log(type = "运营商管理", desc = "修改运营商")
+	public StringJSON tapApplicationSave(TapApplication tapApplication, Model model, HttpServletRequest request, HttpServletResponse response){
+
 		try
 		{
-//			if(tapApplication.getTapApplicationId()!=null){
-//
-//				return "redirect:/tapApplication/tapApplicationlist.do";
-//			}else{
-				
-				return "redirect:/tapApplication/tapApplicationlist.do";
-//			}
-			
+			if(tapApplication.getTapApplicationUnid()!=null){
+//				TptPosition tptPosition1 = new TptPosition();
+//				tptPosition1.setTptUnid(tptPosition.getTptUnid());
+//				tptPosition1 = tptPositionServiceImpl.getById(tptPosition1);
+//				tptPosition1.setTptDemourl(tptPosition.getTptDemourl());
+//				tptPosition1.setTptDesc(tptPosition.getTptDesc());
+//				tptPosition1.setTptName(tptPosition.getTptName());
+//				tptPosition1.setTptPrice(tptPosition.getTptPrice());
+//				tptPosition1.setTptState(tptPosition.getTptState());
+				return getSuccess(true, "修改成功");
+			} else {
+
+				tapApplication.setTapApplicationCdate(new Date());
+				tapApplication.setTapApplicationState("1");
+				tapApplication.setTapApplicationCuser(1);
+				tapApplication.setTapApplicationCheckstate("1");
+				tapApplicationServiceImpl.insert(tapApplication);
+
+				return getSuccess(true, "添加成功");
+			}
+
 		}
 		catch (Exception e)
 		{
 			log.error(e.getMessage());
-			return tapApplicationAdd(model,tapApplication);
+			return getSuccess(false, "发生系统异常");
 		}
 	}
 	
@@ -121,6 +142,24 @@ public class TapApplicationController extends BaseController<TapApplication>{
 			return "redirect:/tapApplication/tapApplicationlist.do";
 		}
 		
+	}
+
+	@RequestMapping(value = "/update", method = { RequestMethod.POST })
+	@ResponseBody
+	public StringJSON update(TapApplication t) {
+		try {
+			t.setTapApplicationChecktime(new Date());
+			t.setTapApplicationUuser(1);
+			String flag =  tapApplicationServiceImpl.updateForCheck(t);
+			if("1".endsWith(flag)){
+				return getSuccess(true, "更新成功！");
+			}else{
+				return getSuccess(false, "系统异常！");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return getSuccess(false, "系统异常！");
+		}
 	}
 	
 	@RequestMapping("/{id}/info")

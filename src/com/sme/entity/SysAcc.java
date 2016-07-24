@@ -76,6 +76,16 @@ public class SysAcc extends BaseObject{
 
 	private  String sysAccHead;
 
+	public Integer getSysAccMoney() {
+		return sysAccMoney;
+	}
+
+	public void setSysAccMoney(Integer sysAccMoney) {
+		this.sysAccMoney = sysAccMoney;
+	}
+
+	private Integer sysAccMoney;
+
 	public String getSysAccMobile() {
 		return sysAccMobile;
 	}

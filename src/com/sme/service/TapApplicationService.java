@@ -4,7 +4,8 @@ import com.sme.core.service.InterfaceBaseService;
 import com.sme.entity.TapApplication;
 
 public interface TapApplicationService  extends InterfaceBaseService<TapApplication>{
-	//================== begin ======================
+    //================== begin ======================
+    String updateForCheck(TapApplication t);
 
 	//================== end ======================
 }

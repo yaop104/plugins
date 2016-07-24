@@ -18,6 +18,7 @@
 		<result property="sysAccMobile" column="sysAccMobile" /><!--号码-->
 		<result property="sysAccEmail" column="sysAccEmail" /><!--号码-->
 		<result property="sysAccHead" column="sysAccHead" /><!--号码-->
+		<result property="sysAccMoney" column="sysAccMoney" /><!--号码-->
 	</resultMap>
 
 	<sql id="fieldAsProperty">
@@ -36,7 +37,8 @@
 		sys_acc_type AS sysAccType,
 		sys_acc_mobile AS sysAccMobile,
 		sys_acc_email AS sysAccEmail,
-		sys_acc_head AS sysAccHead
+		sys_acc_head AS sysAccHead,
+		sys_acc_money AS sysAccMoney
 	</sql>
 
 	<sql id="field">
@@ -54,7 +56,8 @@
 		sys_acc_type,
 		sys_acc_mobile,
 		sys_acc_email,
-		sys_acc_head
+		sys_acc_head,
+		sys_acc_money
 	</sql>
 
 	<sql id="property">
@@ -72,7 +75,8 @@
 		#{sysAccType,jdbcType=VARCHAR},
 		#{sysAccMobile,jdbcType=VARCHAR},
 		#{sysAccEmail,jdbcType=VARCHAR},
-		#{sysAccHead,jdbcType=VARCHAR}
+		#{sysAccHead,jdbcType=VARCHAR},
+		#{sysAccMoney,jdbcType=INTEGER}
 	</sql>
 
 	<sql id="fieldEqProperty">
@@ -90,7 +94,8 @@
 		sys_acc_type=#{sysAccType,jdbcType=VARCHAR},
 		sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR},
 		sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR},
-		sys_acc_head=#{sysAccHead,jdbcType=VARCHAR}
+		sys_acc_head=#{sysAccHead,jdbcType=VARCHAR},
+		sys_acc_money=#{sysAccMoney,jdbcType=INTEGER}
 	</sql>
 
 	<sql id="fieldEqPropertyIf">
@@ -109,6 +114,7 @@
 		<if test="sysAccMobile!=null" >sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR},</if>
 		<if test="sysAccEmail!=null" >sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR},</if>
 		<if test="sysAccHead!=null" >sys_acc_head=#{sysAccHead,jdbcType=VARCHAR},</if>
+		<if test="sysAccMoney!=null" >sys_acc_money=#{sysAccMoney,jdbcType=INTEGER},</if>
 	</sql>
 	<select id="page" resultType="com.sme.entity.SysAcc" parameterType="map">
 		SELECT <include refid="fieldAsProperty" /> FROM SYS_ACC <include refid="idCnd3"/>
