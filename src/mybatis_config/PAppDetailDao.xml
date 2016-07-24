@@ -75,6 +75,8 @@
 		p_appdetail_cdnpic3 AS pAppdetailCdnpic3
 	</sql>
 	<sql id="fieldAsPropertyAsP">
+		d.p_app_open AS openNumber,
+		d.p_app_praise AS praiseNumber,
 		p.p_appdetail_id AS pAppdetailId,
 		p.p_appdetail_apkactionid AS pAppdetailApkactionid,
 		p.p_appdetail_name AS pAppdetailName,
@@ -311,20 +313,29 @@
 		SELECT <include refid="fieldAsProperty" /> FROM P_APP_DETAIL <include refid="idCnd2"/>
 	</select>
 	<select id="selectDetail" parameterType="com.sme.entity.PAppDetail" resultType="com.sme.entity.PAppDetail">
-		SELECT <include refid="fieldAsPropertyAsP" /> FROM p_app_detail p, (SELECT detail.p_appdetail_apkactionid, MAX(detail.p_appdetail_id) AS appdetail_id
-		FROM p_application app,p_app_detail detail
+		SELECT <include refid="fieldAsPropertyAsP" /> FROM p_app_detail p,
+		(
+		select * from p_application a ,
+			(SELECT detail.p_appdetail_apkactionid, MAX(detail.p_appdetail_id) AS appdetail_id
+			FROM p_application app,p_app_detail detail
 
-		WHERE app.p_app_id = detail.p_appdetail_apkactionid AND app.p_app_bigType='1' and detail.p_appdetail_auditstate in (3,4)
+			WHERE app.p_app_id = detail.p_appdetail_apkactionid and detail.p_appdetail_auditstate in (3,4)
 
-		<if test="pAppdetailApkactionid!=null">
-			AND detail.p_appdetail_apkactionid = #{pAppdetailApkactionid}
-		</if>
+			<if test="pAppApkactionType!=null">
+				AND app.p_app_bigType = #{pAppApkactionType}
+			</if>
+			<if test="pAppdetailApkactionid!=null">
+				AND detail.p_appdetail_apkactionid = #{pAppdetailApkactionid}
+			</if>
 
-		<if test="pAppdetailName!=null">
-			AND detail.p_appdetail_name like '%${pAppdetailName}%'
-		</if>
+			<if test="pAppdetailName!=null">
+				AND detail.p_appdetail_name like '%${pAppdetailName}%'
+			</if>
 
-		GROUP BY detail.p_appdetail_apkactionid) c WHERE p.p_appdetail_id = c.appdetail_id
+			GROUP BY detail.p_appdetail_apkactionid) c
+		where a.p_app_id = c.p_appdetail_apkactionid
+		) d
+		WHERE p.p_appdetail_id = d.appdetail_id
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.PAppDetail">
 		INSERT INTO P_APP_DETAIL(<include refid="field" />) VALUES (<include refid="property" />)

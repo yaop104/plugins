@@ -279,7 +279,9 @@ public class OutInterfaceController {
         try {
             log.info("<=====执行getpApplicationDetail====>");
             List<PAppDetail> pAppDetails = pAppDetailService.selectDetail(pAppDetail);
-            return getSuccess(true,"",pAppDetails);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("pAppDetails", pAppDetails);
+            return getSuccess(true,"",map);
         } catch (Exception e) {
             log.error(e.getMessage());
             return getSuccess(false,"app获取失败,系统异常！！");
@@ -298,7 +300,9 @@ public class OutInterfaceController {
                 applicationPackages = applicationPackages + p.getpAppdetailPackagename() + ",";
             }
             applicationPackages = applicationPackages.substring(0,applicationPackages.length()-1);
-            return getSuccess(true,"",applicationPackages);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("applicationPackages", applicationPackages);
+            return getSuccess(true,"",map);
         } catch (Exception e) {
             log.error(e.getMessage());
             return getSuccess(false,"app获取失败,系统异常！！");

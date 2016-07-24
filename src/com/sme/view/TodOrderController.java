@@ -39,13 +39,6 @@ public class TodOrderController extends BaseController<TodOrder>{
 	
 	@RequestMapping(value="/todOrderlist", method={RequestMethod.GET})
 	public String todOrderList(TodOrder todOrder, HttpServletRequest req) {
-		try {
-			log.info("<=====执行sysmenulist====>");
-			List<TodOrder> todOrders = todOrderServiceImpl.select(todOrder);
-//			RespUtil.setResp(todOrders, 10, 1, req);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
 		return "/todOrder/todOrderlist";
 	}
 	

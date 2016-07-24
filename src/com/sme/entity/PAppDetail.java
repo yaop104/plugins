@@ -121,6 +121,35 @@ public class PAppDetail extends BaseObject {
 	private String pAppdetailAdminame;
 	private String pAppdetailAdmindesc;
 
+	public String getpAppApkactionType() {
+		return pAppApkactionType;
+	}
+
+	public void setpAppApkactionType(String pAppApkactionType) {
+		this.pAppApkactionType = pAppApkactionType;
+	}
+
+	private String pAppApkactionType;
+	private Integer openNumber;
+
+	public Integer getPraiseNumber() {
+		return praiseNumber;
+	}
+
+	public void setPraiseNumber(Integer praiseNumber) {
+		this.praiseNumber = praiseNumber;
+	}
+
+	public Integer getOpenNumber() {
+		return openNumber;
+	}
+
+	public void setOpenNumber(Integer openNumber) {
+		this.openNumber = openNumber;
+	}
+
+	private Integer praiseNumber;
+
 	public String getPid() {
 		return pid;
 	}

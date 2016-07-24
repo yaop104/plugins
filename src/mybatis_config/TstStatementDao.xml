@@ -9,6 +9,7 @@
 		<result property="tstStatementAccount" column="tstStatementAccount" /><!--金额-->
 		<result property="tstStatementContractid" column="tstStatementContractid" /><!--合同id-->
 		<result property="tstStatementOrderid" column="tstStatementOrderid" /><!--订单id-->
+		<result property="tstStatementOrdernum" column="tstStatementOrdernum" /><!--订单id-->
 		<result property="tstStatementRemainder" column="tstStatementRemainder" /><!--余额-->
 		<result property="tstStatementProfit" column="tstStatementProfit" /><!--利润-->
 		<result property="tstStatementRemark" column="tstStatementRemark" /><!--备注-->
@@ -23,6 +24,7 @@
 		tst_statement_account AS tstStatementAccount,
 		tst_statement_contractid AS tstStatementContractid,
 		tst_statement_orderid AS tstStatementOrderid,
+		tst_statement_ordernum AS tstStatementOrdernum,
 		tst_statement_remainder AS tstStatementRemainder,
 		tst_statement_profit AS tstStatementProfit,
 		tst_statement_remark AS tstStatementRemark,
@@ -36,6 +38,7 @@
 			tst_statement_account,
 			tst_statement_contractid,
 			tst_statement_orderid,
+			tst_statement_ordernum,
 			tst_statement_remainder,
 			tst_statement_profit,
 			tst_statement_remark,
@@ -49,6 +52,7 @@
 			#{tstStatementAccount,jdbcType=FLOAT},
 			#{tstStatementContractid,jdbcType=INTEGER},
 			#{tstStatementOrderid,jdbcType=INTEGER},
+			#{tstStatementOrdernum,jdbcType=VARCHAR},
 			#{tstStatementRemainder,jdbcType=FLOAT},
 			#{tstStatementProfit,jdbcType=FLOAT},
 			#{tstStatementRemark,jdbcType=VARCHAR},
@@ -62,6 +66,7 @@
 			tst_statement_account=#{tstStatementAccount,jdbcType=FLOAT},
 			tst_statement_contractid=#{tstStatementContractid,jdbcType=INTEGER},
 			tst_statement_orderid=#{tstStatementOrderid,jdbcType=INTEGER},
+			tst_statement_ordernum=#{tstStatementOrdernum,jdbcType=VARCHAR},
 			tst_statement_remainder=#{tstStatementRemainder,jdbcType=FLOAT},
 			tst_statement_profit=#{tstStatementProfit,jdbcType=FLOAT},
 			tst_statement_remark=#{tstStatementRemark,jdbcType=VARCHAR},
@@ -75,6 +80,7 @@
 			<if test="tstStatementAccount!=null" >tst_statement_account=#{tstStatementAccount,jdbcType=FLOAT},</if>
 			<if test="tstStatementContractid!=null" >tst_statement_contractid=#{tstStatementContractid,jdbcType=INTEGER},</if>
 			<if test="tstStatementOrderid!=null" >tst_statement_orderid=#{tstStatementOrderid,jdbcType=INTEGER},</if>
+			<if test="tstStatementOrdernum!=null" >tst_statement_ordernum=#{tstStatementOrdernum,jdbcType=VARCHAR},</if>
 			<if test="tstStatementRemainder!=null" >tst_statement_remainder=#{tstStatementRemainder,jdbcType=FLOAT},</if>
 			<if test="tstStatementProfit!=null" >tst_statement_profit=#{tstStatementProfit,jdbcType=FLOAT},</if>
 			<if test="tstStatementRemark!=null" >tst_statement_remark=#{tstStatementRemark,jdbcType=VARCHAR},</if>
@@ -90,6 +96,7 @@
 					<if test="tstStatementAccount!=null and tstStatementAccount!=''" >AND tst_statement_account=#{tstStatementAccount,jdbcType=FLOAT}</if>
 					<if test="tstStatementContractid!=null and tstStatementContractid!=''" >AND tst_statement_contractid=#{tstStatementContractid,jdbcType=INTEGER}</if>
 					<if test="tstStatementOrderid!=null and tstStatementOrderid!=''" >AND tst_statement_orderid=#{tstStatementOrderid,jdbcType=INTEGER}</if>
+					<if test="tstStatementOrdernum!=null and tstStatementOrdernum!=''" >AND tst_statement_ordernum=#{tstStatementOrdernum,jdbcType=VARCHAR}</if>
 					<if test="tstStatementRemainder!=null and tstStatementRemainder!=''" >AND tst_statement_remainder=#{tstStatementRemainder,jdbcType=FLOAT}</if>
 					<if test="tstStatementProfit!=null and tstStatementProfit!=''" >AND tst_statement_profit=#{tstStatementProfit,jdbcType=FLOAT}</if>
 					<if test="tstStatementRemark!=null and tstStatementRemark!=''" >AND tst_statement_remark=#{tstStatementRemark,jdbcType=VARCHAR}</if>
@@ -108,7 +115,7 @@
 	    SELECT COUNT(*) FROM TST_STATEMENT <include refid="idCnd2"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.TstStatement" resultType="com.sme.entity.TstStatement">
-		SELECT <include refid="fieldAsProperty" /> FROM TST_STATEMENT
+		SELECT <include refid="fieldAsProperty" /> FROM TST_STATEMENT <include refid="idCnd2"/>
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.TstStatement">
 		INSERT INTO TST_STATEMENT(<include refid="field" />) VALUES (<include refid="property" />)
