@@ -32,13 +32,6 @@ public class TstStatementController extends BaseController<TstStatement>{
 	
 	@RequestMapping(value="/tstStatementlist", method={RequestMethod.GET})
 	public String tstStatementList(TstStatement tstStatement, HttpServletRequest req) {
-		try {
-			log.info("<=====执行sysmenulist====>");
-			List<TstStatement> tstStatements = tstStatementServiceImpl.select(tstStatement);
-//			RespUtil.setResp(tstStatements, 10, 1, req);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
 		return "/tstStatement/tstStatementlist";
 	}
 	

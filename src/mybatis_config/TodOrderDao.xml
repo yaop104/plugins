@@ -13,6 +13,7 @@
 		<result property="odOrderPackageid" column="odOrderPackageid" /><!--套餐id-->
 		<result property="todOrderPositionprice" column="todOrderPositionprice" /><!--套餐id-->
 		<result property="todOrderPositionname" column="todOrderPositionname" /><!--套餐id-->
+		<result property="todOrderPositionurl" column="todOrderPositionurl" /><!--套餐id-->
 		<result property="todOrderTotaldays" column="todOrderTotaldays" /><!--套餐id-->
 	</resultMap>
 
@@ -28,6 +29,7 @@
 		od_order_packageid AS odOrderPackageid,
 		tod_order_positionprice AS todOrderPositionprice,
 		tod_order_positionname AS todOrderPositionname,
+		tod_order_positionurl AS todOrderPositionurl,
 		tod_order_totaldays AS todOrderTotaldays
 	</sql>
 
@@ -42,6 +44,7 @@
 			od_order_packageid,
 			tod_order_positionprice,
 			tod_order_positionname,
+			tod_order_positionurl,
 			tod_order_totaldays
 	</sql>
 
@@ -55,7 +58,8 @@
 			#{todOrderCustomid,jdbcType=INTEGER},
 			#{odOrderPackageid,jdbcType=INTEGER},
 			#{todOrderPositionprice,jdbcType=INTEGER},
-			#{todOrderPositionname,jdbcType=INTEGER},
+			#{todOrderPositionname,jdbcType=VARCHAR},
+			#{todOrderPositionurl,jdbcType=VARCHAR},
 			#{todOrderTotaldays,jdbcType=INTEGER}
 	</sql>
 
@@ -69,7 +73,8 @@
 			tod_order_customid=#{todOrderCustomid,jdbcType=INTEGER},
 			od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER},
 			tod_order_positionprice=#{todOrderPositionprice,jdbcType=INTEGER},
-			tod_order_positionname=#{todOrderPositionname,jdbcType=INTEGER},
+			tod_order_positionname=#{todOrderPositionname,jdbcType=VARCHAR},
+			tod_order_positionurl=#{todOrderPositionurl,jdbcType=VARCHAR},
 			tod_order_totaldays=#{todOrderTotaldays,jdbcType=INTEGER}
 	</sql>
 
@@ -83,7 +88,8 @@
 			<if test="todOrderCustomid!=null" >tod_order_customid=#{todOrderCustomid,jdbcType=INTEGER},</if>
 			<if test="odOrderPackageid!=null" >od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER},</if>
 			<if test="todOrderPositionprice!=null" >tod_order_positionprice=#{todOrderPositionprice,jdbcType=INTEGER},</if>
-			<if test="todOrderPositionname!=null" >tod_order_positionname=#{todOrderPositionname,jdbcType=INTEGER},</if>
+			<if test="todOrderPositionname!=null" >tod_order_positionname=#{todOrderPositionname,jdbcType=VARCHAR},</if>
+			<if test="todOrderPositionurl!=null" >tod_order_positionurl=#{todOrderPositionurl,jdbcType=VARCHAR},</if>
 			<if test="todOrderTotaldays!=null" >tod_order_totaldays=#{todOrderTotaldays,jdbcType=INTEGER}</if>
 	</sql>
 
@@ -99,7 +105,8 @@
 					<if test="todOrderCustomid!=null and todOrderCustomid!=''" >AND tod_order_customid=#{todOrderCustomid,jdbcType=INTEGER}</if>
 					<if test="odOrderPackageid!=null and odOrderPackageid!=''" >AND od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER}</if>
 					<if test="todOrderPositionprice!=null and todOrderPositionprice!=''" >AND tod_order_positionprice=#{todOrderPositionprice,jdbcType=INTEGER}</if>
-					<if test="todOrderPositionname!=null and todOrderPositionname!=''" >AND tod_order_positionname=#{todOrderPositionname,jdbcType=INTEGER}</if>
+					<if test="todOrderPositionname!=null and todOrderPositionname!=''" >AND tod_order_positionname=#{todOrderPositionname,jdbcType=VARCHAR}</if>
+					<if test="todOrderPositionurl!=null and todOrderPositionurl!=''" >AND tod_order_positionurl=#{todOrderPositionurl,jdbcType=VARCHAR}</if>
 					<if test="todOrderTotaldays!=null and todOrderTotaldays!=''" >AND tod_order_totaldays=#{todOrderTotaldays,jdbcType=INTEGER}</if>
 		</where>
 	</sql>

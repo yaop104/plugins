@@ -171,5 +171,21 @@ public class TodOrderController extends BaseController<TodOrder>{
 			return getSuccess(false, "系统异常！");
 		}
 	}
+	@RequestMapping(value = "/pay", method = { RequestMethod.POST })
+	@ResponseBody
+	public StringJSON pay(TodOrder t) {
+		try {
+			String flag =  todOrderServiceImpl.pay(t);
+			if("1".endsWith(flag)){
+				return getSuccess(true, "支付成功！");
+			}else{
+				return getSuccess(false, "支付失败！");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return getSuccess(false, "系统异常！");
+		}
+	}
 	//================== end ======================
 }

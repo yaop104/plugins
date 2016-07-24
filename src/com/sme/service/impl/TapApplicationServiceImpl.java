@@ -60,7 +60,8 @@ public class TapApplicationServiceImpl extends BaseService<TapApplication> imple
 				sysAccDao.update(sysAcc);
 
 				TstStatement tstStatement = new TstStatement();
-				tstStatement.setTstStatementAccount((float) (sysAcc.getSysAccMoney()+tapApplication.getTapApplicationAppname()));
+				tstStatement.setTstStatementAccount(Float.valueOf(tapApplication.getTapApplicationAppname()));
+				tstStatement.setTstStatementRemainder((float) (sysAcc.getSysAccMoney()));
 				tstStatement.setTstStatementCdate(new Date());
 				tstStatement.setTstStatementType("1");
 				tstStatement.setTstStatementBasicinfoid(tapApplication.getTapApplicationCuser());

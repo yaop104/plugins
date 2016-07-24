@@ -25,7 +25,7 @@
 					width : 80,
 					align : 'center',
 					formatter : function(value, row, index) {
-						if (value == 0) {
+						if (value == 1) {
 							return "<span style=\"margin-left: 14px; margin-right: 10px;\">APK</span>";
 						}
 						value = "<span style=\"margin-left: 14px; margin-right: 10px;\">HTML</span>";
@@ -174,20 +174,22 @@
 			modal : true,
 			maximizable : true,
 			draggable : true,
-			buttons : [ {
-				id : 'btnTest',
-				text : '测试发布',
-				handler : function() {
-					$.messager.confirm("操作提示", "是否测试发布该插件？", function(data) {
-						if (data) {
-							submitState("test");
-						} else {
-							checkDig.dialog('close');
-							document.getElementById("corForm").reset();
-						}
-					}, "info");
-				}
-			}, {
+			buttons : [
+//				{
+//				id : 'btnTest',
+//				text : '测试发布',
+//				handler : function() {
+//					$.messager.confirm("操作提示", "是否测试发布该插件？", function(data) {
+//						if (data) {
+//							submitState("test");
+//						} else {
+//							checkDig.dialog('close');
+//							document.getElementById("corForm").reset();
+//						}
+//					}, "info");
+//				}
+//			},
+				{
 				id : 'btnPass',
 				text : '审核通过',
 				handler : function() {
@@ -307,13 +309,13 @@
 
 	function appAudit(id, isTest) {
 		checkDig.dialog('open');
-		if (isTest) {
-			$('#btnTest').linkbutton('disable');
-			$('#btnPass').linkbutton('enable');
-		} else {
-			$('#btnTest').linkbutton('enable');
-			$('#btnPass').linkbutton('disable');
-		}
+//		if (isTest) {
+//			$('#btnTest').linkbutton('disable');
+//			$('#btnPass').linkbutton('enable');
+//		} else {
+//			$('#btnTest').linkbutton('enable');
+//			$('#btnPass').linkbutton('disable');
+//		}
 		$.post("${ctx}/appDetail/" + id + "/info.do", {}, function(data) {
 			data = parseJSON(data);
 			$('#c_id').val(data.pAppdetailId);

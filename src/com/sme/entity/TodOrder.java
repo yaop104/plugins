@@ -41,6 +41,16 @@ public class TodOrder extends BaseObject implements Serializable {
 	private Integer todOrderPositionprice;
 
 	private String todOrderPositionname;
+
+	public String getTodOrderPositionurl() {
+		return todOrderPositionurl;
+	}
+
+	public void setTodOrderPositionurl(String todOrderPositionurl) {
+		this.todOrderPositionurl = todOrderPositionurl;
+	}
+
+	private String todOrderPositionurl;
 	private Integer todOrderTotaldays;
 
 	public Integer getTodOrderPositionprice() {

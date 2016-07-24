@@ -31,7 +31,7 @@ public class TstStatement extends BaseObject {
 	private Integer	tstStatementOrderid;
 
 	/** 订单id */
-	private Integer	tstStatementOrdernum;
+	private String	tstStatementOrdernum;
 
 	/** 余额 */
 	private Float	tstStatementRemainder;
@@ -45,11 +45,11 @@ public class TstStatement extends BaseObject {
 	/** 产生人id */
 	private Integer	tstStatementBasicinfoid;
 
-	public Integer getTstStatementOrdernum() {
+	public String getTstStatementOrdernum() {
 		return tstStatementOrdernum;
 	}
 
-	public void setTstStatementOrdernum(Integer tstStatementOrdernum) {
+	public void setTstStatementOrdernum(String tstStatementOrdernum) {
 		this.tstStatementOrdernum = tstStatementOrdernum;
 	}
 

@@ -63,7 +63,8 @@ public class FileController
     		JSONObject json = fileUtil.getResult();
     		return json;
     }
-	
+
+
 	/**
 	 * 上传审核图片
 	 * @param file
@@ -85,6 +86,28 @@ public class FileController
     		JSONObject json = fileUtil.getResult();
     		return json;
     }
+
+
+	/**
+	 * 上传pic
+	 * @param file
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/updatePic", method={RequestMethod.POST})
+	@ResponseBody
+	public JSONObject updatePic(@RequestParam("file") MultipartFile file,HttpServletRequest request,HttpServletResponse response){
+		String savePath = Config.DEFAULT_APK_IMGPATH;
+		IFileSaver fileUtil = new ImageCheckProxy(new FileSaver(savePath));
+
+		fileUtil.save(file, file.getOriginalFilename());
+
+
+		JSONObject json = fileUtil.getResult();
+		return json;
+	}
+
 	
 //	//获得原始文件名
 //    String fileName = file.getOriginalFilename();
