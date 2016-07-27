@@ -55,11 +55,11 @@
 	<sql id="idCnd2">
 		<where>
 			<if test="roleid!=null and roleid!=''" >t_sys_role_id=#{roleid,jdbcType=INTEGER}</if>
-			<if test="rolename!=null and rolename!=''" >AND t_sys_role_name=#{rolename,jdbcType=VARCHAR}</if>
+			<if test="rolename!=null and rolename!=''" >AND t_sys_role_name like CONCAT('%',#{rolename},'%')</if>
 			<if test="roledesc!=null and roledesc!=''" > AND t_sys_role_desc=#{roledesc,jdbcType=VARCHAR}</if>
-			<if test="roletype!=null and roletype!=''" >AND t_sys_role_state=#{roletype,jdbcType=VARCHAR}</if>
+			<if test="roletype!=null and roletype!=''" >AND t_sys_role_type=#{roletype,jdbcType=VARCHAR}</if>
 			<if test="roleorder!=null and roleorder!=''" >AND t_sys_role_order=#{roleorder,jdbcType=INTEGER}</if>
-			<if test="rolestate!=null and rolestate!=''" >AND t_sys_role_type=#{rolestate,jdbcType=VARCHAR}</if>
+			<if test="rolestate!=null and rolestate!=''" >AND t_sys_role_state=#{rolestate,jdbcType=VARCHAR}</if>
 			<if test="rolecdate!=null and rolecdate!=''" >AND t_sys_role_cdate=#{rolecdate,jdbcType=TIMESTAMP}</if>
 			<if test="roleudate!=null and roleudate!=''" >AND t_sys_role_udate=#{roleudate,jdbcType=TIMESTAMP}</if>
 			<if test="roleuuser!=null and roleuuser!=''" >AND t_sys_role_cuser=#{roleuuser,jdbcType=VARCHAR}</if>

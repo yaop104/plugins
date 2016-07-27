@@ -59,12 +59,14 @@ public class SysMenuController extends BaseController<SysMenu> {
 			rows = 10;
 			page = 1;
 		}
-		String menuName = req.getParameter("sysAccName");
+		String menuName = req.getParameter("sysMenuName");
+		String menuState = req.getParameter("sysMenuState");
 		try {
 			Map<String, Object> parm = new HashMap<String, Object>();
 			parm.put("page", getBegin());
 			parm.put("pageCount", getEnd());
 			parm.put("sysMenuName", menuName);
+			parm.put("sysMenuState", menuState);
 			int count = sysMenuServiceImpl.count(parm);
 			List<SysMenu> sysMenus = sysMenuServiceImpl.page(parm);
 			return RespUtil.pageResult(count, sysMenus);

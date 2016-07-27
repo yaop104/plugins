@@ -32,7 +32,7 @@
 			}
 		}, '-', {
 			id : 'btncut',
-			text : '删除帐号',
+			text : '注销帐号',
 			iconCls : 'icon-remove',
 			handler : function() {
 				deleteAccount();

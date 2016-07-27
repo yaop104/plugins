@@ -47,7 +47,7 @@ $(function() {
 		}
 	}, '-', {
 		id : 'btncut',
-		text : '删除角色',
+		text : '注销角色',
 		iconCls : 'icon-remove',
 		handler : function() {
 			deleteRole();

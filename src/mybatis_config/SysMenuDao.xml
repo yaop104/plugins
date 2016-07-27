@@ -104,7 +104,7 @@
 	     FROM SYS_MENU m left join sys_menu m1 on m.sys_menu_pid = m1.sys_menu_id 
 	     <where>
 			<if test="sysMenuId!=null and sysMenuId!=''" >m.sys_menu_id=#{sysMenuId,jdbcType=INTEGER}</if>
-			<if test="sysMenuName!=null and sysMenuName!=''" >AND m.sys_menu_name=#{sysMenuName,jdbcType=VARCHAR}</if>
+			<if test="sysMenuName!=null and sysMenuName!=''" >AND m.sys_menu_name like CONCAT('%',#{sysMenuName},'%')</if>
 			<if test="sysMenuPid!=null and sysMenuPid!=''" > AND m.sys_menu_pid=#{sysMenuPid,jdbcType=INTEGER}</if>
 			<if test="sysMenuState!=null and sysMenuState!=''" >AND m.sys_menu_state=#{sysMenuState,jdbcType=VARCHAR}</if>
 			<if test="sysMenuOrder!=null and sysMenuOrder!=''" >AND m.sys_menu_order=#{sysMenuOrder,jdbcType=INTEGER}</if>
