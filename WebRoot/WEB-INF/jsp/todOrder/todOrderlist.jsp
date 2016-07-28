@@ -30,7 +30,7 @@
 			padding-top:20px;
 		}
 	</style>
-	!-- 引用jQuery的js  -->
+	<!-- 引用jQuery的js  -->
 	<script type="text/javascript" src="${ctx }/js/webuploader/webuploader.js" ></script>
 	<title>信息</title>
 </head>
