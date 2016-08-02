@@ -161,7 +161,7 @@ height:27px;
 	
 </div>
 <script type="text/javascript">
-	var ctx = 'http://127.0.0.1:8089/download/pic/';
+	var ctx = 'http://114.55.150.199:8888/download/pic/';
 var operating='';
 //滚动条的高度
 var height;

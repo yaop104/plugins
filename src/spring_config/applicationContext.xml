@@ -28,8 +28,8 @@
 			<value>root</value>
 		</property>
 		<property name="password">
-<!--  			<value>zhihui</value> -->
-			<value></value>
+  			<value>huijiao</value>
+			<!--<value></value>-->
 		</property>
 	</bean>
 	

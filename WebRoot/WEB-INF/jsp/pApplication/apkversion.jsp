@@ -299,7 +299,7 @@ var imgform = '<form id="html_second_pic" name="upload_Two_form" style="padding:
 '</div>'+
 '</form>';
 var grid;
-var ctx = 'http://127.0.0.1:8089/download/pic/';
+var ctx = 'http://114.55.150.199:8888/download/pic/';
 var hotAppId;
 $(function() {
 	var colArr = [];
