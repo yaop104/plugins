@@ -69,6 +69,7 @@ public class ApkinformatonUtil {
             shellCommand[0] = "/bin/sh";
             shellCommand[1] = "-c";
             softName = "aapt";
+            mAaptPath = "/usr/bin";
 //            mAaptPath = "/Users/haoy/Documents/android-sdk-macosx/build-tools/23.0.1/";
         }
     }
