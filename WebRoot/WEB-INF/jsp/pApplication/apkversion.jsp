@@ -186,11 +186,8 @@ height:27px;
 <!-- 	           <input id="s_endTime" class="easyui-datebox" style="width: 100px" />    -->
 <!-- 	          账号名:    -->
 <!-- 	           <input id="s_name"/>    -->
-	           按类型：  
-	             <select id="s_state" name="pAppPlugintype" style="width: 150px;">  
-					 <option value="2">APK</option>
-	             </select>  
-	           <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchAccount()">&nbsp; 查&nbsp;&nbsp;询 &nbsp; &nbsp;</a>  
+			   插件名称: <input id="s_name" />
+			   <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchAccount()">&nbsp; 查&nbsp;&nbsp;询 &nbsp; &nbsp;</a>
 	       </div>  
 	   </div>  
 		
@@ -444,13 +441,13 @@ $(function() {
 	function getQueryParams(queryParams) {  
 // 	    var StartTime = $("#s_startTime").datebox("getValue");  
 // 	    var EndTime = $("#s_endTime").datebox("getValue");               
-// 	    var Name = document.getElementById("s_name").value;  
-	    var State = $("#s_state").val();  
+ 	    var Name = document.getElementById("s_name").value;
+//	    var State = $("#s_state").val();
 	 
 // 	    queryParams.StartTime = StartTime;  
 // 	    queryParams.EndTime = EndTime;  
-// 	    queryParams.sysAccName = Name;  
-	    queryParams.pAppPlugintype = State;  
+ 	    queryParams.pAppdetailName = Name;
+//	    queryParams.pAppPlugintype = State;
 	 
 	    return queryParams;  
 	  
@@ -767,6 +764,29 @@ function ys2(val, rec, index) {
 		returnvalue=returnvalue+"<img src='${ctx}/image/table_td_button/delete.png' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;' onclick='deletes("+rec.pAppdetailId+","+rec.pAppdetailApkactionid+")'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='deletes("+rec.pAppdetailId+","+rec.pAppdetailApkactionid+")'>删除</a>&nbsp;&nbsp;";
 	}
 	return returnvalue;
+}
+
+//删除
+function stopSafa(id,apkactionid){
+
+	$.messager.confirm("操作提示", "<div class='messager-icon'></div>您确定要执行操作吗？", function (data) {
+		if (data) {
+			$.ajax({
+				type:"POST",
+				url:"${ctx}/appDetail/update.do",
+				data:{"pAppdetailAuditstate" : id, "pAppdetailId" : apkactionid},
+				dataType:"json",
+				success:function(data){
+					$.messager.alert("提示", data.message);
+					if(data.success){
+						//getData();
+						grid.datagrid('load');
+						grid.datagrid('clearSelections');
+					}
+				}
+			});
+		}
+	});
 }
 
 //删除

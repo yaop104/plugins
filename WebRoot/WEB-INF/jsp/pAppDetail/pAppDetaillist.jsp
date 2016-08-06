@@ -9,6 +9,7 @@
 	var grid;
 	var viewDig;
 	var checkDig;
+	var ctx = 'http://114.55.150.199:8888/download/pic/';
 	$(function() {
 		var colArr = [];
 		colArr = [
@@ -25,11 +26,7 @@
 					width : 80,
 					align : 'center',
 					formatter : function(value, row, index) {
-						if (value == 1) {
 							return "<span style=\"margin-left: 14px; margin-right: 10px;\">APK</span>";
-						}
-						value = "<span style=\"margin-left: 14px; margin-right: 10px;\">HTML</span>";
-						return value;
 					},
 					resizable : false
 				},
@@ -102,19 +99,19 @@
 									+ ");' title='查看' class='audit_link'>查看</a>";
 							return value;
 						}
-						if (row.pAppdetailAuditstate == 6) {
-							value = "<img src='<s:url value="/img/temp/update.png"/>' class='audit_img' onclick='appAudit("
-									+ value
-									+ ")' />"
-									+ "<a href='javascript:appAudit("
-									+ value
-									+ ", true);' title='审核' class='audit_link'>审核</a>";
-							if (row.pAppdetailPlugintype == 0) {
-								value += "<img src='<s:url value="/img/temp/download.png"/>' class='audit_img' style='width:18px;height:15px;' />"
-											+ "<a href='' title='下载' class='audit_link'>下载</a>";
-							}
-							return value;
-						}
+						<%--if (row.pAppdetailAuditstate == 6) {--%>
+							<%--value = "<img src='<s:url value="/img/temp/update.png"/>' class='audit_img' onclick='appAudit("--%>
+									<%--+ value--%>
+									<%--+ ")' />"--%>
+									<%--+ "<a href='javascript:appAudit("--%>
+									<%--+ value--%>
+									<%--+ ", true);' title='审核' class='audit_link'>审核</a>";--%>
+							<%--if (row.pAppdetailPlugintype == 0) {--%>
+								<%--value += "<img src='<s:url value="/img/temp/download.png"/>' class='audit_img' style='width:18px;height:15px;' />"--%>
+											<%--+ "<a href='' title='下载' class='audit_link'>下载</a>";--%>
+							<%--}--%>
+							<%--return value;--%>
+						<%--}--%>
 						value = "<img src='<s:url value="/img/temp/update.png"/>' class='audit_img' onclick='appAudit("
 								+ value
 								+ ")' />"
@@ -217,13 +214,11 @@
 	});
 
 	function searchApp() {
-		var name = $("#s_name").val(), type = $("#s_state")
-				.combobox("getValue");
+		var name = $("#s_name").val();
 		var queryParams = grid.datagrid('options').queryParams;
 		queryParams.rows = grid.datagrid('options').pageSize;
 		queryParams.page = 0;
 		queryParams.pAppdetailName = name;
-		queryParams.pluginType = type;
 		grid.datagrid('options').queryParams = queryParams;
 		grid.datagrid('reload');
 	}
@@ -231,12 +226,11 @@
 	function showDetail(id) {
 		viewDig.dialog('open');
 		$.post("${ctx}/appDetail/" + id + "/info.do", {}, function(data) {
-			data = parseJSON(data);
 			$('#v_id').val(data.pAppdetailId);
 			$('#v_pluginname').html(data.pAppdetailName);
 			$('#v_plugintype').html(data.pAppdetailPlugintype);
 			$('#v_version').html(data.pAppdetailActionname);
-			$('#v_app_logo').attr("src", "/link/" + data.pAppdetailLogo);
+			$('#v_app_logo').attr("src", ctx + data.pAppdetailLogo);
 			$('#v_name').html(data.pAppdetailAdminame);
 			$('#v_app_time').html(data.pAppdetailDate);
 			$('#v_corporationname').html(data.pAppdetailAdmindesc);
@@ -246,13 +240,13 @@
 
 			var array = new Array();
 			if (data.descpic1 != '') {
-				array.push("/link/" + data.pAppdetailDescpic1);
+				array.push(ctx + data.pAppdetailDescpic1);
 			}
 			if (data.descpic2 != '') {
-				array.push("/link/" + data.pAppdetailDescpic2);
+				array.push(ctx + data.pAppdetailDescpic2);
 			}
 			if (data.descpic3 != '') {
-				array.push("/link/" + data.pAppdetailDescpic3);
+				array.push(ctx + data.pAppdetailDescpic3);
 			}
 
 			$('#v_img1').attr("src", array[0]);
@@ -317,12 +311,11 @@
 //			$('#btnPass').linkbutton('disable');
 //		}
 		$.post("${ctx}/appDetail/" + id + "/info.do", {}, function(data) {
-			data = parseJSON(data);
 			$('#c_id').val(data.pAppdetailId);
 			$('#c_pluginname').html(data.pAppdetailName);
 			$('#c_plugintype').html(data.pAppdetailPlugintype);
-			$('#c_version').html(data.pAppdetailActionname);
-			$('#c_app_logo').attr("src", "/link/" + data.pAppdetailLogo);
+			$('#c_version').html(data.pAppdetailVersionname);
+			$('#c_app_logo').attr("src", ctx + data.pAppdetailLogo);
 			$('#c_name').html(data.pAppdetailAdminame);
 			$('#c_app_time').html(data.pAppdetailDate);
 			$('#c_corporationname').html(data.pAppdetailAdmindesc);
@@ -332,13 +325,13 @@
 
 			var array = new Array();
 			if (data.descpic1 != '') {
-				array.push("/link/" + data.pAppdetailDescpic1);
+				array.push(ctx + data.pAppdetailDescpic1);
 			}
 			if (data.descpic2 != '') {
-				array.push("/link/" + data.pAppdetailDescpic2);
+				array.push(ctx + data.pAppdetailDescpic2);
 			}
 			if (data.descpic3 != '') {
-				array.push("/link/" + data.pAppdetailDescpic3);
+				array.push(ctx + data.pAppdetailDescpic3);
 			}
 
 			$('#c_img1').attr("src", array[0]);
@@ -426,12 +419,7 @@
 			<div id="tb" style="padding: 10px; height: auto">
 				<%-- 查找管理员信息，根据时间、管理员名 --%>
 				<div>
-					插件名称: <input id="s_name" /> 插件类型： <select id="s_state"
-						class="easyui-combobox" name="s_state" style="width: 150px;"
-						panelheight="auto">
-						<option value="1">HTML</option>
-						<option value="0" selected="selected">APK</option>
-					</select> <a href="#" class="easyui-linkbutton"
+					插件名称: <input id="s_name" />  <a href="#" class="easyui-linkbutton"
 						data-options="iconCls:'icon-search'" onclick="searchApp()">&nbsp;查&nbsp;&nbsp;询
 						&nbsp; &nbsp;</a>
 				</div>

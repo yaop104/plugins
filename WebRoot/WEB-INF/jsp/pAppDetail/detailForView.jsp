@@ -94,7 +94,7 @@
 				</td>
 			</tr>
 			
-			<tr class="trtext">
+			<tr style="display: none">
 				<td class="td_left" >插件地址：</td>
 				<td class="td" style="word-break:break-all;">
 					<span id="v_app_url" ></span>

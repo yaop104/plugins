@@ -13,6 +13,7 @@
 </style>
 <script type="text/javascript">
 	var grid, orderByDig, viewDig;
+	var ctx = 'http://114.55.150.199:8888/download/pic/';
 	$(function() {
 		var colArr = [];
 		colArr = [
@@ -50,11 +51,7 @@
 					width : 80,
 					align : 'center',
 					formatter : function(value, row, index) {
-						if (value == 0) {
 							return "<span style=\"margin-left: 14px; margin-right: 10px;\">APK</span>";
-						}
-						value = "<span style=\"margin-left: 14px; margin-right: 10px;\">HTML</span>";
-						return value;
 					},
 					resizable : false
 				},
@@ -143,38 +140,40 @@
 							onClickRow : function(index, row) {
 								$(this).datagrid('unselectAll');
 							},
-							toolbar : [ {
-								id : 'btncut',
-								text : '自定义排序',
-								iconCls : 'icon-sortMy',
-								handler : function() {
-									var rc = $('#t1').datagrid('getData');
-									size = rc.total;
-									if (size > 1) {
-										orderByDig = $('#orderByDig')
-												.show()
-												.dialog(
-														{
-															cache : false,
-															modal : true,
-															title : '插件列表',
-															closable : true,
-															collapsible : false,
-															href : "${ctx }/application/orderApp.do",
-															maximizable : false,
-															minimizable : false,
-															draggable : false,
-															width : 400,
-															height : 300
-														}).dialog('close');
-										orderByDig.dialog('open');
-									} else if (size == 1) {
-										$.messager.alert("提示", "插件过少，无需排序！");
-									} else {
-										$.messager.alert("提示", "没有可排序的数据！");
-									}
-								}
-							} ]
+							toolbar : [
+								<%--{--%>
+								<%--id : 'btncut',--%>
+								<%--text : '自定义排序',--%>
+								<%--iconCls : 'icon-sortMy',--%>
+								<%--handler : function() {--%>
+									<%--var rc = $('#t1').datagrid('getData');--%>
+									<%--size = rc.total;--%>
+									<%--if (size > 1) {--%>
+										<%--orderByDig = $('#orderByDig')--%>
+												<%--.show()--%>
+												<%--.dialog(--%>
+														<%--{--%>
+															<%--cache : false,--%>
+															<%--modal : true,--%>
+															<%--title : '插件列表',--%>
+															<%--closable : true,--%>
+															<%--collapsible : false,--%>
+															<%--href : "${ctx }/application/orderApp.do",--%>
+															<%--maximizable : false,--%>
+															<%--minimizable : false,--%>
+															<%--draggable : false,--%>
+															<%--width : 400,--%>
+															<%--height : 300--%>
+														<%--}).dialog('close');--%>
+										<%--orderByDig.dialog('open');--%>
+									<%--} else if (size == 1) {--%>
+										<%--$.messager.alert("提示", "插件过少，无需排序！");--%>
+									<%--} else {--%>
+										<%--$.messager.alert("提示", "没有可排序的数据！");--%>
+									<%--}--%>
+								<%--}--%>
+							<%--}--%>
+							]
 						});
 		
 		$(".l-btn-text").css("padding-left","16px");
@@ -196,13 +195,11 @@
 	
 
 	function searchApp() {
-		var name = $("#s_name").val(), type = $("#s_state")
-				.combobox("getValue");
+		var name = $("#s_name").val();
 		var queryParams = grid.datagrid('options').queryParams;
 		queryParams.rows = grid.datagrid('options').pageSize;
 		queryParams.page = 0;
 		queryParams.pAppdetailName = name;
-		queryParams.pluginType = type;
 		grid.datagrid('options').queryParams = queryParams;
 		grid.datagrid('reload');
 	}
@@ -214,12 +211,9 @@
 						$.post("${ctx}/application/offLine.do", {
 							"appId" : id
 						}, function(result) {
-							result = parseJSON(result);
-							if (result.code == 500) {
-								$.messager.alert('成功', result.message, 'info',
-										function() {
+							if (result.code == "500") {
+										msgShow('成功', result.message, 'info');
 											grid.datagrid('reload');
-										});
 							} else {
 								msgShow('错误', "下线失败", 'error');
 							}
@@ -231,12 +225,17 @@
 	function showDetail(id) {
 		viewDig.dialog('open');
 		$.post("${ctx}/appDetail/" + id + "/info.do", {}, function(data) {
-			data = parseJSON(data);
 			$('#v_id').val(data.pAppdetailId);
 			$('#v_pluginname').html(data.pAppdetailName);
-			$('#v_plugintype').html(data.pAppdetailPlugintype);
-			$('#v_version').html(data.pAppdetailActionname);
-			$('#v_app_logo').attr("src", "/link/" + data.pAppdetailLogo);
+			if(data.pAppdetailPlugintype == "2"){
+				$('#v_plugintype').html("apk");
+			}else{
+				$('#v_plugintype').html("");
+			}
+
+
+			$('#v_version').html(data.pAppdetailVersionname);
+			$('#v_app_logo').attr("src", ctx + data.pAppdetailLogo);
 			$('#v_name').html(data.pAppdetailAdminame);
 			$('#v_app_time').html(data.pAppdetailDate);
 			$('#v_corporationname').html(data.pAppdetailAdmindesc);
@@ -246,13 +245,13 @@
 
 			var array = new Array();
 			if (data.descpic1 != '') {
-				array.push("/link/" + data.pAppdetailDescpic1);
+				array.push(ctx + data.pAppdetailDescpic1);
 			}
 			if (data.descpic2 != '') {
-				array.push("/link/" + data.pAppdetailDescpic2);
+				array.push(ctx + data.pAppdetailDescpic2);
 			}
 			if (data.descpic3 != '') {
-				array.push("/link/" + data.pAppdetailDescpic3);
+				array.push(ctx + data.pAppdetailDescpic3);
 			}
 
 			$('#v_img1').attr("src", array[0]);
@@ -338,12 +337,8 @@
 			<%--功能区--%>
 			<div id="tb" style="padding: 10px; height: auto">
 				<div>
-					插件名称: <input id="s_name" /> 插件类型： <select id="s_state"
-						class="easyui-combobox" name="s_state" style="width: 150px;"
-						panelheight="auto">
-						<option value="1">HTML</option>
-						<option value="0" selected="selected">APK</option>
-					</select> <a href="#" class="easyui-linkbutton"
+					插件名称: <input id="s_name" />
+					<a href="#" class="easyui-linkbutton"
 						data-options="iconCls:'icon-search'" onclick="searchApp()">&nbsp;查&nbsp;&nbsp;询
 						&nbsp; &nbsp;</a>
 				</div>

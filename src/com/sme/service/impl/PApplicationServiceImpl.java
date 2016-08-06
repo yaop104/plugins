@@ -42,15 +42,20 @@ public class PApplicationServiceImpl extends BaseService<PApplication> implement
 
 	@Override
 	public void offLine(Integer appId) {
-		PApplication app = new PApplication();
-		app.setpAppId(appId);
-		app  = pApplicationDao.getById(app);
-		if (app != null) {
-			PAppDetail detail = new PAppDetail();
-			detail.setpAppdetailApkactionid(appId);
-			detail.setpAppdetailAuditstate("5");
-			pAppDetailDao.offLineApp(detail);
+		try {
+			PApplication app = new PApplication();
+			app.setpAppId(appId);
+			app  = pApplicationDao.getById(app);
+			if (app != null) {
+				PAppDetail detail = new PAppDetail();
+				detail.setpAppdetailApkactionid(appId);
+				detail.setpAppdetailAuditstate("5");
+				pAppDetailDao.offLineApp(detail);
+			}
+		}catch (Exception e){
+			System.out.println(e.getMessage());
 		}
+
 	}
 
 	@Override

@@ -74,10 +74,8 @@ public class PAppDetailController extends BaseController<PAppDetail> {
 			parm.put("total", count);
 			parm.put("rows", pAppDetails);
 
-			ObjectMapper mapper = new ObjectMapper();
-			String json = mapper.writeValueAsString(parm);
 
-			return json;
+			return parm;
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return null;
@@ -193,10 +191,10 @@ public class PAppDetailController extends BaseController<PAppDetail> {
 		pAppDetail.setpAppdetailId(id);
 		pAppDetail = pAppDetailService.getById(pAppDetail);
 
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(pAppDetail);
+//		ObjectMapper mapper = new ObjectMapper();
+//		String json = mapper.writeValueAsString(pAppDetail);
 
-		return json;
+		return pAppDetail;
 	}
 
 	// ================== begin ======================
@@ -315,7 +313,7 @@ public class PAppDetailController extends BaseController<PAppDetail> {
 			Map<String, Object> parm = new HashMap<String, Object>();
 			parm.put("page", getBegin());
 			parm.put("pageCount", getEnd());
-			parm.put("pAppdetailPlugintype", req.getParameter("ptype"));
+			parm.put("pAppdetailName", req.getParameter("pAppdetailName"));
 			String pid = req.getParameter("pid");
 			parm.put("pid", pid);
 			int count = pAppDetailService.count(parm);

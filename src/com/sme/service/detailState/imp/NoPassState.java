@@ -1,9 +1,11 @@
 package com.sme.service.detailState.imp;
 
+import com.sme.dao.PAppDetailDao;
 import com.sme.entity.PAppDetail;
 import com.sme.service.detailState.Istate;
 import com.sme.util.JSONObject;
 import com.sme.util.JSONUtil;
+import com.sme.util.SpringContextUtil;
 
 
 public class NoPassState implements Istate {
@@ -49,7 +51,8 @@ public class NoPassState implements Istate {
 	@Override
 	public JSONObject del(PAppDetail detail) {
 		try {
-			
+			PAppDetailDao pAppDetailDao = (PAppDetailDao) SpringContextUtil.getBean("pAppDetailDao");
+			pAppDetailDao.delete(detail);
 //			dDao.deleteAppDetail(detail);
 //			
 //			LogProxy.log(new ApplicationLogBuilder(detail, "删除插件|", null));

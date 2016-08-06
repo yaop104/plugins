@@ -49,6 +49,20 @@ public class PApplicationController extends BaseController<PApplication> {
 		return "/pApplication/pApplicationlist";
 	}
 
+	@RequestMapping(value = "/insert", method = { RequestMethod.POST })
+	@ResponseBody
+	public StringJSON insert(PApplication pApplication) {
+		try {
+			pApplication.setpAppOpen(0);
+			pApplication.setpAppPraise(0);
+			pApplicationService.insert(pApplication);
+			return getSuccess(true, "新增成功！");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return getSuccess(false, "系统异常！");
+		}
+	}
+
 	@RequestMapping(value = "/getpApplicationlists")
 	@ResponseBody
 	public Object pApplicationLists(HttpServletRequest req) {
@@ -84,12 +98,18 @@ public class PApplicationController extends BaseController<PApplication> {
 	@com.sme.core.spring.Log(type = "插件管理", desc = "插件运营 | 下线插件")
 	public RespMessage offLine(String appId) {
 		RespMessage msg = new RespMessage();
-		if (StringUtils.isNotBlank(appId)) {
-			pApplicationService.offLine(Integer.parseInt(appId));
-			msg.setCode("500");
-			msg.setMessage("下线成功");
+		try{
+			if (StringUtils.isNotBlank(appId)) {
+				pApplicationService.offLine(Integer.parseInt(appId));
+				msg.setCode("500");
+				msg.setMessage("下线成功");
+			}
+		}catch (Exception e){
+			msg.setCode("1");
+			msg.setMessage("下线失败");
 		}
 		return msg;
+
 	}
 
 	@RequestMapping(value = "/{id}/delete", method = {RequestMethod.GET})
@@ -194,11 +214,13 @@ public class PApplicationController extends BaseController<PApplication> {
 			page = 1;
 		}
 		String pAppPlugintype = req.getParameter("pAppPlugintype") == null ? "" : req.getParameter("pAppPlugintype");
+		String pAppdetailName = req.getParameter("pAppdetailName") == null ? "" : req.getParameter("pAppdetailName");
 		try {
 			Map<String, Object> parm = new HashMap<String, Object>();
 			parm.put("page", getBegin());
 			parm.put("pageCount", getEnd());
 			parm.put("pAppPlugintype", pAppPlugintype);
+			parm.put("pAppPluginname", pAppdetailName);
 			int count = pApplicationService.count(parm);
 			List<PApplication> pAppDetails = pApplicationService.page(parm);
 

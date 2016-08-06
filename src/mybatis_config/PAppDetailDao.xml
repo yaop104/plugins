@@ -319,7 +319,7 @@
 			(SELECT detail.p_appdetail_apkactionid, MAX(detail.p_appdetail_id) AS appdetail_id
 			FROM p_application app,p_app_detail detail
 
-			WHERE app.p_app_id = detail.p_appdetail_apkactionid and detail.p_appdetail_auditstate in (3,4)
+			WHERE app.p_app_id = detail.p_appdetail_apkactionid and detail.p_appdetail_auditstate = 3
 
 			<if test="pAppApkactionType!=null">
 				AND app.p_app_bigType = #{pAppApkactionType}
@@ -335,7 +335,7 @@
 			GROUP BY detail.p_appdetail_apkactionid) c
 		where a.p_app_id = c.p_appdetail_apkactionid
 		) d
-		WHERE p.p_appdetail_id = d.appdetail_id
+		WHERE p.p_appdetail_id = d.appdetail_id and p.p_appdetail_auditstate = 3
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.PAppDetail">
 		INSERT INTO P_APP_DETAIL(<include refid="field" />) VALUES (<include refid="property" />)
@@ -381,7 +381,7 @@
 		<if test="pAppdetailName != null and pAppdetailName !=''">
 			and p_appdetail_name like '%${pAppdetailName}%'
 		</if>
-		<if test="pluginType != null and pluginType !=''">
+		<if test="pluginType != null ">
 			and p_appdetail_plugintype = #{pluginType}
 		</if>
 	</select>
@@ -405,7 +405,7 @@
 		<if test="pAppdetailName != null and pAppdetailName !=''">
 			and p_appdetail_name like '%${pAppdetailName}%'
 		</if>
-		<if test="pluginType != null and pluginType !=''">
+		<if test="pluginType != null ">
 			and p_appdetail_plugintype = #{pluginType}
 		</if>
 		order by a.`p_appdetail_auditstate`,a.`p_appdetail_apkactionid` desc,a.`p_appdetail_id` desc
@@ -415,7 +415,9 @@
 	</select>
 	
 	<update id="updateState" parameterType="com.sme.entity.PAppDetail">
-		update p_app_detail set p_appdetail_auditstate = #{pAppdetailAuditstate} where p_appdetail_id = #{pAppdetailId}
+		update p_app_detail set p_appdetail_auditstate = #{pAppdetailAuditstate}
+		<if test="pAppdetailAuditoption!=null" >,p_appdetail_auditoption=#{pAppdetailAuditoption,jdbcType=VARCHAR}</if>
+		where p_appdetail_id = #{pAppdetailId}
 	</update>
 	
 	<select id="selectOneByActionId" parameterType="Integer" resultType="com.sme.entity.PAppDetail">
