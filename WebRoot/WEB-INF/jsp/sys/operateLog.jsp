@@ -63,7 +63,7 @@ $(function() {
 			valueField:'sysMenuName', 
 			textField:'sysMenuName'
 		});
-		$('#operate_type').combobox("select", "全部");
+//		$('#operate_type').combobox("select", "全部");
 	});
 
 	//获取参数       

@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<%@ include file="/WEB-INF/jsp/sys/taglib2.jsp"%>
-	<title>字典信息</title>
+	<title>分类信息</title>
 </head>
 <script language="javascript">
 	var grid;
@@ -24,21 +24,21 @@
 
 		var _toolbars = [{
 			id : 'btnadd',
-			text : '添加字典',
+			text : '添加分类',
 			iconCls : 'icon-add',
 			handler : function() {
 				addOption();
 			}
 		}, '-', {
 			id : 'btncut',
-			text : '删除字典',
+			text : '删除分类',
 			iconCls : 'icon-remove',
 			handler : function() {
 				deleteOption();
 			}
 		}, '-', {
 			id : 'btnupdate',
-			text : '更新字典',
+			text : '更新分类',
 			iconCls : 'icon-edit',
 			handler : function() {
 				editOption();

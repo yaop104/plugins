@@ -47,9 +47,9 @@ public class OperateLogController extends BaseController<OperateLog> {
 			page = 1;
 		}
 		String accName = req.getParameter("accName");
-		String beginTime = "";
-		String endTime = "";
-		String operateType = "";
+		String beginTime = req.getParameter("beginTime");
+		String endTime = req.getParameter("endTime");
+		String operateType = req.getParameter("operateType");
 		
 		Map<String, Object> parm = new HashMap<String, Object>();
 		parm.put("page", getBegin());

@@ -19,13 +19,13 @@
 			and b.sys_acc_name = #{accName}
 		</if>
 		<if test="beginTime != null and beginTime !=''">
-			date_format(l.operate_time,'%Y-%m-%d') &gt; date_format(#{beginTime},'%Y-%m-%d')
+			and date_format(l.operate_time,'%Y-%m-%d') &gt;= #{beginTime}
 		</if>
 		<if test="endTime != null and endTime !=''">
-			date_format(l.operate_time,'%Y-%m-%d') &lt; date_format(#{endTime},'%Y-%m-%d')
+			and date_format(l.operate_time,'%Y-%m-%d') &lt;= #{endTime}
 		</if>
 		<if test="operateType != null and operateType !=''">
-			operate_type = #{operateType}
+			and operate_type = #{operateType}
 		</if>
 		order by l.id desc
 		<if test="page!=null and pageCount!=null">
@@ -43,10 +43,13 @@
 			and b.sys_acc_name = #{accName}
 		</if>
 		<if test="beginTime != null and beginTime !=''">
-			date_format(l.operate_time,'%Y-%m-%d') &gt; date_format(#{beginTime},'%Y-%m-%d')
+			and date_format(l.operate_time,'%Y-%m-%d') &gt;= #{beginTime}
 		</if>
 		<if test="endTime != null and endTime !=''">
-			date_format(l.operate_time,'%Y-%m-%d') &lt; date_format(#{endTime},'%Y-%m-%d')
+			and date_format(l.operate_time,'%Y-%m-%d') &lt;= #{endTime}
+		</if>
+		<if test="operateType != null and operateType !=''">
+			and operate_type = #{operateType}
 		</if>
 	</select>
 	
