@@ -36,7 +36,7 @@
 </head>
 <script language="javascript">
 	var grid;
-
+	var ctxall = 'http://114.55.150.199:8888/download/pic/';
 	$(function() {
 		var colArr = [];
 
@@ -185,7 +185,9 @@
 	}
 
 	function ys1(val, rec, index) {
-		var returnvalue="<img  src='${ctx}/image/table_td_button/check.png' onclick='buyPosition("
+		var returnvalue = "";
+		if("2" == rec.todOrderState){
+		   returnvalue="<img  src='${ctx}/image/table_td_button/check.png' onclick='buyPosition("
 				+ rec.todOrderUnid + ",\""
 				+ rec.todOrderOrdernum + "\",\""
 				+ rec.todOrderPositionprice + "\",\""
@@ -197,17 +199,17 @@
 				+ rec.todOrderPositionprice + "\",\""
 				+ rec.todOrderPositionname + "\",\""
 				+ rec.todOrderTotaldays +  "\")'>支付</a>&nbsp;&nbsp;";
-
+		}
 		if("1" == rec.todOrderState){
 			returnvalue +="<img  src='${ctx}/image/table_td_button/add.png' onclick='updatePosition("
 					+ rec.todOrderUnid + ",\""
 					+ rec.todOrderOrdernum + "\",\""
-					+ rec.todOrderPositionprice + "\",\""
+					+ rec.todOrderPositionurl + "\",\""
 					+ rec.todOrderPositionname + "\",\""
 					+ rec.todOrderTotaldays +   "\")' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='updatePosition("
 					+ rec.todOrderUnid + ",\""
 					+ rec.todOrderOrdernum + "\",\""
-					+ rec.todOrderPositionprice + "\",\""
+					+ rec.todOrderPositionurl + "\",\""
 					+ rec.todOrderPositionname + "\",\""
 					+ rec.todOrderTotaldays +   "\")'>上传素材</a>&nbsp;&nbsp;";
 
@@ -270,15 +272,17 @@
 	function updatePosition(id, num, price,name, orderdays){
 		initUpload();
 		orderid = id;
-		ordernum = num;
-		orderprice = price;
 		ordername = name;
-		orderdays = orderdays;
-		$('#ordernum').html(num);
 		$('#ordername').html(name);
-		$('#orderprice').html(price);
-		$('#orderdays').html(orderdays);
-		$('#ordertotals').html(orderdays*price);
+		if(price.length>0){
+			$('#sl_item').show();
+			$('#updatePic').val(price);
+
+			var str = '<div class="sl_box"><img src="'+ctxall + price + '"/></div>';
+			str += '<div class="sl_dele"><a href="javascript:deleSL(' +"'"+ price +"'"+ ');">删除</a></div>';
+
+			$('#sl_item').append( str );
+		}
 		$('#d333').dialog('open');
 		$('#f333').form('reset');
 	}
@@ -286,9 +290,11 @@
 	function clearFormHot(){
 		$('#d222').dialog('close');
 		$('#f222').form('reset');
+
 	}
 	function clearForPic(){
 		$('#updatePic').val('')
+		uploader.destroy();
 		$('#d333').dialog('close');
 		$('#f333').form('reset');
 	}
@@ -387,7 +393,7 @@
 				$('#sl_item').show();
 				$('#updatePic').val(data.info);
 
-				var str = '<div class="sl_box"><img src="http://yaop104.6655.la/' + data.info + '"/></div>';
+				var str = '<div class="sl_box"><img src="'+ctxall + data.info + '"/></div>';
 				str += '<div class="sl_dele"><a href="javascript:deleSL(' +"'"+ data.info +"'"+ ');">删除</a></div>';
 
 				$('#sl_item').append( str );
@@ -438,13 +444,13 @@
 		<div id="tb" style="padding: 10px; height: auto">
 			<%-- 查找管理员信息，根据时间、管理员名 --%>
 			<div>
-				公司名:
+				订单编号:
 				<input id="s_name"/>
 				按状态：
 				<select id="s_state" class="easyui-combobox" name="s_state" style="width: 150px;" panelheight="auto">
 					<option value="">全部</option>
-					<option value="1">有效</option>
-					<option value="2">无效</option>
+					<option value="1">已支付</option>
+					<option value="2">未支付</option>
 				</select>
 				<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchOption()">&nbsp; 查&nbsp;&nbsp;询 &nbsp; &nbsp;</a>
 			</div>
@@ -573,7 +579,7 @@
 		</div>
 	</div>
 	<div id="btn3">
-		<a href="javascript:void(0)" class="easyui-linkbutton c6" data-options="iconCls:'icon-ok'" onclick="saveForPic()" style="width:90px"> 支  付 </a>
+		<a href="javascript:void(0)" class="easyui-linkbutton c6" data-options="iconCls:'icon-ok'" onclick="saveForPic()" style="width:90px"> 确  定 </a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="clearForPic()" style="width:90px"> 取  消 </a>
 	</div>
 </div>

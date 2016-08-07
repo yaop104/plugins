@@ -30,4 +30,15 @@
     select id, user_id, text, creat_time
     from feedback
   </select> -->
+
+  <select id="page" resultType="com.sme.entity.Feedback" parameterType="map">
+    SELECT fd.id as id,fd.text as text,fd.pic as pic,fd.creat_time as creatTime,acc.sys_acc_name as username FROM feedback fd left join sys_acc acc on fd.user_id = acc.sys_acc_id
+    order by fd.id desc
+    <if test="page!=null and pageCount!=null">
+      limit #{page}, #{pageCount}
+    </if>
+  </select>
+  <select id="count" resultType="Integer" parameterType="map">
+    select count(*) FROM feedback fd left join sys_acc acc on fd.user_id = acc.sys_acc_id
+  </select>
 </mapper>

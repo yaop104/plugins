@@ -1,7 +1,9 @@
 package com.sme.view;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sme.core.model.StringJSON;
 import com.sme.core.service.InterfaceBaseService;
 import com.sme.core.view.BaseController;
+import com.sme.entity.TapApplication;
 import com.sme.entity.TbcInfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,7 +40,37 @@ public class TptPositionController extends BaseController<TptPosition> {
 	public String tptPositionList(TptPosition tptPosition, HttpServletRequest req) {
 		return "/tptPosition/tptPositionlist";
 	}
-	
+
+	@RequestMapping(value = "/page", method = { RequestMethod.POST })
+	@ResponseBody
+	public Map<String, Object> page(HttpServletRequest req) {
+		// 分页属性
+		if (req.getParameter("rows") != null && req.getParameter("page") != null) {
+			rows = Integer.parseInt(req.getParameter("rows"));
+			page = Integer.parseInt(req.getParameter("page"));
+		} else {
+			rows = 15;
+			page = 1;
+		}
+		try {
+			String tptName = req.getParameter("tptName");
+			String tptState = req.getParameter("tptState");
+
+			Map<String, Object> parm = new HashMap<String, Object>();
+			parm.put("page", getBegin());
+			parm.put("pageCount", getEnd());
+			parm.put("tptName", tptName);
+			parm.put("tptState", tptState);
+			int count = tptPositionServiceImpl.count(parm);
+			List<TptPosition> sysAccs = tptPositionServiceImpl.page(parm);
+			return RespUtil.pageResult(count, sysAccs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
 	@RequestMapping(value="/gettptPositionlists", method={RequestMethod.GET})
 	@ResponseBody
 	public List<TptPosition> tptPositionLists(TptPosition tptPosition, HttpServletRequest req) {
@@ -93,6 +126,7 @@ public class TptPositionController extends BaseController<TptPosition> {
 				tptPosition1.setTptName(tptPosition.getTptName());
 				tptPosition1.setTptPrice(tptPosition.getTptPrice());
 				tptPosition1.setTptState(tptPosition.getTptState());
+				tptPositionServiceImpl.update(tptPosition1);
 				return getSuccess(true, "修改成功");
 			} else {
 

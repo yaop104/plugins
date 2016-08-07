@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sme.entity.TptPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,10 @@ public class FeedbackController extends BaseController<Feedback>{
 
 	@Autowired
 	public FeedbackService feedbackService;
-	
+	@RequestMapping(value="/feedbacklist", method={RequestMethod.GET})
+	public String feedbacklist(HttpServletRequest req) {
+		return "/tptPosition/feedback";
+	}
 	@RequestMapping(value = "/insertData", method = {RequestMethod.POST})
 	@ResponseBody
 	public StringJSON insertData(@RequestParam(value = "pic", required = false) MultipartFile[] files,

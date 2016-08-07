@@ -1,7 +1,9 @@
 package com.sme.view;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,7 +57,37 @@ public class TodOrderController extends BaseController<TodOrder>{
 		}
 		
 	}
-	
+
+	@RequestMapping(value = "/page", method = { RequestMethod.POST })
+	@ResponseBody
+	public Map<String, Object> page(HttpServletRequest req) {
+		// 分页属性
+		if (req.getParameter("rows") != null && req.getParameter("page") != null) {
+			rows = Integer.parseInt(req.getParameter("rows"));
+			page = Integer.parseInt(req.getParameter("page"));
+		} else {
+			rows = 15;
+			page = 1;
+		}
+		try {
+			String tptName = req.getParameter("tptName");
+			String tptState = req.getParameter("tptState");
+
+			Map<String, Object> parm = new HashMap<String, Object>();
+			parm.put("page", getBegin());
+			parm.put("pageCount", getEnd());
+			parm.put("todOrderOrdernum", tptName);
+			parm.put("todOrderState", tptState);
+			int count = todOrderServiceImpl.count(parm);
+			List<TodOrder> sysAccs = todOrderServiceImpl.page(parm);
+			return RespUtil.pageResult(count, sysAccs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
 	 @RequestMapping(value="/{id}/delete", method={RequestMethod.GET})
 	 public String todOrderDelete(@PathVariable Integer id){
 		 try

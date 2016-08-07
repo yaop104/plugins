@@ -124,7 +124,7 @@
 		</if>
 	</select>
 	<select id="count" resultType="Integer" parameterType="map">
-		select count(*) from SYS_ACC <include refid="idCnd2"/>
+		select count(*) from SYS_ACC <include refid="idCnd3"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.SysAcc" resultType="com.sme.entity.SysAcc">
 		SELECT <include refid="fieldAsProperty" /> FROM SYS_ACC <include refid="idCnd2"/>

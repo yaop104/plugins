@@ -213,25 +213,25 @@
 </script>
 <body>
 <div class="easyui-layout" fit="true"  border="false">
-	<div region="north" style="height:50px">
-		<%--功能区--%>
-		<div id="tb" style="padding: 10px; height: auto">
-			<%-- 查找管理员信息，根据时间、管理员名 --%>
-			<div>
-				公司名:
-				<input id="s_name"/>
-				按状态：
-				<select id="s_state" class="easyui-combobox" name="s_state" style="width: 150px;" panelheight="auto">
-					<option value="">全部</option>
-					<option value="1">有效</option>
-					<option value="2">无效</option>
-				</select>
-				<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchOption()">&nbsp; 查&nbsp;&nbsp;询 &nbsp; &nbsp;</a>
-			</div>
-		</div>
+	<%--<div region="north" style="height:50px">--%>
+		<%--&lt;%&ndash;功能区&ndash;%&gt;--%>
+		<%--<div id="tb" style="padding: 10px; height: auto">--%>
+			<%--&lt;%&ndash; 查找管理员信息，根据时间、管理员名 &ndash;%&gt;--%>
+			<%--<div>--%>
+				<%--公司名:--%>
+				<%--<input id="s_name"/>--%>
+				<%--按状态：--%>
+				<%--<select id="s_state" class="easyui-combobox" name="s_state" style="width: 150px;" panelheight="auto">--%>
+					<%--<option value="">全部</option>--%>
+					<%--<option value="1">有效</option>--%>
+					<%--<option value="2">无效</option>--%>
+				<%--</select>--%>
+				<%--<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchOption()">&nbsp; 查&nbsp;&nbsp;询 &nbsp; &nbsp;</a>--%>
+			<%--</div>--%>
+		<%--</div>--%>
 
 
-	</div>
+	<%--</div>--%>
 	<div region="center"   border="false">
 		<table id="t1"></table>
 

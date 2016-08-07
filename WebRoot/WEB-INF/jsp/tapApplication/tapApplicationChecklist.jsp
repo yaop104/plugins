@@ -234,8 +234,9 @@
 				按状态：
 				<select id="s_state" class="easyui-combobox" name="s_state" style="width: 150px;" panelheight="auto">
 					<option value="">全部</option>
-					<option value="1">有效</option>
-					<option value="2">无效</option>
+					<option value="1">未审核</option>
+					<option value="2">通过</option>
+					<option value="3">驳回</option>
 				</select>
 				<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchOption()">&nbsp; 查&nbsp;&nbsp;询 &nbsp; &nbsp;</a>
 			</div>

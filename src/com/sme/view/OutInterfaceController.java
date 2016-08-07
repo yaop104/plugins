@@ -387,6 +387,7 @@ public class OutInterfaceController {
             sysAcc.setSysAccPassword(password);
             sysAcc.setSysAccState("1");
             sysAcc.setSysAccType("1");
+            sysAcc.setSysAccMoney(0);
             sysAcc.setSysAccCdate(new Date());
             sysAcc.setSysAccCuser("用户"+sysAcc.getSysAccName());
 

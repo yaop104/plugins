@@ -1,7 +1,9 @@
 package com.sme.view;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +43,36 @@ public class TapApplicationController extends BaseController<TapApplication>{
 	@RequestMapping(value="/tapApplicationlist", method={RequestMethod.GET})
 	public String tapApplicationList(TapApplication tapApplication, HttpServletRequest req) {
 		return "/tapApplication/tapApplicationlist";
+	}
+
+	@RequestMapping(value = "/page", method = { RequestMethod.POST })
+	@ResponseBody
+	public Map<String, Object> page(HttpServletRequest req) {
+		// 分页属性
+		if (req.getParameter("rows") != null && req.getParameter("page") != null) {
+			rows = Integer.parseInt(req.getParameter("rows"));
+			page = Integer.parseInt(req.getParameter("page"));
+		} else {
+			rows = 15;
+			page = 1;
+		}
+		try {
+			String tptName = req.getParameter("tptName");
+			String tptState = req.getParameter("tptState");
+
+			Map<String, Object> parm = new HashMap<String, Object>();
+			parm.put("page", getBegin());
+			parm.put("pageCount", getEnd());
+			parm.put("tapApplicationMoneyid", tptName);
+			parm.put("tapApplicationCheckstate", tptState);
+			int count = tapApplicationServiceImpl.count(parm);
+			List<TapApplication> sysAccs = tapApplicationServiceImpl.page(parm);
+			return RespUtil.pageResult(count, sysAccs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	@RequestMapping(value="/tapApplicationChecklist", method={RequestMethod.GET})

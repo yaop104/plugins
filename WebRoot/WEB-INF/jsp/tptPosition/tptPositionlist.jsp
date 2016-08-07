@@ -115,8 +115,8 @@
 					'tptUnid':row.tptUnid,
 					'tptType':row.tptType,
 					'tptName':row.tptName,
-					'tptContactname':row.tptContactname,
-					'tptContactphone':row.tptContactphone,
+					'tptPrice':row.tptPrice,
+					'tptDemourl':row.tptDemourl,
 					'tptState':row.tptState,
 					'tptDesc':row.tptDesc
 				});
@@ -170,7 +170,11 @@
 	}
 
 	function ys1(val, rec, index) {
-		var returnvalue="<img  src='${ctx}/image/table_td_button/check.png' onclick='buyPosition(" + rec.tptUnid + ",\"" + rec.tptName + "\")' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='buyPosition(" + rec.tptUnid + ",\"" + rec.tptUnid + "\")'>购买</a>&nbsp;&nbsp;";
+		var returnvalue ="";
+		if(rec.tptState == "1"){
+			returnvalue="<img  src='${ctx}/image/table_td_button/check.png' onclick='buyPosition(" + rec.tptUnid + ",\"" + rec.tptName + "\")' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='buyPosition(" + rec.tptUnid + ",\"" + rec.tptUnid + "\")'>购买</a>&nbsp;&nbsp;";
+		}
+
 		return returnvalue;
 	}
 	var hotAppId;
@@ -185,7 +189,6 @@
 	function  saveFormHot(){
 		var arr =$('#tagTagUnid').combo('getValue');
 
-		alert(arr);
 		$.post('${ctx }/TodOrder/insert.do',{
 			'odOrderPackageid': hotAppId,
 			'todOrderTotaldays': arr,

@@ -148,6 +148,7 @@ public class SysAccController extends BaseController<SysAcc> {
 				sysAcc.setSysAccPassword(password);
 				sysAcc.setSysAccCdate(new Date());
 				sysAcc.setSysAccCuser("admin");
+				sysAcc.setSysAccMoney(0);
 
 				sysAccServiceImpl.insert(sysAcc);
 
