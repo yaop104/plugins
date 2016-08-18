@@ -113,14 +113,14 @@
 	</sql>
 
 	<select id="page" parameterType="map" resultType="com.sme.entity.TdcDictionary">
-	    SELECT <include refid="fieldAsProperty" /> FROM TDC_DICTIONARY <include refid="idCnd2"/> 
+	    SELECT sys_acc_name as accName,<include refid="fieldAsProperty" /> FROM TDC_DICTIONARY left join sys_acc on tdc_dictionary_cuser = sys_acc_id <include refid="idCnd2"/>
 
 		<if test="page!=null and pageCount!=null">
 			limit #{page} , #{pageCount}
 		</if>
 	</select>
 	<select id="count" parameterType="map" resultType="Integer">
-	    SELECT COUNT(*) FROM TDC_DICTIONARY <include refid="idCnd2"/>
+	    SELECT COUNT(*) FROM TDC_DICTIONARY left join sys_acc on tdc_dictionary_cuser = sys_acc_id <include refid="idCnd2"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.TdcDictionary" resultType="com.sme.entity.TdcDictionary">
 		SELECT <include refid="fieldAsProperty" /> FROM TDC_DICTIONARY <include refid="idCnd2"/>

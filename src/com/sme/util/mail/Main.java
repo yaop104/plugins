@@ -14,7 +14,8 @@ public class Main {
         //这个类主要是设置邮件
         MailSenderInfo mailInfo = new MailSenderInfo();
         //服务器端口
-        mailInfo.setMailServerHost("smtp.126.com");
+//        mailInfo.setMailServerHost("smtp.126.com");
+        mailInfo.setMailServerHost("220.181.15.111");
         //或者是通过qq邮箱发送
 //        mailInfo.setMailServerHost("smtp.qq.com");
         mailInfo.setMailServerPort("25");
@@ -22,7 +23,7 @@ public class Main {
         //您的邮箱用户名
         mailInfo.setUserName("yp104@126.com");
         //您的邮箱密码
-        mailInfo.setPassword("123454321asdf");
+        mailInfo.setPassword("123454321asdf1");
         //发送邮件源地址
         mailInfo.setFromAddress("yp104@126.com");
         //发送邮件目的地址

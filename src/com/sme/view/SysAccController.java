@@ -106,6 +106,22 @@ public class SysAccController extends BaseController<SysAcc> {
 		}
 	}
 
+	@RequestMapping(value = "/resetPwd")
+	@ResponseBody
+	@com.sme.core.spring.Log(type = "账号管理", desc = "重置密码")
+	public StringJSON resetPwd(SysAcc sysAcc) {
+		try {
+				SysAcc sysAcc2 = new SysAcc();
+				sysAcc2 = sysAccServiceImpl.getById(sysAcc);
+				sysAcc2.setSysAccPassword(MD5.encryByMD5("123456"));
+				sysAccServiceImpl.update(sysAcc2);
+				return getSuccess(true, "成功,密码为：123456！", null);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return getSuccess(false, "系统异常！", null);
+		}
+	}
+
 	@RequestMapping(value = "/save", method = { RequestMethod.POST })
 	@ResponseBody
 	@com.sme.core.spring.Log(type = "账号管理", desc = "修改账号")

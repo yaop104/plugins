@@ -15,7 +15,7 @@
 		colArr = [
 			{ field:'tdcDictionaryUnid', align:'center', width:'150' , title:'ID' },
 			{ field:'tdcDictionaryName', align:'center', width:'150' , title:'名称' },
-			{ field:'tdcDictionaryCuser', align:'center', width:'120', sortable:'true' , title:'记录人' },
+			{ field:'accName', align:'center', width:'120', sortable:'true' , title:'记录人' },
 			{ field:'tdcDictionaryCdate', align:'center', width:'120', sortable:'true' , title:'记录时间' },
 			{ field:'tdcDictionaryParentid', align:'center',  width:'80', sortable:'true' , title:'上级' },
 			{ field:'tdcDictionaryType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
@@ -109,7 +109,7 @@
 
 	function addOption(){
 		$('#d1').dialog('open');
-		$('#f1').form('reset');
+		$('#f1').form('clear');
 		$('#f1').form.url='${ctx }/TdcDictionary/save.do';
 	}
 

@@ -115,7 +115,7 @@
 
 	function addOption(){
 		$('#d1').dialog('open');
-		$('#f1').form('reset');
+		$('#f1').form('clear');
 		$('#f1').form.url='${ctx }/TodOrder/save.do';
 	}
 
@@ -275,10 +275,11 @@
 		ordername = name;
 		$('#ordername').html(name);
 		if(price.length>0){
+			$('#sl_item').html("");
 			$('#sl_item').show();
 			$('#updatePic').val(price);
 
-			var str = '<div class="sl_box"><img src="'+ctxall + price + '"/></div>';
+			var str = '<div class="sl_box"><a href="'+ctxall + price + '" target="_blank"><img src="'+ctxall + price + '"/></a></div>';
 			str += '<div class="sl_dele"><a href="javascript:deleSL(' +"'"+ price +"'"+ ');">删除</a></div>';
 
 			$('#sl_item').append( str );
@@ -391,9 +392,10 @@
 			$list.html("");
 			if(data.code==500){
 				$('#sl_item').show();
+				$('#sl_item').html("");
 				$('#updatePic').val(data.info);
 
-				var str = '<div class="sl_box"><img src="'+ctxall + data.info + '"/></div>';
+				var str = '<div class="sl_box"><a href="'+ctxall + data.info + '" target="_blank"><img src="'+ctxall + data.info + '"/></a></div>';
 				str += '<div class="sl_dele"><a href="javascript:deleSL(' +"'"+ data.info +"'"+ ');">删除</a></div>';
 
 				$('#sl_item').append( str );

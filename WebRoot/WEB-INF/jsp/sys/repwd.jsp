@@ -22,11 +22,11 @@
 							<span class="ico ico_create"></span><span class="presenter">修改</span>
 						</div>
 				</a></li>
-				<li class="bar_refresh"><a href="#" onclick="closeDialog();">
-						<div class="itembody">
-							<span class="ico dialogclose"></span><span class="presenter">关闭</span>
-						</div>
-				</a></li>
+				<%--<li class="bar_refresh"><a href="#" onclick="closeDialog();">--%>
+						<%--<div class="itembody">--%>
+							<%--<span class="ico dialogclose"></span><span class="presenter">关闭</span>--%>
+						<%--</div>--%>
+				<%--</a></li>--%>
 			</ul>
 		</div>
 		<table border="0" cellpadding="0" cellspacing="0" class="formlist"
@@ -53,7 +53,7 @@
 	</form>
 </body>
 <script language="javascript">
-var path = "/cmcc_sme/";
+var path = "/plugins/";
 //保存
 function save(){
 	if(Validator.isValid("frm")) {
@@ -65,6 +65,7 @@ function save(){
         		 console.info(data.code);
         		 if("0"==data.code){
         			 alert("成功，密码已修改");
+					 location.href = path+'login.do';
         		 }else if("1"==data.code){
         			 alert("密码错误，重新修改");
         		 }else if("2"==data.code){

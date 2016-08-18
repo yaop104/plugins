@@ -44,6 +44,16 @@ public class TdcDictionary extends BaseObject implements Serializable {
 	/** 描述 */
 	private String	tdcDictionaryDesc;
 
+	private String accName;
+
+	public String getAccName() {
+		return accName;
+	}
+
+	public void setAccName(String accName) {
+		this.accName = accName;
+	}
+
 	public Integer getTdcDictionaryUnid() {
 		return this.tdcDictionaryUnid;
 	}

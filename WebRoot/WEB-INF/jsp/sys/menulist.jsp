@@ -110,7 +110,7 @@ $(function() {
 
 	function addMenu(){
 		$('#d1').dialog('open');
-		$('#f1').form('reset');
+		$('#f1').form('clear');
 		$('#f1').form.url='${ctx }/sysMenu/save.do';
 	}
 

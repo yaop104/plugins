@@ -20,7 +20,8 @@
 			{ field:'sysAccState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState },
 			{ field:'sysAccType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
 			{ field:'sysAccRoleid', align:'center',  width:'80', sortable:'true' , title:'角色' },
-			{ field:'sysAccOrgid', align:'center', width:'180' , title:'组织' }
+			{ field:'sysAccOrgid', align:'center', width:'180' , title:'公司' },
+			{ field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];
 
 		var _toolbars = [{
@@ -123,7 +124,7 @@
 
 	function addAccount(){
 		$('#d1').dialog('open');
-		$('#f1').form('reset');
+		$('#f1').form('clear');
 		$('#f1').form.url='${ctx }/sysAcc/save.do';
 	}
 
@@ -227,6 +228,28 @@
 		if(!isInput('sysAccOrgid', '公司名称', 128, 0)){
 			return false;
 		}
+	}
+
+	function ys1(val, rec, index) {
+		var returnvalue ="";
+		if(rec.sysAccState == "1"){
+			returnvalue="<img  src='${ctx}/image/table_td_button/check.png' onclick='buyPosition(" + rec.sysAccId + ",\"" + rec.sysAccName + "\")' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='buyPosition(" + rec.sysAccId + ",\"" + rec.sysAccName + "\")'>重置密码</a>&nbsp;&nbsp;";
+		}
+
+		return returnvalue;
+	}
+
+	function buyPosition(id, name){
+		$.post('${ctx }/sysAcc/resetPwd.do',{
+			'sysAccId': id
+		},function(data){
+			if(data.success){
+				msgShow('成功',data.message,'info');
+			}else{
+				msgShow('错误',data.message,'error');
+			}
+		}, 'json');
+
 	}
 
 	function  saveForm(){
