@@ -176,12 +176,14 @@ public class TapApplicationController extends BaseController<TapApplication>{
 		
 	}
 
-	@RequestMapping(value = "/update", method = { RequestMethod.POST })
+	@RequestMapping(value = "/updateforCheck", method = { RequestMethod.POST })
 	@ResponseBody
-	public StringJSON update(TapApplication t) {
+	public StringJSON updateforCheck(TapApplication t, HttpServletRequest request) {
+		SysAcc session = (SysAcc) request.getSession().getAttribute("loginUser");
 		try {
 			t.setTapApplicationChecktime(new Date());
-			t.setTapApplicationUuser(1);
+			t.setTapApplicationUuser(session.getSysAccId());
+			t.setTapApplicationCheckname(session.getSysAccName());
 			String flag =  tapApplicationServiceImpl.updateForCheck(t);
 			if("1".endsWith(flag)){
 				return getSuccess(true, "更新成功！");

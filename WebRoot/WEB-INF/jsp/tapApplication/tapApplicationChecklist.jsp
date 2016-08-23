@@ -8,7 +8,7 @@
 </head>
 <script language="javascript">
 	var grid;
-
+	var ctxall = 'http://114.55.150.199:8888/download/pic/';
 	$(function() {
 		var colArr = [];
 
@@ -16,11 +16,11 @@
 			{ field:'tapApplicationUnid', align:'center', width:'150' , title:'ID' },
 			{ field:'tapApplicationMoneyid', align:'center', width:'150' , title:'名称' },
 			{ field:'tapApplicationAppname', align:'center', width:'120', sortable:'true' , title:'金额（元）' },
-			{ field:'tapApplicationUrl', align:'center',  width:'80', sortable:'true' , title:'示例图片' },
+			{ field:'tapApplicationUrl', align:'center',  width:'180', sortable:'true' , title:'示例图片' , formatter : ys3},
 			{ field:'tapApplicationCheckstate', align:'center',  width:'80', sortable:'true' , title:'审核状态' , formatter : convertState },
-			{ field:'tapApplicationCheckname', align:'center',  width:'80', sortable:'true' , title:'审核人'  },
-			{ field:'tapApplicationChecktime', align:'center',  width:'80', sortable:'true' , title:'审核时间'  },
-			{ field:'tapApplicationCheckdesc', align:'center',  width:'80', sortable:'true' , title:'审核备注'  },
+			{ field:'tapApplicationCheckname', align:'center',  width:'180', sortable:'true' , title:'审核人'  },
+			{ field:'tapApplicationChecktime', align:'center',  width:'180', sortable:'true' , title:'审核时间'  },
+			{ field:'tapApplicationCheckdesc', align:'center',  width:'180', sortable:'true' , title:'审核备注'  },
 			{ field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];
 
@@ -151,7 +151,11 @@
 		}
 
 	}
+	function ys3(val, rec, index) {
 
+		return '<a target="_blank"  href="' + ctxall +  rec.tapApplicationUrl +'">'+ rec.tapApplicationUrl +'</a>';
+
+	}
 	function convertType(val, rec, index) {
 			return '<span style="color: green">开发商</span>';
 	}
@@ -177,7 +181,7 @@
 		var tapApplicationCheckstate =$('#tapApplicationCheckstate').combo('getValue');
 		var tapApplicationCheckdesc =$('#tapApplicationCheckdesc').val();
 
-		$.post('${ctx }/TapApplication/update.do',{
+		$.post('${ctx }/TapApplication/updateforCheck.do',{
 			'tapApplicationUnid': hotAppId,
 			'tapApplicationCheckstate': tapApplicationCheckstate,
 			'tapApplicationCheckdesc': tapApplicationCheckdesc

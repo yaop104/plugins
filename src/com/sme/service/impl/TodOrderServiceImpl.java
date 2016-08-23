@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TodOrderServiceImpl extends BaseService<TodOrder> implements TodOrderService{
@@ -104,6 +105,11 @@ public class TodOrderServiceImpl extends BaseService<TodOrder> implements TodOrd
 			flag = "3";
 		}
 		return flag;
+	}
+
+	@Override
+	public List<TodOrder> getImgList() {
+		return todOrderDao.getImgList();
 	}
 
 	public static Date getMyDay(Integer day){

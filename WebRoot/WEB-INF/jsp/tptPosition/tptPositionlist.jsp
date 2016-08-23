@@ -16,7 +16,7 @@
 			{ field:'tptUnid', align:'center', width:'150' , title:'ID' },
 			{ field:'tptName', align:'center', width:'150' , title:'名称' },
 			{ field:'tptPrice', align:'center', width:'120', sortable:'true' , title:'价格（元/天）' },
-			{ field:'tptDemourl', align:'center',  width:'80', sortable:'true' , title:'示例图片' },
+			{ field:'tptDemourl', align:'center',  width:'280', sortable:'true' , title:'图片格式要求' },
 			{ field:'tptState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState },
 			{ field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];
@@ -271,7 +271,7 @@
 							<td><input class="easyui-validatebox" name="tptPrice" required="true" style="width: 152px" id="tptPrice"/></td>
 						</tr>
 						<tr>
-							<td align="right">示例：</td>
+							<td align="right">图片格式要求：</td>
 							<td>
 								<input class="easyui-validatebox" name="tptDemourl" required="true" style="width: 152px" id="tptDemourl"/>
 							</td>

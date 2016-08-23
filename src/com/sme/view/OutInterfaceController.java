@@ -3,8 +3,6 @@ package com.sme.view;
 import com.sme.core.model.StringJSON;
 import com.sme.entity.*;
 import com.sme.service.*;
-import com.sme.service.impl.TagTagServiceImpl;
-import com.sme.service.impl.TapDownloadServiceImpl;
 import com.sme.service.impl.TdcDictionaryServiceImpl;
 import com.sme.util.*;
 import com.sme.util.mail.MailSenderInfo;
@@ -54,6 +52,8 @@ public class OutInterfaceController {
     public FeedbackService feedbackService;
     @Autowired
     private TsmSendMessageService tsmSendMessageService;
+    @Autowired
+    private TodOrderService todOrderService;
 
     private Log log = LogFactory.getLog(TdcDictionaryController.class);
 
@@ -350,6 +350,23 @@ public class OutInterfaceController {
             log.info("<=====执行getTapDownload====>");
             List<TapDownload> tapDownloads = tapDownloadService.select(tapDownload);
             return getSuccess(true,"",tapDownloads);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return getSuccess(false,"列表获取失败,系统异常！！");
+        }
+
+    }
+
+    @RequestMapping(value="/getImgList", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public StringJSON getImgList() {
+        try {
+            log.info("<=====执行getImgList====>");
+            List<TodOrder> todOrders = new ArrayList<>();
+            todOrders = todOrderService.getImgList();
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("todOrders", todOrders);
+            return getSuccess(true,"",map);
         } catch (Exception e) {
             log.error(e.getMessage());
             return getSuccess(false,"列表获取失败,系统异常！！");

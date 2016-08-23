@@ -119,7 +119,7 @@
 	</sql>
 	
 	<select id="page" parameterType="map" resultType="com.sme.entity.TapApplication">
-	    SELECT <include refid="fieldAsProperty" /> FROM TAP_APPLICATION <include refid="idCnd2"/> 
+	    SELECT <include refid="fieldAsProperty" /> FROM TAP_APPLICATION <include refid="idCnd2"/>
 
 		<if test="page!=null and pageCount!=null">
 			limit #{page} , #{pageCount}
