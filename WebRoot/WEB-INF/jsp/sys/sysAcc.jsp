@@ -19,8 +19,8 @@
 			{ field:'sysAccRealname', align:'center', width:'120', sortable:'true' , title:'姓名' },
 			{ field:'sysAccState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState },
 			{ field:'sysAccType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
-			{ field:'sysAccRoleid', align:'center',  width:'80', sortable:'true' , title:'角色' },
-			{ field:'sysAccOrgid', align:'center', width:'180' , title:'组织' }
+			{ field:'orgname', align:'center',  width:'80', sortable:'true' , title:'角色' },
+			{ field:'rolename', align:'center', width:'180' , title:'组织' }
 		];
 
 		var _toolbars = [{

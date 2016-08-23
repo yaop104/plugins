@@ -56,6 +56,26 @@ public class SysAcc extends BaseObject{
 	/** 手机号 **/
 	private String sysAccMobile;
 
+	private String orgname;
+
+	private String rolename;
+
+	public String getOrgname() {
+		return orgname;
+	}
+
+	public void setOrgname(String orgname) {
+		this.orgname = orgname;
+	}
+
+	public String getRolename() {
+		return rolename;
+	}
+
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
+
 	public String getSysAccEmail() {
 		return sysAccEmail;
 	}

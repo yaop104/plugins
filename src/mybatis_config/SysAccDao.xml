@@ -117,14 +117,21 @@
 		<if test="sysAccMoney!=null" >sys_acc_money=#{sysAccMoney,jdbcType=INTEGER},</if>
 	</sql>
 	<select id="page" resultType="com.sme.entity.SysAcc" parameterType="map">
-		SELECT <include refid="fieldAsProperty" /> FROM SYS_ACC <include refid="idCnd3"/>
+
+		SELECT IFNULL(tio_name,'') AS orgname, IFNULL(t_sys_role_name,'') AS rolename,<include refid="fieldAsProperty" />
+		FROM SYS_ACC
+		LEFT JOIN sysrole ON t_sys_role_id = sys_acc_roleid
+		LEFT JOIN tbc_info ON tio_unid = sys_acc_orgid
+		<include refid="idCnd3"/>
 		order by sys_acc_cdate desc
 		<if test="page!=null and pageCount!=null">
 			limit #{page}, #{pageCount}
 		</if>
 	</select>
 	<select id="count" resultType="Integer" parameterType="map">
-		select count(*) from SYS_ACC <include refid="idCnd3"/>
+		select count(*) FROM SYS_ACC
+		LEFT JOIN sysrole ON t_sys_role_id = sys_acc_roleid
+		LEFT JOIN tbc_info ON tio_unid = sys_acc_orgid <include refid="idCnd3"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.SysAcc" resultType="com.sme.entity.SysAcc">
 		SELECT <include refid="fieldAsProperty" /> FROM SYS_ACC <include refid="idCnd2"/>
