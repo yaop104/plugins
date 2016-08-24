@@ -125,7 +125,7 @@
 		SELECT <include refid="fieldAsProperty" /> FROM TOD_ORDER
 	</select>
 	<select id="getImgList" parameterType="com.sme.entity.TodOrder" resultType="com.sme.entity.TodOrder">
-		SELECT IFNULL(CONCAT('http://114.55.150.199:8888/download/pic/',tod_order_positionurl),'') AS todOrderPositionurl FROM ttm_time, tod_order  WHERE 1=1 AND  tod_order_unid = ttm_time_orderid AND DATE_FORMAT(NOW(),'%y-%m-%d') = ttm_time_time
+		SELECT IFNULL(CONCAT('http://114.55.150.199:8888/download/pic/',tod_order_positionurl),'') AS todOrderPositionurl FROM ttm_time, tod_order  WHERE 1=1 AND  tod_order_unid = ttm_time_orderid AND tod_order_positionurl IS NOT NULL AND DATE_FORMAT(NOW(),'%y-%m-%d') = ttm_time_time
 	</select>
 	<insert id="insert" parameterType="com.sme.entity.TodOrder">
 		INSERT INTO TOD_ORDER(<include refid="field" />) VALUES (<include refid="property" />)
