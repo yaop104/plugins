@@ -175,7 +175,7 @@ public class OutInterfaceController {
             sysAcc.setSysAccHead(json.getInfo());
             sysAccService.update(sysAcc);
             String img = json.getInfo();
-            img = Config.HEAD_IMG_REALPATH + img;
+            img = Config.HEAD_IMG_REALPATH + "download/pic/" + img;
             json.setInfo(img);
         }
         Map<String, Object> map = new HashMap<>();

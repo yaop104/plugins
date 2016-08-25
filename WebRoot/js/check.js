@@ -79,3 +79,11 @@
 	     if (r==null) return false;
 	     else return true;
 	}
+
+	/**
+	 * 判断是否null
+	 * @param data
+	 */
+	function isNull(data){
+		return (data == "" || data == undefined || data == null || data == "null");
+	}

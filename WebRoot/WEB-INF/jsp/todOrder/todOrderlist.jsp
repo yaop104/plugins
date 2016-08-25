@@ -70,7 +70,7 @@
 			sortOrder : 'asc',//定义排序顺序，可以是'asc'或者'desc'（正序或者倒序）
 			remoteSort : false,//定义是否通过远程服务器对数据排序
 			itColumns : false,
-			singleSelect : false,//设置为true将只允许选择一行
+			singleSelect : true,//设置为true将只允许选择一行
 			idField : 'todOrderUnid',//表明该列是一个唯一列。
 			rownumbers : true,//设置为true将显示行数
 			frozenColumns:[[
@@ -266,7 +266,7 @@
 		$('#orderdays').html(orderdays);
 		$('#ordertotals').html(orderdays*price);
 		$('#d222').dialog('open');
-		$('#f222').form('reset');
+		$('#f222').form('clear');
 	}
 
 	function updatePosition(id, num, price,name, orderdays){
@@ -274,7 +274,7 @@
 		orderid = id;
 		ordername = name;
 		$('#ordername').html(name);
-		if(price.length>0){
+		if(!isNull(price)){
 			$('#sl_item').html("");
 			$('#sl_item').show();
 			$('#updatePic').val(price);
@@ -285,19 +285,24 @@
 			$('#sl_item').append( str );
 		}
 		$('#d333').dialog('open');
-		$('#f333').form('reset');
+		$('#f333').form('clear');
 	}
 
 	function clearFormHot(){
+		orderid = '';
+		ordername = '';
+		uploader.destroy();
+		deleSL('');
 		$('#d222').dialog('close');
-		$('#f222').form('reset');
+		$('#f222').form('clear');
 
 	}
 	function clearForPic(){
 		$('#updatePic').val('')
 		uploader.destroy();
+		deleSL('');
 		$('#d333').dialog('close');
-		$('#f333').form('reset');
+		$('#f333').form('clear');
 	}
 
 	function  saveForm(){
