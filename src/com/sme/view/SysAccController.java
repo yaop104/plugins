@@ -137,6 +137,7 @@ public class SysAccController extends BaseController<SysAcc> {
 				sysAcc2.setSysAccName(sysAcc.getSysAccName());
 				sysAcc2.setSysAccOrgid(sysAcc.getSysAccOrgid());
 				// sysAcc2.setSysAccPassword(MD5.encryByMD5(sysAcc.getSysAccPassword()));
+				sysAcc2.setSysAccMobile(sysAcc.getSysAccMobile());
 				sysAcc2.setSysAccRealname(sysAcc.getSysAccRealname());
 				sysAcc2.setSysAccRoleid(sysAcc.getSysAccRoleid());
 				sysAcc2.setSysAccState(sysAcc.getSysAccState());
@@ -154,10 +155,13 @@ public class SysAccController extends BaseController<SysAcc> {
 				if(chkAccountIsExists(sysAccnames)){
 					return getSuccess(false, "该用户名已存在,请重新输入用户名！！");
 				}
-				SysAcc sysAccphone = new SysAcc();
-				sysAccphone.setSysAccMobile(sysAcc.getSysAccMobile());
-				if(chkAccountIsExists(sysAccphone)){
-					return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
+
+				if(!sysAcc.getSysAccType().equals("1")){
+					SysAcc sysAccphone = new SysAcc();
+					sysAccphone.setSysAccMobile(sysAcc.getSysAccMobile());
+					if(chkAccountIsExists(sysAccphone)){
+						return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
+					}
 				}
 
 				String password = MD5.encryByMD5("1");

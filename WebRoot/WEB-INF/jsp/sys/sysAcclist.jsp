@@ -212,22 +212,22 @@
 		if(!isInput('sysAccName', '用户名', 128, 1)){
 			return false;
 		}
-		if(!isInput('sysAccRealname', '联系人', 128, 1)){
-			return false;
-		}
+//		if(!isInput('sysAccRealname', '联系人', 128, 1)){
+//			return false;
+//		}
 
-		if(!isMobilePhone($("#sysAccMobile").val(), false)){
-			alert("输入手机号码为空或者号码不正确");
-			$("#user_mobile").focus();
-			return false;
-		}
+//		if(!isMobilePhone($("#sysAccMobile").val(), false)){
+//			alert("输入手机号码为空或者号码不正确");
+//			$("#user_mobile").focus();
+//			return false;
+//		}
 
 		if(!isInput('sysAccRoleid', '角色', 128, 0)){
 			return false;
 		}
-		if(!isInput('sysAccOrgid', '公司名称', 128, 0)){
-			return false;
-		}
+//		if(!isInput('sysAccOrgid', '公司名称', 128, 0)){
+//			return false;
+//		}
 	}
 
 	function ys1(val, rec, index) {
@@ -323,11 +323,11 @@
 						</tr>
 						<tr>
 							<td align="right">真实姓名：</td>
-							<td><input class="easyui-validatebox" name="sysAccRealname" required="true" style="width: 152px" id="sysAccRealname"/></td>
+							<td><input class="easyui-validatebox" name="sysAccRealname"  style="width: 152px" id="sysAccRealname"/></td>
 						</tr>
 						<tr>
 							<td align="right">手机号码：</td>
-							<td><input class="easyui-validatebox" name="sysAccMobile" required="false" style="width: 152px" id="sysAccMobile"/></td>
+							<td><input class="easyui-validatebox" name="sysAccMobile"  style="width: 152px" id="sysAccMobile"/></td>
 						</tr>
 						<tr>
 							<td align="right">角色：</td>
@@ -340,7 +340,7 @@
 						<tr>
 							<td align="right">公司：</td>
 							<td>
-								<select  class="easyui-combobox" name="sysAccOrgid" id="sysAccOrgid" style="width:152px;" required="true" editable="false">
+								<select  class="easyui-combobox" name="sysAccOrgid" id="sysAccOrgid" style="width:152px;"  editable="false">
 
 								</select>
 							</td>
