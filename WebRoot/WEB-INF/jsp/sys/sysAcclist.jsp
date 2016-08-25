@@ -327,7 +327,7 @@
 						</tr>
 						<tr>
 							<td align="right">手机号码：</td>
-							<td><input class="easyui-validatebox" name="sysAccMobile" required="true" style="width: 152px" id="sysAccMobile"/></td>
+							<td><input class="easyui-validatebox" name="sysAccMobile" required="false" style="width: 152px" id="sysAccMobile"/></td>
 						</tr>
 						<tr>
 							<td align="right">角色：</td>

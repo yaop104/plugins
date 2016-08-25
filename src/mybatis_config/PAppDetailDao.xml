@@ -79,7 +79,8 @@
 		d.p_app_praise AS praiseNumber,
 		p.p_appdetail_id AS pAppdetailId,
 		p.p_appdetail_apkactionid AS pAppdetailApkactionid,
-		p.p_appdetail_name AS pAppdetailName,
+		d.p_app_pluginname AS pAppdetailName,
+<!-- 		p.p_appdetail_name AS pAppdetailName,-->
 		p.p_appdetail_version AS pAppdetailVersion,
 		p.p_appdetail_versioncode AS pAppdetailVersioncode,
 		p.p_appdetail_actionname AS pAppdetailActionname,
