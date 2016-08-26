@@ -386,10 +386,12 @@ public class OutInterfaceController {
             if(chkAccountIsExists(sysAccnames)){
                 return getSuccess(false, "该用户名已存在,请重新输入用户名！！");
             }
-            SysAcc sysAccphone = new SysAcc();
-            sysAccphone.setSysAccMobile(sysAcc.getSysAccMobile());
-            if(chkAccountIsExists(sysAccphone)){
-                return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
+            if(!StringUtil.isEmpty(sysAcc.getSysAccMobile())){
+                SysAcc sysAccphone = new SysAcc();
+                sysAccphone.setSysAccMobile(sysAcc.getSysAccMobile());
+                if(chkAccountIsExists(sysAccphone)){
+                    return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
+                }
             }
             if(!RegexValidateUtil.checkEmail(sysAcc.getSysAccEmail())){
                 return getSuccess(false, "该邮箱格式不正确,请输入新的邮箱！！");
