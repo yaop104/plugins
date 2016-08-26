@@ -27,7 +27,7 @@ public class Main {
         //发送邮件源地址
         mailInfo.setFromAddress("yp104@126.com");
         //发送邮件目的地址
-        mailInfo.setToAddress("1178251242@qq.com");
+        mailInfo.setToAddress("yp104@126.com");
         //主题
         mailInfo.setSubject("汇教验证码");
         //内容
