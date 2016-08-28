@@ -599,6 +599,9 @@ public class SignApk {
 					e.printStackTrace();
 				}
 				String digest=base64.encode(md.digest());
+                if(input.getAttributes(name) == null){
+                    continue;
+                }
 				String olddigest=input.getAttributes(name).getValue("SHA1-Digest");
 				if(!digest.equals(olddigest)){
 					return false;
