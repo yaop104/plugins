@@ -47,7 +47,7 @@ public class TapApplicationServiceImpl extends BaseService<TapApplication> imple
 			//判断是否通过
 			//通过则需要增加流水,增加 账户余额
 			//不通过只需要更新状态
-			if("2".endsWith(t.getTapApplicationCheckstate())){
+			if("2".equals(t.getTapApplicationCheckstate())){
 				TapApplication tapApplication  = new TapApplication();
 				tapApplication.setTapApplicationUnid(t.getTapApplicationUnid());
 				tapApplication = tapApplicationDao.getById(tapApplication);

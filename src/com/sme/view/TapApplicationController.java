@@ -45,6 +45,22 @@ public class TapApplicationController extends BaseController<TapApplication>{
 		return "/tapApplication/tapApplicationlist";
 	}
 
+	@RequestMapping(value = "/insertForT", method = { RequestMethod.POST })
+	@ResponseBody
+	public StringJSON insertForT(TapApplication t, HttpServletRequest request) {
+		SysAcc session = (SysAcc) getLoginUser(request);
+		try {
+			t.setTapApplicationCuser(session.getSysAccId());
+			t.setTapApplicationCdate(new Date());
+			tapApplicationServiceImpl.insert(t);
+			return getSuccess(true, "新增成功！");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return getSuccess(false, "系统异常！");
+		}
+	}
+
+
 	@RequestMapping(value = "/page", method = { RequestMethod.POST })
 	@ResponseBody
 	public Map<String, Object> page(HttpServletRequest req) {
@@ -116,7 +132,7 @@ public class TapApplicationController extends BaseController<TapApplication>{
 	@ResponseBody
 	@com.sme.core.spring.Log(type = "运营商管理", desc = "修改运营商")
 	public StringJSON tapApplicationSave(TapApplication tapApplication, Model model, HttpServletRequest request, HttpServletResponse response){
-
+		SysAcc session = (SysAcc) getLoginUser(request);
 		try
 		{
 			if(tapApplication.getTapApplicationUnid()!=null){
@@ -133,7 +149,7 @@ public class TapApplicationController extends BaseController<TapApplication>{
 
 				tapApplication.setTapApplicationCdate(new Date());
 				tapApplication.setTapApplicationState("1");
-				tapApplication.setTapApplicationCuser(1);
+				tapApplication.setTapApplicationCuser(session.getSysAccId());
 				tapApplication.setTapApplicationCheckstate("1");
 				tapApplicationServiceImpl.insert(tapApplication);
 

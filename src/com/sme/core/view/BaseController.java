@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.sme.entity.SysAcc;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,6 +66,11 @@ public abstract class BaseController<T extends BaseObject> {
 		json.setSuccess(isSuccess);
 		json.setMessage(message);
 		return json;
+	}
+
+	public SysAcc getLoginUser(HttpServletRequest request){
+		SysAcc sysAcc = (SysAcc) request.getSession().getAttribute("loginUser");
+		return sysAcc;
 	}
 
 	protected long id;

@@ -169,7 +169,7 @@
 	function  saveFormHot(){
 		var arr =$('#tagTagUnid').combo('getValue');
 
-		$.post('${ctx }/TodOrder/insert.do',{
+		$.post('${ctx }/TodOrder/insertForT.do',{
 			'odOrderPackageid': hotAppId,
 			'todOrderTotaldays': arr,
 			'todOrderPositionname': hotAppName

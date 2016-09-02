@@ -40,6 +40,13 @@ public class SysAccController extends BaseController<SysAcc> {
 
 	private Log log = LogFactory.getLog(SysAccController.class);
 
+	@RequestMapping(value = "/myAccountInfo", method = { RequestMethod.GET })
+	public String myAccountInfo(Model model, HttpServletRequest req) {
+		SysAcc sysAcc = (SysAcc)getLoginUser(req);
+		model.addAttribute("sysAcc", sysAcc);
+		return "/sys/myAccountInfo";
+	}
+
 	@RequestMapping(value = "/sysAcclist", method = { RequestMethod.GET })
 	public String sysAccList(SysAcc sysAcc, HttpServletRequest req) {
 		return "/sys/sysAcclist";

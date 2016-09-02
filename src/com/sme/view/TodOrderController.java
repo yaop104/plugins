@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sme.core.model.StringJSON;
 import com.sme.core.service.InterfaceBaseService;
 import com.sme.core.view.BaseController;
+import com.sme.entity.SysAcc;
 import com.sme.entity.TptPosition;
 import com.sme.service.impl.TptPositionServiceImpl;
 import com.sme.util.StringUtil;
@@ -178,9 +179,10 @@ public class TodOrderController extends BaseController<TodOrder>{
 	}
 
 	//================== begin ======================
-	@RequestMapping(value = "/insert", method = { RequestMethod.POST })
+	@RequestMapping(value = "/insertForT", method = { RequestMethod.POST })
 	@ResponseBody
-	public StringJSON insert(TodOrder t) {
+	public StringJSON insertForT(TodOrder t, HttpServletRequest request) {
+		SysAcc session = (SysAcc) getLoginUser(request);
 		try {
 			TptPosition tptPosition = new TptPosition();
 			tptPosition.setTptUnid(t.getOdOrderPackageid());
@@ -190,7 +192,7 @@ public class TodOrderController extends BaseController<TodOrder>{
 				t.setTodOrderCuser(1);
 				t.setTodOrderCdate(new Date());
 				t.setTodOrderState("2");
-				t.setTodOrderCustomid(1);
+				t.setTodOrderCustomid(session.getSysAccId());
 				t.setTodOrderPositionprice(tptPosition.getTptPrice());
 				todOrderServiceImpl.insert(t);
 				return getSuccess(true, "新增成功！");

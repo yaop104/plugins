@@ -218,7 +218,7 @@
 		var arr =$('#tagTagUnid').combo('getValue');
 
 		alert(arr);
-		$.post('${ctx }/TodOrder/insert.do',{
+		$.post('${ctx }/TodOrder/insertForT.do',{
 			'odOrderPackageid': hotAppId,
 			'todOrderTotaldays': arr,
 			'todOrderPositionname': hotAppName
