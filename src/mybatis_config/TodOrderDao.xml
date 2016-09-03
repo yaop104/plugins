@@ -127,7 +127,7 @@
 	</sql>
 	<sql id="idCnd3">
 		<where>
-			      1=1 AND SYSDATE() &lt; ttm.times OR tod_order_state = '2'
+			      1=1 AND SYSDATE() &lt; ttm.times AND tod_order_state = '1'
 					<if test="todOrderOrdernum!=null and todOrderOrdernum!=''" >AND tod_order_ordernum=#{todOrderOrdernum,jdbcType=VARCHAR}</if>
 					<if test="todOrderState!=null and todOrderState!=''" >AND tod_order_state=#{todOrderState,jdbcType=VARCHAR}</if>
 					<if test="todOrderCdate!=null and todOrderCdate!=''" >AND tod_order_cdate=#{todOrderCdate,jdbcType=TIMESTAMP}</if>
@@ -140,24 +140,67 @@
 					<if test="todOrderPositionname!=null and todOrderPositionname!=''" >AND tod_order_positionname=#{todOrderPositionname,jdbcType=VARCHAR}</if>
 					<if test="todOrderPositionurl!=null and todOrderPositionurl!=''" >AND tod_order_positionurl=#{todOrderPositionurl,jdbcType=VARCHAR}</if>
 					<if test="todOrderTotaldays!=null and todOrderTotaldays!=''" >AND tod_order_totaldays=#{todOrderTotaldays,jdbcType=INTEGER}</if>
+
+
+		</where>
+	</sql>
+
+	<sql id="idCnd4">
+		<where>
+			1=1 AND tod_order_state = '2'
+			<if test="todOrderOrdernum!=null and todOrderOrdernum!=''" >AND tod_order_ordernum=#{todOrderOrdernum,jdbcType=VARCHAR}</if>
+			<if test="todOrderState!=null and todOrderState!=''" >AND tod_order_state=#{todOrderState,jdbcType=VARCHAR}</if>
+			<if test="todOrderCdate!=null and todOrderCdate!=''" >AND tod_order_cdate=#{todOrderCdate,jdbcType=TIMESTAMP}</if>
+			<if test="todOrderUdate!=null and todOrderUdate!=''" >AND tod_order_udate=#{todOrderUdate,jdbcType=TIMESTAMP}</if>
+			<if test="todOrderCuser!=null and todOrderCuser!=''" >AND tod_order_cuser=#{todOrderCuser,jdbcType=INTEGER}</if>
+			<if test="todOrderUuser!=null and todOrderUuser!=''" >AND tod_order_uuser=#{todOrderUuser,jdbcType=INTEGER}</if>
+			<if test="todOrderCuserType!=null and todOrderCuserType!=''" >AND tod_order_customid=#{todOrderCustomid,jdbcType=INTEGER}</if>
+			<if test="odOrderPackageid!=null and odOrderPackageid!=''" >AND od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER}</if>
+			<if test="todOrderPositionprice!=null and todOrderPositionprice!=''" >AND tod_order_positionprice=#{todOrderPositionprice,jdbcType=INTEGER}</if>
+			<if test="todOrderPositionname!=null and todOrderPositionname!=''" >AND tod_order_positionname=#{todOrderPositionname,jdbcType=VARCHAR}</if>
+			<if test="todOrderPositionurl!=null and todOrderPositionurl!=''" >AND tod_order_positionurl=#{todOrderPositionurl,jdbcType=VARCHAR}</if>
+			<if test="todOrderTotaldays!=null and todOrderTotaldays!=''" >AND tod_order_totaldays=#{todOrderTotaldays,jdbcType=INTEGER}</if>
+
+
 		</where>
 	</sql>
 
 	<select id="page" parameterType="map" resultType="com.sme.entity.TodOrder">
-	    SELECT <include refid="fieldAsProperty1" /> FROM TOD_ORDER  tod
-		LEFT JOIN (SELECT ttm_time_orderid,MAX(ttm_time_time) AS times  FROM ttm_time GROUP BY ttm_time_orderid) ttm ON  ttm.ttm_time_orderid = tod.tod_order_unid
+
+
+		SELECT<include refid="fieldAsProperty1"/>
+		FROM TOD_ORDER tod
+		LEFT JOIN (SELECT ttm_time_orderid,MAX(ttm_time_time) AS times FROM ttm_time GROUP BY ttm_time_orderid) ttm ON
+		ttm.ttm_time_orderid = tod.tod_order_unid
 		LEFT JOIN tpt_position tpt ON tod.tod_order_positionname = tpt.tpt_unid
 		<include refid="idCnd3"/>
+		UNION
+		SELECT<include refid="fieldAsProperty1"/>
+		FROM TOD_ORDER tod
+		LEFT JOIN (SELECT ttm_time_orderid,MAX(ttm_time_time) AS times FROM ttm_time GROUP BY ttm_time_orderid) ttm ON
+		ttm.ttm_time_orderid = tod.tod_order_unid
+		LEFT JOIN tpt_position tpt ON tod.tod_order_positionname = tpt.tpt_unid
+		<include refid="idCnd4"/>
 
 		<if test="page!=null and pageCount!=null">
 			limit #{page} , #{pageCount}
 		</if>
 	</select>
 	<select id="count" parameterType="map" resultType="Integer">
-	    SELECT COUNT(*) FROM TOD_ORDER  tod
-		LEFT JOIN (SELECT ttm_time_orderid,MAX(ttm_time_time) AS times  FROM ttm_time GROUP BY ttm_time_orderid) ttm ON  ttm.ttm_time_orderid = tod.tod_order_unid
+		SELECT COUNT(*) FROM (
+		SELECT<include refid="fieldAsProperty1"/>
+		FROM TOD_ORDER tod
+		LEFT JOIN (SELECT ttm_time_orderid,MAX(ttm_time_time) AS times FROM ttm_time GROUP BY ttm_time_orderid) ttm ON
+		ttm.ttm_time_orderid = tod.tod_order_unid
 		LEFT JOIN tpt_position tpt ON tod.tod_order_positionname = tpt.tpt_unid
 		<include refid="idCnd3"/>
+		UNION
+		SELECT<include refid="fieldAsProperty1"/>
+		FROM TOD_ORDER tod
+		LEFT JOIN (SELECT ttm_time_orderid,MAX(ttm_time_time) AS times FROM ttm_time GROUP BY ttm_time_orderid) ttm ON
+		ttm.ttm_time_orderid = tod.tod_order_unid
+		LEFT JOIN tpt_position tpt ON tod.tod_order_positionname = tpt.tpt_unid
+		<include refid="idCnd4"/>) c
 	</select>
 	<select id="select" parameterType="com.sme.entity.TodOrder" resultType="com.sme.entity.TodOrder">
 		SELECT <include refid="fieldAsProperty" /> FROM TOD_ORDER

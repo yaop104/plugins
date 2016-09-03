@@ -123,7 +123,7 @@
 		LEFT JOIN sysrole ON t_sys_role_id = sys_acc_roleid
 		LEFT JOIN tbc_info ON tio_unid = sys_acc_orgid
 		<include refid="idCnd3"/>
-		order by sys_acc_cdate desc
+		order by sys_acc_id desc
 		<if test="page!=null and pageCount!=null">
 			limit #{page}, #{pageCount}
 		</if>

@@ -14,7 +14,7 @@
 		var colArr = [];
 
 		colArr = [
-			{ field:'sysAccId', align:'center', width:'150' , title:'ID' },
+			{ field:'sysAccId', align:'center', width:'150', sortable:'true'  , title:'ID' },
 			{ field:'sysAccName', align:'center', width:'150' , title:'昵称' },
 			{ field:'sysAccRealname', align:'center', width:'120', sortable:'true' , title:'姓名' },
 			{ field:'sysAccState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState },
@@ -71,7 +71,7 @@
 			loadMsg : '正在加载数据.......',//当从远程站点载入数据时，显示的一条快捷信息
 			pagination : true,//设置true将在数据表格底部显示分页工具栏
 			sortName : 'sysAccId',//当数据表格初始化时以哪一列来排序
-			sortOrder : 'asc',//定义排序顺序，可以是'asc'或者'desc'（正序或者倒序）
+			sortOrder : 'desc',//定义排序顺序，可以是'asc'或者'desc'（正序或者倒序）
 			remoteSort : false,//定义是否通过远程服务器对数据排序
 			itColumns : false,
 			singleSelect : false,//设置为true将只允许选择一行
