@@ -40,6 +40,10 @@ public class TptPositionController extends BaseController<TptPosition> {
 	public String tptPositionList(TptPosition tptPosition, HttpServletRequest req) {
 		return "/tptPosition/tptPositionlist";
 	}
+	@RequestMapping(value="/tptPositionlistForOthers", method={RequestMethod.GET})
+	public String tptPositionlistForOthers(TptPosition tptPosition, HttpServletRequest req) {
+		return "/tptPosition/tptPositionlistForOthers";
+	}
 
 	@RequestMapping(value = "/page", method = { RequestMethod.POST })
 	@ResponseBody
