@@ -5,6 +5,7 @@ import com.sme.core.service.InterfaceBaseService;
 import com.sme.core.view.BaseController;
 import com.sme.entity.PAppDetail;
 import com.sme.entity.PApplication;
+import com.sme.entity.SysAcc;
 import com.sme.service.PApplicationService;
 import com.sme.util.Config;
 import com.sme.util.Pass;
@@ -205,6 +206,7 @@ public class PApplicationController extends BaseController<PApplication> {
 	@RequestMapping(value = "/getApplicationlists")
 	@ResponseBody
 	public Map<String, Object> applicationLists(HttpServletRequest req) {
+		SysAcc sysAcc = (SysAcc)getLoginUser(req);
 		//分页属性
 		if (req.getParameter("rows") != null && req.getParameter("page") != null) {
 			rows = Integer.parseInt(req.getParameter("rows"));
@@ -221,6 +223,11 @@ public class PApplicationController extends BaseController<PApplication> {
 			parm.put("pageCount", getEnd());
 			parm.put("pAppPlugintype", pAppPlugintype);
 			parm.put("pAppPluginname", pAppdetailName);
+			parm.put("pAppCuser", sysAcc.getSysAccId());
+			if(sysAcc.getSysAccType().equals("2")){
+
+				parm.put("pAppCuserType", "1");
+			}
 			int count = pApplicationService.count(parm);
 			List<PApplication> pAppDetails = pApplicationService.page(parm);
 
