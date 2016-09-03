@@ -603,7 +603,7 @@ $(function() {
 	function addHtml(){
 		$('#d1').window('open');
 		$('#f1').form('reset');
-		$('#f1').form.url='${ctx }/application/insert.do';
+		$('#f1').form.url='${ctx }/application/insertForT.do';
 	}
 
 	function editHtml(){

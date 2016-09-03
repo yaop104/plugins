@@ -100,7 +100,7 @@
 					<if test="tstStatementRemainder!=null and tstStatementRemainder!=''" >AND tst_statement_remainder=#{tstStatementRemainder,jdbcType=FLOAT}</if>
 					<if test="tstStatementProfit!=null and tstStatementProfit!=''" >AND tst_statement_profit=#{tstStatementProfit,jdbcType=FLOAT}</if>
 					<if test="tstStatementRemark!=null and tstStatementRemark!=''" >AND tst_statement_remark=#{tstStatementRemark,jdbcType=VARCHAR}</if>
-					<if test="tstStatementBasicinfoid!=null and tstStatementBasicinfoid!=''" >AND tst_statement_basicinfoid=#{tstStatementBasicinfoid,jdbcType=INTEGER}</if>
+					<if test="tstStatementCuserType!=null and tstStatementCuserType!=''" >AND tst_statement_basicinfoid=#{tstStatementBasicinfoid,jdbcType=INTEGER}</if>
 		</where>
 	</sql>
 	

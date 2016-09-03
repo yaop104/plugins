@@ -134,7 +134,7 @@
 					<if test="todOrderUdate!=null and todOrderUdate!=''" >AND tod_order_udate=#{todOrderUdate,jdbcType=TIMESTAMP}</if>
 					<if test="todOrderCuser!=null and todOrderCuser!=''" >AND tod_order_cuser=#{todOrderCuser,jdbcType=INTEGER}</if>
 					<if test="todOrderUuser!=null and todOrderUuser!=''" >AND tod_order_uuser=#{todOrderUuser,jdbcType=INTEGER}</if>
-					<if test="todOrderCustomid!=null and todOrderCustomid!=''" >AND tod_order_customid=#{todOrderCustomid,jdbcType=INTEGER}</if>
+					<if test="todOrderCuserType!=null and todOrderCuserType!=''" >AND tod_order_customid=#{todOrderCustomid,jdbcType=INTEGER}</if>
 					<if test="odOrderPackageid!=null and odOrderPackageid!=''" >AND od_order_packageid=#{odOrderPackageid,jdbcType=INTEGER}</if>
 					<if test="todOrderPositionprice!=null and todOrderPositionprice!=''" >AND tod_order_positionprice=#{todOrderPositionprice,jdbcType=INTEGER}</if>
 					<if test="todOrderPositionname!=null and todOrderPositionname!=''" >AND tod_order_positionname=#{todOrderPositionname,jdbcType=VARCHAR}</if>

@@ -64,6 +64,7 @@ public class TapApplicationController extends BaseController<TapApplication>{
 	@RequestMapping(value = "/page", method = { RequestMethod.POST })
 	@ResponseBody
 	public Map<String, Object> page(HttpServletRequest req) {
+		SysAcc sysAcc = (SysAcc)getLoginUser(req);
 		// 分页属性
 		if (req.getParameter("rows") != null && req.getParameter("page") != null) {
 			rows = Integer.parseInt(req.getParameter("rows"));
@@ -81,6 +82,10 @@ public class TapApplicationController extends BaseController<TapApplication>{
 			parm.put("pageCount", getEnd());
 			parm.put("tapApplicationMoneyid", tptName);
 			parm.put("tapApplicationCheckstate", tptState);
+			parm.put("tapApplicationCuser", sysAcc.getSysAccId());
+			if(sysAcc.getSysAccType().equals("2")){
+				parm.put("tapApplicationCuserType", "1");
+			}
 			int count = tapApplicationServiceImpl.count(parm);
 			List<TapApplication> sysAccs = tapApplicationServiceImpl.page(parm);
 			return RespUtil.pageResult(count, sysAccs);

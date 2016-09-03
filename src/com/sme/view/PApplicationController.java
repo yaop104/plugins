@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,12 +51,15 @@ public class PApplicationController extends BaseController<PApplication> {
 		return "/pApplication/pApplicationlist";
 	}
 
-	@RequestMapping(value = "/insert", method = { RequestMethod.POST })
+	@RequestMapping(value = "/insertForT", method = { RequestMethod.POST })
 	@ResponseBody
-	public StringJSON insert(PApplication pApplication) {
+	public StringJSON insertForT(PApplication pApplication,HttpServletRequest req) {
+		SysAcc sysAcc = (SysAcc)getLoginUser(req);
 		try {
 			pApplication.setpAppOpen(0);
 			pApplication.setpAppPraise(0);
+			pApplication.setpAppCdate(new Date());
+			pApplication.setpAppCuser(sysAcc.getSysAccId());
 			pApplicationService.insert(pApplication);
 			return getSuccess(true, "新增成功！");
 		} catch (Exception e) {
@@ -225,7 +229,6 @@ public class PApplicationController extends BaseController<PApplication> {
 			parm.put("pAppPluginname", pAppdetailName);
 			parm.put("pAppCuser", sysAcc.getSysAccId());
 			if(sysAcc.getSysAccType().equals("2")){
-
 				parm.put("pAppCuserType", "1");
 			}
 			int count = pApplicationService.count(parm);

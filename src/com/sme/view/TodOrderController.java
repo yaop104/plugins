@@ -62,6 +62,7 @@ public class TodOrderController extends BaseController<TodOrder>{
 	@RequestMapping(value = "/page", method = { RequestMethod.POST })
 	@ResponseBody
 	public Map<String, Object> page(HttpServletRequest req) {
+		SysAcc sysAcc = (SysAcc)getLoginUser(req);
 		// 分页属性
 		if (req.getParameter("rows") != null && req.getParameter("page") != null) {
 			rows = Integer.parseInt(req.getParameter("rows"));
@@ -79,6 +80,10 @@ public class TodOrderController extends BaseController<TodOrder>{
 			parm.put("pageCount", getEnd());
 			parm.put("todOrderOrdernum", tptName);
 			parm.put("todOrderState", tptState);
+			parm.put("todOrderCustomid", sysAcc.getSysAccId());
+			if(sysAcc.getSysAccType().equals("2")){
+				parm.put("todOrderCuserType", "1");
+			}
 			int count = todOrderServiceImpl.count(parm);
 			List<TodOrder> sysAccs = todOrderServiceImpl.page(parm);
 			return RespUtil.pageResult(count, sysAccs);

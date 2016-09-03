@@ -115,7 +115,9 @@
 					<if test="pAppPlugintype!=null and pAppPlugintype!=''" >AND p_app_plugintype=#{pAppPlugintype,jdbcType=VARCHAR}</if>
 					<if test="pAppOpen!=null and pAppOpen!=''" >AND p_app_open=#{pAppOpen,jdbcType=INTEGER}</if>
 					<if test="pAppPraise!=null and pAppPraise!=''" >AND p_app_praise=#{pAppPraise,jdbcType=INTEGER}</if>
-					<if test="pAppCuser!=null and pAppCuser!=''" >AND p_app_cuser=#{pAppCuser,jdbcType=INTEGER}</if>
+
+					<if test="pAppCuserType!=null and pAppCuserType!=''" >AND p_app_cuser=#{pAppCuser,jdbcType=INTEGER}</if>
+
 					<if test="pAppUuper!=null and pAppUuper!=''" >AND p_app_uuper=#{pAppUuper,jdbcType=INTEGER}</if>
 					<if test="pAppCdate!=null and pAppCdate!=''" >AND p_app_cdate=#{pAppCdate,jdbcType=TIMESTAMP}</if>
 					<if test="pAppUdate!=null and pAppUdate!=''" >AND p_app_udate=#{pAppUdate,jdbcType=TIMESTAMP}</if>

@@ -1,11 +1,14 @@
 package com.sme.view;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sme.entity.SysAcc;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +51,40 @@ public class TstStatementController extends BaseController<TstStatement>{
 		}
 		
 	}
-	
+
+	@RequestMapping(value = "/page", method = { RequestMethod.POST })
+	@ResponseBody
+	public Map<String, Object> page(HttpServletRequest req) {
+		SysAcc sysAcc = (SysAcc)getLoginUser(req);
+		// 分页属性
+		if (req.getParameter("rows") != null && req.getParameter("page") != null) {
+			rows = Integer.parseInt(req.getParameter("rows"));
+			page = Integer.parseInt(req.getParameter("page"));
+		} else {
+			rows = 15;
+			page = 1;
+		}
+		try {
+			String tptName = req.getParameter("tptName");
+			String tptState = req.getParameter("tptState");
+
+			Map<String, Object> parm = new HashMap<String, Object>();
+			parm.put("page", getBegin());
+			parm.put("pageCount", getEnd());
+			parm.put("tstStatementBasicinfoid", sysAcc.getSysAccId());
+			if(sysAcc.getSysAccType().equals("2")){
+				parm.put("tstStatementCuserType", "1");
+			}
+			int count = tstStatementServiceImpl.count(parm);
+			List<TstStatement> sysAccs = tstStatementServiceImpl.page(parm);
+			return RespUtil.pageResult(count, sysAccs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
 	 @RequestMapping(value="/{id}/delete", method={RequestMethod.GET})
 	 public String tstStatementDelete(@PathVariable Integer id){
 		 try

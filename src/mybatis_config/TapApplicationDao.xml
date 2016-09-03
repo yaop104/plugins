@@ -106,7 +106,7 @@
 					<if test="tapApplicationOrder!=null and tapApplicationOrder!=''" >AND tap_application_order=#{tapApplicationOrder,jdbcType=INTEGER}</if>
 					<if test="tapApplicationCdate!=null and tapApplicationCdate!=''" >AND tap_application_cdate=#{tapApplicationCdate,jdbcType=TIMESTAMP}</if>
 					<if test="tapApplicationUdate!=null and tapApplicationUdate!=''" >AND tap_application_udate=#{tapApplicationUdate,jdbcType=TIMESTAMP}</if>
-					<if test="tapApplicationCuser!=null and tapApplicationCuser!=''" >AND tap_application_cuser=#{tapApplicationCuser,jdbcType=INTEGER}</if>
+					<if test="tapApplicationCuserType!=null and tapApplicationCuserType!=''" >AND tap_application_cuser=#{tapApplicationCuser,jdbcType=INTEGER}</if>
 					<if test="tapApplicationUuser!=null and tapApplicationUuser!=''" >AND tap_application_uuser=#{tapApplicationUuser,jdbcType=INTEGER}</if>
 					<if test="tapApplicationMoneyid!=null and tapApplicationMoneyid!=''" >AND tap_application_moneyid=#{tapApplicationMoneyid,jdbcType=VARCHAR}</if>
 					<if test="tapApplicationAppname!=null and tapApplicationAppname!=''" >AND tap_application_appname=#{tapApplicationAppname,jdbcType=INTEGER}</if>

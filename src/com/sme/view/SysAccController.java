@@ -43,6 +43,7 @@ public class SysAccController extends BaseController<SysAcc> {
 	@RequestMapping(value = "/myAccountInfo", method = { RequestMethod.GET })
 	public String myAccountInfo(Model model, HttpServletRequest req) {
 		SysAcc sysAcc = (SysAcc)getLoginUser(req);
+		sysAcc = sysAccServiceImpl.getById(sysAcc);
 		model.addAttribute("sysAcc", sysAcc);
 		return "/sys/myAccountInfo";
 	}
