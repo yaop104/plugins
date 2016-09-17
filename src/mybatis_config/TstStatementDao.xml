@@ -105,14 +105,18 @@
 	</sql>
 	
 	<select id="page" parameterType="map" resultType="com.sme.entity.TstStatement">
-	    SELECT <include refid="fieldAsProperty" /> FROM TST_STATEMENT <include refid="idCnd2"/> 
+	    SELECT tio_name as companyname ,<include refid="fieldAsProperty" />
+		FROM TST_STATEMENT tst left join sys_acc acc on tst.tst_statement_basicinfoid = sys_acc_id
+		left join tbc_info tbc on tbc.tio_unid = acc.sys_acc_orgid
+		<include refid="idCnd2"/>
 
 		<if test="page!=null and pageCount!=null">
 			limit #{page} , #{pageCount}
 		</if>
 	</select>
 	<select id="count" parameterType="map" resultType="Integer">
-	    SELECT COUNT(*) FROM TST_STATEMENT <include refid="idCnd2"/>
+	    SELECT COUNT(*) FROM TST_STATEMENT tst left join sys_acc acc on tst.tst_statement_basicinfoid = sys_acc_id
+		left join tbc_info tbc on tbc.tio_unid = acc.sys_acc_orgid <include refid="idCnd2"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.TstStatement" resultType="com.sme.entity.TstStatement">
 		SELECT <include refid="fieldAsProperty" /> FROM TST_STATEMENT <include refid="idCnd2"/>

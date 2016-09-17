@@ -15,6 +15,7 @@
 
 		colArr = [
 			{ field:'tapApplicationUnid', align:'center', width:'150' , title:'ID' },
+			{ field:'companyname', align:'center', width:'180' , title:'运营商' },
 			{ field:'tapApplicationMoneyid', align:'center', width:'150' , title:'名称' },
 			{ field:'tapApplicationAppname', align:'center', width:'120', sortable:'true' , title:'金额（元）' },
 			{ field:'tapApplicationUrl', align:'center',  width:'180', sortable:'true' , title:'充值凭证' , formatter : ys3},

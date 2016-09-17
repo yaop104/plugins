@@ -119,14 +119,20 @@
 	</sql>
 	
 	<select id="page" parameterType="map" resultType="com.sme.entity.TapApplication">
-	    SELECT <include refid="fieldAsProperty" /> FROM TAP_APPLICATION <include refid="idCnd2"/>
+	    SELECT tio_name as companyname ,<include refid="fieldAsProperty" />
+		FROM TAP_APPLICATION tap left join sys_acc acc on tap.tap_application_cuser = sys_acc_id
+		left join tbc_info tbc on tbc.tio_unid = acc.sys_acc_orgid
+		<include refid="idCnd2"/>
 
 		<if test="page!=null and pageCount!=null">
 			limit #{page} , #{pageCount}
 		</if>
 	</select>
 	<select id="count" parameterType="map" resultType="Integer">
-	    SELECT COUNT(*) FROM TAP_APPLICATION <include refid="idCnd2"/>
+	    SELECT COUNT(*)
+		FROM TAP_APPLICATION tap left join sys_acc acc on tap.tap_application_cuser = sys_acc_id
+		left join tbc_info tbc on tbc.tio_unid = acc.sys_acc_orgid
+		<include refid="idCnd2"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.TapApplication" resultType="com.sme.entity.TapApplication">
 		SELECT <include refid="fieldAsProperty" /> FROM TAP_APPLICATION

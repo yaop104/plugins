@@ -45,6 +45,16 @@ public class TstStatement extends BaseObject {
 	/** 产生人id */
 	private Integer	tstStatementBasicinfoid;
 
+	private String companyname;
+
+	public String getCompanyname() {
+		return companyname;
+	}
+
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
+	}
+
 	public String getTstStatementOrdernum() {
 		return tstStatementOrdernum;
 	}

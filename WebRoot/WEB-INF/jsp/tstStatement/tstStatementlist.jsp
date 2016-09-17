@@ -15,6 +15,7 @@
 
 		colArr = [
 			{ field:'tstStatementUnid', align:'center', width:'150' , title:'ID' },
+			{ field:'companyname', align:'center', width:'180' , title:'运营商' },
 			{ field:'tstStatementCdate', align:'center', width:'150' , title:'时间', formatter : CommonYao.DateFormatter },
 			{ field:'tstStatementType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertState },
 			{ field:'tstStatementAccount', align:'center', width:'120', sortable:'true' , title:'金额（元）' },
