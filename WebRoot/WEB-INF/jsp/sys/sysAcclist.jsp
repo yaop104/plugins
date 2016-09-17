@@ -14,13 +14,13 @@
 
 		colArr = [
 			{ field:'sysAccId', align:'center', width:'150' , title:'ID' },
-			{ field:'sysAccName', align:'center', width:'150' , title:'昵称' },
+			{ field:'sysAccName', align:'center', width:'150' , title:'用户名' },
 			{ field:'sysAccRealname', align:'center', width:'120', sortable:'true' , title:'姓名' },
-			{ field:'sysAccMobile', align:'center', width:'120', sortable:'true' , title:'号码' },
+			{ field:'sysAccMobile', align:'center', width:'120', sortable:'true' , title:'手机号码' },
 			{ field:'sysAccState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState },
 			{ field:'sysAccType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
 			{ field:'orgname', align:'center',  width:'80', sortable:'true' , title:'角色' },
-			{ field:'rolename', align:'center', width:'180' , title:'公司' },
+			{ field:'rolename', align:'center', width:'180' , title:'运营商' },
 			{ field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];
 
@@ -40,7 +40,7 @@
 			}
 		}, '-', {
 			id : 'btnupdate',
-			text : '更新帐号',
+			text : '编辑帐号',
 			iconCls : 'icon-edit',
 			handler : function() {
 				editAccount();
@@ -283,7 +283,7 @@
 		<div id="tb" style="padding: 10px; height: auto">
 			<%-- 查找管理员信息，根据时间、管理员名 --%>
 			<div>
-				账号名:
+				用户名:
 				<input id="s_name"/>
 				按状态：
 				<select id="s_state" class="easyui-combobox" name="s_state" style="width: 150px;" panelheight="auto">
@@ -301,7 +301,7 @@
 		<table id="t1"></table>
 
 		<!-- 窗口-->
-		<div id="d1" class="easyui-dialog" buttons="#btn1" title="账号编辑"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:600px;height:400px;overflow: hidden;">
+		<div id="d1" class="easyui-dialog" buttons="#btn1" title="编辑账号"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:600px;height:400px;overflow: hidden;">
 			<div style="padding:10px 60px 20px 60px">
 				<form id="f1"  class="easyui-form" method="post">
 					<input type="hidden" id="sysAccId" name="sysAccId"/>
@@ -338,7 +338,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td align="right">公司：</td>
+							<td align="right">运营商：</td>
 							<td>
 								<select  class="easyui-combobox" name="sysAccOrgid" id="sysAccOrgid" style="width:152px;"  editable="false">
 

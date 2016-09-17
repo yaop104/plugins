@@ -180,7 +180,7 @@
 	<sql id="idCnd3">
 		<where>
 			<if test="sysAccId!=null and sysAccId!=''" >sys_acc_id=#{sysAccId,jdbcType=INTEGER}</if>
-			<if test="sysAccName!=null and sysAccName!=''" >AND sys_acc_name=#{sysAccName,jdbcType=VARCHAR}</if>
+			<if test="sysAccName!=null and sysAccName!=''" >AND sys_acc_name LIKE CONCAT(CONCAT('%', #{sysAccName}), '%')</if>
 			<if test="sysAccRealname!=null and sysAccRealname!=''" >AND sys_acc_realname=#{sysAccRealname,jdbcType=VARCHAR}</if>
 			<if test="sysAccState!=null and sysAccState!=''" >AND sys_acc_state=#{sysAccState,jdbcType=VARCHAR}</if>
 			<if test="sysAccPassword!=null and sysAccPassword!=''" >AND sys_acc_password=#{sysAccPassword,jdbcType=VARCHAR}</if>

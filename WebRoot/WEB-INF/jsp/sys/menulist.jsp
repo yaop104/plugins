@@ -15,6 +15,7 @@ $(function() {
 	colArr = [
 		{ field:'sysMenuId', align:'center', width:'150' , title:'ID' },
 		{ field:'sysMenuName', align:'center', width:'150' , title:'菜单名称' },
+		{ field:'sysMenuType', align:'center', width:'150' , title:'菜单等级', formatter : convertType },
 		{ field:'sysMenuPname', align:'center', width:'120', sortable:'false' , title:'上级菜单' },
 		{ field:'sysMenuState', align:'center',  width:'80', sortable:'false' , title:'状态' , formatter : convertState },
 		{ field:'sysMenuUrl', align:'center',  width:'320', sortable:'false' , title:'地址' }
@@ -36,7 +37,7 @@ $(function() {
 	        }
 	}, '-', {
 	        id : 'btnupdate',
-	        text : '更新菜单',
+	        text : '编辑菜单',
 	        iconCls : 'icon-edit',
 	        handler : function() {
 	                editMenu();
@@ -179,6 +180,18 @@ $(function() {
 		}
     }
 
+	function convertType(val, rec, index) {
+       if(val == '1'){
+			return '<span style="color: green">一级菜单</span>';
+		}else if(val == '2'){
+			return '<span style="color: green">二级菜单</span>';
+		}else if(val == '3'){
+		   return '<span style="color: green">三级菜单</span>';
+	   }else{
+		   return '<span style="color: green"></span>';
+	   }
+    }
+
 	function  saveForm(){   					
 			$('#f1').form('submit',{
 	   					url:$('#f1').form.url,
@@ -265,7 +278,7 @@ $(function() {
 		                    </tr> 
 		                     
 		                    <tr>
-								<td>菜单类型：</td>
+								<td>菜单等级：</td>
 								<td>
 								<select class="easyui-combobox" name="sysMenuType" id="sysMenuType" style="width:152px;" required="true" editable="false">
 		                       		 <option value="3">三级菜单</option>

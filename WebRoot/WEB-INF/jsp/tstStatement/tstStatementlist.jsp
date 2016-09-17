@@ -4,6 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<%@ include file="/WEB-INF/jsp/sys/taglib2.jsp"%>
+	<script type="text/javascript" src="${ctx }/js/check.js" ></script>
 	<title>信息</title>
 </head>
 <script language="javascript">
@@ -14,7 +15,7 @@
 
 		colArr = [
 			{ field:'tstStatementUnid', align:'center', width:'150' , title:'ID' },
-			{ field:'tstStatementCdate', align:'center', width:'150' , title:'时间' },
+			{ field:'tstStatementCdate', align:'center', width:'150' , title:'时间', formatter : CommonYao.DateFormatter },
 			{ field:'tstStatementType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertState },
 			{ field:'tstStatementAccount', align:'center', width:'120', sortable:'true' , title:'金额（元）' },
 			{ field:'tstStatementRemainder', align:'center',  width:'80', sortable:'true' , title:'余额' },

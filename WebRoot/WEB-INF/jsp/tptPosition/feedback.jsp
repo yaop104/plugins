@@ -4,6 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<%@ include file="/WEB-INF/jsp/sys/taglib2.jsp"%>
+	<script type="text/javascript" src="${ctx }/js/check.js" ></script>
 	<title>信息</title>
 </head>
 <script language="javascript">
@@ -17,7 +18,7 @@
 			{ field:'username', align:'center', width:'150' , title:'名称' },
 			{ field:'text', align:'center', width:'120', sortable:'true' , title:'内容' },
 			{ field:'pic', align:'center',  width:'80', sortable:'true' , title:'图片' },
-			{ field:'creatTime', align:'center',  width:'180', sortable:'true' , title:'时间' }
+			{ field:'creatTime', align:'center',  width:'180', sortable:'true' , title:'时间' , formatter : CommonYao.DateFormatter}
 //			,
 //			{ field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];

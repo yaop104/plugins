@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="${ctx }/js/easyui/jquery.lightbox.js"></script>
+<script type="text/javascript" src="${ctx }/js/check.js" ></script>
 <script type="text/javascript">
 	var grid;
 	var viewDig;
@@ -63,7 +64,7 @@
 					title : '提交时间',
 					width : 100,
 					align : 'center',
-					resizable : false
+					resizable : false, formatter : CommonYao.DateFormatter
 				},
 				{
 					field : 'pAppdetailAuditstate',

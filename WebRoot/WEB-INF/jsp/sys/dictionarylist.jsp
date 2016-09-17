@@ -4,6 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<%@ include file="/WEB-INF/jsp/sys/taglib2.jsp"%>
+	<script type="text/javascript" src="${ctx }/js/check.js" ></script>
 	<title>分类信息</title>
 </head>
 <script language="javascript">
@@ -16,7 +17,7 @@
 			{ field:'tdcDictionaryUnid', align:'center', width:'150' , title:'ID' },
 			{ field:'tdcDictionaryName', align:'center', width:'150' , title:'名称' },
 			{ field:'accName', align:'center', width:'120', sortable:'true' , title:'记录人' },
-			{ field:'tdcDictionaryCdate', align:'center', width:'120', sortable:'true' , title:'记录时间' },
+			{ field:'tdcDictionaryCdate', align:'center', width:'120', sortable:'true' , title:'记录时间' , formatter : CommonYao.DateFormatter },
 			{ field:'tdcDictionaryParentid', align:'center',  width:'80', sortable:'true' , title:'上级' },
 			{ field:'tdcDictionaryType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
 			{ field:'tdcDictionaryState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState }

@@ -87,3 +87,22 @@
 	function isNull(data){
 		return (data == "" || data == undefined || data == null || data == "null");
 	}
+
+	var CommonYao = {
+
+		//EasyUI用DataGrid用日期格式化
+		DateFormatter: function (value, rec, index) {
+			if (value == undefined) {
+				return "";
+			}
+			var date = new Date(value);
+			var datetime = date.getFullYear()
+				+ "-"// "年"
+				+ ((date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : "0"
+				+ (date.getMonth() + 1))
+				+ "-"// "月"
+				+ (date.getDate() < 10 ? "0" + date.getDate() : date
+					.getDate());
+			return datetime;
+		}
+	};

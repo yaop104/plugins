@@ -32,6 +32,7 @@
 	</style>
 	<!-- 引用jQuery的js  -->
 	<script type="text/javascript" src="${ctx }/js/webuploader/webuploader.js" ></script>
+	<script type="text/javascript" src="${ctx }/js/check.js" ></script>
 	<title>信息</title>
 </head>
 <script language="javascript">
@@ -49,10 +50,10 @@
 			{ field:'tapApplicationUnid', align:'center', width:'150' , title:'ID' },
 			{ field:'tapApplicationMoneyid', align:'center', width:'150' , title:'名称' },
 			{ field:'tapApplicationAppname', align:'center', width:'120', sortable:'true' , title:'金额（元）' },
-			{ field:'tapApplicationUrl', align:'center',  width:'180', sortable:'true' , title:'示例图片' , formatter : ys3},
+			{ field:'tapApplicationUrl', align:'center',  width:'180', sortable:'true' , title:'充值凭证' , formatter : ys3},
 			{ field:'tapApplicationCheckstate', align:'center',  width:'80', sortable:'true' , title:'审核状态' , formatter : convertState },
 			{ field:'tapApplicationCheckname', align:'center',  width:'180', sortable:'true' , title:'审核人'  },
-			{ field:'tapApplicationChecktime', align:'center',  width:'180', sortable:'true' , title:'审核时间'  },
+			{ field:'tapApplicationChecktime', align:'center',  width:'180', sortable:'true' , title:'审核时间' , formatter : CommonYao.DateFormatter },
 			{ field:'tapApplicationCheckdesc', align:'center',  width:'180', sortable:'true' , title:'审核备注'  }
 		];
 
