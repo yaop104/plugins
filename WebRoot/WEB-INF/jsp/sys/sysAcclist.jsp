@@ -19,8 +19,8 @@
 			{ field:'sysAccMobile', align:'center', width:'120', sortable:'true' , title:'手机号码' },
 			{ field:'sysAccState', align:'center',  width:'80', sortable:'true' , title:'状态' , formatter : convertState },
 			{ field:'sysAccType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
-			{ field:'orgname', align:'center',  width:'80', sortable:'true' , title:'角色' },
-			{ field:'rolename', align:'center', width:'180' , title:'运营商' },
+			{ field:'rolename', align:'center',  width:'80', sortable:'true' , title:'角色' },
+			{ field:'orgname', align:'center', width:'180' , title:'运营商' },
 			{ field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];
 
