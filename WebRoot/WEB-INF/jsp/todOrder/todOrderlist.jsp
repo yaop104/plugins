@@ -559,9 +559,8 @@
 			<form id="f333"  class="easyui-form" method="post">
 				<input type="hidden" id="updatePic" name="updatePic"/>
 				<table>
-					<tr>
-						<td align="right">上传图片：</td>
-
+					<tr style="width: 150px; ">
+						<td align="right">上传图片：<span style="color: red">图片仅支持：gif,jpg,jpeg,bmp,png</span></td>
 					</tr>
 					<tr>
 						<td>

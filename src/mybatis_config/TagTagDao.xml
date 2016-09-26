@@ -85,7 +85,7 @@
 			<if test="tagTagCuser!=null and tagTagCuser!=''" >AND tag_tag_cuser=#{tagTagCuser,jdbcType=INTEGER}</if>
 			<if test="tagTagUuser!=null and tagTagUuser!=''" >AND tag_tag_uuser=#{tagTagUuser,jdbcType=INTEGER}</if>
 			<if test="tagTagType!=null and tagTagType!=''" >AND tag_tag_type=#{tagTagType,jdbcType=VARCHAR}</if>
-			<if test="tagTagName!=null and tagTagName!=''" >AND tag_tag_name=#{tagTagName,jdbcType=VARCHAR}</if>
+			<if test="tagTagName!=null and tagTagName!=''" >AND tag_tag_name like CONCAT(CONCAT('%', #{tagTagName,jdbcType=VARCHAR}), '%')</if>
 			<if test="tagTagDesc!=null and tagTagDesc!=''" >AND tag_tag_desc=#{tagTagDesc,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>

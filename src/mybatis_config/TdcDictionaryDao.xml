@@ -91,7 +91,7 @@
 					<if test="tdcDictionaryCuser!=null and tdcDictionaryCuser!=''" >AND tdc_dictionary_cuser=#{tdcDictionaryCuser,jdbcType=INTEGER}</if>
 					<if test="tdcDictionaryUuser!=null and tdcDictionaryUuser!=''" >AND tdc_dictionary_uuser=#{tdcDictionaryUuser,jdbcType=INTEGER}</if>
 					<if test="tdcDictionaryType!=null and tdcDictionaryType!=''" >AND tdc_dictionary_type=#{tdcDictionaryType,jdbcType=VARCHAR}</if>
-					<if test="tdcDictionaryName!=null and tdcDictionaryName!=''" >AND tdc_dictionary_name=#{tdcDictionaryName,jdbcType=VARCHAR}</if>
+					<if test="tdcDictionaryName!=null and tdcDictionaryName!=''" >AND tdc_dictionary_name like CONCAT(CONCAT('%', #{tdcDictionaryName,jdbcType=VARCHAR}), '%')</if>
 					<if test="tdcDictionaryParentid!=null and tdcDictionaryParentid!=''" >AND tdc_dictionary_parentid=#{tdcDictionaryParentid,jdbcType=INTEGER}</if>
 					<if test="tdcDictionaryDesc!=null and tdcDictionaryDesc!=''" >AND tdc_dictionary_desc=#{tdcDictionaryDesc,jdbcType=VARCHAR}</if>
 		</where>

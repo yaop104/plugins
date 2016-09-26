@@ -29,7 +29,7 @@
 		</property>
 		<property name="password">
   			<!--<value>huijiao</value>-->
-			<value></value>
+			<value>root</value>
 		</property>
 	</bean>
 	
