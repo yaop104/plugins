@@ -56,9 +56,29 @@ public class SysAcc extends BaseObject{
 	/** 手机号 **/
 	private String sysAccMobile;
 
+	private Integer sysAccSchool;
+
+	public Integer getSysAccSchool() {
+		return sysAccSchool;
+	}
+
+	public void setSysAccSchool(Integer sysAccSchool) {
+		this.sysAccSchool = sysAccSchool;
+	}
+
 	private String orgname;
 
 	private String rolename;
+
+	private String schoolname;
+
+	public String getSchoolname() {
+		return schoolname;
+	}
+
+	public void setSchoolname(String schoolname) {
+		this.schoolname = schoolname;
+	}
 
 	public String getOrgname() {
 		return orgname;

@@ -150,6 +150,7 @@ public class SysAccController extends BaseController<SysAcc> {
 				sysAcc2.setSysAccRoleid(sysAcc.getSysAccRoleid());
 				sysAcc2.setSysAccState(sysAcc.getSysAccState());
 				sysAcc2.setSysAccType(sysAcc.getSysAccType());
+				sysAcc2.setSysAccSchool(sysAcc.getSysAccSchool());
 				sysAcc2.setSysAccUdate(new Date());
 				sysAcc2.setSysAccUueser("admin2");
 

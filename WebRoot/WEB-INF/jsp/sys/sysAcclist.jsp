@@ -21,6 +21,7 @@
 			{ field:'sysAccType', align:'center',  width:'80', sortable:'true' , title:'类型' , formatter : convertType },
 			{ field:'rolename', align:'center',  width:'80', sortable:'true' , title:'角色' },
 			{ field:'orgname', align:'center', width:'180' , title:'运营商' },
+			{ field:'schoolname', align:'center', width:'180' , title:'学校' },
 			{ field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];
 
@@ -66,6 +67,16 @@
 			url:'${ctx }/TbcInfo/select.do',
 			valueField:'tioUnid',
 			textField:'tioName'
+		});
+		$('#sysAccSchool').combobox({
+// 			onShowPanel:function(){
+// 				$('#sysAccRoleid').combobox({
+// 					url:'${ctx }/sysRole/selectRoles.do'
+// 				});
+// 			},
+			url:'${ctx }/SchoolSchool/select.do',
+			valueField:'schoolUnid',
+			textField:'schoolName'
 		});
 
 		//初始化显示列表
@@ -144,7 +155,8 @@
 					'sysAccDesc':row.sysAccDesc,
 					'sysAccRoleid':row.sysAccRoleid,
 					'sysAccMobile':row.sysAccMobile,
-					'sysAccOrgid':row.sysAccOrgid
+					'sysAccOrgid':row.sysAccOrgid,
+					'sysAccSchool':row.sysAccSchool
 				});
 //				$('#sysAccId').val(row.sysAccId);
 //				$('#sysAccName').val(row.sysAccName);
@@ -341,6 +353,14 @@
 							<td align="right">运营商：</td>
 							<td>
 								<select  class="easyui-combobox" name="sysAccOrgid" id="sysAccOrgid" style="width:152px;"  editable="false">
+
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">学校：</td>
+							<td>
+								<select  class="easyui-combobox" name="sysAccSchool" id="sysAccSchool" style="width:152px;"  editable="false">
 
 								</select>
 							</td>

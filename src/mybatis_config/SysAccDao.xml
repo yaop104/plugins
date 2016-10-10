@@ -19,6 +19,7 @@
 		<result property="sysAccEmail" column="sysAccEmail" /><!--号码-->
 		<result property="sysAccHead" column="sysAccHead" /><!--号码-->
 		<result property="sysAccMoney" column="sysAccMoney" /><!--号码-->
+		<result property="sysAccSchool" column="sysAccSchool" /><!--号码-->
 	</resultMap>
 
 	<sql id="fieldAsProperty">
@@ -38,7 +39,8 @@
 		sys_acc_mobile AS sysAccMobile,
 		sys_acc_email AS sysAccEmail,
 		sys_acc_head AS sysAccHead,
-		sys_acc_money AS sysAccMoney
+		sys_acc_money AS sysAccMoney,
+		sys_acc_school AS sysAccSchool
 	</sql>
 
 	<sql id="field">
@@ -57,7 +59,8 @@
 		sys_acc_mobile,
 		sys_acc_email,
 		sys_acc_head,
-		sys_acc_money
+		sys_acc_money,
+		sys_acc_school
 	</sql>
 
 	<sql id="property">
@@ -76,7 +79,8 @@
 		#{sysAccMobile,jdbcType=VARCHAR},
 		#{sysAccEmail,jdbcType=VARCHAR},
 		#{sysAccHead,jdbcType=VARCHAR},
-		#{sysAccMoney,jdbcType=INTEGER}
+		#{sysAccMoney,jdbcType=INTEGER},
+		#{sysAccSchool,jdbcType=INTEGER}
 	</sql>
 
 	<sql id="fieldEqProperty">
@@ -95,7 +99,8 @@
 		sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR},
 		sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR},
 		sys_acc_head=#{sysAccHead,jdbcType=VARCHAR},
-		sys_acc_money=#{sysAccMoney,jdbcType=INTEGER}
+		sys_acc_money=#{sysAccMoney,jdbcType=INTEGER},
+		sys_acc_school=#{sysAccSchool,jdbcType=INTEGER}
 	</sql>
 
 	<sql id="fieldEqPropertyIf">
@@ -115,13 +120,15 @@
 		<if test="sysAccEmail!=null" >sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR},</if>
 		<if test="sysAccHead!=null" >sys_acc_head=#{sysAccHead,jdbcType=VARCHAR},</if>
 		<if test="sysAccMoney!=null" >sys_acc_money=#{sysAccMoney,jdbcType=INTEGER},</if>
+		<if test="sysAccSchool!=null" >sys_acc_school=#{sysAccSchool,jdbcType=INTEGER},</if>
 	</sql>
 	<select id="page" resultType="com.sme.entity.SysAcc" parameterType="map">
 
-		SELECT IFNULL(tio_name,'') AS orgname, IFNULL(t_sys_role_name,'') AS rolename,<include refid="fieldAsProperty" />
+		SELECT IFNULL(school_name,'') AS schoolname, IFNULL(tio_name,'') AS orgname, IFNULL(t_sys_role_name,'') AS rolename,<include refid="fieldAsProperty" />
 		FROM SYS_ACC
 		LEFT JOIN sysrole ON t_sys_role_id = sys_acc_roleid
 		LEFT JOIN tbc_info ON tio_unid = sys_acc_orgid
+		LEFT JOIN school_school ON school_unid = sys_acc_school
 		<include refid="idCnd3"/>
 		order by sys_acc_id desc
 		<if test="page!=null and pageCount!=null">
@@ -131,7 +138,9 @@
 	<select id="count" resultType="Integer" parameterType="map">
 		select count(*) FROM SYS_ACC
 		LEFT JOIN sysrole ON t_sys_role_id = sys_acc_roleid
-		LEFT JOIN tbc_info ON tio_unid = sys_acc_orgid <include refid="idCnd3"/>
+		LEFT JOIN tbc_info ON tio_unid = sys_acc_orgid
+		LEFT JOIN school_school ON school_unid = sys_acc_school
+		<include refid="idCnd3"/>
 	</select>
 	<select id="select" parameterType="com.sme.entity.SysAcc" resultType="com.sme.entity.SysAcc">
 		SELECT <include refid="fieldAsProperty" /> FROM SYS_ACC <include refid="idCnd2"/>
@@ -175,6 +184,7 @@
 			<if test="sysAccType!=null and sysAccType!=''" >AND sys_acc_type=#{sysAccType,jdbcType=VARCHAR}</if>
 			<if test="sysAccMobile!=null and sysAccMobile!=''" >AND sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
 			<if test="sysAccEmail!=null and sysAccEmail!=''" >AND sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR}</if>
+			<if test="sysAccSchool!=null and sysAccSchool!=''" >AND sys_acc_school=#{sysAccSchool,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
 	<sql id="idCnd3">
@@ -189,6 +199,7 @@
 			<if test="sysAccType!=null and sysAccType!=''" >AND sys_acc_type=#{sysAccType,jdbcType=VARCHAR}</if>
 			<if test="sysAccMobile!=null and sysAccMobile!=''" >AND sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
 			<if test="sysAccEmail!=null and sysAccEmail!=''" >AND sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR}</if>
+			<if test="sysAccSchool!=null and sysAccSchool!=''" >AND sys_acc_school=#{sysAccSchool,jdbcType=VARCHAR}</if>
 			<if test="startTime!=null and startTime!=''" >AND sys_acc_cdate <![CDATA[> ]]> #{startTime,jdbcType=TIMESTAMP}</if>
 			<if test="endTime!=null and endTime!=''" >AND sys_acc_cdate <![CDATA[< ]]> #{endTime,jdbcType=TIMESTAMP}</if>
 		</where>
