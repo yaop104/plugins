@@ -215,7 +215,10 @@
 						</tr>
 						<tr>
 							<td>规则：</td>
-							<td><input class="easyui-textbox" id="schoolRule" name="schoolRule" data-options="multiline:true" style="height:60px"/></td>
+							<td>
+								<input class="easyui-textbox" id="schoolRule" name="schoolRule" data-options="multiline:true" style="height:60px"/>
+								<span style="color: red">&nbsp;规则之间以英文分号分隔</span>
+							</td>
 						</tr>
 						<tr>
 							<td>备注：</td>
