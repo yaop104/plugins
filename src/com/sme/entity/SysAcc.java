@@ -21,7 +21,7 @@ public class SysAcc extends BaseObject{
 	private String	sysAccName;
 
 	/** 真实姓名 */
-	private String	sysAccRealname;
+		private String	sysAccRealname;
 
 	/** 状态 */
 	private String	sysAccState;

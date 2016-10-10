@@ -54,6 +54,8 @@ public class OutInterfaceController {
     private TsmSendMessageService tsmSendMessageService;
     @Autowired
     private TodOrderService todOrderService;
+    @Autowired
+    private SchoolSchoolService schoolSchoolService;
 
     private Log log = LogFactory.getLog(TdcDictionaryController.class);
 
@@ -374,6 +376,44 @@ public class OutInterfaceController {
 
     }
 
+    @RequestMapping(value="/getSchoolList", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public StringJSON getSchoolList() {
+        try {
+            log.info("<=====getSchoolList====>");
+            List<SchoolSchool> schoolSchools = new ArrayList<>();
+            schoolSchools = schoolSchoolService.select(null);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("schoolSchools", schoolSchools);
+            return getSuccess(true,"",map);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return getSuccess(false,"列表获取失败,系统异常！！");
+        }
+
+    }
+
+    @RequestMapping(value="/getPermissionByUserId", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public StringJSON getPermissionByUserId(SysAcc sysAcc) {
+        try {
+            log.info("<=====getPermissionByUserId====>");
+            String rules = "";
+            List<SchoolSchool> permissions = new ArrayList<>();
+            permissions = schoolSchoolService.selectByUsers(sysAcc);
+            if(permissions!=null&& permissions.size()>0){
+                rules = StringUtils.isBlank(permissions.get(0).getSchoolRule())?"":permissions.get(0).getSchoolRule();
+            }
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("permissions", rules);
+            return getSuccess(true,"",map);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return getSuccess(false,"列表获取失败,系统异常！！");
+        }
+
+    }
+
     @RequestMapping(value = "/register", method = { RequestMethod.POST })
     @ResponseBody
     @com.sme.core.spring.Log(type = "首页", desc = "用户注册")
@@ -401,6 +441,9 @@ public class OutInterfaceController {
             if(chkAccountIsExists(sysAccmail)){
                 return getSuccess(false, "该邮箱已存在,请输入未注册邮箱！！");
             }
+//            if(sysAcc.getSysAccSchool()==null ||sysAcc.getSysAccSchool()<1){
+//                return getSuccess(false, "请绑定学校！！");
+//            }
             String pwd = StringUtil.getRandomChar(6);
             String password = MD5.encryByMD5(pwd);
             sysAcc.setSysAccPassword(password);

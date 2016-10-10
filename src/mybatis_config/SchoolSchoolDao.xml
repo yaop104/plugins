@@ -109,6 +109,13 @@
 	<select id="select" parameterType="com.sme.entity.SchoolSchool" resultType="com.sme.entity.SchoolSchool">
 		SELECT <include refid="fieldAsProperty" /> FROM SCHOOL_SCHOOL
 	</select>
+	<select id="selectByUsers" parameterType="com.sme.entity.SysAcc" resultType="com.sme.entity.SchoolSchool">
+		SELECT <include refid="fieldAsProperty" />
+		FROM SCHOOL_SCHOOL
+		LEFT JOIN SYS_ACC ON sys_acc_school = school_unid
+		where 1=1
+		<if test="sysAccId!=null and sysAccId!=''" >AND sys_acc_id=#{sysAccId,jdbcType=INTEGER}</if>
+	</select>
 	<insert id="insert" parameterType="com.sme.entity.SchoolSchool">
 		INSERT INTO SCHOOL_SCHOOL(<include refid="field" />) VALUES (<include refid="property" />)
 	</insert>
