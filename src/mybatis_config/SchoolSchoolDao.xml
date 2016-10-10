@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.SchoolSchoolDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.SchoolSchool">
+		<id property="schoolUnid" column="schoolUnid" /><!--id-->
+		<result property="schoolOrder" column="schoolOrder" /><!--排序-->
+		<result property="schoolState" column="schoolState" /><!--状态-->
+		<result property="schoolCdate" column="schoolCdate" /><!--记录日期-->
+		<result property="schoolUdate" column="schoolUdate" /><!--更新日期-->
+		<result property="schoolCuser" column="schoolCuser" /><!--记录人-->
+		<result property="schoolUuser" column="schoolUuser" /><!--创建人-->
+		<result property="schoolType" column="schoolType" /><!--类型1-->
+		<result property="schoolName" column="schoolName" /><!--名字-->
+		<result property="schoolDesc" column="schoolDesc" /><!--描述-->
+		<result property="schoolRule" column="schoolRule" /><!--规则-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		school_unid AS schoolUnid,
+		school_order AS schoolOrder,
+		school_state AS schoolState,
+		school_cdate AS schoolCdate,
+		school_udate AS schoolUdate,
+		school_cuser AS schoolCuser,
+		school_uuser AS schoolUuser,
+		school_type AS schoolType,
+		school_name AS schoolName,
+		school_desc AS schoolDesc,
+		school_rule AS schoolRule
+	</sql>
+
+	<sql id="field">
+			school_order,
+			school_state,
+			school_cdate,
+			school_udate,
+			school_cuser,
+			school_uuser,
+			school_type,
+			school_name,
+			school_desc,
+			school_rule
+	</sql>
+
+	<sql id="property">
+			#{schoolOrder,jdbcType=INTEGER},
+			#{schoolState,jdbcType=VARCHAR},
+			#{schoolCdate,jdbcType=TIMESTAMP},
+			#{schoolUdate,jdbcType=TIMESTAMP},
+			#{schoolCuser,jdbcType=INTEGER},
+			#{schoolUuser,jdbcType=INTEGER},
+			#{schoolType,jdbcType=VARCHAR},
+			#{schoolName,jdbcType=VARCHAR},
+			#{schoolDesc,jdbcType=VARCHAR},
+			#{schoolRule,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			school_order=#{schoolOrder,jdbcType=INTEGER},
+			school_state=#{schoolState,jdbcType=VARCHAR},
+			school_cdate=#{schoolCdate,jdbcType=TIMESTAMP},
+			school_udate=#{schoolUdate,jdbcType=TIMESTAMP},
+			school_cuser=#{schoolCuser,jdbcType=INTEGER},
+			school_uuser=#{schoolUuser,jdbcType=INTEGER},
+			school_type=#{schoolType,jdbcType=VARCHAR},
+			school_name=#{schoolName,jdbcType=VARCHAR},
+			school_desc=#{schoolDesc,jdbcType=VARCHAR},
+			school_rule=#{schoolRule,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="schoolOrder!=null" >school_order=#{schoolOrder,jdbcType=INTEGER},</if>
+			<if test="schoolState!=null" >school_state=#{schoolState,jdbcType=VARCHAR},</if>
+			<if test="schoolCdate!=null" >school_cdate=#{schoolCdate,jdbcType=TIMESTAMP},</if>
+			<if test="schoolUdate!=null" >school_udate=#{schoolUdate,jdbcType=TIMESTAMP},</if>
+			<if test="schoolCuser!=null" >school_cuser=#{schoolCuser,jdbcType=INTEGER},</if>
+			<if test="schoolUuser!=null" >school_uuser=#{schoolUuser,jdbcType=INTEGER},</if>
+			<if test="schoolType!=null" >school_type=#{schoolType,jdbcType=VARCHAR},</if>
+			<if test="schoolName!=null" >school_name=#{schoolName,jdbcType=VARCHAR},</if>
+			<if test="schoolDesc!=null" >school_desc=#{schoolDesc,jdbcType=VARCHAR},</if>
+			<if test="schoolRule!=null" >school_rule=#{schoolRule,jdbcType=VARCHAR}</if>
+	</sql>
+
+	<sql id="idCnd2">
+		<where>
+			<if test="schoolState!=null and schoolState!=''" >AND school_state=#{schoolState,jdbcType=VARCHAR}</if>
+			<if test="schoolOrder!=null and schoolOrder!=''" >AND school_order=#{schoolOrder,jdbcType=INTEGER}</if>
+			<if test="schoolType!=null and schoolType!=''" >AND school_type=#{schoolType,jdbcType=VARCHAR}</if>
+			<if test="schoolCdate!=null and schoolCdate!=''" >AND school_cdate=#{schoolCdate,jdbcType=TIMESTAMP}</if>
+			<if test="schoolCuser!=null and schoolCuser!=''" >AND school_cuser=#{schoolCuser,jdbcType=VARCHAR}</if>
+			<if test="schoolUdate!=null and schoolUdate!=''" >AND school_udate=#{schoolUdate,jdbcType=TIMESTAMP}</if>
+			<if test="schoolUuser!=null and schoolUuser!=''" >AND school_uuser=#{schoolUuser,jdbcType=VARCHAR}</if>
+			<if test="schoolDesc!=null and schoolDesc!=''" >AND school_desc=#{schoolDesc,jdbcType=VARCHAR}</if>
+			<if test="schoolName!=null and schoolName!=''" >AND school_name like CONCAT(CONCAT('%', #{schoolName,jdbcType=VARCHAR}), '%')</if>
+			<if test="schoolRule!=null and schoolRule!=''" >AND school_rule=#{schoolRule,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+
+	<select id="page" parameterType="map" resultType="com.sme.entity.SchoolSchool">
+		SELECT <include refid="fieldAsProperty" /> FROM SCHOOL_SCHOOL <include refid="idCnd2"/>
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+		SELECT COUNT(*) FROM SCHOOL_SCHOOL <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.SchoolSchool" resultType="com.sme.entity.SchoolSchool">
+		SELECT <include refid="fieldAsProperty" /> FROM SCHOOL_SCHOOL
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.SchoolSchool">
+		INSERT INTO SCHOOL_SCHOOL(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.SchoolSchool">
+		DELETE FROM SCHOOL_SCHOOL<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.SchoolSchool"
+		parameterType="com.sme.entity.SchoolSchool">
+		SELECT<include refid="fieldAsProperty" />FROM SCHOOL_SCHOOL<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.SchoolSchool">
+		UPDATE SCHOOL_SCHOOL<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="schoolUnid!=null" >school_unid=#{schoolUnid,jdbcType=INTEGER}</if>
+			<if test="schoolUnid==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>
