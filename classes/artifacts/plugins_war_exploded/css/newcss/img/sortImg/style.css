@@ -1,0 +1,68 @@
+/* tables   */
+table.tablesorter {
+	font-family: arial;
+	background-color: #CDCDCD;
+	margin: 10px 0pt 15px;
+	font-size: 10pt;
+	width: 100%;
+	
+}
+
+table.tablesorter th,td {
+	text-align: center;
+	vertical-align:middle;
+	padding: 5px;
+}
+
+table.tablesorter thead tr th,table.tablesorter tfoot tr th {
+	background: none repeat scroll 0 0 #DCF0FF;
+	border: 1px solid #FFF;
+	font-size: 10pt;
+	padding: 5px;
+}
+
+table.tablesorter thead tr .ascCla {
+	background: none repeat scroll 0 0 #DCF0FF;
+	background-image: url(asc.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+table.tablesorter thead tr .sortCla {
+	background: none repeat scroll 0 0 #DCF0FF;
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+table.tablesorter thead tr  .descCla {
+	background: none repeat scroll 0 0 #DCF0FF;
+	background-image: url(desc.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+table.tablesorter thead tr .ascCla,table.tablesorter thead tr .descCla
+{
+	background-color: #8dbdd8;
+}
+
+
+
+
+
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	background-color: #FFF;
+	padding: 5px;
+}
+
+table.tablesorter tbody tr.odd td {
+	background-color: #F0F0F6;
+}
+
+table.tablesorter tbody tr.over{ background-color:#cfdff3; cursor:pointer;}
+table.tablesorter tbody tr.out{ background-color:#cfdff3;}
