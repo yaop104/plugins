@@ -6,14 +6,11 @@ import com.sme.dao.TsmSendMessageDao;
 import com.sme.entity.TsmSendMessage;
 import com.sme.service.TsmSendMessageService;
 import com.sme.util.Config;
-import com.sme.util.StringUtil;
 import com.sme.util.mail.MailSenderInfo;
 import com.sme.util.mail.SimpleMailSender;
-import com.sme.view.OutInterfaceController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.UUID;

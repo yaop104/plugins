@@ -1,8 +1,5 @@
 package com.sme.view;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.sme.util.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sme.entity.PAppDetail;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 文件上传
@@ -22,27 +20,6 @@ import com.sme.entity.PAppDetail;
 @RequestMapping("/imagefile")
 public class FileController
 {
-	@RequestMapping(value="/uploadApkFile", method={RequestMethod.POST})
-	@ResponseBody
-	public JSONObject uploadApkFile(@RequestParam("upload_one_file") MultipartFile file, PAppDetail cor, HttpServletRequest request,HttpServletResponse response){
-		JSONObject result = new JSONObject();
-		if(file == null)
-		{
-			result.setCode(501);
-			result.setInfo("系统错误!");
-			return result;
-		}
-//		String savePath = request.getServletContext().getRealPath("apk");
-		String savePath = Config.DEFAULT_APK_PATH;
-		IFileSaver fileUtil = new ApkPrefixProxy(new ApkCheckProxy(new FileSaver(savePath), cor, request));
-
-		fileUtil.save(file, file.getOriginalFilename());
-		
-		result = fileUtil.getResult();
-		
-		return result;
-	}
-	
 	/**
 	 * 上传logo
 	 * @param file

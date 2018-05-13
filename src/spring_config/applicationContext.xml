@@ -75,7 +75,6 @@
 	
 	<!-- springApplicationContext -->
     <bean id="springContextUtil" class="com.sme.util.SpringContextUtil" lazy-init="false" />
-	<bean id="plgSendServiceImplContext" class="com.sme.service.impl.PlgSendServiceImpl" lazy-init="false" />
 	<bean id="msgcontentServiceImplContext" class="com.sme.service.impl.MsgcontentServiceImpl" lazy-init="false" />
 	<!-- quartz -->
 <!-- 	<import resource="spring_quartz.xml" />  -->

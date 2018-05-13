@@ -20,27 +20,9 @@
 		<typeAlias type="com.sme.entity.SysMenu" alias="SysMenu" />
 		<typeAlias type="com.sme.entity.SysAcc" alias="SysAcc" /> 
 		<typeAlias type="com.sme.entity.SysRoleMenu" alias="SysRoleMenu" />
-		<typeAlias type="com.sme.entity.PApplication" alias="PApplication" />
-		<typeAlias type="com.sme.entity.PAppPatch" alias="PAppPatch" />
-		<typeAlias type="com.sme.entity.PTerminalInfo" alias="PTerminalInfo" />
-		<typeAlias type="com.sme.entity.PTerminalRelate" alias="PTerminalRelate" />
-		<typeAlias type="com.sme.entity.PAppDetail" alias="PAppDetail" />
 		<typeAlias type="com.sme.entity.Feedback" alias="Feedback" />
-		<typeAlias type="com.sme.entity.PlgGroup" alias="PlgGroup" />
-		<typeAlias type="com.sme.entity.PlgUser" alias="PlgUser" />
-		<typeAlias type="com.sme.entity.PlgSend" alias="PlgSend" />
 		<typeAlias type="com.sme.entity.Msgcontent" alias="Msgcontent" />
-		<typeAlias type="com.sme.entity.TbcInfo" alias="TbcInfo" />
-		<typeAlias type="com.sme.entity.TapDownload" alias="TapDownload" />
-		<typeAlias type="com.sme.entity.TscSource" alias="TscSource" />
 		<typeAlias type="com.sme.entity.TdcDictionary" alias="TdcDictionary" />
-		<typeAlias type="com.sme.entity.TagTag" alias="TagTag" />
-		<typeAlias type="com.sme.entity.TptPosition" alias="TptPosition" />
-		<typeAlias type="com.sme.entity.TodOrder" alias="TodOrder" />
-		<typeAlias type="com.sme.entity.TosOrderSource" alias="TosOrderSource" />
-		<typeAlias type="com.sme.entity.TtmTime" alias="TtmTime" />
-		<typeAlias type="com.sme.entity.TstStatement" alias="TstStatement" />
-		<typeAlias type="com.sme.entity.TapApplication" alias="TapApplication" />
 		<typeAlias type="com.sme.entity.TsmSendMessage" alias="TsmSendMessage" />
 	</typeAliases>
 	
@@ -64,30 +46,11 @@
 		<mapper resource="./mybatis_config/SysMenuDao.xml"/>
 		<mapper resource="./mybatis_config/SysAccDao.xml"/>
 		<mapper resource="./mybatis_config/SysRoleMenuDao.xml"/>
-		<mapper resource="./mybatis_config/PApplicationDao.xml"/>
-		<mapper resource="./mybatis_config/PAppPatchDao.xml"/>
-		<mapper resource="./mybatis_config/PTerminalInfoDao.xml"/>
-		<mapper resource="./mybatis_config/PTerminalRelateDao.xml"/>
-		<mapper resource="./mybatis_config/PAppDetailDao.xml"/>
 		<mapper resource="./mybatis_config/LoginLog.xml"/>
 		<mapper resource="./mybatis_config/OperateLog.xml"/>
 		<mapper resource="./mybatis_config/FeedbackDao.xml"/>
-		<mapper resource="./mybatis_config/PlgGroupDao.xml"/>
-		<mapper resource="./mybatis_config/PlgUserDao.xml"/>
-		<mapper resource="./mybatis_config/PlgSendDao.xml"/>
 		<mapper resource="./mybatis_config/MsgcontentDao.xml"/>
-		<mapper resource="./mybatis_config/TapDownloadDao.xml"/>
-		<mapper resource="./mybatis_config/TbcInfoDao.xml"/>
-		<mapper resource="./mybatis_config/TscSourceDao.xml"/>
 		<mapper resource="./mybatis_config/TdcDictionaryDao.xml"/>
-		<mapper resource="./mybatis_config/TagTagDao.xml"/>
-		<mapper resource="./mybatis_config/TatTagAppDao.xml"/>
-		<mapper resource="./mybatis_config/TptPositionDao.xml"/>
-		<mapper resource="./mybatis_config/TodOrderDao.xml"/>
-		<mapper resource="./mybatis_config/TosOrderSourceDao.xml"/>
-		<mapper resource="./mybatis_config/TtmTimeDao.xml"/>
-		<mapper resource="./mybatis_config/TstStatementDao.xml"/>
-		<mapper resource="./mybatis_config/TapApplicationDao.xml"/>
 		<mapper resource="./mybatis_config/TsmSendMessageDao.xml"/>
 	</mappers>
 </configuration>
