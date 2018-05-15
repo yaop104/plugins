@@ -1,18 +1,17 @@
 package com.sme.service.impl;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sme.core.dao.BaseDao;
 import com.sme.core.service.BaseService;
 import com.sme.dao.SysAccDao;
 import com.sme.entity.SysAcc;
 import com.sme.service.SysAccService;
 import com.sme.util.MD5;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 @Service
 public class SysAccServiceImpl extends BaseService<SysAcc> implements SysAccService{
 	@Autowired
@@ -70,6 +69,21 @@ public class SysAccServiceImpl extends BaseService<SysAcc> implements SysAccServ
 			sysAcc = null;
 		}
 		return sysAcc == null ? false : true;
+	}
+
+	/**
+	 * 判断重复
+	 */
+	@Override
+	public SysAcc getSysAccByToken(SysAcc sysAcc) {
+		List<SysAcc> list = new ArrayList<SysAcc>();
+		list = sysAccDao.select(sysAcc);
+		if (list.size() > 0) {
+			sysAcc = list.get(0);
+		} else {
+			sysAcc = null;
+		}
+		return sysAcc;
 	}
 
 	/**

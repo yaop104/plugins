@@ -1,8 +1,8 @@
 package com.sme.entity;
 
-import java.util.Date;
-
 import com.sme.core.model.BaseObject;
+
+import java.util.Date;
 
 /**
  * 账号(SysAcc)模型对象
@@ -56,9 +56,31 @@ public class SysAcc extends BaseObject{
 	/** 手机号 **/
 	private String sysAccMobile;
 
+	/** 类型 1后台2app **/
+	private String sysAccUserType;
+
+	/** token **/
+	private String sysAccToken;
+
 	private String orgname;
 
 	private String rolename;
+
+	public String getSysAccUserType() {
+		return sysAccUserType;
+	}
+
+	public void setSysAccUserType(String sysAccUserType) {
+		this.sysAccUserType = sysAccUserType;
+	}
+
+	public String getSysAccToken() {
+		return sysAccToken;
+	}
+
+	public void setSysAccToken(String sysAccToken) {
+		this.sysAccToken = sysAccToken;
+	}
 
 	public String getOrgname() {
 		return orgname;

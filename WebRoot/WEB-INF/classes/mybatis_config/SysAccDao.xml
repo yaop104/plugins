@@ -16,9 +16,11 @@
 		<result property="sysAccUueser" column="sysAccUueser" /><!--创建人-->
 		<result property="sysAccType" column="sysAccType" /><!--类型 1用户2开发商3财务4系统-->
 		<result property="sysAccMobile" column="sysAccMobile" /><!--号码-->
-		<result property="sysAccEmail" column="sysAccEmail" /><!--号码-->
-		<result property="sysAccHead" column="sysAccHead" /><!--号码-->
-		<result property="sysAccMoney" column="sysAccMoney" /><!--号码-->
+		<result property="sysAccEmail" column="sysAccEmail" /><!--email-->
+		<result property="sysAccHead" column="sysAccHead" /><!--头像-->
+		<result property="sysAccMoney" column="sysAccMoney" /><!--钱-->
+		<result property="sysAccUserType" column="sysAccUserType" /><!--1后台2app-->
+		<result property="sysAccToken" column="sysAccToken" /><!--token-->
 	</resultMap>
 
 	<sql id="fieldAsProperty">
@@ -38,7 +40,9 @@
 		sys_acc_mobile AS sysAccMobile,
 		sys_acc_email AS sysAccEmail,
 		sys_acc_head AS sysAccHead,
-		sys_acc_money AS sysAccMoney
+		sys_acc_money AS sysAccMoney,
+		sys_acc_user_type AS sysAccUserType,
+		sys_acc_token AS sysAccToken
 	</sql>
 
 	<sql id="field">
@@ -57,7 +61,9 @@
 		sys_acc_mobile,
 		sys_acc_email,
 		sys_acc_head,
-		sys_acc_money
+		sys_acc_money,
+		sys_acc_user_type,
+		sys_acc_token
 	</sql>
 
 	<sql id="property">
@@ -76,7 +82,9 @@
 		#{sysAccMobile,jdbcType=VARCHAR},
 		#{sysAccEmail,jdbcType=VARCHAR},
 		#{sysAccHead,jdbcType=VARCHAR},
-		#{sysAccMoney,jdbcType=INTEGER}
+		#{sysAccMoney,jdbcType=INTEGER},
+		#{sysAccUserType,jdbcType=VARCHAR},
+		#{sysAccToken,jdbcType=VARCHAR}
 	</sql>
 
 	<sql id="fieldEqProperty">
@@ -95,7 +103,9 @@
 		sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR},
 		sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR},
 		sys_acc_head=#{sysAccHead,jdbcType=VARCHAR},
-		sys_acc_money=#{sysAccMoney,jdbcType=INTEGER}
+		sys_acc_money=#{sysAccMoney,jdbcType=INTEGER},
+		sys_acc_user_type=#{sysAccUserType,jdbcType=VARCHAR},
+		sys_acc_token=#{sysAccToken,jdbcType=VARCHAR}
 	</sql>
 
 	<sql id="fieldEqPropertyIf">
@@ -115,6 +125,8 @@
 		<if test="sysAccEmail!=null" >sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR},</if>
 		<if test="sysAccHead!=null" >sys_acc_head=#{sysAccHead,jdbcType=VARCHAR},</if>
 		<if test="sysAccMoney!=null" >sys_acc_money=#{sysAccMoney,jdbcType=INTEGER},</if>
+		<if test="sysAccUserType!=null" >sys_acc_user_type=#{sysAccUserType,jdbcType=VARCHAR},</if>
+		<if test="sysAccToken!=null" >sys_acc_token=#{sysAccToken,jdbcType=VARCHAR}</if>
 	</sql>
 	<select id="page" resultType="com.sme.entity.SysAcc" parameterType="map">
 
@@ -175,6 +187,8 @@
 			<if test="sysAccType!=null and sysAccType!=''" >AND sys_acc_type=#{sysAccType,jdbcType=VARCHAR}</if>
 			<if test="sysAccMobile!=null and sysAccMobile!=''" >AND sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
 			<if test="sysAccEmail!=null and sysAccEmail!=''" >AND sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR}</if>
+			<if test="sysAccUserType!=null and sysAccUserType!=''" >AND sys_acc_user_type=#{sysAccUserType,jdbcType=VARCHAR}</if>
+			<if test="sysAccToken!=null and sysAccToken!=''" >AND sys_acc_token=#{sysAccToken,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
 	<sql id="idCnd3">
@@ -187,6 +201,8 @@
 			<if test="sysAccDesc!=null and sysAccDesc!=''" >AND sys_acc_desc=#{sysAccDesc,jdbcType=VARCHAR}</if>
 			<if test="sysAccRoleid!=null and sysAccRoleid!=''" >AND sys_acc_orgid=#{sysAccRoleid,jdbcType=VARCHAR}</if>
 			<if test="sysAccType!=null and sysAccType!=''" >AND sys_acc_type=#{sysAccType,jdbcType=VARCHAR}</if>
+			<if test="sysAccUserType!=null and sysAccUserType!=''" >AND sys_acc_user_type=#{sysAccUserType,jdbcType=VARCHAR}</if>
+			<if test="sysAccToken!=null and sysAccToken!=''" >AND sys_acc_token=#{sysAccToken,jdbcType=VARCHAR}</if>
 			<if test="sysAccMobile!=null and sysAccMobile!=''" >AND sys_acc_mobile=#{sysAccMobile,jdbcType=VARCHAR}</if>
 			<if test="sysAccEmail!=null and sysAccEmail!=''" >AND sys_acc_email=#{sysAccEmail,jdbcType=VARCHAR}</if>
 			<if test="startTime!=null and startTime!=''" >AND sys_acc_cdate <![CDATA[> ]]> #{startTime,jdbcType=TIMESTAMP}</if>

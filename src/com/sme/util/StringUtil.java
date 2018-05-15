@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * 字符串工具类
@@ -262,6 +263,21 @@ public class StringUtil {
 		}
 
 		return new String(bytes, 0, fromId);
+	}
+
+	/**
+	 * 生成token
+	 * @param hasHyphen
+	 * @return
+	 */
+	public static String generateUUID(boolean hasHyphen) {
+		UUID uuid = UUID.randomUUID();
+		String str = uuid.toString();
+		if (!hasHyphen) {
+			str = str.replaceAll("-", "");
+		}
+
+		return str;
 	}
 
 	public static void main(String[] args) {

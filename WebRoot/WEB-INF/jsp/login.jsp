@@ -107,7 +107,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td><label>
       	<input type="button" class="loginbtn" id="button" name="button" onclick="do_login();return false;" class="loginbtn" tabIndex="3"/>
       </label></td>
-		<td height="35"><a href="<%=basePath%>register.do">申请账号</a></td>
+		<td height="35">
+            <%--<a href="<%=basePath%>register.do">申请账号</a>--%>
+        </td>
       <td colspan="2">
       <span id="msgDiv" style="color:red;text-align:center;font-size:12px">
 

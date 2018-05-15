@@ -45,7 +45,7 @@ public class TsmSendMessageServiceImpl extends BaseService<TsmSendMessage> imple
 			tsmSendMessage.setTsmSendUuid(UUID.randomUUID().toString());
 			
 //			String flag = MessageSendUtil.sendMessage(tsmSendMessage.getTsmSendMobile(), tsmSendMessage.getTsmSendCode());
-			boolean flag = sendMail(tsmSendMessage.getTsmSendMobile(), tsmSendMessage.getTsmSendCode());
+			boolean flag = sendPhone(tsmSendMessage.getTsmSendMobile(), tsmSendMessage.getTsmSendCode());
 
 			if(flag){
 				message = "1";
@@ -58,7 +58,14 @@ public class TsmSendMessageServiceImpl extends BaseService<TsmSendMessage> imple
 		
 	}
 
-	public boolean sendMail(String mail, String pwd){
+	public static boolean sendPhone(String mail, String pwd){
+
+		Boolean flag = true;
+		return  flag;
+	}
+
+
+	public static boolean sendMail(String mail, String pwd){
 
 		//这个类主要是设置邮件
 		MailSenderInfo mailInfo = new MailSenderInfo();

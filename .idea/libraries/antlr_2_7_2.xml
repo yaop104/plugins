@@ -1,6 +1,20 @@
 <component name="libraryTable">
   <library name="antlr-2.7.2">
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/javax.mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/fastjson-1.1.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-aop-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-aspects-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-beans-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-context-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-context-support-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-core-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-expression-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-jdbc-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-orm-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-tx-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-web-3.2.11.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-webmvc-3.2.11.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/antlr-2.7.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/aopalliance.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/asm.jar!/" />
@@ -16,10 +30,6 @@
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/commons-pool.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/dom4j-1.6.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/easydao1.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/fastjson-1.1.15.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-all-1.6.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-core-asl-1.6.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-mapper-asl-1.6.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jaxen-1.1.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jldap.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jsf-api.jar!/" />
@@ -40,20 +50,13 @@
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/quartz-all-1.6.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/slf4j-api-1.7.12.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/slf4j-log4j12-1.7.12.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-aop-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-aspects-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-beans-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-context-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-context-support-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-core-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-expression-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-jdbc-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-orm-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-tx-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-web-3.2.11.RELEASE.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-webmvc-3.2.11.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/standard.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/javax.mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-annotations-2.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-core-2.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-databind-2.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-module-jaxb-annotations-2.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-mapper-asl-1.8.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-core-asl-1.8.8.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
