@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.sme.service.impl.TsmSendMessageServiceImpl.sendPhone;
-
 /**
  * Created by yao on 2016/7/11.
  */
@@ -64,6 +62,35 @@ public class OutInterfaceController {
     protected StringJSON getSuccess(boolean isSuccess, String message) {
         StringJSON json = new StringJSON();
         json.setSuccess(isSuccess);
+        json.setMessage(message);
+        return json;
+    }
+
+    /**
+     * 字符串转换成JSON
+     *
+     * @param code
+     * @param message
+     * @return
+     */
+    protected RespMessage respMessage(String code, String message, Object data) {
+        RespMessage json = new RespMessage();
+        json.setCode(code);
+        json.setMessage(message);
+        json.setData(data);
+        return json;
+    }
+
+    /**
+     * 字符串转换成JSON
+     *
+     * @param code
+     * @param message
+     * @return
+     */
+    protected RespMessage respMessage(String code, String message) {
+        RespMessage json = new RespMessage();
+        json.setCode(code);
         json.setMessage(message);
         return json;
     }
@@ -173,7 +200,7 @@ public class OutInterfaceController {
 
     @RequestMapping(value="/login", method={RequestMethod.POST})
     @ResponseBody
-    public StringJSON login(@RequestBody LoginDTO loginDTO){
+    public RespMessage login(@RequestBody LoginDTO loginDTO){
         try
         {
             SysAcc sysAcc = new SysAcc();
@@ -195,27 +222,27 @@ public class OutInterfaceController {
 
                     Map<String, Object> map = new HashMap<>();
                     map.put("token",token);
-                    return getSuccess(true,"",map);
+                    return respMessage("1","",map);
 
                 }else{
-                    return getSuccess(false,"用户名或密码错误！");
+                    return respMessage("-1","用户名或密码错误！");
                 }
 
             }else{
-                return getSuccess(false,"用户名或密码错误！");
+                return respMessage("-1","用户名或密码错误！");
             }
         }
         catch (Exception e)
         {
             log.error(e.getMessage());
-            return getSuccess(false,"失败，系统异常，尝试重新登入！");
+            return respMessage("-1","失败，系统异常，尝试重新登入！");
         }
 
     }
 
     @RequestMapping(value="/loginOut", method={RequestMethod.POST})
     @ResponseBody
-    public StringJSON loginOut(@RequestBody LoginDTO loginDTO){
+    public RespMessage loginOut(@RequestBody LoginDTO loginDTO){
         try
         {
             SysAcc sysAcc = new SysAcc();
@@ -231,20 +258,20 @@ public class OutInterfaceController {
                     sysAccService.update(sysAcc);
 
                     Map<String, Object> map = new HashMap<>();
-                    return getSuccess(true,"",  map);
+                    return respMessage("1","登出成功",  map);
 
                 }else{
-                    return getSuccess(false,"登出失败！");
+                    return respMessage("-1","登出失败！");
                 }
 
             }else{
-                return getSuccess(false,"登出失败！");
+                return respMessage("-1","登出失败！");
             }
         }
         catch (Exception e)
         {
             log.error(e.getMessage());
-            return getSuccess(false,"失败，系统异常，重新尝试！");
+            return respMessage("-1","失败，系统异常，重新尝试！");
         }
 
     }
@@ -268,81 +295,93 @@ public class OutInterfaceController {
     @RequestMapping(value = "/register", method = { RequestMethod.POST })
     @ResponseBody
     @com.sme.core.spring.Log(type = "首页", desc = "用户注册")
-    public StringJSON sysAccRegister(@RequestBody SysAcc sysAcc) {
+    public RespMessage sysAccRegister(@RequestBody SysAcc sysAcc) {
         try {
 
             SysAcc sysAccnames=new SysAcc();
             sysAccnames.setSysAccName(sysAcc.getSysAccName());
             if(chkAccountIsExists(sysAccnames)){
-                return getSuccess(false, "该用户名已存在,请重新输入用户名！！");
+                return respMessage("-1", "该用户名已存在,请重新输入用户名！！");
             }
 
             if(!RegexValidateUtil.checkMobileNumber(sysAcc.getSysAccMobile())){
-                return getSuccess(false, "手机格式不正确,请重新输入");
+                return respMessage("-1", "手机格式不正确,请重新输入");
             }
-            if(!StringUtil.isEmpty(sysAcc.getSysAccMobile())){
-                SysAcc sysAccphone = new SysAcc();
-                sysAccphone.setSysAccMobile(sysAcc.getSysAccMobile());
-                if(chkAccountIsExists(sysAccphone)){
-                    return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
-                }
+//            if(!StringUtil.isEmpty(sysAcc.getSysAccMobile())){
+//                SysAcc sysAccphone = new SysAcc();
+//                sysAccphone.setSysAccMobile(sysAcc.getSysAccMobile());
+//                if(chkAccountIsExists(sysAccphone)){
+//                    return getSuccess(false, "该手机号码已存在,请输入未注册手机号码！！");
+//                }
+//            }
+
+            //检查数据完整性
+            if(sysAcc.getTsmSendCode()==""||sysAcc.getTsmSendCode()==null||!StringUtil.isNumber(sysAcc.getTsmSendCode())){
+                return respMessage("-1", "请正确输入验证码！！");
+            }
+
+            if (StringUtils.isBlank(sysAcc.getFirstPassword())) {
+                return respMessage("-1", "密码为空");
+            }
+
+            if (!sysAcc.getFirstPassword().equals(sysAcc.getSecondPassword())) {
+                return respMessage("-1", "两次密码不一致");
+            }
+
+            TsmSendMessage tsmSendMessage = new TsmSendMessage();
+            tsmSendMessage.setTsmSendType("1");
+            tsmSendMessage.setTsmSendMobile(sysAcc.getSysAccMobile());
+            tsmSendMessage.setTsmSendCode(sysAcc.getTsmSendCode());
+            String flag = tsmSendMessageService.selectLastCode(tsmSendMessage);
+
+            if(!"1".equals(flag)){
+                return respMessage("-1", "无效验证码，请重新输入！");
             }
 
 
-            String pwd = StringUtil.getRandomChar(6);
-            String password = MD5.encryByMD5(pwd);
+
+            String password = MD5.encryByMD5(sysAcc.getFirstPassword());
             sysAcc.setSysAccPassword(password);
             sysAcc.setSysAccState("1");
             sysAcc.setSysAccType("1");
             sysAcc.setSysAccUserType("2");
             sysAcc.setSysAccMoney(0);
             sysAcc.setSysAccCdate(new Date());
-            sysAcc.setSysAccDesc(password);
+            sysAcc.setSysAccDesc(sysAcc.getFirstPassword());
             sysAcc.setSysAccCuser("用户:"+sysAcc.getSysAccName());
 
-
-
-            boolean flag =  sendPhone(sysAcc.getSysAccMobile(), pwd);
-
-            if(flag){
-                sysAccService.insert(sysAcc);
-                return getSuccess(true, "注册成功，稍后帐号密码将发送至短信！");
-            }else{
-                return getSuccess(false, "发送失败，注册失败，稍后再试！");
-            }
+            sysAccService.insert(sysAcc);
+            return respMessage("1", "注册成功！");
 
         } catch (Exception e) {
             log.error(e.getCause().getMessage());
             System.out.println(e.getCause().getMessage());
-            return getSuccess(false, "系统异常，注册失败！");
+            return respMessage("-1", "系统异常，注册失败！");
         }
     }
 
 
     @RequestMapping(value="/getCode")
     @ResponseBody
-    public StringJSON getCode(@RequestBody TsmSendMessage tsmSendMessage) {
+    public RespMessage getCode(@RequestBody TsmSendMessage tsmSendMessage) {
         try {
             log.info("<=====getCode====>");
             //检查数据完整性
             if(!RegexValidateUtil.checkMobileNumber(tsmSendMessage.getTsmSendMobile())){
-                return getSuccess(false, "手机格式不正确,请重新输入");
+                return respMessage("-1", "手机格式不正确,请重新输入");
             }
 
             String code = StringUtil.getRandomNumber(4);
             tsmSendMessage.setTsmSendCode(code);
             tsmSendMessage.setTsmSendType("1");
-            String flag = tsmSendMessageService.sendMessage(tsmSendMessage);
 
-            if("1".endsWith(flag)){
-                return  getSuccess(true, "发送成功，稍后验证码将发送至手机！");
-            }else{
-                return getSuccess(false, "发送失败，稍后再试！");
-            }
+            tsmSendMessageService.sendMessage(tsmSendMessage);
+
+            return  respMessage("1", "发送成功，稍后验证码将发送至手机！");
 
         } catch (Exception e) {
             log.error(e.getMessage());
-            return getSuccess(false, "失败，系统异常，稍后再试！");
+            return respMessage("-1", "失败，系统异常，稍后再试！");
         }
 
     }
@@ -350,30 +389,30 @@ public class OutInterfaceController {
     //验证验证码
     @RequestMapping(value = "/checkCode")
     @ResponseBody
-    public StringJSON checkCode(@RequestBody TsmSendMessage tsmSendMessage) {
+    public RespMessage checkCode(@RequestBody TsmSendMessage tsmSendMessage) {
         try {
             //检查数据完整性
             if(!RegexValidateUtil.checkMobileNumber(tsmSendMessage.getTsmSendMobile())){
-                return getSuccess(false, "该邮箱格式不正确,请输入新的邮箱！！");
+                return respMessage("-1", "该邮箱格式不正确,请输入新的邮箱！！");
             }
             //检查数据完整性
             if(tsmSendMessage.getTsmSendCode()==""||tsmSendMessage.getTsmSendCode()==null||!StringUtil.isNumber(tsmSendMessage.getTsmSendCode())){
-                return getSuccess(false, "请正确输入验证码！！");
+                return respMessage("-1", "请正确输入验证码！！");
             }
             tsmSendMessage.setTsmSendType("1");
             String flag = tsmSendMessageService.selectLastCode(tsmSendMessage);
 
             if("1".equals(flag)){
-                return  getSuccess(true, "成功");
+                return  respMessage("1", "成功");
             }else{
-                return getSuccess(false, "无效验证码，请重新输入！");
+                return respMessage("-1", "无效验证码，请重新输入！");
             }
 
 
 
         } catch (Exception e) {
             log.error(e.getStackTrace());
-            return getSuccess(false, "失败，系统异常，稍后再试！");
+            return respMessage("-1", "失败，系统异常，稍后再试！");
         }
 
     }

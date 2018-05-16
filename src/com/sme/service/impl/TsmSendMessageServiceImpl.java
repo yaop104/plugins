@@ -1,19 +1,29 @@
 package com.sme.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sme.core.dao.BaseDao;
 import com.sme.core.service.BaseService;
 import com.sme.dao.TsmSendMessageDao;
+import com.sme.entity.MessageBody;
 import com.sme.entity.TsmSendMessage;
 import com.sme.service.TsmSendMessageService;
 import com.sme.util.Config;
+import com.sme.util.HttpSendExecutor;
+import com.sme.util.HttpUtils;
 import com.sme.util.mail.MailSenderInfo;
 import com.sme.util.mail.SimpleMailSender;
+import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+
+import static com.sme.util.Config.*;
 
 @Service
 public class TsmSendMessageServiceImpl extends BaseService<TsmSendMessage> implements TsmSendMessageService {
@@ -36,31 +46,62 @@ public class TsmSendMessageServiceImpl extends BaseService<TsmSendMessage> imple
 	//================== begin ======================
 
 	@Override
-	@Transactional
-	public String sendMessage(TsmSendMessage tsmSendMessage) {
-		String message="0";
+	public void sendMessage(TsmSendMessage tsmSendMessage) {
 		try {
 			tsmSendMessage.setTsmSendState("2");
 			tsmSendMessage.setTsmSendTime(new Date());
 			tsmSendMessage.setTsmSendUuid(UUID.randomUUID().toString());
-			
-//			String flag = MessageSendUtil.sendMessage(tsmSendMessage.getTsmSendMobile(), tsmSendMessage.getTsmSendCode());
-			boolean flag = sendPhone(tsmSendMessage.getTsmSendMobile(), tsmSendMessage.getTsmSendCode());
+			tsmSendMessageDao.insert(tsmSendMessage);
 
-			if(flag){
-				message = "1";
-				tsmSendMessageDao.insert(tsmSendMessage);
-			}
-			return message;
+//			String flag = MessageSendUtil.sendMessage(tsmSendMessage.getTsmSendMobile(), tsmSendMessage.getTsmSendCode());
+			HttpSendExecutor.sendMessageInfo(tsmSendMessage.getTsmSendMobile(), tsmSendMessage.getTsmSendCode());
+
+
 		} catch (Exception e) {
-			return message;
+
 		}
 		
 	}
 
-	public static boolean sendPhone(String mail, String pwd){
+	public static boolean sendPhone(String phone, String pwd){
 
-		Boolean flag = true;
+		Boolean flag = false;
+
+		String host = MessageServerHost;
+		String path = MessagePath;
+		String method = "GET";
+		String appcode = "b98869cdf71448689686bb66b407a6c7";
+		Map<String, String> headers = new HashMap<String, String>();
+		//最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
+		headers.put("Authorization", "APPCODE " + MessageAppcode);
+		Map<String, String> querys = new HashMap<String, String>();
+		querys.put("param", pwd);
+		querys.put("phone", phone);
+		querys.put("sign", "1");
+		querys.put("skin", "2");
+
+
+		try {
+			/**
+			 * 重要提示如下:
+			 * HttpUtils请从
+			 * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/src/main/java/com/aliyun/api/gateway/demo/util/HttpUtils.java
+			 * 下载
+			 *
+			 * 相应的依赖请参照
+			 * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
+			 */
+			HttpResponse response = HttpUtils.doGet(host, path, method, headers, querys);
+			//System.out.println(response.toString());
+			//获取response的body
+			String responseBody = EntityUtils.toString(response.getEntity());
+			MessageBody messageBody = JSONObject.parseObject(responseBody, MessageBody.class);
+			if(messageBody.getCode().equals("OK")){
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return  flag;
 	}
 

@@ -66,6 +66,36 @@ public class SysAcc extends BaseObject{
 
 	private String rolename;
 
+	private String firstPassword;
+
+	private String secondPassword;
+
+	private String tsmSendCode;
+
+	public String getTsmSendCode() {
+		return tsmSendCode;
+	}
+
+	public void setTsmSendCode(String tsmSendCode) {
+		this.tsmSendCode = tsmSendCode;
+	}
+
+	public String getFirstPassword() {
+		return firstPassword;
+	}
+
+	public void setFirstPassword(String firstPassword) {
+		this.firstPassword = firstPassword;
+	}
+
+	public String getSecondPassword() {
+		return secondPassword;
+	}
+
+	public void setSecondPassword(String secondPassword) {
+		this.secondPassword = secondPassword;
+	}
+
 	public String getSysAccUserType() {
 		return sysAccUserType;
 	}

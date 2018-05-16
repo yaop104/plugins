@@ -1,5 +1,10 @@
 package com.sme.util;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RespMessage {
 	private String code;
 	public String getCode() {
@@ -9,8 +14,18 @@ public class RespMessage {
 		this.code = code;
 	}
 	private Object  body;
-	private String  message; 
+	private Object  data;
+	private String  message;
 	private String  appflag;
+
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
+	}
+
 	public String getMessage() {
 		return message;
 	}

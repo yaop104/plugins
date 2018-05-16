@@ -1,8 +1,13 @@
 <component name="libraryTable">
   <library name="antlr-2.7.2">
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jetty-util-9.3.7.v20160115.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/junit-4.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/fastjson-1.2.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/httpclient-4.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/httpcore-4.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/commons-lang-2.6.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/javax.mail.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/fastjson-1.1.15.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-aop-3.2.11.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-aspects-3.2.11.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-beans-3.2.11.RELEASE.jar!/" />
@@ -25,7 +30,6 @@
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/commons-fileupload-1.2.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/commons-fileupload-1.2.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/commons-io-1.4.jar!/" />
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/commons-lang-2.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/commons-logging-1.0.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/commons-pool.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/dom4j-1.6.1.jar!/" />

@@ -8,7 +8,7 @@ public interface TsmSendMessageService extends InterfaceBaseService<TsmSendMessa
 
 	//================== begin ======================
 
-	String sendMessage(TsmSendMessage tsmSendMessage);
+	void sendMessage(TsmSendMessage tsmSendMessage);
 	String selectLastCode(TsmSendMessage tsmSendMessage);
 	//================== end ======================
 

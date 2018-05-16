@@ -86,4 +86,10 @@ public class Config {
 	public static final String Content2 = getConfigProperty("defult.Content2");
 	public static final String CodeContent1 = getConfigProperty("defult.codeContent1");
 	public static final String CodeContent2 = getConfigProperty("defult.codeContent2");
+
+	//message
+	public static final String MessageServerHost = getConfigProperty("defult.Message.serverHost");
+	public static final String MessagePath = getConfigProperty("defult.Message.path");
+	public static final String MessageAppcode = getConfigProperty("defult.Message.appcode");
+
 }
