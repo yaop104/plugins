@@ -1,5 +1,7 @@
 package com.sme.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sme.core.model.BaseObject;
 
 import java.util.Date;
@@ -7,6 +9,8 @@ import java.util.Date;
 /**
  * 账号(SysAcc)模型对象
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SysAcc extends BaseObject{
 	/**
 	 *
