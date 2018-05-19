@@ -1,5 +1,6 @@
 package com.sme.view;
 
+import com.sme.core.model.StringJSON;
 import com.sme.core.service.InterfaceBaseService;
 import com.sme.core.view.BaseController;
 import com.sme.entity.FruitItem;
@@ -17,10 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/FruitItem")
+@RequestMapping("/fruitItem")
 public class FruitItemController extends BaseController<FruitItem> {
 	@Autowired
 	private FruitItemService fruitItemServiceImpl;
@@ -29,13 +31,6 @@ public class FruitItemController extends BaseController<FruitItem> {
 	
 	@RequestMapping(value="/fruitItemlist", method={RequestMethod.GET})
 	public String fruitItemList(FruitItem fruitItem, HttpServletRequest req) {
-		try {
-			log.info("<=====执行sysmenulist====>");
-			List<FruitItem> fruitItems = fruitItemServiceImpl.select(fruitItem);
-//			RespUtil.setResp(fruitItems, 10, 1, req);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
 		return "/fruitItem/fruitItemlist";
 	}
 	
@@ -69,25 +64,74 @@ public class FruitItemController extends BaseController<FruitItem> {
 			return "redirect:/fruitItem/fruitItemlist.do";
 		}
 	 }
-	
-	@RequestMapping(value="/save", method={RequestMethod.POST})
-	public String fruitItemSave(FruitItem fruitItem, Model model, HttpServletRequest request, HttpServletResponse response){
-		
+
+	@RequestMapping(value="/fruitItemDelete", method={RequestMethod.POST})
+	@ResponseBody
+	public StringJSON fruitItemDelete(String ids){
 		try
 		{
-			if(fruitItem.getId()!=null){
-				
-				return "redirect:/fruitItem/fruitItemlist.do";
+			if(ids != null && ids.length() > 0){
+				String[] idStrings = ids.split(",");
+
+				for (String id : idStrings)
+				{
+					FruitItem fruitItem= new FruitItem();
+					fruitItem.setId(Integer.valueOf(id));
+					fruitItemServiceImpl.delete(fruitItem);
+				}
+
+				return getSuccess(true, "删除成功！", null);
 			}else{
-				
-				return "redirect:/fruitItem/fruitItemlist.do";
+				return getSuccess(false, "删除内容为空！", null);
 			}
-			
 		}
 		catch (Exception e)
 		{
-			log.error(e.getMessage());
-			return fruitItemAdd(model,fruitItem);
+			// TODO: handle exception
+			return getSuccess(false, "系统异常！", null);
+		}
+	}
+	
+	@RequestMapping(value="/save", method={RequestMethod.POST})
+	@ResponseBody
+	public StringJSON fruitItemSave(FruitItem fruitItem, Model model, HttpServletRequest request, HttpServletResponse response){
+
+		try {
+			if (fruitItem.getId() != null) {
+
+				FruitItem fruitItem1 = new FruitItem();
+
+				fruitItem1 = fruitItemServiceImpl.getById(fruitItem);
+				fruitItem1.setId(fruitItem.getId());
+				fruitItem1.setUpdateTime(new Date());
+				fruitItem1.setTitle(fruitItem.getTitle());
+				fruitItem1.setItemStock(fruitItem.getItemStock());
+				fruitItem1.setItemSaleInfo(fruitItem.getItemSaleInfo());
+				fruitItem1.setItemPrice(fruitItem.getItemPrice());
+				fruitItem1.setItemSaleType(fruitItem.getItemSaleType());
+				fruitItem1.setItemPic(fruitItem.getItemPic());
+
+				fruitItemServiceImpl.update(fruitItem1);
+
+				return getSuccess(true, "修改成功", null);
+			} else {
+
+				fruitItem.setUpdateTime(new Date());
+				fruitItem.setCreateTime(new Date());
+				fruitItem.setAdminId(1);
+				fruitItem.setIsDelete(1);
+				fruitItem.setItemType(1);
+				fruitItem.setItemStatus(1);
+
+				fruitItemServiceImpl.insert(fruitItem);
+
+				return getSuccess(true, "添加成功", null);
+			}
+
+		} catch (Exception e) {
+			log.error(e.getCause().getMessage());
+			System.out.println(e.getCause().getMessage());
+			return getSuccess(false, "发生系统异常");
 		}
 	}
 	
