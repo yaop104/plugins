@@ -65,7 +65,7 @@
 			#{title,jdbcType=VARCHAR},
 			#{description,jdbcType=VARCHAR},
 			#{isDelete,jdbcType=INTEGER},
-			#{itemPic,jdbcType=INTEGER},
+			#{itemPic,jdbcType=VARCHAR},
 			#{itemData,jdbcType=VARCHAR},
 			#{itemPrice,jdbcType=VARCHAR},
 			#{itemSaleType,jdbcType=INTEGER},
@@ -82,7 +82,7 @@
 			title=#{title,jdbcType=VARCHAR},
 			description=#{description,jdbcType=VARCHAR},
 			is_delete=#{isDelete,jdbcType=INTEGER},
-			item_pic=#{itemPic,jdbcType=INTEGER},
+			item_pic=#{itemPic,jdbcType=VARCHAR},
 			item_data=#{itemData,jdbcType=VARCHAR},
 			item_price=#{itemPrice,jdbcType=VARCHAR},
 			item_sale_type=#{itemSaleType,jdbcType=INTEGER},
@@ -99,7 +99,7 @@
 			<if test="title!=null" >title=#{title,jdbcType=VARCHAR},</if>
 			<if test="description!=null" >description=#{description,jdbcType=VARCHAR},</if>
 			<if test="isDelete!=null" >is_delete=#{isDelete,jdbcType=INTEGER},</if>
-			<if test="itemPic!=null" >item_pic=#{itemPic,jdbcType=INTEGER},</if>
+			<if test="itemPic!=null" >item_pic=#{itemPic,jdbcType=VARCHAR},</if>
 			<if test="itemData!=null" >item_data=#{itemData,jdbcType=VARCHAR},</if>
 			<if test="itemPrice!=null" >item_price=#{itemPrice,jdbcType=VARCHAR},</if>
 			<if test="itemSaleType!=null" >item_sale_type=#{itemSaleType,jdbcType=INTEGER},</if>
@@ -118,7 +118,7 @@
 					<if test="title!=null and title!=''" >AND title=#{title,jdbcType=VARCHAR}</if>
 					<if test="description!=null and description!=''" >AND description=#{description,jdbcType=VARCHAR}</if>
 					<if test="isDelete!=null and isDelete!=''" >AND is_delete=#{isDelete,jdbcType=INTEGER}</if>
-					<if test="itemPic!=null and itemPic!=''" >AND item_pic=#{itemPic,jdbcType=INTEGER}</if>
+					<if test="itemPic!=null and itemPic!=''" >AND item_pic=#{itemPic,jdbcType=VARCHAR}</if>
 					<if test="itemData!=null and itemData!=''" >AND item_data=#{itemData,jdbcType=VARCHAR}</if>
 					<if test="itemPrice!=null and itemPrice!=''" >AND item_price=#{itemPrice,jdbcType=VARCHAR}</if>
 					<if test="itemSaleType!=null and itemSaleType!=''" >AND item_sale_type=#{itemSaleType,jdbcType=INTEGER}</if>

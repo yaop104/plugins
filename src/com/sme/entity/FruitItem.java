@@ -40,7 +40,7 @@ public class FruitItem extends BaseDTO {
 	private Integer	isDelete;
 
 	/** 图片 */
-	private Integer	itemPic;
+	private String	itemPic;
 
 	/** 内容 */
 	private String	itemData;
@@ -129,11 +129,11 @@ public class FruitItem extends BaseDTO {
 		this.isDelete = isDelete;
 	}
 
-	public Integer getItemPic() {
-		return this.itemPic;
+	public String getItemPic() {
+		return itemPic;
 	}
 
-	public void setItemPic(Integer itemPic) {
+	public void setItemPic(String itemPic) {
 		this.itemPic = itemPic;
 	}
 

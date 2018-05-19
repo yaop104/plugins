@@ -5,6 +5,7 @@ import com.sme.entity.*;
 import com.sme.service.*;
 import com.sme.service.impl.TdcDictionaryServiceImpl;
 import com.sme.util.*;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
+
+import static com.sme.util.Config.HEAD_IMG_REALPATH;
 
 /**
  * Created by yao on 2016/7/11.
@@ -181,7 +184,7 @@ public class OutInterfaceController {
             sysAcc.setSysAccHead(json.getInfo());
             sysAccService.update(sysAcc);
             String img = json.getInfo();
-            img = Config.HEAD_IMG_REALPATH + "download/pic/" + img;
+            img = HEAD_IMG_REALPATH + "download/pic/" + img;
             json.setInfo(img);
         }
         Map<String, Object> map = new HashMap<>();
@@ -274,7 +277,7 @@ public class OutInterfaceController {
 
     @RequestMapping(value="/getIFruittems", method={RequestMethod.GET , RequestMethod.POST})
     @ResponseBody
-    public Map<String, Object> getIFruittems(@RequestBody FruitItem fruitItem) {
+    public  RespMessage getIFruittems(@RequestBody FruitItem fruitItem) {
         try {
             log.info("<=====getIFruittems====>");
             // 分页属性
@@ -293,10 +296,19 @@ public class OutInterfaceController {
 
             int count = fruitItemServiceImpl.count(parm);
             List<FruitItem> fruitItems = fruitItemServiceImpl.page(parm);
-            return RespUtil.pageResult(count, fruitItems);
+            if(CollectionUtils.isNotEmpty(fruitItems)){
+
+                for (FruitItem fruitItem1 : fruitItems) {
+                    if(StringUtils.isNotBlank(fruitItem1.getItemPic())){
+                        fruitItem1.setItemPic(HEAD_IMG_REALPATH+fruitItem1.getItemPic());
+                    }
+                }
+
+            }
+            return respMessage("1","获取成功",  RespUtil.pageResult(count, fruitItems));
         } catch (Exception e) {
             log.error(e.getMessage());
-            return RespUtil.pageResult(0, new ArrayList());
+            return respMessage("1","获取成功",  RespUtil.pageResult(0, new ArrayList()));
         }
 
     }
