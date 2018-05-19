@@ -2,8 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09bb0ec7-0fc8-41fe-927d-da26b05f59bf" name="默认的" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sme/dao/FruitItemDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sme/entity/BaseDTO.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sme/entity/FruitItem.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sme/service/FruitItemService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sme/service/impl/FruitItemServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sme/view/FruitItemController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/com/sme/dao/FruitItemDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/com/sme/entity/BaseDTO.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/com/sme/entity/FruitItem.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/com/sme/service/FruitItemService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/com/sme/service/impl/FruitItemServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/com/sme/view/FruitItemController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/mybatis_config/FruitItemDao.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/mybatis_config/FruitItemDao.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sme/dao/FruitItemDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sme/entity/BaseDTO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sme/entity/FruitItem.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sme/service/FruitItemService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sme/service/impl/FruitItemServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sme/view/FruitItemController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/mybatis_config/FruitItemDao.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sme/view/OutInterfaceController.class" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sme/view/OutInterfaceController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/artifacts/plugins_war/plugins_war.war" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war/plugins_war.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/com/sme/view/OutInterfaceController.class" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/com/sme/view/OutInterfaceController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/mybatis_config/Configuration.xml" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/mybatis_config/Configuration.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/spring_config/applicationContext.xml" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/spring_config/applicationContext.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/mybatis_config/Configuration.xml" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/mybatis_config/Configuration.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/spring_config/applicationContext.xml" afterPath="$PROJECT_DIR$/classes/artifacts/plugins_war_exploded/WEB-INF/classes/spring_config/applicationContext.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sme/view/OutInterfaceController.java" afterPath="$PROJECT_DIR$/src/com/sme/view/OutInterfaceController.java" />
@@ -1157,7 +1182,7 @@
       <workItem from="1475940759547" duration="269000" />
       <workItem from="1476117111223" duration="601000" />
       <workItem from="1526207704549" duration="14422000" />
-      <workItem from="1526370659127" duration="23569000" />
+      <workItem from="1526370659127" duration="23650000" />
     </task>
     <task id="LOCAL-00001" summary="part1：初始导入">
       <created>1466391837407</created>
@@ -1475,7 +1500,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="274696000" />
+    <option name="totallyTimeSpent" value="274777000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
