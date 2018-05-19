@@ -2,10 +2,7 @@ package com.sme.view;
 
 import com.sme.core.model.StringJSON;
 import com.sme.entity.*;
-import com.sme.service.FeedbackService;
-import com.sme.service.LoginLogService;
-import com.sme.service.SysAccService;
-import com.sme.service.TsmSendMessageService;
+import com.sme.service.*;
 import com.sme.service.impl.TdcDictionaryServiceImpl;
 import com.sme.util.*;
 import org.apache.commons.lang.StringUtils;
@@ -18,10 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by yao on 2016/7/11.
@@ -40,6 +34,8 @@ public class OutInterfaceController {
     public FeedbackService feedbackService;
     @Autowired
     private TsmSendMessageService tsmSendMessageService;
+    @Autowired
+    private FruitItemService fruitItemServiceImpl;
 
 
     private Log log = LogFactory.getLog(TdcDictionaryController.class);
@@ -272,6 +268,35 @@ public class OutInterfaceController {
         {
             log.error(e.getMessage());
             return respMessage("-1","失败，系统异常，重新尝试！");
+        }
+
+    }
+
+    @RequestMapping(value="/getIFruittems", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public Map<String, Object> getIFruittems(@RequestBody FruitItem fruitItem) {
+        try {
+            log.info("<=====getIFruittems====>");
+            // 分页属性
+            if (fruitItem.getRows() < 1) {
+                 fruitItem.setRows(10);
+            }
+            if(fruitItem.getPage() < 1){
+                fruitItem.setPage(1);
+            }
+
+
+            Map<String, Object> parm = new HashMap<String, Object>();
+            parm.put("page", fruitItem.getBegin());
+            parm.put("pageCount",fruitItem.getEnd());
+
+
+            int count = fruitItemServiceImpl.count(parm);
+            List<FruitItem> fruitItems = fruitItemServiceImpl.page(parm);
+            return RespUtil.pageResult(count, fruitItems);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return RespUtil.pageResult(0, new ArrayList());
         }
 
     }

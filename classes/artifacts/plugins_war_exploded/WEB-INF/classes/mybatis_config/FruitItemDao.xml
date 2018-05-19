@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.FruitItemDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.FruitItem">
+		<result property="id" column="id" /><!--id-->
+		<result property="createTime" column="createTime" /><!--创建时间-->
+		<result property="updateTime" column="updateTime" /><!--更新时间-->
+		<result property="adminId" column="adminId" /><!--操作人-->
+		<result property="itemStatus" column="itemStatus" /><!--状态1上架2下架-->
+		<result property="itemType" column="itemType" /><!--类型1商品-->
+		<result property="title" column="title" /><!--标题-->
+		<result property="description" column="description" /><!--描述-->
+		<result property="isDelete" column="isDelete" /><!--删除0正常1删除-->
+		<result property="itemPic" column="itemPic" /><!--图片-->
+		<result property="itemData" column="itemData" /><!--内容-->
+		<result property="itemPrice" column="itemPrice" /><!--价格-->
+		<result property="itemSaleType" column="itemSaleType" /><!--规格类型1份2个-->
+		<result property="itemSaleInfo" column="itemSaleInfo" /><!--规格内容-->
+		<result property="itemStock" column="itemStock" /><!--库存-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		id AS id,
+		create_time AS createTime,
+		update_time AS updateTime,
+		admin_id AS adminId,
+		item_status AS itemStatus,
+		item_type AS itemType,
+		title AS title,
+		description AS description,
+		is_delete AS isDelete,
+		item_pic AS itemPic,
+		item_data AS itemData,
+		item_price AS itemPrice,
+		item_sale_type AS itemSaleType,
+		item_sale_info AS itemSaleInfo,
+		item_stock AS itemStock
+	</sql>
+
+	<sql id="field">
+			id,
+			create_time,
+			update_time,
+			admin_id,
+			item_status,
+			item_type,
+			title,
+			description,
+			is_delete,
+			item_pic,
+			item_data,
+			item_price,
+			item_sale_type,
+			item_sale_info,
+			item_stock
+	</sql>
+
+	<sql id="property">
+			next.nextval,
+			#{createTime,jdbcType=TIMESTAMP},
+			#{updateTime,jdbcType=TIMESTAMP},
+			#{adminId,jdbcType=INTEGER},
+			#{itemStatus,jdbcType=INTEGER},
+			#{itemType,jdbcType=INTEGER},
+			#{title,jdbcType=VARCHAR},
+			#{description,jdbcType=VARCHAR},
+			#{isDelete,jdbcType=INTEGER},
+			#{itemPic,jdbcType=INTEGER},
+			#{itemData,jdbcType=VARCHAR},
+			#{itemPrice,jdbcType=VARCHAR},
+			#{itemSaleType,jdbcType=INTEGER},
+			#{itemSaleInfo,jdbcType=VARCHAR},
+			#{itemStock,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			create_time=#{createTime,jdbcType=TIMESTAMP},
+			update_time=#{updateTime,jdbcType=TIMESTAMP},
+			admin_id=#{adminId,jdbcType=INTEGER},
+			item_status=#{itemStatus,jdbcType=INTEGER},
+			item_type=#{itemType,jdbcType=INTEGER},
+			title=#{title,jdbcType=VARCHAR},
+			description=#{description,jdbcType=VARCHAR},
+			is_delete=#{isDelete,jdbcType=INTEGER},
+			item_pic=#{itemPic,jdbcType=INTEGER},
+			item_data=#{itemData,jdbcType=VARCHAR},
+			item_price=#{itemPrice,jdbcType=VARCHAR},
+			item_sale_type=#{itemSaleType,jdbcType=INTEGER},
+			item_sale_info=#{itemSaleInfo,jdbcType=VARCHAR},
+			item_stock=#{itemStock,jdbcType=INTEGER}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="createTime!=null" >create_time=#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime!=null" >update_time=#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="adminId!=null" >admin_id=#{adminId,jdbcType=INTEGER},</if>
+			<if test="itemStatus!=null" >item_status=#{itemStatus,jdbcType=INTEGER},</if>
+			<if test="itemType!=null" >item_type=#{itemType,jdbcType=INTEGER},</if>
+			<if test="title!=null" >title=#{title,jdbcType=VARCHAR},</if>
+			<if test="description!=null" >description=#{description,jdbcType=VARCHAR},</if>
+			<if test="isDelete!=null" >is_delete=#{isDelete,jdbcType=INTEGER},</if>
+			<if test="itemPic!=null" >item_pic=#{itemPic,jdbcType=INTEGER},</if>
+			<if test="itemData!=null" >item_data=#{itemData,jdbcType=VARCHAR},</if>
+			<if test="itemPrice!=null" >item_price=#{itemPrice,jdbcType=VARCHAR},</if>
+			<if test="itemSaleType!=null" >item_sale_type=#{itemSaleType,jdbcType=INTEGER},</if>
+			<if test="itemSaleInfo!=null" >item_sale_info=#{itemSaleInfo,jdbcType=VARCHAR},</if>
+			<if test="itemStock!=null" >item_stock=#{itemStock,jdbcType=INTEGER}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="createTime!=null and createTime!=''" >AND create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+					<if test="updateTime!=null and updateTime!=''" >AND update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+					<if test="adminId!=null and adminId!=''" >AND admin_id=#{adminId,jdbcType=INTEGER}</if>
+					<if test="itemStatus!=null and itemStatus!=''" >AND item_status=#{itemStatus,jdbcType=INTEGER}</if>
+					<if test="itemType!=null and itemType!=''" >AND item_type=#{itemType,jdbcType=INTEGER}</if>
+					<if test="title!=null and title!=''" >AND title=#{title,jdbcType=VARCHAR}</if>
+					<if test="description!=null and description!=''" >AND description=#{description,jdbcType=VARCHAR}</if>
+					<if test="isDelete!=null and isDelete!=''" >AND is_delete=#{isDelete,jdbcType=INTEGER}</if>
+					<if test="itemPic!=null and itemPic!=''" >AND item_pic=#{itemPic,jdbcType=INTEGER}</if>
+					<if test="itemData!=null and itemData!=''" >AND item_data=#{itemData,jdbcType=VARCHAR}</if>
+					<if test="itemPrice!=null and itemPrice!=''" >AND item_price=#{itemPrice,jdbcType=VARCHAR}</if>
+					<if test="itemSaleType!=null and itemSaleType!=''" >AND item_sale_type=#{itemSaleType,jdbcType=INTEGER}</if>
+					<if test="itemSaleInfo!=null and itemSaleInfo!=''" >AND item_sale_info=#{itemSaleInfo,jdbcType=VARCHAR}</if>
+					<if test="itemStock!=null and itemStock!=''" >AND item_stock=#{itemStock,jdbcType=INTEGER}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.FruitItem">
+	    SELECT <include refid="fieldAsProperty" /> FROM fruit_item <include refid="idCnd2"/>
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM fruit_item <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.FruitItem" resultType="com.sme.entity.FruitItem">
+		SELECT <include refid="fieldAsProperty" /> FROM fruit_item
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.FruitItem" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO fruit_item(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.FruitItem">
+		DELETE FROM fruit_item<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.FruitItem" 
+		parameterType="com.sme.entity.FruitItem">
+		SELECT<include refid="fieldAsProperty" />FROM fruit_item<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.FruitItem">
+		UPDATE fruit_item<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="id!=null" >id=#{id,jdbcType=INTEGER}</if>
+			<if test="id==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>
