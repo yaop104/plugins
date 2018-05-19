@@ -29,7 +29,6 @@
 			<value>yao</value>
 		</property>
 		<property name="password">
-  			<!--<value>huijiao</value>-->
 			<value>yao</value>
 		</property>
 	</bean>

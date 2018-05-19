@@ -5,21 +5,21 @@ import com.sme.core.service.InterfaceBaseService;
 import com.sme.core.view.BaseController;
 import com.sme.entity.FruitItem;
 import com.sme.service.FruitItemService;
+import com.sme.util.RespUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/fruitItem")
@@ -46,6 +46,37 @@ public class FruitItemController extends BaseController<FruitItem> {
 			return null;
 		}
 		
+	}
+
+	@RequestMapping(value = "/pageForSearch", method = { RequestMethod.POST })
+	@ResponseBody
+	public Map<String, Object> pageForSearch(HttpServletRequest req) {
+		// 分页属性
+		if (req.getParameter("rows") != null && req.getParameter("page") != null) {
+			rows = Integer.parseInt(req.getParameter("rows"));
+			page = Integer.parseInt(req.getParameter("page"));
+		} else {
+			rows = 10;
+			page = 1;
+		}
+		String title = req.getParameter("title");
+
+		try {
+			log.info("<=====pageForSearch====>");
+
+			Map<String, Object> parm = new HashMap<String, Object>();
+			parm.put("page", getBegin());
+			parm.put("pageCount", getEnd());
+			parm.put("title", title);
+
+			int count = getService().count(parm);
+			List<FruitItem> fruitItems = getService().page(parm);
+			return RespUtil.pageResult(count, fruitItems);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 	
 	 @RequestMapping(value="/{id}/delete", method={RequestMethod.GET})

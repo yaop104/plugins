@@ -88,7 +88,7 @@
 			nowrap : true,//设置为true，当数据长度超出列宽时将会自动截取。
 			striped : true,//显示条纹
 			collapsible : true,
-			url : '${ctx }/fruitItem/page.do',
+			url : '${ctx }/fruitItem/pageForSearch.do',
 			pageList : [10, 15, 20],
 			pageSize : 10,
 			fitColumns : false,
@@ -119,7 +119,7 @@
 
 		/* queryParams.StartTime = StartTime;
 		 queryParams.EndTime = EndTime;   */
-		queryParams.tptName = Name;
+		queryParams.title = Name;
 
 		return queryParams;
 
@@ -143,10 +143,20 @@
 	}
 
 	function editOption(){
+        initUpload();
 		var row = grid.datagrid('getSelected');
 		var rows = grid.datagrid('getSelections');
 		if(row){
 			if(1 == rows.length){
+
+                $('#sl_item').show();
+                $('#sl_item').html("");
+
+                var str = '<div class="sl_box"><a href="'+ctxall + row.itemPic + '" target="_blank"><img src="'+ctxall + row.itemPic + '"/></a></div>';
+                str += '<div class="sl_dele"><a href="javascript:deleSL(' +"'"+ row.itemPic +"'"+ ');">删除</a></div>';
+
+                $('#sl_item').append( str );
+
 				$('#f1').form.url='${ctx }/fruitItem/save.do';
 				$('#f1').form('load',{
 					'id':row.id,
@@ -270,7 +280,7 @@
 
 	function deleSL(path){
 		$('#sl_item').html( '');
-		$('#tapApplicationUrl').val('');
+		$('#itemPic').val('');
 	}
 
 	function initUpload(){
