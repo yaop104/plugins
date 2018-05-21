@@ -137,6 +137,9 @@
 
 	function addOption(){
 		initUpload();
+        $('#sl_item').html( '');
+        $('#itemPic').val('');
+
 		$('#d1').dialog('open');
 		$('#f1').form('clear');
 		$('#f1').form.url='${ctx }/fruitItem/save.do';
@@ -464,7 +467,7 @@
 			</div>
 		</div>
 		<div id="btn1">
-			<a href="javascript:void(0)" class="easyui-linkbutton c6" data-options="iconCls:'icon-ok'" onclick="saveForm()" style="width:90px"> 申  请 </a>
+			<a href="javascript:void(0)" class="easyui-linkbutton c6" data-options="iconCls:'icon-ok'" onclick="saveForm()" style="width:90px"> 添  加 </a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="clearForm()" style="width:90px"> 取  消 </a>
 		</div>
 	</div>

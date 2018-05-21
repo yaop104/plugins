@@ -302,6 +302,7 @@ public class OutInterfaceController {
                     if(StringUtils.isNotBlank(fruitItem1.getItemPic())){
                         fruitItem1.setItemPic(HEAD_IMG_REALPATH+fruitItem1.getItemPic());
                     }
+                    fruitItem1.setItemSaleInfo(fruitItem1.getItemSaleInfo() + (fruitItem1.getItemSaleType().equals(2)?"/个":"/份"));
                 }
 
             }
