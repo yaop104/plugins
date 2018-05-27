@@ -25,6 +25,7 @@
 		<typeAlias type="com.sme.entity.TdcDictionary" alias="TdcDictionary" />
 		<typeAlias type="com.sme.entity.TsmSendMessage" alias="TsmSendMessage" />
 		<typeAlias type="com.sme.entity.FruitItem" alias="FruitItem" />
+		<typeAlias type="com.sme.entity.FruitOrder" alias="FruitOrder" />
 	</typeAliases>
 	
 	<!--<environments default="MySQL">
@@ -54,5 +55,6 @@
 		<mapper resource="./mybatis_config/TdcDictionaryDao.xml"/>
 		<mapper resource="./mybatis_config/TsmSendMessageDao.xml"/>
 		<mapper resource="./mybatis_config/FruitItemDao.xml"/>
+		<mapper resource="./mybatis_config/FruitOrderDao.xml"/>
 	</mappers>
 </configuration>

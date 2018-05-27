@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.FruitOrderDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.FruitOrder">
+		<result property="id" column="id" /><!--id-->
+		<result property="createTime" column="createTime" /><!--创建时间-->
+		<result property="updateTime" column="updateTime" /><!--更新时间-->
+		<result property="sellerId" column="sellerId" /><!--卖家id-->
+		<result property="orderStatus" column="orderStatus" /><!--订单状态：-1 已删除 0 已取消 1 下单 2 付款确认中 3 已付款 4 已发货 5 付款失败-->
+		<result property="orderPrice" column="orderPrice" /><!--订单价格-->
+		<result property="realpay" column="realpay" /><!--实际支付-->
+		<result property="userId" column="userId" /><!--买家id-->
+		<result property="quantity" column="quantity" /><!--总数-->
+		<result property="snapshot" column="snapshot" /><!--快照-->
+		<result property="receiverAddress" column="receiverAddress" /><!--收件人地址-->
+		<result property="receiverMobile" column="receiverMobile" /><!--收件人手机号码-->
+		<result property="receiverName" column="receiverName" /><!--收件人名称-->
+		<result property="hidden" column="hidden" /><!--删除标志位1删除-->
+		<result property="notes" column="notes" /><!--买家订单备注-->
+		<result property="payTime" column="payTime" /><!--付款时间-->
+		<result property="sendTime" column="sendTime" /><!--发货时间-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		id AS id,
+		create_time AS createTime,
+		update_time AS updateTime,
+		seller_id AS sellerId,
+		order_status AS orderStatus,
+		order_price AS orderPrice,
+		realpay AS realpay,
+		user_id AS userId,
+		quantity AS quantity,
+		snapshot AS snapshot,
+		receiver_address AS receiverAddress,
+		receiver_mobile AS receiverMobile,
+		receiver_name AS receiverName,
+		hidden AS hidden,
+		notes AS notes,
+		pay_time AS payTime,
+		send_time AS sendTime
+	</sql>
+
+	<sql id="field">
+			create_time,
+			update_time,
+			seller_id,
+			order_status,
+			order_price,
+			realpay,
+			user_id,
+			quantity,
+			snapshot,
+			receiver_address,
+			receiver_mobile,
+			receiver_name,
+			hidden,
+			notes,
+			pay_time,
+			send_time
+	</sql>
+
+	<sql id="property">
+			#{createTime,jdbcType=TIMESTAMP},
+			#{updateTime,jdbcType=TIMESTAMP},
+			#{sellerId,jdbcType=INTEGER},
+			#{orderStatus,jdbcType=INTEGER},
+			#{orderPrice,jdbcType=INTEGER},
+			#{realpay,jdbcType=INTEGER},
+			#{userId,jdbcType=INTEGER},
+			#{quantity,jdbcType=INTEGER},
+			#{snapshot,jdbcType=VARCHAR},
+			#{receiverAddress,jdbcType=VARCHAR},
+			#{receiverMobile,jdbcType=VARCHAR},
+			#{receiverName,jdbcType=VARCHAR},
+			#{hidden,jdbcType=INTEGER},
+			#{notes,jdbcType=VARCHAR},
+			#{payTime,jdbcType=TIMESTAMP},
+			#{sendTime,jdbcType=TIMESTAMP}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			create_time=#{createTime,jdbcType=TIMESTAMP},
+			update_time=#{updateTime,jdbcType=TIMESTAMP},
+			seller_id=#{sellerId,jdbcType=INTEGER},
+			order_status=#{orderStatus,jdbcType=INTEGER},
+			order_price=#{orderPrice,jdbcType=INTEGER},
+			realpay=#{realpay,jdbcType=INTEGER},
+			user_id=#{userId,jdbcType=INTEGER},
+			quantity=#{quantity,jdbcType=INTEGER},
+			snapshot=#{snapshot,jdbcType=VARCHAR},
+			receiver_address=#{receiverAddress,jdbcType=VARCHAR},
+			receiver_mobile=#{receiverMobile,jdbcType=VARCHAR},
+			receiver_name=#{receiverName,jdbcType=VARCHAR},
+			hidden=#{hidden,jdbcType=INTEGER},
+			notes=#{notes,jdbcType=VARCHAR},
+			pay_time=#{payTime,jdbcType=TIMESTAMP},
+			send_time=#{sendTime,jdbcType=TIMESTAMP}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="createTime!=null" >create_time=#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime!=null" >update_time=#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="sellerId!=null" >seller_id=#{sellerId,jdbcType=INTEGER},</if>
+			<if test="orderStatus!=null" >order_status=#{orderStatus,jdbcType=INTEGER},</if>
+			<if test="orderPrice!=null" >order_price=#{orderPrice,jdbcType=INTEGER},</if>
+			<if test="realpay!=null" >realpay=#{realpay,jdbcType=INTEGER},</if>
+			<if test="userId!=null" >user_id=#{userId,jdbcType=INTEGER},</if>
+			<if test="quantity!=null" >quantity=#{quantity,jdbcType=INTEGER},</if>
+			<if test="snapshot!=null" >snapshot=#{snapshot,jdbcType=VARCHAR},</if>
+			<if test="receiverAddress!=null" >receiver_address=#{receiverAddress,jdbcType=VARCHAR},</if>
+			<if test="receiverMobile!=null" >receiver_mobile=#{receiverMobile,jdbcType=VARCHAR},</if>
+			<if test="receiverName!=null" >receiver_name=#{receiverName,jdbcType=VARCHAR},</if>
+			<if test="hidden!=null" >hidden=#{hidden,jdbcType=INTEGER},</if>
+			<if test="notes!=null" >notes=#{notes,jdbcType=VARCHAR},</if>
+			<if test="payTime!=null" >pay_time=#{payTime,jdbcType=TIMESTAMP},</if>
+			<if test="sendTime!=null" >send_time=#{sendTime,jdbcType=TIMESTAMP}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="createTime!=null and createTime!=''" >AND create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+					<if test="updateTime!=null and updateTime!=''" >AND update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+					<if test="sellerId!=null and sellerId!=''" >AND seller_id=#{sellerId,jdbcType=INTEGER}</if>
+					<if test="orderStatus!=null and orderStatus!=''" >AND order_status=#{orderStatus,jdbcType=INTEGER}</if>
+					<if test="orderPrice!=null and orderPrice!=''" >AND order_price=#{orderPrice,jdbcType=INTEGER}</if>
+					<if test="realpay!=null and realpay!=''" >AND realpay=#{realpay,jdbcType=INTEGER}</if>
+					<if test="userId!=null and userId!=''" >AND user_id=#{userId,jdbcType=INTEGER}</if>
+					<if test="quantity!=null and quantity!=''" >AND quantity=#{quantity,jdbcType=INTEGER}</if>
+					<if test="snapshot!=null and snapshot!=''" >AND snapshot=#{snapshot,jdbcType=VARCHAR}</if>
+					<if test="receiverAddress!=null and receiverAddress!=''" >AND receiver_address=#{receiverAddress,jdbcType=VARCHAR}</if>
+					<if test="receiverMobile!=null and receiverMobile!=''" >AND receiver_mobile=#{receiverMobile,jdbcType=VARCHAR}</if>
+					<if test="receiverName!=null and receiverName!=''" >AND receiver_name=#{receiverName,jdbcType=VARCHAR}</if>
+					<if test="hidden!=null" >AND hidden=#{hidden,jdbcType=INTEGER}</if>
+					<if test="notes!=null and notes!=''" >AND notes=#{notes,jdbcType=VARCHAR}</if>
+					<if test="payTime!=null and payTime!=''" >AND pay_time=#{payTime,jdbcType=TIMESTAMP}</if>
+					<if test="sendTime!=null and sendTime!=''" >AND send_time=#{sendTime,jdbcType=TIMESTAMP}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.FruitOrder">
+	    SELECT <include refid="fieldAsProperty" /> FROM fruit_order <include refid="idCnd2"/>
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM fruit_order <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.FruitOrder" resultType="com.sme.entity.FruitOrder">
+		SELECT <include refid="fieldAsProperty" /> FROM fruit_order
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.FruitOrder" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO fruit_order(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.FruitOrder">
+		DELETE FROM fruit_order<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.FruitOrder" 
+		parameterType="com.sme.entity.FruitOrder">
+		SELECT<include refid="fieldAsProperty" />FROM fruit_order<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.FruitOrder">
+		UPDATE fruit_order<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="id!=null" >id=#{id,jdbcType=VARCHAR}</if>
+			<if test="id==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>
