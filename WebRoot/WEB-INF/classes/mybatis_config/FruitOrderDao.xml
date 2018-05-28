@@ -42,6 +42,7 @@
 	</sql>
 
 	<sql id="field">
+			id,
 			create_time,
 			update_time,
 			seller_id,
@@ -61,12 +62,13 @@
 	</sql>
 
 	<sql id="property">
+			#{id,jdbcType=VARCHAR},
 			#{createTime,jdbcType=TIMESTAMP},
 			#{updateTime,jdbcType=TIMESTAMP},
 			#{sellerId,jdbcType=INTEGER},
 			#{orderStatus,jdbcType=INTEGER},
-			#{orderPrice,jdbcType=INTEGER},
-			#{realpay,jdbcType=INTEGER},
+			#{orderPrice,jdbcType=VARCHAR},
+			#{realpay,jdbcType=VARCHAR},
 			#{userId,jdbcType=INTEGER},
 			#{quantity,jdbcType=INTEGER},
 			#{snapshot,jdbcType=VARCHAR},
@@ -84,8 +86,8 @@
 			update_time=#{updateTime,jdbcType=TIMESTAMP},
 			seller_id=#{sellerId,jdbcType=INTEGER},
 			order_status=#{orderStatus,jdbcType=INTEGER},
-			order_price=#{orderPrice,jdbcType=INTEGER},
-			realpay=#{realpay,jdbcType=INTEGER},
+			order_price=#{orderPrice,jdbcType=VARCHAR},
+			realpay=#{realpay,jdbcType=VARCHAR},
 			user_id=#{userId,jdbcType=INTEGER},
 			quantity=#{quantity,jdbcType=INTEGER},
 			snapshot=#{snapshot,jdbcType=VARCHAR},
@@ -103,8 +105,8 @@
 			<if test="updateTime!=null" >update_time=#{updateTime,jdbcType=TIMESTAMP},</if>
 			<if test="sellerId!=null" >seller_id=#{sellerId,jdbcType=INTEGER},</if>
 			<if test="orderStatus!=null" >order_status=#{orderStatus,jdbcType=INTEGER},</if>
-			<if test="orderPrice!=null" >order_price=#{orderPrice,jdbcType=INTEGER},</if>
-			<if test="realpay!=null" >realpay=#{realpay,jdbcType=INTEGER},</if>
+			<if test="orderPrice!=null" >order_price=#{orderPrice,jdbcType=VARCHAR},</if>
+			<if test="realpay!=null" >realpay=#{realpay,jdbcType=VARCHAR},</if>
 			<if test="userId!=null" >user_id=#{userId,jdbcType=INTEGER},</if>
 			<if test="quantity!=null" >quantity=#{quantity,jdbcType=INTEGER},</if>
 			<if test="snapshot!=null" >snapshot=#{snapshot,jdbcType=VARCHAR},</if>
@@ -124,8 +126,8 @@
 					<if test="updateTime!=null and updateTime!=''" >AND update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
 					<if test="sellerId!=null and sellerId!=''" >AND seller_id=#{sellerId,jdbcType=INTEGER}</if>
 					<if test="orderStatus!=null and orderStatus!=''" >AND order_status=#{orderStatus,jdbcType=INTEGER}</if>
-					<if test="orderPrice!=null and orderPrice!=''" >AND order_price=#{orderPrice,jdbcType=INTEGER}</if>
-					<if test="realpay!=null and realpay!=''" >AND realpay=#{realpay,jdbcType=INTEGER}</if>
+					<if test="orderPrice!=null and orderPrice!=''" >AND order_price=#{orderPrice,jdbcType=VARCHAR}</if>
+					<if test="realpay!=null and realpay!=''" >AND realpay=#{realpay,jdbcType=VARCHAR}</if>
 					<if test="userId!=null and userId!=''" >AND user_id=#{userId,jdbcType=INTEGER}</if>
 					<if test="quantity!=null and quantity!=''" >AND quantity=#{quantity,jdbcType=INTEGER}</if>
 					<if test="snapshot!=null and snapshot!=''" >AND snapshot=#{snapshot,jdbcType=VARCHAR}</if>
@@ -152,7 +154,7 @@
 	<select id="select" parameterType="com.sme.entity.FruitOrder" resultType="com.sme.entity.FruitOrder">
 		SELECT <include refid="fieldAsProperty" /> FROM fruit_order
 	</select>
-	<insert id="insert" parameterType="com.sme.entity.FruitOrder" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" parameterType="com.sme.entity.FruitOrder">
 		INSERT INTO fruit_order(<include refid="field" />) VALUES (<include refid="property" />)
 	</insert>
 	<delete id="delete" parameterType="com.sme.entity.FruitOrder">

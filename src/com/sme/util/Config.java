@@ -92,4 +92,18 @@ public class Config {
 	public static final String MessagePath = getConfigProperty("defult.Message.path");
 	public static final String MessageAppcode = getConfigProperty("defult.Message.appcode");
 
+
+	//message
+	public static final String alipayGateway = getConfigProperty("defult.alipay.gateway");
+	public static final String alipayAppId = getConfigProperty("defult.alipay.app_id");
+	public static final String alipayPrivateKey = getConfigProperty("defult.alipay.private_key");
+	public static final String alipayCharset = getConfigProperty("defult.alipay.charset");
+	public static final String alipayFormat = getConfigProperty("defult.alipay.format");
+	public static final String alipayPublicKey = getConfigProperty("defult.alipay.alipay_public_key");
+	public static final String alipayAignType = getConfigProperty("defult.alipay.sign_type");
+	public static final String QUICK_MSECURITY_PAY = getConfigProperty("defult.alipay.product_code");
+	public static final String alipayMethod = getConfigProperty("defult.alipay.method");
+	public static final String alipayVersion = getConfigProperty("defult.alipay.version");
+	public static final String alipayNotifyUrl = getConfigProperty("defult.alipay.notify_url");
+
 }

@@ -61,6 +61,9 @@
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-module-jaxb-annotations-2.2.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-mapper-asl-1.8.8.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/jackson-core-asl-1.8.8.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/plugins/sdk-alipay/alipay-sdk-java-3.0.1.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/plugins/sdk-alipay/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/plugins/jar/commons-codec-1.9.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

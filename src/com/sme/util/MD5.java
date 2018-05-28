@@ -102,5 +102,6 @@ public class MD5 {
 		System.out.println("encry data length is:" + encryStr.length());
 
 		System.out.println("end of encry data...");
+
 	}
 }

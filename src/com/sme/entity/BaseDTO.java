@@ -10,6 +10,17 @@ public class BaseDTO extends BaseObject{
     protected int rows;// ，每页记录数
     protected int page;// 当前页码
 
+    /** token */
+    private String	token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public int getBegin() {
         return rows * (page - 1);
     }

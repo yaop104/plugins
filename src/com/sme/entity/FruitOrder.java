@@ -1,13 +1,16 @@
 package com.sme.entity;
 
-import com.sme.core.model.BaseObject;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;
 
 /**
  * order(FruitOrder)模型对象
  */
-public class FruitOrder extends BaseObject {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class FruitOrder extends BaseDTO {
 	//======================字段列表========================
 	/** id */
 	private String	id;
@@ -25,10 +28,10 @@ public class FruitOrder extends BaseObject {
 	private Integer	orderStatus;
 
 	/** 订单价格 */
-	private Integer	orderPrice;
+	private String	orderPrice;
 
 	/** 实际支付 */
-	private Integer	realpay;
+	private String	realpay;
 
 	/** 买家id */
 	private Integer	userId;
@@ -100,19 +103,19 @@ public class FruitOrder extends BaseObject {
 		this.orderStatus = orderStatus;
 	}
 
-	public Integer getOrderPrice() {
-		return this.orderPrice;
+	public String getOrderPrice() {
+		return orderPrice;
 	}
 
-	public void setOrderPrice(Integer orderPrice) {
+	public void setOrderPrice(String orderPrice) {
 		this.orderPrice = orderPrice;
 	}
 
-	public Integer getRealpay() {
-		return this.realpay;
+	public String getRealpay() {
+		return realpay;
 	}
 
-	public void setRealpay(Integer realpay) {
+	public void setRealpay(String realpay) {
 		this.realpay = realpay;
 	}
 

@@ -54,7 +54,7 @@
             { field:'orderStatus', align:'center',  width:'180', sortable:'true' , title:'订单状态' , formatter : convertState},
             { field:'createTime', align:'center', width:'180' , title:'下单日期' },
             { field:'orderPrice', align:'center', width:'150' , title:'价格（元）' },
-            { field:'realpay', align:'center', width:'120', sortable:'true' , title:'实付' , formatter : ys3},
+            { field:'realpay', align:'center', width:'120', sortable:'true' , title:'实付（元）' , formatter : ys3},
             { field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];
 
@@ -398,7 +398,7 @@
 		<table id="t1"></table>
 
 		<!-- 窗口-->
-		<div id="d1" class="easyui-dialog" buttons="#btn1" title="商品"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:500px;height:400px;overflow: hidden;">
+		<div id="d1" class="easyui-dialog" buttons="#btn1" title="订单"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:500px;height:400px;overflow: hidden;">
 			<div style="padding:10px 60px 20px 60px">
 				<form id="f1"  class="easyui-form" method="post">
 					<table>

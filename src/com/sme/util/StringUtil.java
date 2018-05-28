@@ -2,10 +2,9 @@ package com.sme.util;
 
 import java.io.InputStream;
 import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 字符串工具类
@@ -278,6 +277,23 @@ public class StringUtil {
 		}
 
 		return str;
+	}
+
+	/**
+	 *订单号
+	 * @param uid
+	 * @return
+	 */
+	public static String generateOrderId(Integer uid) {
+		long epoch = System.currentTimeMillis();
+		long temp = Math.round(Math.random() * 8999 + 1000);
+		return String.format("%d%d%d", epoch, uid, temp);
+	}
+
+	public static String timeStampString(){
+		DateFormat dateTimeformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String strBeginDate = dateTimeformat.format(new Date());
+		return strBeginDate;
 	}
 
 	public static void main(String[] args) {

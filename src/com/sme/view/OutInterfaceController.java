@@ -1,5 +1,7 @@
 package com.sme.view;
 
+import com.alibaba.fastjson.JSON;
+import com.alipay.api.AlipayApiException;
 import com.sme.core.model.StringJSON;
 import com.sme.entity.*;
 import com.sme.service.*;
@@ -11,14 +13,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-import static com.sme.util.Config.HEAD_IMG_REALPATH;
+import static com.sme.util.Config.*;
+import static com.sme.util.StringUtil.timeStampString;
 
 /**
  * Created by yao on 2016/7/11.
@@ -39,7 +45,8 @@ public class OutInterfaceController {
     private TsmSendMessageService tsmSendMessageService;
     @Autowired
     private FruitItemService fruitItemServiceImpl;
-
+    @Autowired
+    private FruitOrderService fruitOrderServiceImpl;
 
     private Log log = LogFactory.getLog(TdcDictionaryController.class);
 
@@ -538,6 +545,204 @@ public class OutInterfaceController {
             log.error(e.getCause().getMessage());
             return getSuccess(false, "系统异常！");
         }
+    }
+
+
+    /**
+     *订单列表
+     * @param order
+     * @return
+     */
+    @RequestMapping(value="/getOrderList")
+    @ResponseBody
+    public RespMessage getOrderList(@RequestBody FruitOrder order) {
+        try {
+            log.info("<=====getOrderList====>");
+            SysAcc sysAcc = getUserByToken(order.getToken());
+            if(sysAcc == null){
+                return  respMessage("2", "");
+            }
+            // 分页属性
+            if (order.getRows() < 1) {
+                order.setRows(10);
+            }
+            if(order.getPage() < 1){
+                order.setPage(1);
+            }
+
+
+            Map<String, Object> parm = new HashMap<String, Object>();
+            parm.put("page", order.getBegin());
+            parm.put("pageCount",order.getEnd());
+            parm.put("userId", sysAcc.getSysAccId());
+
+
+            int count = fruitOrderServiceImpl.count(parm);
+            List<FruitOrder> fruitOrders = fruitOrderServiceImpl.page(parm);
+
+            return respMessage("1","获取成功",  RespUtil.pageResult(count, fruitOrders));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return respMessage("1","获取成功",  RespUtil.pageResult(0, new ArrayList()));
+        }
+
+    }
+
+    /**
+     * 下订单
+     * @param orderItem
+     * @return
+     */
+    @RequestMapping(value="/addOrder")
+    @ResponseBody
+    @Transactional
+    public RespMessage addOrder(@RequestBody OrderItem orderItem) {
+        try {
+            log.info("<=====addOrder====>");
+            SysAcc sysAcc = getUserByToken(orderItem.getToken());
+            if(sysAcc == null){
+                return  respMessage("2", "");
+            }
+            //检查数据完整性
+
+            String ooid = StringUtil.generateOrderId(sysAcc.getSysAccId());
+
+            //生成签名
+            OrderDTO orderDTO = getOrderDTO(orderItem, sysAcc, ooid);
+
+            FruitOrder fruitOrder = buildOrder(orderItem, sysAcc, ooid);
+
+            fruitOrderServiceImpl.insert(fruitOrder);
+
+            return  respMessage("1", "成功", orderDTO);
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return respMessage("-1", "失败，系统异常，稍后再试！");
+        }
+
+    }
+
+    private FruitOrder buildOrder(OrderItem orderItem, SysAcc sysAcc, String ooid) {
+        FruitOrder fruitOrder = new FruitOrder();
+        fruitOrder.setId(ooid);
+        fruitOrder.setHidden(1);
+        fruitOrder.setOrderStatus(1);
+        fruitOrder.setReceiverName(orderItem.getReceiverName());
+        fruitOrder.setReceiverMobile(orderItem.getReceiverMobile());
+        fruitOrder.setReceiverAddress(orderItem.getReceiverAddress());
+        fruitOrder.setNotes(orderItem.getNotes());
+        fruitOrder.setCreateTime(new Date());
+        fruitOrder.setOrderPrice(orderItem.getOrderPrice());
+        fruitOrder.setRealpay(orderItem.getOrderPrice());
+        fruitOrder.setQuantity(orderItem.getQuantity());
+        fruitOrder.setSellerId(1);
+        fruitOrder.setUserId(sysAcc.getSysAccId());
+        fruitOrder.setSnapshot(JSON.toJSONString(orderItem));
+        return fruitOrder;
+
+    }
+
+    private OrderDTO getOrderDTO(OrderItem orderItem, SysAcc sysAcc, String ooid) {
+        OrderContent content = new OrderContent();
+        content.setBody(ooid);
+        content.setOut_trade_no(ooid);
+        content.setSubject(ooid);
+        content.setProduct_code(QUICK_MSECURITY_PAY);
+        content.setTotal_amount(orderItem.getOrderPrice());
+        String contentString = JSON.toJSONString(content);
+        OrderDTO orderBase = new OrderDTO();
+        orderBase.setApp_id(alipayAppId);
+        orderBase.setMethod(alipayMethod);
+        orderBase.setFormat(alipayFormat);
+        orderBase.setCharset(alipayCharset);
+        orderBase.setSign_type(alipayAignType);
+        orderBase.setTimestamp(timeStampString());
+        orderBase.setVersion(alipayVersion);
+        orderBase.setNotify_url(alipayNotifyUrl);
+        orderBase.setBiz_content(contentString);
+        try {
+            String sign = AlipayUtil.rsaSign(BeanToMapUtil.convertBean(orderBase));
+            orderBase.setSign(sign);
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        } catch (IntrospectionException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return orderBase;
+
+    }
+
+    /**
+     * 回调订单
+     * @param order
+     * @return
+     */
+    @RequestMapping(value="/notifyOrder", method={RequestMethod.GET , RequestMethod.POST})
+    @ResponseBody
+    public void notifyOrder(@RequestBody FruitOrder order, HttpServletRequest req) {
+        try {
+            log.info("<=====notifyOrder====>" +  order.toString());
+            log.info("<=====req====>" +  req.toString());
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+    }
+
+    /**
+     * 更新订单
+     * @param order
+     * @return
+     */
+    @RequestMapping(value="/updateOrderStatus")
+    @ResponseBody
+    public RespMessage updateOrderStatus(@RequestBody FruitOrder order) {
+        try {
+            log.info("<=====updateOrderStatus====> " + order.toString());
+
+            SysAcc sysAcc = getUserByToken(order.getToken());
+            if(sysAcc == null){
+                return  respMessage("2", "");
+            }
+
+            //检查数据完整性
+            if(order != null && order.getId() !=null && order.getOrderStatus() !=null ){
+
+                FruitOrder fruitOrder = new FruitOrder();
+                fruitOrder.setId(order.getId());
+                fruitOrder.setOrderStatus(order.getOrderStatus());
+                fruitOrderServiceImpl.update(fruitOrder);
+            }
+
+            return  respMessage("1", "成功");
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return respMessage("-1", "失败，系统异常，稍后再试！");
+        }
+
+    }
+
+    public SysAcc getUserByToken(String token){
+        if(StringUtils.isBlank(token)){
+            return null;
+        }
+
+        SysAcc sysAcc = new SysAcc();
+        sysAcc.setSysAccToken(token);
+        sysAcc = sysAccService.getSysAccByToken(sysAcc);
+        if(sysAcc == null || sysAcc.getSysAccId() == null || sysAcc.getSysAccId() < 0 ){
+            return null;
+        }
+
+        return sysAcc;
+
     }
 
 }
