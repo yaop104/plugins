@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.sme.core.model.StringJSON;
 import com.sme.entity.*;
+import com.sme.entity.alipay.AppPayResponse;
+import com.sme.entity.item.SignWithApp;
 import com.sme.service.*;
 import com.sme.service.impl.TdcDictionaryServiceImpl;
 import com.sme.util.*;
@@ -697,30 +699,40 @@ public class OutInterfaceController {
 
     /**
      * 更新订单
-     * @param order
+     * @param aliResultDTO
      * @return
      */
     @RequestMapping(value="/updateOrderStatus")
     @ResponseBody
-    public RespMessage updateOrderStatus(@RequestBody FruitOrder order) {
+    public RespMessage updateOrderStatus(@RequestBody SignWithApp aliResultDTO) {
         try {
-            log.info("<=====updateOrderStatus====> " + order.toString());
+            log.info("<=====updateOrderStatus====> " + aliResultDTO.toString());
 
-            SysAcc sysAcc = getUserByToken(order.getToken());
+            SysAcc sysAcc = getUserByToken(aliResultDTO.getToken());
             if(sysAcc == null){
                 return  respMessage("2", "");
             }
+            String result =  aliResultDTO.getAlipay_trade_app_pay_response();
+            AppPayResponse checkSignWithApp = null;
+            boolean flag = false;
+            if(StringUtils.isNotBlank(result)){
+                checkSignWithApp = JSON.parseObject(result, AppPayResponse.class);
+                String content = result;
+                flag = AlipayUtil.rsaCheckContent(content, aliResultDTO.getSign());
+           }
 
             //检查数据完整性
-            if(order != null && order.getId() !=null && order.getOrderStatus() !=null ){
+            if(flag && checkSignWithApp != null  && checkSignWithApp.getOut_trade_no() !=null ){
 
                 FruitOrder fruitOrder = new FruitOrder();
-                fruitOrder.setId(order.getId());
-                fruitOrder.setOrderStatus(order.getOrderStatus());
+                fruitOrder.setId(checkSignWithApp.getOut_trade_no());
+                fruitOrder.setOrderStatus(3);
                 fruitOrderServiceImpl.update(fruitOrder);
+                return  respMessage("1", "支付成功");
+            }else{
+                return  respMessage("-1", "支付失败");
             }
 
-            return  respMessage("1", "成功");
 
         } catch (Exception e) {
             log.error(e.getMessage());

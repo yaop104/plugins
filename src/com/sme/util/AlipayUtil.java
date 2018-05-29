@@ -7,6 +7,7 @@ import com.alipay.api.internal.util.AlipaySignature;
 
 import java.util.Map;
 
+import static com.alipay.api.internal.util.AlipaySignature.getSignContent;
 import static com.sme.util.Config.*;
 
 /**
@@ -35,7 +36,8 @@ public class AlipayUtil {
      * @throws AlipayApiException
      */
     public static String rsaSign(Map<String, String> params) throws AlipayApiException {
-       return AlipaySignature.rsaSign(params, alipayPrivateKey, alipayCharset);
+        String signContent = getSignContent(params);
+       return AlipaySignature.rsaSign(signContent, alipayPrivateKey, alipayCharset, alipayAignType);
     }
 
 
@@ -50,7 +52,7 @@ public class AlipayUtil {
      * @throws AlipayApiException
      */
     public static boolean rsaCheckV2(Map<String, String> params) throws AlipayApiException {
-        return AlipaySignature.rsaCheckV2(params, alipayPublicKey, alipayCharset);
+        return AlipaySignature.rsaCheckV2(params, alipayPublicKey, alipayCharset, alipayAignType);
     }
 
     /**
@@ -65,6 +67,6 @@ public class AlipayUtil {
      * @throws AlipayApiException
      */
     public static boolean rsaCheckContent(String content, String sign) throws AlipayApiException {
-        return AlipaySignature.rsaCheckContent(content, sign, alipayPublicKey, alipayCharset);
+        return AlipaySignature.rsaCheck(content, sign, alipayPublicKey, alipayCharset, alipayAignType);
     }
 }

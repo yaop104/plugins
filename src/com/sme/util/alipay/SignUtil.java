@@ -9,13 +9,12 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
-import static com.sme.util.Config.alipayAignType;
 import static com.sme.util.Config.alipayCharset;
 
 
 public class SignUtil {
 
-    private static final String ENCODING = "UTF-8";
+    private static final String ENCODING = "utf-8";
     private static final String SIGNATURE_ALGORITHM = "SHA256withRSA";
 
     /**
@@ -48,7 +47,7 @@ public class SignUtil {
         }
 
         try {
-            KeyFactory keyFactory = KeyFactory.getInstance(alipayAignType);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             byte[] encodedKey = Base64.decodeBase64(publicKey);
             PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
 
@@ -74,7 +73,7 @@ public class SignUtil {
 
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
 
-        KeyFactory keyFactory = KeyFactory.getInstance(alipayAignType);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 
         PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
 
