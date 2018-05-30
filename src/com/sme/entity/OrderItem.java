@@ -27,6 +27,16 @@ public class OrderItem extends BaseDTO {
     /** 买家订单备注 */
     private String	notes;
 
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getReceiverAddress() {
         return receiverAddress;
     }

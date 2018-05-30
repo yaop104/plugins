@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sme.dao.FruitOrderLogDao">
+	<resultMap id="fieldMapper" type="com.sme.entity.FruitOrderLog">
+		<result property="id" column="id" /><!--id-->
+		<result property="createTime" column="createTime" /><!--创建时间-->
+		<result property="updateTime" column="updateTime" /><!--更新时间-->
+		<result property="sellerId" column="sellerId" /><!--卖家id-->
+		<result property="payStatus" column="payStatus" /><!--订单状态： 9000成功2 付款失败-->
+		<result property="totalAmount" column="totalAmount" /><!--订单价格-->
+		<result property="userId" column="userId" /><!--买家id-->
+		<result property="outTradeNo" column="outTradeNo" /><!--订单号-->
+		<result property="tradeNo" column="tradeNo" /><!--收件人地址-->
+		<result property="code" column="code" /><!--结果码-->
+		<result property="msg" column="msg" /><!--结果的描述-->
+		<result property="userPayTime" column="userPayTime" /><!--付款时间-->
+		<result property="orderData" column="orderData" /><!--原始日志-->
+	</resultMap>
+
+	<sql id="fieldAsProperty">
+		id AS id,
+		create_time AS createTime,
+		update_time AS updateTime,
+		seller_id AS sellerId,
+		pay_status AS payStatus,
+		total_amount AS totalAmount,
+		user_id AS userId,
+		out_trade_no AS outTradeNo,
+		trade_no AS tradeNo,
+		code AS code,
+		msg AS msg,
+		user_pay_time AS userPayTime,
+		order_data AS orderData
+	</sql>
+
+	<sql id="field">
+			create_time,
+			update_time,
+			seller_id,
+			pay_status,
+			total_amount,
+			user_id,
+			out_trade_no,
+			trade_no,
+			code,
+			msg,
+			user_pay_time,
+			order_data
+	</sql>
+
+	<sql id="property">
+			#{createTime,jdbcType=TIMESTAMP},
+			#{updateTime,jdbcType=TIMESTAMP},
+			#{sellerId,jdbcType=VARCHAR},
+			#{payStatus,jdbcType=VARCHAR},
+			#{totalAmount,jdbcType=VARCHAR},
+			#{userId,jdbcType=VARCHAR},
+			#{outTradeNo,jdbcType=VARCHAR},
+			#{tradeNo,jdbcType=VARCHAR},
+			#{code,jdbcType=VARCHAR},
+			#{msg,jdbcType=VARCHAR},
+			#{userPayTime,jdbcType=VARCHAR},
+			#{orderData,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqProperty">
+			create_time=#{createTime,jdbcType=TIMESTAMP},
+			update_time=#{updateTime,jdbcType=TIMESTAMP},
+			seller_id=#{sellerId,jdbcType=VARCHAR},
+			pay_status=#{payStatus,jdbcType=VARCHAR},
+			total_amount=#{totalAmount,jdbcType=VARCHAR},
+			user_id=#{userId,jdbcType=VARCHAR},
+			out_trade_no=#{outTradeNo,jdbcType=VARCHAR},
+			trade_no=#{tradeNo,jdbcType=VARCHAR},
+			code=#{code,jdbcType=VARCHAR},
+			msg=#{msg,jdbcType=VARCHAR},
+			user_pay_time=#{userPayTime,jdbcType=VARCHAR},
+			order_data=#{orderData,jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="fieldEqPropertyIf">
+			<if test="createTime!=null" >create_time=#{createTime,jdbcType=TIMESTAMP},</if>
+			<if test="updateTime!=null" >update_time=#{updateTime,jdbcType=TIMESTAMP},</if>
+			<if test="sellerId!=null" >seller_id=#{sellerId,jdbcType=VARCHAR},</if>
+			<if test="payStatus!=null" >pay_status=#{payStatus,jdbcType=VARCHAR},</if>
+			<if test="totalAmount!=null" >total_amount=#{totalAmount,jdbcType=VARCHAR},</if>
+			<if test="userId!=null" >user_id=#{userId,jdbcType=VARCHAR},</if>
+			<if test="outTradeNo!=null" >out_trade_no=#{outTradeNo,jdbcType=VARCHAR},</if>
+			<if test="tradeNo!=null" >trade_no=#{tradeNo,jdbcType=VARCHAR},</if>
+			<if test="code!=null" >code=#{code,jdbcType=VARCHAR},</if>
+			<if test="msg!=null" >msg=#{msg,jdbcType=VARCHAR},</if>
+			<if test="userPayTime!=null" >user_pay_time=#{userPayTime,jdbcType=VARCHAR},</if>
+			<if test="orderData!=null" >order_data=#{orderData,jdbcType=VARCHAR}</if>
+	</sql>
+
+	
+	<sql id="idCnd2">
+		<where>
+					<if test="createTime!=null and createTime!=''" >AND create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+					<if test="updateTime!=null and updateTime!=''" >AND update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+					<if test="sellerId!=null and sellerId!=''" >AND seller_id=#{sellerId,jdbcType=VARCHAR}</if>
+					<if test="payStatus!=null and payStatus!=''" >AND pay_status=#{payStatus,jdbcType=VARCHAR}</if>
+					<if test="totalAmount!=null and totalAmount!=''" >AND total_amount=#{totalAmount,jdbcType=VARCHAR}</if>
+					<if test="userId!=null and userId!=''" >AND user_id=#{userId,jdbcType=VARCHAR}</if>
+					<if test="outTradeNo!=null and outTradeNo!=''" >AND out_trade_no=#{outTradeNo,jdbcType=VARCHAR}</if>
+					<if test="tradeNo!=null and tradeNo!=''" >AND trade_no=#{tradeNo,jdbcType=VARCHAR}</if>
+					<if test="code!=null and code!=''" >AND code=#{code,jdbcType=VARCHAR}</if>
+					<if test="msg!=null and msg!=''" >AND msg=#{msg,jdbcType=VARCHAR}</if>
+					<if test="userPayTime!=null and userPayTime!=''" >AND user_pay_time=#{userPayTime,jdbcType=VARCHAR}</if>
+					<if test="orderData!=null and orderData!=''" >AND order_data=#{orderData,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+	<select id="page" parameterType="map" resultType="com.sme.entity.FruitOrderLog">
+	    SELECT <include refid="fieldAsProperty" /> FROM fruit_order_log <include refid="idCnd2"/>
+
+		<if test="page!=null and pageCount!=null">
+			limit #{page} , #{pageCount}
+		</if>
+	</select>
+	<select id="count" parameterType="map" resultType="Integer">
+	    SELECT COUNT(*) FROM fruit_order_log <include refid="idCnd2"/>
+	</select>
+	<select id="select" parameterType="com.sme.entity.FruitOrderLog" resultType="com.sme.entity.FruitOrderLog">
+		SELECT <include refid="fieldAsProperty" /> FROM fruit_order_log
+	</select>
+	<insert id="insert" parameterType="com.sme.entity.FruitOrderLog" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO fruit_order_log(<include refid="field" />) VALUES (<include refid="property" />)
+	</insert>
+	<delete id="delete" parameterType="com.sme.entity.FruitOrderLog">
+		DELETE FROM fruit_order_log<include refid="idCnd" />
+	</delete>
+	<select id="getById" resultType="com.sme.entity.FruitOrderLog" 
+		parameterType="com.sme.entity.FruitOrderLog">
+		SELECT<include refid="fieldAsProperty" />FROM fruit_order_log<include refid="idCnd" />
+	</select>
+	<update id="update" parameterType="com.sme.entity.FruitOrderLog">
+		UPDATE fruit_order_log<set><include refid="fieldEqPropertyIf" /></set><include refid="idCnd" />
+	</update>
+	
+	<sql id="idCnd">
+		<where>
+			<if test="id!=null" >id=#{id,jdbcType=INTEGER}</if>
+			<if test="id==null">AND 1=0</if>
+		</where>
+	</sql>
+	<!-- ================== start ================== -->
+	
+	<!-- ================== end ================== -->
+</mapper>

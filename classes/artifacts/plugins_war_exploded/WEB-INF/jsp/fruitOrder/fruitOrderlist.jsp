@@ -50,11 +50,12 @@
 		initUpload();
 		var colArr = [];
 		colArr = [
-			{ field:'id', align:'center', width:'150' , title:'订单号' },
-            { field:'orderStatus', align:'center',  width:'180', sortable:'true' , title:'订单状态' , formatter : convertState},
-            { field:'createTime', align:'center', width:'180' , title:'下单日期' },
-            { field:'orderPrice', align:'center', width:'150' , title:'价格（元）' },
-            { field:'realpay', align:'center', width:'120', sortable:'true' , title:'实付（元）' , formatter : ys3},
+			{ field:'id', align:'center', width:'180' , title:'订单号' },
+			{ field:'receiverName', align:'center', width:'100' , title:'收货人姓名' },
+            { field:'orderStatus', align:'center',  width:'80', sortable:'true' , title:'订单状态' , formatter : convertState},
+            { field:'orderCreateTime', align:'center', width:'180' , title:'下单日期' },
+            { field:'orderPrice', align:'center', width:'100' , title:'价格（元）' },
+            { field:'realpay', align:'center', width:'100', sortable:'true' , title:'实付（元）' , formatter : ys3},
             { field:'asd', align:'center', width:'280' , title:'操作', formatter : ys1}
 		];
 
@@ -105,14 +106,17 @@
 
 	//获取参数
 	function getQueryParams(queryParams) {
-		/*  var StartTime = $("#s_startTime").datebox("getValue");
-		 var EndTime = $("#s_endTime").datebox("getValue");              */
-		var Name = document.getElementById("s_name").value;
-//		var State = $("#s_state").combobox("getValue");
+		var StartTime = $("#s_startTime").datebox("getValue");
+		 var EndTime = $("#s_endTime").datebox("getValue");
+		var s_receiverMobile = document.getElementById("s_receiverMobile").value;
+		var s_id = document.getElementById("s_id").value;
+		var s_orderStatus = $("#s_orderStatus").combobox("getValue");
 
-		/* queryParams.StartTime = StartTime;
-		 queryParams.EndTime = EndTime;   */
-		queryParams.pageForSearch = Name;
+		queryParams.beginTime = StartTime;
+		queryParams.endTime = EndTime;
+		queryParams.receiverMobile = s_receiverMobile;
+		queryParams.id = s_id;
+		queryParams.orderStatus = s_orderStatus;
 
 		return queryParams;
 
@@ -151,8 +155,7 @@
 					'orderStatus':row.orderStatus,
 					'receiverAddress':row.receiverAddress,
 					'receiverMobile':row.receiverMobile,
-					'receiverName':row.receiverName,
-					'hidden':row.hidden
+					'receiverName':row.receiverName
 				});
 				$('#d1').dialog('open');
 			}else{
@@ -223,16 +226,19 @@
 
 	function ys1(val, rec, index) {
         var returnvalue="";
-		<%-- returnvalue="<img  src='${ctx}/image/table_td_button/check.png' onclick='offItem(" + rec.id + "\")' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='offItem(" + rec.id + "\")'>下架</a>&nbsp;&nbsp;";--%>
-		return returnvalue;
+        if(rec.orderStatus == 3){
+            returnvalue="<img  src='${ctx}/image/table_td_button/check.png' onclick='buyPosition(" + rec.id + ",\"" + rec.id + "\")' style='cursor:pointer;width:20px;height:20px;vertical-align:middle;'/>&nbsp;<a href='javascript:void(0)' style='height:20px;line-height:30px;vertical-align:middle;' onclick='buyPosition(" + rec.id + ",\"" + rec.id + "\")'>发货</a>&nbsp;&nbsp;";
+        }
+		 return returnvalue;
 	}
-	function offItem(id){
-        $.post('${ctx }/fruitOrder/offItem.do',{
+	function buyPosition(id, name){
+        $.post('${ctx}/fruitOrder/onItem.do',{
             'id': id
         },function(data){
             if(data.success){
                 msgShow('成功',data.message,'info');
-                clearFormHot()
+                grid.datagrid('reload');
+                grid.datagrid('clearSelections');
             }else{
                 msgShow('错误',data.message,'error');
             }
@@ -386,8 +392,24 @@
 		<div id="tb" style="padding: 10px; height: auto">
 			<%-- 查找管理员信息，根据时间、管理员名 --%>
 			<div>
-				名称:
-				<input id="s_name"/>
+				订单号:
+				<input id="s_id"/>
+				手机号:
+				<input id="s_receiverMobile"/>
+				操作时间:
+				<input id="s_startTime" class ="easyui-datebox" style="width: 110px" />
+				~
+				<input id="s_endTime" class="easyui-datebox" style="width: 110px" />
+				<select id="s_orderStatus" class="easyui-combobox" style="width: 150px;" panelheight="auto">
+					<option value="">----请选择----</option>
+					<option value="-1">已删除</option>
+					<option value="0">已取消</option>
+					<option value="1">下单</option>
+					<option value="2">付款确认中</option>
+					<option value="3">已付款</option>
+					<option value="4">已发货</option>
+					<option value="5">付款失败</option>
+				</select>
 				<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchOption()">&nbsp; 查&nbsp;&nbsp;询 &nbsp; &nbsp;</a>
 			</div>
 		</div>
@@ -432,15 +454,15 @@
 							<td align="right">收件人名字：</td>
 							<td><input class="easyui-validatebox" name="receiverName" required="true" style="width: 152px" id="receiverName"/></td>
 						</tr>
-						<tr>
-							<td align="right">删除后订单：</td>
-							<td>
-								<select id="hidden" class="easyui-combobox" name="hidden" required="true" style="width: 150px;" panelheight="auto">
-									<option value="1">正常</option>
-									<option value="2">已删除</option>
-								</select>
-							</td>
-						</tr>
+						<%--<tr>--%>
+							<%--<td align="right">删除后订单：</td>--%>
+							<%--<td>--%>
+								<%--<select id="hidden" class="easyui-combobox" name="hidden" required="true" style="width: 150px;" panelheight="auto">--%>
+									<%--<option value="1">正常</option>--%>
+									<%--<option value="2">已删除</option>--%>
+								<%--</select>--%>
+							<%--</td>--%>
+						<%--</tr>--%>
 					</table>
 				</form>
 			</div>

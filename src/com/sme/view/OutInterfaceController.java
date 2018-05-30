@@ -1,6 +1,7 @@
 package com.sme.view;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.Feature;
 import com.alipay.api.AlipayApiException;
 import com.sme.core.model.StringJSON;
 import com.sme.entity.*;
@@ -49,6 +50,8 @@ public class OutInterfaceController {
     private FruitItemService fruitItemServiceImpl;
     @Autowired
     private FruitOrderService fruitOrderServiceImpl;
+    @Autowired
+    private FruitOrderLogService fruitOrderLogServiceImpl;
 
     private Log log = LogFactory.getLog(TdcDictionaryController.class);
 
@@ -641,6 +644,7 @@ public class OutInterfaceController {
         fruitOrder.setSellerId(1);
         fruitOrder.setUserId(sysAcc.getSysAccId());
         fruitOrder.setSnapshot(JSON.toJSONString(orderItem));
+        fruitOrder.setDescription(orderItem.getDescription());
         return fruitOrder;
 
     }
@@ -681,16 +685,16 @@ public class OutInterfaceController {
 
     /**
      * 回调订单
-     * @param order
+     * @param aliResultDTO
      * @return
      */
     @RequestMapping(value="/notifyOrder", method={RequestMethod.GET , RequestMethod.POST})
     @ResponseBody
-    public void notifyOrder(@RequestBody FruitOrder order, HttpServletRequest req) {
+    public void notifyOrder(@RequestBody SignWithApp aliResultDTO, HttpServletRequest req) {
         try {
-            log.info("<=====notifyOrder====>" +  order.toString());
+            log.info("<=====notifyOrder====>" +  aliResultDTO.toString());
             log.info("<=====req====>" +  req.toString());
-
+            buildAliPayLog(aliResultDTO);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -712,17 +716,26 @@ public class OutInterfaceController {
             if(sysAcc == null){
                 return  respMessage("2", "");
             }
+            buildAliPayLog(aliResultDTO);
             String result =  aliResultDTO.getAlipay_trade_app_pay_response();
             AppPayResponse checkSignWithApp = null;
             boolean flag = false;
+            boolean resultStatusFlag = "9000".equals( aliResultDTO.getResultStatus());
+
             if(StringUtils.isNotBlank(result)){
                 checkSignWithApp = JSON.parseObject(result, AppPayResponse.class);
-                String content = result;
-                flag = AlipayUtil.rsaCheckContent(content, aliResultDTO.getSign());
            }
 
+            String responseAll =  aliResultDTO.getResult();
+            if(StringUtils.isNotBlank(responseAll)){
+
+                Map map = (Map) JSON.parse(responseAll, Feature.OrderedField);
+
+                flag = AlipayUtil.rsaCheckContent(map.get("alipay_trade_app_pay_response").toString(), map.get("sign").toString());
+            }
+
             //检查数据完整性
-            if(flag && checkSignWithApp != null  && checkSignWithApp.getOut_trade_no() !=null ){
+            if(resultStatusFlag && flag && checkSignWithApp != null  && checkSignWithApp.getOut_trade_no() !=null ){
 
                 FruitOrder fruitOrder = new FruitOrder();
                 fruitOrder.setId(checkSignWithApp.getOut_trade_no());
@@ -733,12 +746,38 @@ public class OutInterfaceController {
                 return  respMessage("-1", "支付失败");
             }
 
-
         } catch (Exception e) {
             log.error(e.getMessage());
             return respMessage("-1", "失败，系统异常，稍后再试！");
         }
 
+
+    }
+
+    private void buildAliPayLog(SignWithApp aliResultDTO){
+        FruitOrderLog fruitOrderLog = new FruitOrderLog();
+        //原始数据
+        fruitOrderLog.setOrderData(JSON.toJSONString(aliResultDTO));
+        try {
+            //解析数据
+            fruitOrderLog.setPayStatus(aliResultDTO.getResultStatus());
+            fruitOrderLog.setCreateTime(new Date());
+            String result =  aliResultDTO.getAlipay_trade_app_pay_response();
+            if(StringUtils.isNotBlank(result)){
+                AppPayResponse appPayResponse = JSON.parseObject(result, AppPayResponse.class);
+                fruitOrderLog.setCode(appPayResponse.getCode());
+                fruitOrderLog.setMsg(appPayResponse.getMsg());
+                fruitOrderLog.setSellerId(appPayResponse.getSeller_id());
+                fruitOrderLog.setUserPayTime(appPayResponse.getTimestamp());
+                fruitOrderLog.setTradeNo(appPayResponse.getTrade_no());
+                fruitOrderLog.setOutTradeNo(appPayResponse.getOut_trade_no());
+                fruitOrderLog.setTotalAmount(appPayResponse.getTotal_amount());
+            }
+        }catch (Exception e){
+            log.error("记录日志异常，原始数据：" + JSON.toJSONString(aliResultDTO));
+        }
+
+        fruitOrderLogServiceImpl.insert(fruitOrderLog);
     }
 
     public SysAcc getUserByToken(String token){

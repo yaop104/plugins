@@ -13,6 +13,24 @@ public class SignWithApp extends BaseDTO{
     private String alipay_trade_app_pay_response;
     private String sign;
     private String sign_type;
+    private String resultStatus;
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getResultStatus() {
+        return resultStatus;
+    }
+
+    public void setResultStatus(String resultStatus) {
+        this.resultStatus = resultStatus;
+    }
 
     public String getAlipay_trade_app_pay_response() {
         return alipay_trade_app_pay_response;

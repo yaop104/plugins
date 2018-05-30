@@ -63,6 +63,27 @@ public class FruitOrder extends BaseDTO {
 	/** 发货时间 */
 	private Date	sendTime;
 
+	/** 冗余 */
+	private String	description;
+
+	private String orderCreateTime;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getOrderCreateTime() {
+		return orderCreateTime;
+	}
+
+	public void setOrderCreateTime(String orderCreateTime) {
+		this.orderCreateTime = orderCreateTime;
+	}
+
 	public String getId() {
 		return this.id;
 	}

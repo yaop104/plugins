@@ -4,6 +4,7 @@
 	<resultMap id="fieldMapper" type="com.sme.entity.FruitOrder">
 		<result property="id" column="id" /><!--id-->
 		<result property="createTime" column="createTime" /><!--创建时间-->
+		<result property="orderCreateTime" column="orderCreateTime" /><!--创建时间-->
 		<result property="updateTime" column="updateTime" /><!--更新时间-->
 		<result property="sellerId" column="sellerId" /><!--卖家id-->
 		<result property="orderStatus" column="orderStatus" /><!--订单状态：-1 已删除 0 已取消 1 下单 2 付款确认中 3 已付款 4 已发货 5 付款失败-->
@@ -19,11 +20,13 @@
 		<result property="notes" column="notes" /><!--买家订单备注-->
 		<result property="payTime" column="payTime" /><!--付款时间-->
 		<result property="sendTime" column="sendTime" /><!--发货时间-->
+		<result property="description" column="description" /><!--description-->
 	</resultMap>
 
 	<sql id="fieldAsProperty">
 		id AS id,
 		create_time AS createTime,
+		date_format(create_time,'%Y-%m-%d %H:%i:%s') as orderCreateTime,
 		update_time AS updateTime,
 		seller_id AS sellerId,
 		order_status AS orderStatus,
@@ -38,7 +41,8 @@
 		hidden AS hidden,
 		notes AS notes,
 		pay_time AS payTime,
-		send_time AS sendTime
+		send_time AS sendTime,
+		description AS description
 	</sql>
 
 	<sql id="field">
@@ -58,7 +62,8 @@
 			hidden,
 			notes,
 			pay_time,
-			send_time
+			send_time,
+			description
 	</sql>
 
 	<sql id="property">
@@ -78,7 +83,8 @@
 			#{hidden,jdbcType=INTEGER},
 			#{notes,jdbcType=VARCHAR},
 			#{payTime,jdbcType=TIMESTAMP},
-			#{sendTime,jdbcType=TIMESTAMP}
+			#{sendTime,jdbcType=TIMESTAMP},
+			#{description,jdbcType=VARCHAR}
 	</sql>
 
 	<sql id="fieldEqProperty">
@@ -97,7 +103,8 @@
 			hidden=#{hidden,jdbcType=INTEGER},
 			notes=#{notes,jdbcType=VARCHAR},
 			pay_time=#{payTime,jdbcType=TIMESTAMP},
-			send_time=#{sendTime,jdbcType=TIMESTAMP}
+			send_time=#{sendTime,jdbcType=TIMESTAMP},
+			description=#{description,jdbcType=VARCHAR}
 	</sql>
 
 	<sql id="fieldEqPropertyIf">
@@ -116,7 +123,8 @@
 			<if test="hidden!=null" >hidden=#{hidden,jdbcType=INTEGER},</if>
 			<if test="notes!=null" >notes=#{notes,jdbcType=VARCHAR},</if>
 			<if test="payTime!=null" >pay_time=#{payTime,jdbcType=TIMESTAMP},</if>
-			<if test="sendTime!=null" >send_time=#{sendTime,jdbcType=TIMESTAMP}</if>
+			<if test="sendTime!=null" >send_time=#{sendTime,jdbcType=TIMESTAMP},</if>
+			<if test="description!=null" >description=#{description,jdbcType=VARCHAR}</if>
 	</sql>
 
 	
@@ -136,14 +144,23 @@
 					<if test="receiverName!=null and receiverName!=''" >AND receiver_name=#{receiverName,jdbcType=VARCHAR}</if>
 					<if test="hidden!=null" >AND hidden=#{hidden,jdbcType=INTEGER}</if>
 					<if test="notes!=null and notes!=''" >AND notes=#{notes,jdbcType=VARCHAR}</if>
+					<if test="description!=null and description!=''" >AND description=#{description,jdbcType=VARCHAR}</if>
 					<if test="payTime!=null and payTime!=''" >AND pay_time=#{payTime,jdbcType=TIMESTAMP}</if>
 					<if test="sendTime!=null and sendTime!=''" >AND send_time=#{sendTime,jdbcType=TIMESTAMP}</if>
+					<if test="beginTime != null and beginTime !=''">
+						and date_format(create_time,'%Y-%m-%d') &gt;= #{beginTime}
+					</if>
+					<if test="endTime != null and endTime !=''">
+						and date_format(create_time,'%Y-%m-%d') &lt;= #{endTime}
+					</if>
+					<if test="idlike!=null and idlike!=''" >AND id LIKE CONCAT(CONCAT('%', #{idlike}), '%')</if>
+					<if test="receiverMobilelike!=null and receiverMobilelike!=''" >AND receiver_mobile LIKE CONCAT(CONCAT('%', #{receiverMobilelike}), '%')</if>
 		</where>
 	</sql>
 	
 	<select id="page" parameterType="map" resultType="com.sme.entity.FruitOrder">
 	    SELECT <include refid="fieldAsProperty" /> FROM fruit_order <include refid="idCnd2"/>
-
+		ORDER BY create_time DESC
 		<if test="page!=null and pageCount!=null">
 			limit #{page} , #{pageCount}
 		</if>

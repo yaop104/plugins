@@ -12,10 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,14 +61,21 @@ public class FruitOrderController extends BaseController<FruitOrder> {
 			page = 1;
 		}
 		String receiverMobile = req.getParameter("receiverMobile");
-
+		String beginTime = req.getParameter("beginTime");
+		String endTime = req.getParameter("endTime");
+		String orderStatus = req.getParameter("orderStatus");
+		String id = req.getParameter("id");
 		try {
 			log.info("<=====pageForSearch====>");
 
 			Map<String, Object> parm = new HashMap<String, Object>();
 			parm.put("page", getBegin());
 			parm.put("pageCount", getEnd());
-			parm.put("receiverMobile", receiverMobile);
+			parm.put("beginTime", beginTime);
+			parm.put("endTime", endTime);
+			parm.put("orderStatus", orderStatus);
+			parm.put("receiverMobilelike", receiverMobile);
+			parm.put("idlike", id);
 
 			int count = getService().count(parm);
 			List<FruitItem> fruitItems = getService().page(parm);
@@ -99,6 +103,26 @@ public class FruitOrderController extends BaseController<FruitOrder> {
 			return "redirect:/fruitOrder/fruitOrderlist.do";
 		}
 	 }
+
+
+	@RequestMapping(value="/onItem", method={RequestMethod.POST})
+	@ResponseBody
+	public StringJSON fruitOrderOnItem(FruitOrder fruitOrderReq){
+		try
+		{
+			log.info("<=====执行发货口====>" + id);
+			FruitOrder fruitOrder = new FruitOrder();
+			fruitOrder.setId(fruitOrderReq.getId());
+			fruitOrder.setOrderStatus(4);
+			fruitOrderServiceImpl.update(fruitOrder);
+			return getSuccess(true, "成功！", null);
+		}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+			return getSuccess(false, "系统异常！", null);
+		}
+	}
 
 
 	@RequestMapping(value="/fruitOrderDelete", method={RequestMethod.POST})

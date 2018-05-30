@@ -26,6 +26,7 @@
 		<typeAlias type="com.sme.entity.TsmSendMessage" alias="TsmSendMessage" />
 		<typeAlias type="com.sme.entity.FruitItem" alias="FruitItem" />
 		<typeAlias type="com.sme.entity.FruitOrder" alias="FruitOrder" />
+		<typeAlias type="com.sme.entity.FruitOrderLog" alias="FruitOrderLog" />
 	</typeAliases>
 	
 	<!--<environments default="MySQL">
@@ -56,5 +57,6 @@
 		<mapper resource="./mybatis_config/TsmSendMessageDao.xml"/>
 		<mapper resource="./mybatis_config/FruitItemDao.xml"/>
 		<mapper resource="./mybatis_config/FruitOrderDao.xml"/>
+		<mapper resource="./mybatis_config/FruitOrderLogDao.xml"/>
 	</mappers>
 </configuration>
