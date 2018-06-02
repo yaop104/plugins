@@ -155,6 +155,7 @@
 					'orderStatus':row.orderStatus,
 					'receiverAddress':row.receiverAddress,
 					'receiverMobile':row.receiverMobile,
+					'description':row.description,
 					'receiverName':row.receiverName
 				});
 				$('#d1').dialog('open');
@@ -233,7 +234,7 @@
 	}
 	function buyPosition(id, name){
         $.post('${ctx}/fruitOrder/onItem.do',{
-            'id': id
+            'id': name
         },function(data){
             if(data.success){
                 msgShow('成功',data.message,'info');
@@ -420,7 +421,7 @@
 		<table id="t1"></table>
 
 		<!-- 窗口-->
-		<div id="d1" class="easyui-dialog" buttons="#btn1" title="订单"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:500px;height:400px;overflow: hidden;">
+		<div id="d1" class="easyui-dialog" buttons="#btn1" title="订单"  data-options="novalidate:true,iconCls:'icon-save',closed:true,modal:true,minimizable:false" style="width:800px;height:500px;overflow: hidden;">
 			<div style="padding:10px 60px 20px 60px">
 				<form id="f1"  class="easyui-form" method="post">
 					<table>
@@ -453,6 +454,11 @@
 						<tr>
 							<td align="right">收件人名字：</td>
 							<td><input class="easyui-validatebox" name="receiverName" required="true" style="width: 152px" id="receiverName"/></td>
+						</tr>
+						<tr>
+							<td align="right">订单详情：</td>
+							<td><input class="easyui-validatebox" name="description" readonly="readonly" style="width:500px;height:200px;margin-bottom: 15px" id="description"/></td>
+							<%--<td><textarea  style="width:500px;height:200px;" readonly="readonly" name="description"  id="description"/> </td>--%>
 						</tr>
 						<%--<tr>--%>
 							<%--<td align="right">删除后订单：</td>--%>
